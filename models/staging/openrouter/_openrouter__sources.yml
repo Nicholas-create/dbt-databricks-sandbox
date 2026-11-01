@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: openrouter
+    description: "Daily snapshots of OpenRouter's public model catalogue (/api/v1/models). Loaded by the Databricks notebook ingest_openrouter_models."
+    database: workspace
+    schema: raw_openrouter
+    tables:
+      - name: models_daily
+        description: "One row per model per load. raw_json holds the full API record, unmodified."
+        config:
+          loaded_at_field: loaded_at
+          freshness:
+            warn_after: {count: 26, period: hour}
+            error_after: {count: 50, period: hour}
