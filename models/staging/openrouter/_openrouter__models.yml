@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_openrouter__models
+    description: "OpenRouter model catalogue, one row per model per snapshot date. Prices converted to USD per million tokens."
+    columns:
+      - name: model_snapshot_key
+        description: "model_id + snapshot_date. Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: model_id
+        data_tests:
+          - not_null
+      - name: snapshot_date
+        data_tests:
+          - not_null

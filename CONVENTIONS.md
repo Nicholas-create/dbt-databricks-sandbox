@@ -29,6 +29,22 @@ Raw tables are a faithful copy of the source. If a load is wrong, fix it **at lo
 ✅ CSV parsed incorrectly → change the upload settings and overwrite the raw table
 ❌ CSV parsed incorrectly → write dbt logic to filter out the broken rows
 
+### API data lands as untouched JSON
+When loading from an API, store each record's **full JSON as text** alongside a `loaded_at` timestamp. Parse it into columns in dbt staging, not in the loader.
+
+> **Why:** APIs add and rename fields. A loader that picks out specific fields breaks when the API changes; a loader that stores the whole record never does, and nothing the source sent is lost.
+
+✅ `Row(model_id=m["id"], raw_json=json.dumps(m), loaded_at=loaded_at)`
+❌ `Row(model_id=m["id"], price=m["pricing"]["prompt"])`, which fails the day `pricing` changes shape and discards every other field
+
+### Snapshot loads append, never overwrite
+Scheduled loads that capture changing data (e.g. daily prices) use `.mode("append")`.
+
+> **Why:** history only exists if old snapshots are kept. Overwriting makes it impossible to chart change over time.
+
+✅ `.mode("append")`
+❌ `.mode("overwrite")`
+
 ---
 
 ## 2. Staging rules
@@ -38,6 +54,8 @@ Staging models do **only** these things:
 - cast data types
 - drop columns that will never be used (e.g. long free-text)
 - light tidying (trimming whitespace, standardising nulls)
+- parse raw JSON into typed columns
+- remove duplicates caused by ingestion (e.g. a manual re-run producing two snapshots for the same day, keeping the latest)
 
 Staging models **never**:
 - join to other models
@@ -85,6 +103,17 @@ where `Domain` = 'Language'          -- filtering belongs downstream
 ✅ `training_power_draw_watts`
 ❌ `power`
 
+### Units and money
+- Every measured value carries its **unit in the column name**, including currency and scale.
+- Prices are standardised to **USD per million tokens** (`_usd_per_mtok`), the industry convention, regardless of how the source publishes them.
+- Money is stored as `decimal`, never `double`.
+- Keep full precision in staging and round only in marts, where values are meant to be read.
+
+> **Why:** a price column without a unit is a millionfold mistake waiting to happen in a dashboard. `double` stores fractions inexactly (0.1 + 0.2 ≠ 0.3), and the error grows when prices are multiplied up.
+
+✅ `cast(raw_json:pricing.prompt as decimal(20, 12)) * 1000000 as input_price_usd_per_mtok`
+❌ `cast(raw_json:pricing.prompt as double) as input_price`
+
 ---
 
 ## 4. Referencing other data
@@ -115,6 +144,35 @@ columns:
       - unique
       - not_null
 ```
+
+- When the grain is more than one column (e.g. one row per model **per day**), build a combined key column and test that instead.
+
+```sql
+model_id || '|' || cast(snapshot_date as string) as model_snapshot_key
+```
+
+- Use `accepted_values` on category columns that drive logic, so a new category from the source fails the build instead of being silently mis-classified.
+- After a build passes, **spot-check one known value by hand** (e.g. a price you can read in the raw JSON). Tests prove shape; a spot check proves meaning.
+
+### Source freshness
+Every source loaded on a schedule declares freshness, inside `config:`:
+
+```yaml
+tables:
+  - name: models_daily
+    config:
+      loaded_at_field: loaded_at
+      freshness:
+        warn_after: {count: 26, period: hour}
+        error_after: {count: 50, period: hour}
+```
+
+Check it with `dbt source freshness --select source:<source>`.
+
+> **Why:** a broken schedule fails silently. Freshness checks turn "no new data" into a visible warning before gaps appear in the history.
+
+✅ `freshness` and `loaded_at_field` nested under `config:`
+❌ `freshness` as a top-level property of the table (deprecated in current dbt)
 
 ---
 
@@ -162,8 +220,9 @@ clean-targets:
 | Source | Licence | Notes |
 |---|---|---|
 | Epoch AI (Notable AI Models) | CC-BY 4.0 | Credit Epoch AI wherever the data is shown |
-| OpenRouter (planned) | Public API | Model pricing; to be loaded daily and tracked with dbt snapshots |
+| OpenRouter | Public API (`/api/v1/models`, no key needed) | Model catalogue and pricing; loaded daily at 06:00 Europe/London by the Databricks notebook `ingest_openrouter_models` into `raw_openrouter.models_daily` |
 
 ### Loading notes
 - **Epoch CSV:** upload with *Rows span multiple lines* ticked and *Escape character* set to `"`. Without these, multi-paragraph text fields break into extra rows (first load produced 6,407 rows instead of 1,091).
 - **Missing values:** many recent closed models have no published parameter count. These nulls are genuine gaps in the source, not load errors.
+- **OpenRouter benchmarks:** the API response includes a `benchmarks.artificial_analysis` block. It is deliberately not parsed or published, because Artificial Analysis's free terms don't allow redistribution.
