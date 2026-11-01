@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: epoch
+    description: "Epoch AI 'Notable AI Models' dataset (CC-BY 4.0). Loaded via Databricks file upload."
+    database: workspace
+    schema: raw_epoch
+    tables:
+      - name: notable_ai_models
+        description: "One row per notable AI model, exactly as published by Epoch."
