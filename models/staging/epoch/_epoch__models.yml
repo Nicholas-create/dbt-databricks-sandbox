@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_epoch__notable_models
+    description: "Epoch notable AI models, renamed to snake_case. One row per model."
+    columns:
+      - name: model_name
+        description: "Model name as published by Epoch. Primary key."
+        data_tests:
+          - unique
+          - not_null
