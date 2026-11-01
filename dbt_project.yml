@@ -38,5 +38,7 @@ models:
   ai_model_tracker:
     staging:
       +materialized: view
+    intermediate:
+      +materialized: view
     marts:
       +materialized: table
