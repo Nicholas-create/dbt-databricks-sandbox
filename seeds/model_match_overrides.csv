@@ -1,0 +1,8 @@
+openrouter_model_id,epoch_model_name,match_note
+deepseek/deepseek-chat-v3-0324,DeepSeek-V3 (Mar 2025),Date code 0324 = March 2025 release
+deepseek/deepseek-r1-0528,DeepSeek-R1 (May 2025),Date code 0528 = May 2025 release
+google/gemini-2.5-pro,Gemini 2.5 Pro (Jun 2025),Stable alias for the June 2025 general release
+google/gemini-2.5-pro-preview,Gemini 2.5 Pro (Jun 2025),Preview 06-05 is the June 2025 version
+qwen/qwen3-235b-a22b-2507,Qwen3-235B-A22B (Jul 2025),Date code 2507 = July 2025 update
+qwen/qwen3-235b-a22b-thinking-2507,Qwen3-235B-A22B-Thinking (Jul 2025),Date code 2507 = July 2025 thinking variant
+qwen/qwen3-vl-235b-a22b-instruct,Qwen3-VL-235B-A22B,Instruct is the standard served variant

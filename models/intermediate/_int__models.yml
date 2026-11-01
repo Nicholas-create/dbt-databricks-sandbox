@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: int_models__matched
+    description: "One row per OpenRouter model, mapped to an Epoch model where possible. Manual overrides take priority over automatic name matching."
+    columns:
+      - name: openrouter_model_id
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: epoch_model_name
+        description: "Matched Epoch model. Null when unmatched."
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_epoch__notable_models')
+                field: model_name
+      - name: match_method
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['manual', 'automatic', 'unmatched']
+      - name: pricing_variant
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['standard', 'batch', 'free']

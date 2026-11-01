@@ -1,0 +1,19 @@
+version: 2
+
+seeds:
+  - name: model_match_overrides
+    description: "Manual OpenRouter → Epoch pairings for models that automatic name matching misses. Each row records the reasoning in match_note."
+    columns:
+      - name: openrouter_model_id
+        description: "OpenRouter model ID. Primary key: each OpenRouter model maps to at most one Epoch model."
+        data_tests:
+          - unique
+          - not_null
+      - name: epoch_model_name
+        description: "Exact Epoch model name this OpenRouter model represents."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_epoch__notable_models')
+                field: model_name
