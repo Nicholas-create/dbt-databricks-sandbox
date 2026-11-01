@@ -15,5 +15,5 @@ seeds:
           - not_null
           - relationships:
               arguments:
-                to: ref('dim_models')
+                to: ref('stg_epoch__notable_models')
                 field: model_name
