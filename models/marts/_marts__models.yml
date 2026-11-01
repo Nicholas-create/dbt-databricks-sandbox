@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_models
+    description: "One row per notable AI model, ready for reporting. Source: Epoch AI (CC-BY 4.0)."
+    columns:
+      - name: model_name
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: access_type
+        description: "How the model is made available. 'Unknown' where Epoch has no data."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - 'Unreleased'
+                  - 'API access'
+                  - 'Hosted access (no API)'
+                  - 'Limited access'
+                  - 'Open weights (unrestricted)'
+                  - 'Open weights (non-commercial)'
+                  - 'Open weights (restricted use)'
+                  - 'Unknown'
+      - name: is_open_weights
+        description: "True if weights are downloadable in any form. Null where access is unknown."
