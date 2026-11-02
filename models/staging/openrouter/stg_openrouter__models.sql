@@ -50,7 +50,13 @@ parsed as (
         case when cast(raw_json:pricing.input_cache_read as decimal(20, 12)) >= 0
              then cast(raw_json:pricing.input_cache_read as decimal(20, 12)) * 1000000
         end                                                            as cached_input_price_usd_per_mtok,
-        coalesce(cast(raw_json:pricing.prompt as decimal(20, 12)) < 0, false) as is_variable_priced,
+        -- true if any price carried the placeholder, so every nulled-out price keeps its meaning
+        coalesce(
+            cast(raw_json:pricing.prompt           as decimal(20, 12)) < 0
+         or cast(raw_json:pricing.completion       as decimal(20, 12)) < 0
+         or cast(raw_json:pricing.input_cache_read as decimal(20, 12)) < 0,
+            false
+        )                                                              as is_variable_priced,
 
         -- snapshot
         to_date(loaded_at)                                             as snapshot_date,
