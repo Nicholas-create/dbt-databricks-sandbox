@@ -39,10 +39,18 @@ parsed as (
         from_json(raw_json:architecture.input_modalities,  'array<string>') as input_modalities,
         from_json(raw_json:architecture.output_modalities, 'array<string>') as output_modalities,
 
-        -- pricing: OpenRouter gives USD per token as text; convert to USD per million tokens
-        cast(raw_json:pricing.prompt           as decimal(20, 12)) * 1000000 as input_price_usd_per_mtok,
-        cast(raw_json:pricing.completion       as decimal(20, 12)) * 1000000 as output_price_usd_per_mtok,
-        cast(raw_json:pricing.input_cache_read as decimal(20, 12)) * 1000000 as cached_input_price_usd_per_mtok,
+        -- pricing: OpenRouter gives USD per token as text; convert to USD per million tokens.
+        -- Routers report -1 (price varies by routed model), so negatives become null.
+        case when cast(raw_json:pricing.prompt as decimal(20, 12)) >= 0
+             then cast(raw_json:pricing.prompt as decimal(20, 12)) * 1000000
+        end                                                            as input_price_usd_per_mtok,
+        case when cast(raw_json:pricing.completion as decimal(20, 12)) >= 0
+             then cast(raw_json:pricing.completion as decimal(20, 12)) * 1000000
+        end                                                            as output_price_usd_per_mtok,
+        case when cast(raw_json:pricing.input_cache_read as decimal(20, 12)) >= 0
+             then cast(raw_json:pricing.input_cache_read as decimal(20, 12)) * 1000000
+        end                                                            as cached_input_price_usd_per_mtok,
+        coalesce(cast(raw_json:pricing.prompt as decimal(20, 12)) < 0, false) as is_variable_priced,
 
         -- snapshot
         to_date(loaded_at)                                             as snapshot_date,
