@@ -57,3 +57,19 @@ models:
           - not_null
       - name: output_price_usd_per_mtok
         description: "Null when variable-priced. 0 means free."
+
+  - name: rpt_models_latest_price
+    description: "One row per Epoch model with its latest standard OpenRouter price. Where several listings match, the main listing wins over dated checkpoints and previews, then the cheaper one. Unpriced models are kept (has_price = false)."
+    columns:
+      - name: model_name
+        description: "Primary key. Matches dim_models."
+        data_tests:
+          - unique
+          - not_null
+      - name: has_price
+        data_tests:
+          - not_null
+      - name: standard_listings
+        description: "How many standard OpenRouter listings matched this Epoch model. Above 1 means the tie-break chose one."
+      - name: price_as_of_date
+        description: "Snapshot date the price comes from. Older than the latest snapshot means OpenRouter has delisted the listing."
