@@ -1,0 +1,78 @@
+name: dbt production build
+
+# Rebuild the production schema (workspace.analytics) once a day, after the
+# 06:00 Europe/London OpenRouter ingestion has landed. The dashboard reads
+# from this schema, never from anyone's dev schema.
+on:
+  schedule:
+    # 07:30 UTC = 07:30 GMT in winter, 08:30 BST in summer: always after the 06:00 London load
+    - cron: "30 7 * * *"
+  workflow_dispatch:
+
+# Never run two production builds at once.
+concurrency:
+  group: dbt-prod
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  dbt-build-prod:
+    name: dbt build (prod)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_HTTP_PATH: ${{ vars.DATABRICKS_HTTP_PATH }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dbt (versions pinned in requirements.txt)
+        run: pip install -r requirements.txt
+
+      - name: Write the prod dbt profile (credentials come from env vars, never from the repo)
+        run: |
+          mkdir -p "$RUNNER_TEMP/dbt"
+          cat > "$RUNNER_TEMP/dbt/profiles.yml" <<'EOF'
+          default:
+            target: prod
+            outputs:
+              prod:
+                type: databricks
+                catalog: workspace
+                schema: analytics
+                host: "{{ env_var('DATABRICKS_HOST') }}"
+                http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+                token: "{{ env_var('DATABRICKS_TOKEN') }}"
+                threads: 4
+          EOF
+
+      - name: dbt build
+        run: dbt build --profiles-dir "$RUNNER_TEMP/dbt"
+
+      # Runs after the build so the tables are always refreshed; fails the
+      # workflow (and GitHub emails the repo owner) if the daily load is late.
+      - name: dbt source freshness
+        run: dbt source freshness --profiles-dir "$RUNNER_TEMP/dbt"
+
+      - name: Keep dbt results for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-prod-results
+          path: |
+            target/run_results.json
+            target/sources.json
+            logs/dbt.log
+          if-no-files-found: ignore
+          retention-days: 14

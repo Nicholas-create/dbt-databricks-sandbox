@@ -92,6 +92,7 @@ The full rules, each with a correct and an incorrect example, are in [`CONVENTIO
 ## Data quality
 
 - **29 data tests** run on every `dbt build`: `unique` + `not_null` on every primary key (composite keys for daily grain), `relationships` from matches and facts back to Epoch models, `accepted_values` on the categories that drive logic, and a singular test that fails if a negative price ever reaches the fact table.
+- **Daily production build**: GitHub Actions ([`.github/workflows/dbt-prod.yml`](.github/workflows/dbt-prod.yml)) rebuilds the `analytics` schema from `main` at 07:30 UTC, after the morning OpenRouter load, then checks source freshness. If the load is late, the run fails and GitHub sends an email. Dev, CI and prod each have their own schema (see `CONVENTIONS.md` §6).
 - **CI on every pull request**: GitHub Actions ([`.github/workflows/dbt-ci.yml`](.github/workflows/dbt-ci.yml)) installs the pinned dbt versions and runs `dbt build` against Databricks in a separate `dbt_ci` schema. A PR is only merged once that check is green.
 - **Source freshness** on the OpenRouter feed: warn after 26 hours, error after 50.
 - **Spot checks** after each change: known prices and tie-breaks are checked by hand in the SQL editor. Tests prove shape; spot checks prove meaning.
@@ -151,7 +152,7 @@ models/
 macros/                 model_match_key (shared name normalisation)
 seeds/                  model_match_overrides (manual OpenRouter → Epoch pairings)
 tests/                  singular tests
-.github/workflows/      dbt-ci.yml: dbt build on every pull request
+.github/workflows/      dbt-ci.yml (every pull request), dbt-prod.yml (daily prod build)
 CONVENTIONS.md          project rules, with reasons and examples
 ```
 

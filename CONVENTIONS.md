@@ -204,6 +204,18 @@ Check it with `dbt source freshness --select source:<source>`.
 ❌ Merge because the local build passed while the CI check is still failing
 - Commit messages say *what* changed in the imperative mood.
 
+### Environments
+| Environment | Schema | Built by | Who reads it |
+|---|---|---|---|
+| dev | `dbt_<name>` (e.g. `dbt_nsampson`) | You, locally or in dbt Studio, from any branch | Only you, while developing |
+| ci | `dbt_ci` | GitHub Actions on every pull request (`dbt-ci.yml`) | The PR check |
+| prod | `analytics` | GitHub Actions daily at 07:30 UTC, from `main` only (`dbt-prod.yml`) | Dashboards and anyone using the data |
+
+> **Why:** dashboards must never read a dev schema. Dev tables change whenever someone runs a half-finished branch; prod only changes when reviewed code reaches `main`.
+
+✅ Dashboard dataset: `FROM rpt_models_latest_price`, with the dataset schema set to `analytics`
+❌ Dashboard dataset reading `dbt_nsampson.rpt_models_latest_price`
+
 ✅ `Add Epoch source and staging model with grain tests`
 ❌ `updates`
 
