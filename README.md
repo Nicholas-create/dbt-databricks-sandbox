@@ -34,7 +34,7 @@ group by 1
 ```mermaid
 flowchart LR
     epoch_csv["Epoch AI CSV<br/>(notable models)"] -->|manual upload| raw_epoch[("raw_epoch.<br/>notable_ai_models")]
-    or_api["OpenRouter API<br/>/api/v1/models"] -->|"Databricks job<br/>daily 06:00 London"| raw_or[("raw_openrouter.<br/>models_daily")]
+    or_api["OpenRouter API<br/>/api/v1/models"] -->|"ingestion notebook<br/>daily 06:00 London"| raw_or[("raw_openrouter.<br/>models_daily")]
 
     raw_epoch --> stg_epoch["stg_epoch__notable_models"]
     raw_or --> stg_or["stg_openrouter__models"]
@@ -134,13 +134,14 @@ default:
 .venv/bin/dbt source freshness       # is the OpenRouter feed up to date?
 ```
 
-The raw tables have to exist first: upload the Epoch CSV to `workspace.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §8) and schedule the OpenRouter ingestion notebook to load `workspace.raw_openrouter.models_daily`.
+The raw tables have to exist first: upload the Epoch CSV to `workspace.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §8), then import [`ingestion/ingest_openrouter_models.py`](ingestion/ingest_openrouter_models.py) into Databricks as a notebook and schedule it daily to load `workspace.raw_openrouter.models_daily`. See [`ingestion/README.md`](ingestion/README.md).
 
 ---
 
 ## Repository layout
 
 ```
+ingestion/              OpenRouter loader (Databricks notebook, run daily by a job)
 models/
   staging/epoch/        stg_epoch__notable_models + source and model YAML
   staging/openrouter/   stg_openrouter__models + source (with freshness) and model YAML
@@ -162,7 +163,7 @@ CONVENTIONS.md          project rules, with reasons and examples
 
 ## Roadmap
 
-- Export the ingestion notebook into this repo so the loader is version-controlled
+- Deploy the ingestion job from this repo (Databricks Asset Bundle), so the repo becomes the source of truth instead of a copy
 - GitHub Actions CI running `dbt build` on every pull request
 - A dashboard on top of the marts
 - Benchmark and capability data from Epoch, to answer "what is each model good at?"
