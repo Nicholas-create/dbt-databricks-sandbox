@@ -13,6 +13,12 @@ Built as an Analytics Engineering portfolio project: layered dbt models, tested 
 - How do prices change from day to day, and when does a listing disappear?
 - Which organisations, release years and domains do the priced models come from?
 
+### Dashboard
+
+A Databricks AI/BI dashboard on the production marts, rebuilt daily. Details and deployment steps are in [`dashboards/README.md`](dashboards/README.md).
+
+![AI Model Prices dashboard](docs/dashboard.png)
+
 **Example result** (snapshot of 13 Nov 2026, models released in 2025 or later with a current standard OpenRouter price):
 
 | | Priced models | Median output price (USD / M tokens) |
@@ -49,6 +55,9 @@ flowchart LR
 
     dim --> rpt["rpt_models_latest_price"]
     fct --> rpt
+
+    rpt --> dash["AI/BI dashboard<br/>(analytics schema)"]
+    fct --> dash
 ```
 
 **Stack:** Databricks Free Edition (Delta tables, SQL warehouse, scheduled job) · dbt Core 1.12 / dbt Studio · GitHub.
@@ -152,6 +161,7 @@ models/
 macros/                 model_match_key (shared name normalisation)
 seeds/                  model_match_overrides (manual OpenRouter → Epoch pairings)
 tests/                  singular tests
+dashboards/             AI/BI dashboard definition (.lvdash.json) and deployment notes
 .github/workflows/      dbt-ci.yml (every pull request), dbt-prod.yml (daily prod build)
 CONVENTIONS.md          project rules, with reasons and examples
 ```
@@ -167,5 +177,4 @@ CONVENTIONS.md          project rules, with reasons and examples
 ## Roadmap
 
 - Deploy the ingestion job from this repo (Databricks Asset Bundle), so the repo becomes the source of truth instead of a copy
-- A dashboard on top of the marts
 - Benchmark and capability data from Epoch, to answer "what is each model good at?"
