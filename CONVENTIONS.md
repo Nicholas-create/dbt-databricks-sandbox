@@ -64,6 +64,21 @@ Staging models **never**:
 
 > **Why:** staging is a clean mirror of the source. Business decisions hidden in staging are invisible to anyone reading the marts.
 
+### Placeholder codes become null, with a flag
+Some sources use a magic number to mean "no real value" (OpenRouter reports a price of `-1` for routers, whose price depends on the model routed to). Staging turns the placeholder into `null` and adds an `is_` flag that records what the placeholder meant.
+
+> **Why:** a placeholder left in place is read as a real number: `-1` drags down an average price, and summing it is meaningless. Turning it into null alone loses information, because null usually means "unknown", while `-1` meant something specific. The flag keeps that meaning. Never turn a placeholder into `0`: `0` is a real price (free).
+
+✅
+```sql
+case when price >= 0 then price end   as output_price_usd_per_mtok,
+coalesce(price < 0, false)            as is_variable_priced
+```
+❌ `price as output_price_usd_per_mtok`: `-1` reaches the dashboard as a real price
+❌ `greatest(price, 0)`: a router now looks free
+
+A singular test on the mart (`tests/assert_model_prices_not_negative.sql`) fails the build if a new negative code ever appears.
+
 ✅ Good staging:
 ```sql
 select
@@ -89,7 +104,7 @@ where `Domain` = 'Language'          -- filtering belongs downstream
 | Raw schema | `raw_<source>` | `raw_epoch` |
 | Staging model | `stg_<source>__<entity>` | `stg_epoch__notable_models` |
 | Intermediate model | `int_<entity>__<verb>` | `int_models__joined_pricing` |
-| Mart | `fct_<event>` / `dim_<thing>` | `dim_models`, `fct_daily_prices` |
+| Mart | `fct_<event>` / `dim_<thing>` | `dim_models`, `fct_model_prices_daily` |
 | Source YAML | `_<source>__sources.yml` | `_epoch__sources.yml` |
 | Model YAML | `_<source>__models.yml` | `_epoch__models.yml` |
 | Columns | `snake_case`, units in the name | `training_compute_flop`, `training_time_hours` |

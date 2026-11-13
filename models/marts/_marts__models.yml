@@ -25,3 +25,35 @@ models:
                   - 'Unknown'
       - name: is_open_weights
         description: "True if weights are downloadable in any form. Null where access is unknown."
+  - name: fct_model_prices_daily
+    description: "One row per OpenRouter model per snapshot date, with its Epoch match where one exists. All OpenRouter models are kept; unmatched ones have a null epoch_model_name. Prices in USD per million tokens, rounded to 4 dp."
+    columns:
+      - name: model_snapshot_key
+        description: "openrouter_model_id + snapshot_date. Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: openrouter_model_id
+        data_tests:
+          - not_null
+      - name: snapshot_date
+        data_tests:
+          - not_null
+      - name: epoch_model_name
+        description: "Matched Epoch model. Null when unmatched."
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_models')
+                field: model_name
+      - name: pricing_variant
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['standard', 'batch', 'free']
+      - name: is_variable_priced
+        description: "True when OpenRouter reported a placeholder (-1) price, e.g. for routers whose price depends on the model routed to. Those prices are null, not 0."
+        data_tests:
+          - not_null
+      - name: output_price_usd_per_mtok
+        description: "Null when variable-priced. 0 means free."
