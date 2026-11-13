@@ -1,0 +1,1141 @@
+{
+  "datasets": [
+    {
+      "name": "ds_models",
+      "displayName": "Notable models with a current price",
+      "queryLines": [
+        "SELECT\n",
+        "  model_name,\n",
+        "  organization,\n",
+        "  CAST(release_year AS STRING) AS release_year,\n",
+        "  CASE WHEN is_open_weights THEN 'Open weights' ELSE 'Closed' END AS weights,\n",
+        "  access_type,\n",
+        "  priced_listing_id,\n",
+        "  -- DOUBLE only for display: the dashboard formats floating-point numbers, not DECIMAL\n",
+        "  CAST(input_price_usd_per_mtok AS DOUBLE) AS input_price_usd_per_mtok,\n",
+        "  CAST(output_price_usd_per_mtok AS DOUBLE) AS output_price_usd_per_mtok,\n",
+        "  CAST(cached_input_price_usd_per_mtok AS DOUBLE) AS cached_input_price_usd_per_mtok,\n",
+        "  context_length_tokens,\n",
+        "  standard_listings,\n",
+        "  price_as_of_date,\n",
+        "  CASE\n",
+        "    WHEN output_price_usd_per_mtok < 1  THEN 'Under $1'\n",
+        "    WHEN output_price_usd_per_mtok < 3  THEN '$1 to $3'\n",
+        "    WHEN output_price_usd_per_mtok < 10 THEN '$3 to $10'\n",
+        "    WHEN output_price_usd_per_mtok < 30 THEN '$10 to $30'\n",
+        "    ELSE '$30 and over'\n",
+        "  END AS price_band\n",
+        "FROM rpt_models_latest_price\n",
+        "WHERE has_price\n",
+        "ORDER BY output_price_usd_per_mtok"
+      ],
+      "columns": [
+        {
+          "displayName": "Priced Models",
+          "description": "Notable models with a current standard price",
+          "expression": "COUNT(`model_name`)"
+        },
+        {
+          "displayName": "Median Output Price",
+          "description": "Median USD per million output tokens",
+          "expression": "CAST(MEDIAN(`output_price_usd_per_mtok`) AS DOUBLE)"
+        },
+        {
+          "displayName": "Median Output Price Open",
+          "description": "Median output price, open-weights models",
+          "expression": "CAST(MEDIAN(CASE WHEN `weights` = 'Open weights' THEN `output_price_usd_per_mtok` END) AS DOUBLE)"
+        },
+        {
+          "displayName": "Median Output Price Closed",
+          "description": "Median output price, closed models",
+          "expression": "CAST(MEDIAN(CASE WHEN `weights` = 'Closed' THEN `output_price_usd_per_mtok` END) AS DOUBLE)"
+        }
+      ]
+    },
+    {
+      "name": "ds_daily",
+      "displayName": "OpenRouter catalogue per day",
+      "queryLines": [
+        "SELECT\n",
+        "  snapshot_date,\n",
+        "  COUNT(*) AS listings,\n",
+        "  COUNT(DISTINCT epoch_model_name) AS notable_models_listed,\n",
+        "  SUM(CASE WHEN is_variable_priced THEN 1 ELSE 0 END) AS variable_priced_listings\n",
+        "FROM fct_model_prices_daily\n",
+        "GROUP BY snapshot_date\n",
+        "ORDER BY snapshot_date"
+      ]
+    },
+    {
+      "name": "ds_latest",
+      "displayName": "Latest snapshot",
+      "queryLines": [
+        "SELECT\n",
+        "  snapshot_date AS latest_snapshot_date,\n",
+        "  COUNT(*) AS listings,\n",
+        "  COUNT(DISTINCT epoch_model_name) AS notable_models_listed\n",
+        "FROM fct_model_prices_daily\n",
+        "WHERE snapshot_date = (SELECT MAX(snapshot_date) FROM fct_model_prices_daily)\n",
+        "GROUP BY snapshot_date"
+      ]
+    },
+    {
+      "name": "ds_org",
+      "displayName": "Priced models by organisation",
+      "queryLines": [
+        "WITH priced AS (\n",
+        "  SELECT organization, CASE WHEN is_open_weights THEN 'Open weights' ELSE 'Closed' END AS weights\n",
+        "  FROM rpt_models_latest_price\n",
+        "  WHERE has_price\n",
+        "),\n",
+        "top_orgs AS (\n",
+        "  SELECT organization FROM priced GROUP BY organization ORDER BY COUNT(*) DESC, organization LIMIT 10\n",
+        ")\n",
+        "SELECT\n",
+        "  CASE WHEN t.organization IS NOT NULL THEN p.organization ELSE 'Other' END AS organization_group,\n",
+        "  p.weights,\n",
+        "  COUNT(*) AS priced_models\n",
+        "FROM priced p\n",
+        "LEFT JOIN top_orgs t ON p.organization = t.organization\n",
+        "GROUP BY 1, 2\n",
+        "ORDER BY priced_models DESC"
+      ]
+    },
+    {
+      "name": "ds_changes",
+      "displayName": "Price changes",
+      "queryLines": [
+        "WITH prices AS (\n",
+        "  SELECT\n",
+        "    f.openrouter_model_id, f.epoch_model_name, f.snapshot_date,\n",
+        "    f.input_price_usd_per_mtok, f.output_price_usd_per_mtok\n",
+        "  FROM fct_model_prices_daily f\n",
+        "  WHERE f.epoch_model_name IS NOT NULL AND f.pricing_variant = 'standard'\n",
+        "),\n",
+        "per_listing AS (\n",
+        "  SELECT\n",
+        "    openrouter_model_id,\n",
+        "    epoch_model_name,\n",
+        "    MIN(snapshot_date) AS first_seen,\n",
+        "    MAX(snapshot_date) AS last_seen,\n",
+        "    MIN_BY(input_price_usd_per_mtok, snapshot_date)  AS first_input_price,\n",
+        "    MAX_BY(input_price_usd_per_mtok, snapshot_date)  AS latest_input_price,\n",
+        "    MIN_BY(output_price_usd_per_mtok, snapshot_date) AS first_output_price,\n",
+        "    MAX_BY(output_price_usd_per_mtok, snapshot_date) AS latest_output_price,\n",
+        "    COUNT(DISTINCT input_price_usd_per_mtok) > 1 OR COUNT(DISTINCT output_price_usd_per_mtok) > 1 AS price_changed\n",
+        "  FROM prices\n",
+        "  GROUP BY 1, 2\n",
+        ")\n",
+        "SELECT\n",
+        "  p.epoch_model_name AS model_name,\n",
+        "  d.organization,\n",
+        "  p.openrouter_model_id,\n",
+        "  p.first_seen,\n",
+        "  p.last_seen,\n",
+        "  -- DOUBLE only for display: the dashboard formats floating-point numbers, not DECIMAL\n",
+        "  CAST(p.first_input_price AS DOUBLE) AS first_input_price,\n",
+        "  CAST(p.latest_input_price AS DOUBLE) AS latest_input_price,\n",
+        "  CAST(p.first_output_price AS DOUBLE) AS first_output_price,\n",
+        "  CAST(p.latest_output_price AS DOUBLE) AS latest_output_price,\n",
+        "  CAST(ROUND(CASE WHEN p.first_output_price > 0\n",
+        "       THEN 100 * (p.latest_output_price - p.first_output_price) / p.first_output_price END, 0) AS DOUBLE) AS output_price_change_pct\n",
+        "FROM per_listing p\n",
+        "JOIN dim_models d ON d.model_name = p.epoch_model_name\n",
+        "WHERE p.price_changed\n",
+        "ORDER BY ABS(COALESCE(p.latest_output_price - p.first_output_price, 0)) DESC, p.epoch_model_name"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "overview",
+      "displayName": "AI model prices",
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1",
+      "layout": [
+        {
+          "widget": {
+            "name": "header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# What do notable AI models cost to use?\n",
+                "\n",
+                "Notable AI models from **Epoch AI**, priced with **OpenRouter**'s public catalogue. Prices are USD per million tokens, taken from each model's main listing. The data is rebuilt daily at 07:30 UTC from the production `analytics` schema. Use the **Filters** panel to narrow by open or closed weights, organisation or release year."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi-priced-models",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "measure(Priced Models)",
+                      "expression": "MEASURE(`Priced Models`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(Priced Models)",
+                  "displayName": "Notable models with a price"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Notable models with a price",
+                "showDescription": true,
+                "description": "Epoch AI models with a current price"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi-median-open",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "measure(Median Output Price Open)",
+                      "expression": "MEASURE(`Median Output Price Open`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(Median Output Price Open)",
+                  "displayName": "Median price: open weights",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  },
+                  "formatTemplate": "${{ @formatted }}"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Median price: open weights",
+                "showDescription": true,
+                "description": "USD per million output tokens"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi-median-closed",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "measure(Median Output Price Closed)",
+                      "expression": "MEASURE(`Median Output Price Closed`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(Median Output Price Closed)",
+                  "displayName": "Median price: closed",
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  },
+                  "formatTemplate": "${{ @formatted }}"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Median price: closed",
+                "showDescription": true,
+                "description": "USD per million output tokens"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi-listings-today",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_latest",
+                  "disaggregated": true,
+                  "fields": [
+                    {
+                      "name": "listings",
+                      "expression": "`listings`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "listings",
+                  "displayName": "OpenRouter listings today"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "OpenRouter listings today",
+                "showDescription": true,
+                "description": "Latest daily snapshot, all listings"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 3,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "median-price-by-year",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "release_year",
+                      "expression": "`release_year`"
+                    },
+                    {
+                      "name": "weights",
+                      "expression": "`weights`"
+                    },
+                    {
+                      "name": "measure(Median Output Price)",
+                      "expression": "MEASURE(`Median Output Price`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "release_year",
+                  "displayName": "Release year",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "alphabetical"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(Median Output Price)",
+                  "displayName": "Median output price (USD / M tokens)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "format": {
+                    "type": "number-plain",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                },
+                "color": {
+                  "fieldName": "weights",
+                  "displayName": "Weights",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Open weights",
+                        "color": "#009E73"
+                      },
+                      {
+                        "value": "Closed",
+                        "color": "#E69F00"
+                      }
+                    ]
+                  }
+                }
+              },
+              "mark": {
+                "layout": "group"
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Median output price by release year",
+                "showDescription": true,
+                "description": "Closed models cost several times more than open-weights models released in the same year"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "price-bands",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "price_band",
+                      "expression": "`price_band`"
+                    },
+                    {
+                      "name": "weights",
+                      "expression": "`weights`"
+                    },
+                    {
+                      "name": "count(model_name)",
+                      "expression": "COUNT(`model_name`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "price_band",
+                  "displayName": "Output price (USD / M tokens)",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "custom-order",
+                      "orderedValues": [
+                        "Under $1",
+                        "$1 to $3",
+                        "$3 to $10",
+                        "$10 to $30",
+                        "$30 and over"
+                      ]
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "count(model_name)",
+                  "displayName": "Models",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "weights",
+                  "displayName": "Weights",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Open weights",
+                        "color": "#009E73"
+                      },
+                      {
+                        "value": "Closed",
+                        "color": "#E69F00"
+                      }
+                    ]
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "How output prices are spread",
+                "showDescription": true,
+                "description": "Prices range from under $0.10 to $180 per million output tokens"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "catalogue-per-day",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_daily",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "snapshot_date",
+                      "expression": "`snapshot_date`"
+                    },
+                    {
+                      "name": "sum(listings)",
+                      "expression": "SUM(`listings`)"
+                    },
+                    {
+                      "name": "sum(notable_models_listed)",
+                      "expression": "SUM(`notable_models_listed`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "snapshot_date",
+                  "displayName": "Snapshot date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "fields": [
+                    {
+                      "fieldName": "sum(listings)",
+                      "displayName": "All OpenRouter listings"
+                    },
+                    {
+                      "fieldName": "sum(notable_models_listed)",
+                      "displayName": "Notable models listed"
+                    }
+                  ]
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "OpenRouter catalogue, day by day",
+                "showDescription": true,
+                "description": "One point per daily snapshot. Days without a snapshot (e.g. 7 Nov 2026) are left out, not filled in"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "priced-by-organisation",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_org",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "organization_group",
+                      "expression": "`organization_group`"
+                    },
+                    {
+                      "name": "weights",
+                      "expression": "`weights`"
+                    },
+                    {
+                      "name": "sum(priced_models)",
+                      "expression": "SUM(`priced_models`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(priced_models)",
+                  "displayName": "Priced notable models",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "organization_group",
+                  "displayName": "Organisation",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "value"
+                    }
+                  }
+                },
+                "color": {
+                  "fieldName": "weights",
+                  "displayName": "Weights",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "Open weights",
+                        "color": "#009E73"
+                      },
+                      {
+                        "value": "Closed",
+                        "color": "#E69F00"
+                      }
+                    ]
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Who makes the priced models",
+                "showDescription": true,
+                "description": "Top 10 organisations; the rest are grouped as Other"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 12,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "price-changes",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_changes",
+                  "disaggregated": true,
+                  "fields": [
+                    {
+                      "name": "model_name",
+                      "expression": "`model_name`"
+                    },
+                    {
+                      "name": "organization",
+                      "expression": "`organization`"
+                    },
+                    {
+                      "name": "openrouter_model_id",
+                      "expression": "`openrouter_model_id`"
+                    },
+                    {
+                      "name": "first_output_price",
+                      "expression": "`first_output_price`"
+                    },
+                    {
+                      "name": "latest_output_price",
+                      "expression": "`latest_output_price`"
+                    },
+                    {
+                      "name": "output_price_change_pct",
+                      "expression": "`output_price_change_pct`"
+                    },
+                    {
+                      "name": "first_input_price",
+                      "expression": "`first_input_price`"
+                    },
+                    {
+                      "name": "latest_input_price",
+                      "expression": "`latest_input_price`"
+                    },
+                    {
+                      "name": "first_seen",
+                      "expression": "`first_seen`"
+                    },
+                    {
+                      "name": "last_seen",
+                      "expression": "`last_seen`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "model_name",
+                    "displayName": "Model"
+                  },
+                  {
+                    "fieldName": "organization",
+                    "displayName": "Organisation"
+                  },
+                  {
+                    "fieldName": "openrouter_model_id",
+                    "displayName": "OpenRouter listing"
+                  },
+                  {
+                    "fieldName": "first_output_price",
+                    "displayName": "Output price, first seen"
+                  },
+                  {
+                    "fieldName": "latest_output_price",
+                    "displayName": "Output price, latest"
+                  },
+                  {
+                    "fieldName": "output_price_change_pct",
+                    "displayName": "Output change (%)"
+                  },
+                  {
+                    "fieldName": "first_input_price",
+                    "displayName": "Input price, first seen"
+                  },
+                  {
+                    "fieldName": "latest_input_price",
+                    "displayName": "Input price, latest"
+                  },
+                  {
+                    "fieldName": "first_seen",
+                    "displayName": "First seen"
+                  },
+                  {
+                    "fieldName": "last_seen",
+                    "displayName": "Last seen"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Notable-model prices that changed since tracking began",
+                "showDescription": true,
+                "description": "Main and dated listings whose input or output price moved between their first and latest snapshot. Prices rounded to the cent; a negative change means cheaper"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 18,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "latest-prices",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": true,
+                  "fields": [
+                    {
+                      "name": "model_name",
+                      "expression": "`model_name`"
+                    },
+                    {
+                      "name": "organization",
+                      "expression": "`organization`"
+                    },
+                    {
+                      "name": "release_year",
+                      "expression": "`release_year`"
+                    },
+                    {
+                      "name": "access_type",
+                      "expression": "`access_type`"
+                    },
+                    {
+                      "name": "input_price_usd_per_mtok",
+                      "expression": "`input_price_usd_per_mtok`"
+                    },
+                    {
+                      "name": "output_price_usd_per_mtok",
+                      "expression": "`output_price_usd_per_mtok`"
+                    },
+                    {
+                      "name": "context_length_tokens",
+                      "expression": "`context_length_tokens`"
+                    },
+                    {
+                      "name": "priced_listing_id",
+                      "expression": "`priced_listing_id`"
+                    },
+                    {
+                      "name": "price_as_of_date",
+                      "expression": "`price_as_of_date`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "model_name",
+                    "displayName": "Model"
+                  },
+                  {
+                    "fieldName": "organization",
+                    "displayName": "Organisation"
+                  },
+                  {
+                    "fieldName": "release_year",
+                    "displayName": "Released"
+                  },
+                  {
+                    "fieldName": "access_type",
+                    "displayName": "Access"
+                  },
+                  {
+                    "fieldName": "input_price_usd_per_mtok",
+                    "displayName": "Input (USD / M)"
+                  },
+                  {
+                    "fieldName": "output_price_usd_per_mtok",
+                    "displayName": "Output (USD / M)"
+                  },
+                  {
+                    "fieldName": "context_length_tokens",
+                    "displayName": "Context (tokens)",
+                    "format": {
+                      "type": "number",
+                      "abbreviation": "compact",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    }
+                  },
+                  {
+                    "fieldName": "priced_listing_id",
+                    "displayName": "OpenRouter listing"
+                  },
+                  {
+                    "fieldName": "price_as_of_date",
+                    "displayName": "Price as of"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Latest price per notable model",
+                "showDescription": true,
+                "description": "Cheapest first, prices rounded to the cent. An older 'Price as of' date means OpenRouter has since delisted the model"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 24,
+            "width": 12,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "sources",
+            "multilineTextboxSpec": {
+              "lines": [
+                "**Sources.** Epoch AI, *Data on AI models* (notable models), [epoch.ai/data/ai-models](https://epoch.ai/data/ai-models), licensed CC BY 4.0. OpenRouter public model catalogue (`/api/v1/models`). Benchmark data from Artificial Analysis included in the OpenRouter payload is deliberately not shown. Built with dbt on Databricks; models and tests in the `dbt-databricks-sandbox` repository."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 32,
+            "width": 12,
+            "height": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "filters",
+      "displayName": "Filters",
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
+      "layoutVersion": "GRID_V1",
+      "layout": [
+        {
+          "widget": {
+            "name": "filter-weights",
+            "queries": [
+              {
+                "name": "ds_models_weights",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "weights",
+                      "expression": "`weights`"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ds_org_weights",
+                "query": {
+                  "datasetName": "ds_org",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "weights",
+                      "expression": "`weights`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "weights",
+                    "displayName": "Weights",
+                    "queryName": "ds_models_weights"
+                  },
+                  {
+                    "fieldName": "weights",
+                    "displayName": "Weights",
+                    "queryName": "ds_org_weights"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Weights"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 4,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "filter-organisation",
+            "queries": [
+              {
+                "name": "ds_models_organization",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "organization",
+                      "expression": "`organization`"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ds_changes_organization",
+                "query": {
+                  "datasetName": "ds_changes",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "organization",
+                      "expression": "`organization`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "organization",
+                    "displayName": "Organisation",
+                    "queryName": "ds_models_organization"
+                  },
+                  {
+                    "fieldName": "organization",
+                    "displayName": "Organisation",
+                    "queryName": "ds_changes_organization"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Organisation"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 4,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "filter-release-year",
+            "queries": [
+              {
+                "name": "ds_models_release_year",
+                "query": {
+                  "datasetName": "ds_models",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "name": "release_year",
+                      "expression": "`release_year`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "release_year",
+                    "displayName": "Release year",
+                    "queryName": "ds_models_release_year"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Release year"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 0,
+            "width": 4,
+            "height": 2
+          }
+        }
+      ]
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#F7F8FA",
+        "dark": "#1F272D"
+      },
+      "widgetBackgroundColor": {
+        "light": "#FFFFFF",
+        "dark": "#11171C"
+      },
+      "widgetBorderColor": {
+        "light": "#FFFFFF",
+        "dark": "#11171C"
+      },
+      "fontColor": {
+        "light": "#11171C",
+        "dark": "#E8ECF0"
+      },
+      "selectionColor": {
+        "light": "#2272B4",
+        "dark": "#8ACAFF"
+      },
+      "visualizationColors": [
+        "#0072B2",
+        "#E69F00",
+        "#009E73",
+        "#CC79A7",
+        "#D55E00",
+        "#56B4E9",
+        "#F0E442"
+      ],
+      "widgetHeaderAlignment": "LEFT"
+    }
+  }
+}
