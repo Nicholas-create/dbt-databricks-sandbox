@@ -1,0 +1,71 @@
+name: Publish site
+
+# Publishes site/ to GitHub Pages with fresh data from the production marts.
+# Runs after each successful production dbt build (so the page never shows
+# data that failed its tests), and whenever the site itself changes on main.
+on:
+  workflow_run:
+    workflows: ["dbt production build"]
+    types: [completed]
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "scripts/export_site_data.py"
+      - ".github/workflows/site.yml"
+  workflow_dispatch:
+
+# Only one deployment at a time; a newer run waits rather than cancelling.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write      # deploy to GitHub Pages
+  id-token: write   # proves to Pages that this workflow is allowed to deploy
+
+jobs:
+  publish:
+    name: Export data and deploy
+    # Skip when the production build it follows failed.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_HTTP_PATH: ${{ vars.DATABRICKS_HTTP_PATH }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # dbt-databricks brings the Databricks SQL connector the export uses.
+      - name: Install dependencies (versions pinned in requirements.txt)
+        run: pip install -r requirements.txt
+
+      - name: Export site data from workspace.analytics
+        run: python scripts/export_site_data.py --schema analytics
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

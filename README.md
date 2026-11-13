@@ -13,9 +13,13 @@ Built as an Analytics Engineering portfolio project: layered dbt models, tested 
 - How do prices change from day to day, and when does a listing disappear?
 - Which organisations, release years and domains do the priced models come from?
 
-### Dashboard
+### Website
 
-A Databricks AI/BI dashboard on the production marts, rebuilt daily. Details and deployment steps are in [`dashboards/README.md`](dashboards/README.md).
+**[nicholas-create.github.io/dbt-databricks-sandbox](https://nicholas-create.github.io/dbt-databricks-sandbox/)**: a scroll-driven chart of every priced notable model, placed by release date against what it costs today. It's a static page (`site/`): after each successful production build, `scripts/export_site_data.py` reads `rpt_models_latest_price` from the `analytics` schema into a small JSON file and `.github/workflows/site.yml` publishes it to GitHub Pages. The browser never connects to Databricks.
+
+### Dashboard (internal)
+
+A Databricks AI/BI dashboard on the production marts, rebuilt daily. Only workspace users can open it, which is why the public view is the website above. Details and deployment steps are in [`dashboards/README.md`](dashboards/README.md).
 
 ![AI Model Prices dashboard](docs/dashboard.png)
 
@@ -56,6 +60,7 @@ flowchart LR
     dim --> rpt["rpt_models_latest_price"]
     fct --> rpt
 
+    rpt -->|export_site_data.py| site["Website<br/>(GitHub Pages)"]
     rpt --> dash["AI/BI dashboard<br/>(analytics schema)"]
     fct --> dash
 ```
@@ -100,7 +105,7 @@ The full rules, each with a correct and an incorrect example, are in [`CONVENTIO
 
 ## Data quality
 
-- **29 data tests** run on every `dbt build`: `unique` + `not_null` on every primary key (composite keys for daily grain), `relationships` from matches and facts back to Epoch models, `accepted_values` on the categories that drive logic, and a singular test that fails if a negative price ever reaches the fact table.
+- **30 data tests** run on every `dbt build`: `unique` + `not_null` on every primary key (composite keys for daily grain), `relationships` from matches and facts back to Epoch models, `accepted_values` on the categories that drive logic, and a singular test that fails if a negative price ever reaches the fact table.
 - **Daily production build**: GitHub Actions ([`.github/workflows/dbt-prod.yml`](.github/workflows/dbt-prod.yml)) rebuilds the `analytics` schema from `main` at 07:30 UTC, after the morning OpenRouter load, then checks source freshness. If the load is late, the run fails and GitHub sends an email. Dev, CI and prod each have their own schema (see `CONVENTIONS.md` §6).
 - **CI on every pull request**: GitHub Actions ([`.github/workflows/dbt-ci.yml`](.github/workflows/dbt-ci.yml)) installs the pinned dbt versions and runs `dbt build` against Databricks in a separate `dbt_ci` schema. A PR is only merged once that check is green.
 - **Source freshness** on the OpenRouter feed: warn after 26 hours, error after 50.
@@ -161,8 +166,10 @@ models/
 macros/                 model_match_key (shared name normalisation)
 seeds/                  model_match_overrides (manual OpenRouter → Epoch pairings)
 tests/                  singular tests
+site/                   the public website (static HTML, CSS and D3; data/ is generated at deploy)
+scripts/                export_site_data.py (production mart → site/data/models.json)
 dashboards/             AI/BI dashboard definition (.lvdash.json) and deployment notes
-.github/workflows/      dbt-ci.yml (every pull request), dbt-prod.yml (daily prod build)
+.github/workflows/      dbt-ci.yml (every pull request), dbt-prod.yml (daily prod build), site.yml (publish the website)
 CONVENTIONS.md          project rules, with reasons and examples
 ```
 

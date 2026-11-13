@@ -66,6 +66,10 @@ models:
         data_tests:
           - unique
           - not_null
+      - name: published_date
+        description: "Release date from Epoch AI. The website plots models along this axis."
+        data_tests:
+          - not_null
       - name: has_price
         data_tests:
           - not_null

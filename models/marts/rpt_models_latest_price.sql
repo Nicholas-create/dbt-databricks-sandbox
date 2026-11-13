@@ -53,6 +53,7 @@ final as (
         -- Epoch: the spine
         e.model_name,
         e.organization,
+        e.published_date,
         e.release_year,
         e.access_type,
         e.is_open_weights,

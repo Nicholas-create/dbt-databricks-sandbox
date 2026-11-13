@@ -1,0 +1,31 @@
+version: 2
+
+# Exposures record who uses the marts outside dbt. They appear in the lineage
+# graph (dbt docs), so changing a mart shows which pages it could break.
+exposures:
+  - name: portfolio_site
+    label: Portfolio website
+    type: application
+    maturity: medium
+    url: https://nicholas-create.github.io/dbt-databricks-sandbox/
+    description: >
+      Public GitHub Pages site (`site/`). `scripts/export_site_data.py` reads the
+      priced rows of this mart from the production schema after each daily build,
+      and `.github/workflows/site.yml` publishes them with the page.
+    depends_on:
+      - ref('rpt_models_latest_price')
+    owner:
+      name: Nicholas
+
+  - name: ai_model_prices_dashboard
+    label: AI Model Prices (Databricks dashboard)
+    type: dashboard
+    maturity: low
+    description: >
+      Databricks AI/BI dashboard defined in `dashboards/ai_model_prices.lvdash.json`,
+      reading the production schema. Internal: only workspace users can open it.
+    depends_on:
+      - ref('rpt_models_latest_price')
+      - ref('fct_model_prices_daily')
+    owner:
+      name: Nicholas

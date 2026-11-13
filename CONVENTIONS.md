@@ -209,9 +209,9 @@ Check it with `dbt source freshness --select source:<source>`.
 |---|---|---|---|
 | dev | `dbt_<name>` (e.g. `dbt_nsampson`) | You, locally or in dbt Studio, from any branch | Only you, while developing |
 | ci | `dbt_ci` | GitHub Actions on every pull request (`dbt-ci.yml`) | The PR check |
-| prod | `analytics` | GitHub Actions daily at 07:30 UTC, from `main` only (`dbt-prod.yml`) | Dashboards and anyone using the data |
+| prod | `analytics` | GitHub Actions daily at 07:30 UTC, from `main` only (`dbt-prod.yml`) | The website (via `scripts/export_site_data.py`), dashboards and anyone using the data |
 
-> **Why:** dashboards must never read a dev schema. Dev tables change whenever someone runs a half-finished branch; prod only changes when reviewed code reaches `main`.
+> **Why:** dashboards and the website must never read a dev schema. Dev tables change whenever someone runs a half-finished branch; prod only changes when reviewed code reaches `main`.
 
 ✅ Dashboard dataset: `FROM rpt_models_latest_price`, with the dataset schema set to `analytics`
 ❌ Dashboard dataset reading `dbt_nsampson.rpt_models_latest_price`
