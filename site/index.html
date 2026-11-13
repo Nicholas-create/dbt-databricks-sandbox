@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Price of a Model · Nicholas Sampson</title>
+  <meta name="description" content="Notable AI models placed by release date and priced by what they cost today. A dbt and Databricks data project, rebuilt every morning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <a class="wordmark" href="#top">Nicholas Sampson</a>
+    <span class="section-label" aria-live="polite">01 · The price of a model</span>
+    <a class="header-link" href="https://github.com/Nicholas-create/dbt-databricks-sandbox">Code <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="top">
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section class="hero" data-label="01 · The price of a model">
+      <p class="eyebrow">AI Model Tracker · dbt on Databricks</p>
+      <h1>What does it cost<br>to <em>ask</em> a frontier model?</h1>
+      <p class="lede">
+        <span data-stat="count">—</span> notable AI models from <span data-stat="labCount">—</span> labs,
+        placed by release date and priced by what a million output tokens cost today.
+      </p>
+      <p class="scroll-hint" aria-hidden="true">Keep scrolling</p>
+    </section>
+
+    <!-- ── Scroll story: the steps drive the sticky chart ──── -->
+    <section class="story" data-label="01 · The price of a model">
+      <div class="stage">
+        <div class="stage-top">
+          <div class="labs" role="group" aria-label="Highlight a lab"></div>
+          <div class="legend" aria-label="Legend">
+            <span class="key"><i class="mark mark-closed"></i>Closed weights</span>
+            <span class="key"><i class="mark mark-open"></i>Open weights</span>
+            <span class="key key-focus" hidden><i class="mark mark-focus"></i><span class="focus-name"></span></span>
+          </div>
+        </div>
+        <p class="axis-title">USD per million output tokens · log scale</p>
+        <div class="chart"></div>
+        <div class="tooltip" role="status" hidden></div>
+      </div>
+
+      <div class="steps">
+        <article class="step" data-step="all">
+          <span class="step-num">01</span>
+          <h2>Every dot is a model.</h2>
+          <p>Each one is a model Epoch AI rates as notable, and that you can still pay to use through OpenRouter. Left to right is when it came out. Height is what it costs today to generate a million tokens, roughly 750,000 words.</p>
+          <p class="aside">These are today's prices, not launch prices. Daily price tracking began on 1&nbsp;November&nbsp;2026.</p>
+        </article>
+
+        <article class="step" data-step="range">
+          <span class="step-num">02</span>
+          <h2>Each gridline is ten times the last.</h2>
+          <p>The cheapest model here, <b data-stat="cheapestName">—</b>, costs <span class="num" data-stat="cheapestPrice">—</span>. The most expensive, <b data-stat="priciestName">—</b>, costs <span class="num" data-stat="priciestPrice">—</span>. That's a <span class="num" data-stat="ratio">—</span>× spread, far too wide for an ordinary scale.</p>
+        </article>
+
+        <article class="step" data-step="closed">
+          <span class="step-num">03</span>
+          <h2>Closed models sit high.</h2>
+          <p>Filled dots are closed models: the weights stay with the lab that trained them, so the lab sets the price. Across <span data-stat="closedCount">—</span> of them, the median is <span class="num" data-stat="closedMedian">—</span> per million output tokens.</p>
+        </article>
+
+        <article class="step" data-step="open">
+          <span class="step-num">04</span>
+          <h2>Open weights sit lower.</h2>
+          <p>Rings are open-weights models. Anyone can download and host them, so hosting providers compete on price. Their median is <span class="num" data-stat="openMedian">—</span> across <span data-stat="openCount">—</span> models, about <span class="num" data-stat="medianRatio">—</span>× cheaper than closed.</p>
+        </article>
+
+        <article class="step" data-step="lab">
+          <span class="step-num">05</span>
+          <h2><span data-stat="spotlight">—</span> sells every price point.</h2>
+          <p><span data-stat="spotCount">—</span> of its models are here, from <b data-stat="spotMinName">—</b> at <span class="num" data-stat="spotMinPrice">—</span> to <b data-stat="spotMaxName">—</b> at <span class="num" data-stat="spotMaxPrice">—</span>. Small, standard and Pro tiers launch side by side, so a release date says little about price.</p>
+        </article>
+
+        <article class="step" data-step="explore">
+          <span class="step-num">06</span>
+          <h2>Now compare any lab.</h2>
+          <p>Pick a lab above the chart to bring its models forward. Hover or tap any dot for its input and output price and how much text it can take in at once.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── How it's built ───────────────────────────────────── -->
+    <section class="method" data-label="02 · How it's built">
+      <p class="eyebrow">02 · How it's built</p>
+      <h2>Rebuilt from two public sources, every morning.</h2>
+
+      <ol class="pipeline">
+        <li>
+          <div class="layer"><code>06:00 · raw_openrouter.models_daily</code><p>A Databricks job saves OpenRouter's public model catalogue as untouched JSON, appending one snapshot a day.</p></div>
+          <span class="layer-label">Ingest</span>
+        </li>
+        <li>
+          <div class="layer"><code>07:30 · dbt build --target prod</code><p>dbt cleans both sources, matches OpenRouter listings to Epoch AI's notable models and builds the marts. Data tests and a freshness check gate every run.</p></div>
+          <span class="layer-label">Model</span>
+        </li>
+        <li>
+          <div class="layer"><code>select … from rpt_models_latest_price</code><p>A short script reads one tested mart and writes the small JSON file this page loads. No logic lives here.</p></div>
+          <span class="layer-label">Export</span>
+        </li>
+        <li>
+          <div class="layer"><code>github-pages · static files</code><p>GitHub Actions publishes the page. Your browser never talks to the warehouse, so there's no server and no credential to leak.</p></div>
+          <span class="layer-label">Publish</span>
+        </li>
+      </ol>
+
+      <p class="method-links"><a href="https://github.com/Nicholas-create/dbt-databricks-sandbox">Read the dbt project on GitHub <span aria-hidden="true">→</span></a></p>
+
+      <details class="table-view">
+        <summary>See all <span data-stat="count">—</span> models as a table</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Lab</th><th scope="col">Released</th><th scope="col">Weights</th><th scope="col" class="r">Input $/M</th><th scope="col" class="r">Output $/M</th><th scope="col" class="r">Context</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Model data: Epoch AI, <a href="https://epoch.ai/data/ai-models">Data on AI Models</a> (notable models, CC BY 4.0). Prices: <a href="https://openrouter.ai/models">OpenRouter</a> public models API. Prices as of <span data-stat="pricesAsOf">—</span>.</p>
+    <p>Built with dbt Core on Databricks, deployed by GitHub Actions. © 2026 Nicholas Sampson.</p>
+  </footer>
+</body>
+</html>

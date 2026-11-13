@@ -10,3 +10,6 @@ logs/
 # Credentials must never be committed: profiles.yml lives in ~/.dbt/
 .env
 profiles.yml
+
+# Website data is generated at deploy time from the production marts
+site/data/
