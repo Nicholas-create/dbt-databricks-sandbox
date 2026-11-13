@@ -1,15 +1,168 @@
-Welcome to your new dbt project!
+# AI Model Tracker
 
-### Using the starter project
+A dbt project on Databricks that combines two public datasets: **what notable AI models are** ([Epoch AI](https://epoch.ai/data/ai-models)) and **what they cost to use** ([OpenRouter](https://openrouter.ai/)), with daily price history.
 
-Try running the following commands:
-- dbt run
-- dbt test
+Built as an Analytics Engineering portfolio project: layered dbt models, tested grain, source freshness, documented conventions, and every change reviewed through a pull request.
 
+---
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+## What it answers
+
+- Which notable AI models can I actually buy access to today, and at what price per million tokens?
+- How do open-weights models compare on price with closed models?
+- How do prices change from day to day, and when does a listing disappear?
+- Which organisations, release years and domains do the priced models come from?
+
+**Example result** (snapshot of 13 Nov 2026, models released in 2025 or later with a current standard OpenRouter price):
+
+| | Priced models | Median output price (USD / M tokens) |
+|---|---|---|
+| Open weights | 39 | 1.90 |
+| Closed | 44 | 10.00 |
+
+```sql
+select is_open_weights, count(*), percentile_approx(output_price_usd_per_mtok, 0.5)
+from rpt_models_latest_price
+where has_price and release_year >= 2025
+group by 1
+```
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+    epoch_csv["Epoch AI CSV<br/>(notable models)"] -->|manual upload| raw_epoch[("raw_epoch.<br/>notable_ai_models")]
+    or_api["OpenRouter API<br/>/api/v1/models"] -->|"Databricks job<br/>daily 06:00 London"| raw_or[("raw_openrouter.<br/>models_daily")]
+
+    raw_epoch --> stg_epoch["stg_epoch__notable_models"]
+    raw_or --> stg_or["stg_openrouter__models"]
+
+    stg_epoch --> int_matched["int_models__matched"]
+    stg_or --> int_matched
+    seed["seed: model_match_overrides"] --> int_matched
+
+    stg_epoch --> dim["dim_models"]
+    stg_or --> fct["fct_model_prices_daily"]
+    int_matched --> fct
+
+    dim --> rpt["rpt_models_latest_price"]
+    fct --> rpt
+```
+
+**Stack:** Databricks Free Edition (Delta tables, SQL warehouse, scheduled job) · dbt Core 1.12 / dbt Studio · GitHub.
+
+| Layer | Built as | Purpose |
+|---|---|---|
+| Raw (`workspace.raw_*`) | Delta tables, loaded outside dbt | Source data exactly as published. OpenRouter is stored as untouched JSON plus `loaded_at`, appended daily |
+| Staging | Views | Rename, cast, parse JSON, deduplicate same-day reloads. No joins, no business filters |
+| Intermediate | Views | Name matching between the two sources |
+| Marts | Tables | Dimension, fact and report tables ready for a dashboard |
+
+### Models
+
+| Model | Grain | Notes |
+|---|---|---|
+| `stg_epoch__notable_models` | One row per Epoch model | 1,091 models, 1950–2026 |
+| `stg_openrouter__models` | One row per OpenRouter model per snapshot date | Prices converted from USD per token (text) to `decimal` USD per million tokens. Router placeholder prices (`-1`) become null with `is_variable_priced` |
+| `int_models__matched` | One row per OpenRouter model | Links each listing to an Epoch model: manual override first, then an automatic match on a normalised name key (`model_match_key` macro) |
+| `dim_models` | One row per Epoch model | Organisation, release year, domains, `access_type`, `is_open_weights`, parameters, training compute |
+| `fct_model_prices_daily` | One row per OpenRouter model per snapshot date | All listings kept, matched or not (5,517 rows over 12 snapshots, 1–13 Nov 2026) |
+| `rpt_models_latest_price` | One row per Epoch model | Latest standard price where one exists; unpriced models kept with `has_price = false` |
+
+---
+
+## Design decisions
+
+| Decision | Why |
+|---|---|
+| **Epoch is the spine; OpenRouter is the enrichment.** Reports are `dim_models left join prices`. | The question is "what do notable models cost", so every notable model stays in the report even with no price. OpenRouter also lists hundreds of fine-tunes and routers that aren't notable models. |
+| **Raw data is never edited.** API records land as full JSON and are parsed in staging. | APIs add and rename fields. Storing the whole record means nothing is lost and history can always be rebuilt. |
+| **Daily snapshots append, never overwrite.** | Price history only exists if old snapshots are kept. Days without a snapshot stay as gaps; nothing is forward-filled. |
+| **Placeholder codes become null, with a flag.** | OpenRouter reports `-1` for routers whose price depends on the routed model. Left in place it would drag averages down; set to `0` it would look free. Null + `is_variable_priced` keeps the meaning. |
+| **Manual overrides beat automatic matches.** | Name normalisation handles most pairs. A small seed (7 rows) fixes date-coded releases like `deepseek-r1-0528` → *DeepSeek-R1 (May 2025)*, and every override carries a note explaining it. |
+| **Latest-price tie-break:** main listing → cheaper output price → id. | When several listings match one model, the undated main listing is the price most people pay, so it wins over cheaper dated checkpoints and previews. The final id sort keeps the result the same on every run. |
+| **Money as `decimal`, units in column names** (`_usd_per_mtok`). | `double` stores fractions inexactly, and a price column without a unit invites a millionfold mistake. |
+
+The full rules, each with a correct and an incorrect example, are in [`CONVENTIONS.md`](CONVENTIONS.md).
+
+---
+
+## Data quality
+
+- **29 data tests** run on every `dbt build`: `unique` + `not_null` on every primary key (composite keys for daily grain), `relationships` from matches and facts back to Epoch models, `accepted_values` on the categories that drive logic, and a singular test that fails if a negative price ever reaches the fact table.
+- **Source freshness** on the OpenRouter feed: warn after 26 hours, error after 50.
+- **Spot checks** after each change: known prices and tie-breaks are checked by hand in the SQL editor. Tests prove shape; spot checks prove meaning.
+
+Coverage as of 13 Nov 2026: 140 of 495 OpenRouter listings match an Epoch model (133 automatic, 7 manual), and 88 Epoch models have a current standard price. Most unmatched listings are fine-tunes, routers or models Epoch doesn't class as notable.
+
+---
+
+## Running it
+
+dbt runs locally against a Databricks SQL warehouse. The same project also runs in dbt Studio.
+
+**1. Install dbt** (Python 3.12, [uv](https://docs.astral.sh/uv/)):
+
+```bash
+uv venv --python 3.12
+uv pip install -r requirements.txt
+```
+
+**2. Connect to Databricks.** Create `~/.dbt/profiles.yml` *outside the repo*, with credentials read from environment variables:
+
+```yaml
+default:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      catalog: workspace
+      schema: dbt_<your_name>
+      host: "{{ env_var('DATABRICKS_HOST') }}"
+      http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      threads: 4
+```
+
+**3. Build and test:**
+
+```bash
+.venv/bin/dbt debug                  # check the connection
+.venv/bin/dbt build                  # seed, run and test everything
+.venv/bin/dbt source freshness       # is the OpenRouter feed up to date?
+```
+
+The raw tables have to exist first: upload the Epoch CSV to `workspace.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §8) and schedule the OpenRouter ingestion notebook to load `workspace.raw_openrouter.models_daily`.
+
+---
+
+## Repository layout
+
+```
+models/
+  staging/epoch/        stg_epoch__notable_models + source and model YAML
+  staging/openrouter/   stg_openrouter__models + source (with freshness) and model YAML
+  intermediate/         int_models__matched
+  marts/                dim_models, fct_model_prices_daily, rpt_models_latest_price
+macros/                 model_match_key (shared name normalisation)
+seeds/                  model_match_overrides (manual OpenRouter → Epoch pairings)
+tests/                  singular tests
+CONVENTIONS.md          project rules, with reasons and examples
+```
+
+---
+
+## Sources and licences
+
+- **Epoch AI, "Data on AI models"** (Notable AI models dataset), [epoch.ai/data/ai-models](https://epoch.ai/data/ai-models), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The data here is a CSV snapshot uploaded in November 2026. Credit Epoch AI wherever this data is shown.
+- **OpenRouter** public model catalogue, [`/api/v1/models`](https://openrouter.ai/api/v1/models), no API key needed. Snapshots are taken daily from 1 Nov 2026.
+- The OpenRouter payload includes an Artificial Analysis benchmark block. It is **deliberately not parsed or published**, because its terms don't allow redistribution.
+
+## Roadmap
+
+- Export the ingestion notebook into this repo so the loader is version-controlled
+- GitHub Actions CI running `dbt build` on every pull request
+- A dashboard on top of the marts
+- Benchmark and capability data from Epoch, to answer "what is each model good at?"
