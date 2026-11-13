@@ -3,3 +3,10 @@
 target/
 dbt_packages/
 logs/
+
+# Local Python environment (dbt Core + adapter, created with uv)
+.venv/
+
+# Credentials must never be committed: profiles.yml lives in ~/.dbt/
+.env
+profiles.yml
