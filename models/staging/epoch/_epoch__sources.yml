@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: epoch
-    description: "Epoch AI 'Notable AI Models' dataset (CC-BY 4.0). Loaded via Databricks file upload."
+    description: "Epoch AI 'Notable AI models' dataset (CC-BY 4.0; credit Epoch AI). CSV from https://epoch.ai/data/notable_ai_models.csv, uploaded to Databricks by hand in November 2026 (see CONVENTIONS.md section 8 for the upload settings)."
     database: workspace
     schema: raw_epoch
     tables:

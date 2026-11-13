@@ -1,0 +1,4 @@
+# Local dbt environment. Install into a virtual environment, e.g.:
+#   uv venv --python 3.12 && uv pip install -r requirements.txt
+dbt-core==1.12.6
+dbt-databricks==1.13.0
