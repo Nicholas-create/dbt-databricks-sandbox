@@ -8,7 +8,7 @@ Nicholas, moving from BI/FP&A into Analytics Engineering. This project is my por
 - When showing a convention or pattern, show a correct example next to a bad one.
 - I prefer GUIs to the terminal. When I need to do something myself, say **where** it happens (which app, panel, menu).
 - You edit files, commit and push to a feature branch. Never push to `main`; changes reach it only through a pull request.
-- You may merge PRs yourself, but only after the branch builds locally and its checks pass. Put the build result and what you checked in the PR description.
+- You may merge PRs yourself, but only after the branch builds locally, its checks pass, **and the `dbt CI` GitHub check is green** (`gh pr checks <n> --watch`). Put the build result and what you checked in the PR description.
 
 ## Running dbt
 - **Locally:** dbt Core lives in the project's `.venv/`. Always call `.venv/bin/dbt` (or `source .venv/bin/activate` first). A bare `dbt` on this Mac is dbt Fusion, a different engine. Credentials come from `~/.dbt/profiles.yml` and environment variables, never from files in the repo.

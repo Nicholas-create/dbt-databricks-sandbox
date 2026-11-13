@@ -92,6 +92,7 @@ The full rules, each with a correct and an incorrect example, are in [`CONVENTIO
 ## Data quality
 
 - **29 data tests** run on every `dbt build`: `unique` + `not_null` on every primary key (composite keys for daily grain), `relationships` from matches and facts back to Epoch models, `accepted_values` on the categories that drive logic, and a singular test that fails if a negative price ever reaches the fact table.
+- **CI on every pull request**: GitHub Actions ([`.github/workflows/dbt-ci.yml`](.github/workflows/dbt-ci.yml)) installs the pinned dbt versions and runs `dbt build` against Databricks in a separate `dbt_ci` schema. A PR is only merged once that check is green.
 - **Source freshness** on the OpenRouter feed: warn after 26 hours, error after 50.
 - **Spot checks** after each change: known prices and tie-breaks are checked by hand in the SQL editor. Tests prove shape; spot checks prove meaning.
 
@@ -150,6 +151,7 @@ models/
 macros/                 model_match_key (shared name normalisation)
 seeds/                  model_match_overrides (manual OpenRouter → Epoch pairings)
 tests/                  singular tests
+.github/workflows/      dbt-ci.yml: dbt build on every pull request
 CONVENTIONS.md          project rules, with reasons and examples
 ```
 
@@ -164,6 +166,5 @@ CONVENTIONS.md          project rules, with reasons and examples
 ## Roadmap
 
 - Deploy the ingestion job from this repo (Databricks Asset Bundle), so the repo becomes the source of truth instead of a copy
-- GitHub Actions CI running `dbt build` on every pull request
 - A dashboard on top of the marts
 - Benchmark and capability data from Epoch, to answer "what is each model good at?"
