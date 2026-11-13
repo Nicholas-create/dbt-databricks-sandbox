@@ -196,7 +196,12 @@ Check it with `dbt source freshness --select source:<source>`.
 - `main` holds only finished, working code and is never edited directly.
 - All work happens on a branch: `feature/<short-description>` or `setup/<short-description>`.
 - Changes reach `main` through a pull request.
-- `dbt build` must pass before a pull request is merged.
+- `dbt build` must pass before a pull request is merged. GitHub Actions (`.github/workflows/dbt-ci.yml`) runs it on every PR into `main`, building into its own `dbt_ci` schema. Never merge on a red or pending check.
+
+> **Why:** "it worked on my machine" isn't proof. CI builds the branch from a clean install with pinned versions, the same way every time, and the result sits on the PR for anyone reviewing it.
+
+✅ PR shows **dbt CI / dbt build ✓**, then merge
+❌ Merge because the local build passed while the CI check is still failing
 - Commit messages say *what* changed in the imperative mood.
 
 ✅ `Add Epoch source and staging model with grain tests`

@@ -1,0 +1,84 @@
+name: dbt CI
+
+# Build and test the whole project on every pull request into main,
+# in a separate dbt_ci schema so CI never touches anyone's dev tables.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Every run writes to the same dbt_ci schema, so runs queue instead of overlapping.
+concurrency:
+  group: dbt-ci
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  dbt-build:
+    name: dbt build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_HTTP_PATH: ${{ vars.DATABRICKS_HTTP_PATH }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    steps:
+      - name: Check out the branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dbt (versions pinned in requirements.txt)
+        run: pip install -r requirements.txt
+
+      - name: Check Databricks connection settings exist
+        run: |
+          missing=0
+          for v in DATABRICKS_HOST DATABRICKS_HTTP_PATH DATABRICKS_TOKEN; do
+            if [ -z "${!v}" ]; then
+              echo "::error::$v is not set. Add it under repo Settings > Secrets and variables > Actions."
+              missing=1
+            fi
+          done
+          exit $missing
+
+      - name: Write the CI dbt profile (credentials come from env vars, never from the repo)
+        run: |
+          mkdir -p "$RUNNER_TEMP/dbt"
+          cat > "$RUNNER_TEMP/dbt/profiles.yml" <<'EOF'
+          default:
+            target: ci
+            outputs:
+              ci:
+                type: databricks
+                catalog: workspace
+                schema: dbt_ci
+                host: "{{ env_var('DATABRICKS_HOST') }}"
+                http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+                token: "{{ env_var('DATABRICKS_TOKEN') }}"
+                threads: 4
+          EOF
+
+      - name: dbt debug
+        run: dbt debug --profiles-dir "$RUNNER_TEMP/dbt"
+
+      - name: dbt build
+        run: dbt build --profiles-dir "$RUNNER_TEMP/dbt"
+
+      - name: Keep dbt results for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-results
+          path: |
+            target/run_results.json
+            logs/dbt.log
+          if-no-files-found: ignore
+          retention-days: 7
