@@ -1,0 +1,5 @@
+# SQL linter that enforces the SQL style in CONVENTIONS.md §7 (rules in .sqlfluff).
+# Used by the `sql lint` CI job and locally:
+#   uv pip install -r requirements-lint.txt --python .venv/bin/python
+# Separate from requirements.txt so the lint job installs no dbt and needs no secrets.
+sqlfluff==4.5.0
