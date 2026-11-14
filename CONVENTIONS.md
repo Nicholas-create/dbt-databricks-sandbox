@@ -17,6 +17,7 @@ raw  →  staging  →  intermediate  →  marts
 | Layer | Where it lives | Built as | Purpose |
 |---|---|---|---|
 | **Raw** | `workspace.raw_<source>` | Delta table (loaded outside dbt) | Source data exactly as published |
+| **Seeds** | `seeds/` (CSV in the repo) | Table, loaded by `dbt build` into each environment | Small data authored in the repo: lookups, the benchmark catalog, hand-entered results |
 | **Staging** | `models/staging/<source>/` | View | Rename, retype, light tidying. One model per source table |
 | **Intermediate** | `models/intermediate/` | View or table | Joins, reshaping, business logic shared by several marts |
 | **Marts** | `models/marts/` | Table | Final, dashboard-ready tables |
@@ -45,20 +46,23 @@ Scheduled loads that capture changing data (e.g. daily prices) use `.mode("appen
 ✅ `.mode("append")`
 ❌ `.mode("overwrite")`
 
-### Manually curated sources are append-only too
-Some data has no feed and is typed in by hand: benchmark results from model release pages go into `workspace.raw_manual` (runbook in `ingestion/manual/README.md`). Those tables follow the same rule as every raw table, adapted to hand entry:
+### Hand-entered data lives in Git, as seeds
+Some data has no feed and is typed in by hand: benchmark results from model release pages. It lives in the repo as dbt seeds (`seeds/manual/*.csv`, runbook in `ingestion/manual/README.md`), not in a warehouse table. A **source** is data that arrives from outside (an API, a file someone publishes); a **seed** is small data authored in the repo itself.
 
-- **Corrections and withdrawals are new rows.** The latest row per key is the current value; a withdrawal is a row with `is_retracted = true`. Staging picks the latest row; intermediate drops retractions.
-- **Every row says where it came from** (`source_url`, `source_type`), and each release is entered as one batch file in `ingestion/manual/releases/`, reviewed in a PR.
-- **Bad values are stopped at entry** with `CHECK` constraints on the table, and again by dbt tests.
+- **Each CSV holds the current state.** A correction is an edited line; a withdrawal is a deleted line. Git history is the audit trail: every earlier value, when it changed, who changed it and in which PR.
+- **Every row says where it came from** (`source_url`, `source_type`), and each release gets a short note in `ingestion/manual/releases/`: what was entered from which page, and what was skipped and why.
+- **Bad values fail the build:** every column has an explicit type in the seed YAML, and tests reject an unknown unit or source type, a negative score, a duplicate key or an unknown category.
 
-> **Why:** a hand-edited table that allows `UPDATE` loses what was entered before, and when. Append-only keeps an audit trail for free, and the batch files mean the table can always be rebuilt from Git.
+> **Why:** a hand-filled warehouse table is shared by every environment, so a value is live before anyone reviews it, and reverting the PR doesn't revert the data. With a seed, the PR diff *is* the review, CI tests the PR's own copy of the data, each environment loads its own copy, and nothing reaches production before the merge. Keeping only the current state works because Git already keeps the history.
 
-✅ Typo in a score → `INSERT` the row again with the right value (the newest wins)
-❌ Typo in a score → `UPDATE raw_manual.benchmark_scores SET score = …`
+✅ Typo in a score → edit that line of `manual_benchmark_scores.csv` in a PR
+❌ Typo in a score → `INSERT` or `UPDATE` a warehouse table by hand
 
-✅ Score withdrawn → `INSERT` the same benchmark and model with `is_retracted = true`
-❌ Score withdrawn → `DELETE FROM raw_manual.benchmark_scores WHERE …`
+✅ Score withdrawn → delete its line in a PR (Epoch's score, if any, shows again)
+❌ Score withdrawn → keep the line and add an `is_retracted` flag
+
+✅ Seed column with an explicit type: `variant_label: string` in `column_types`
+❌ Leaving dbt to guess types from the values: `variant_label` "2.0" is read as the number 2
 
 ---
 
@@ -120,8 +124,10 @@ where `Domain` = 'Language'          -- filtering belongs downstream
 | Staging model | `stg_<source>__<entity>` | `stg_epoch__notable_models` |
 | Intermediate model | `int_<entity>__<verb>` | `int_models__joined_pricing` |
 | Mart | `fct_<event>` / `dim_<thing>` | `dim_models`, `fct_model_prices_daily` |
+| Hand-entered seed | `manual_<entity>` in `seeds/manual/` | `manual_benchmark_scores` |
 | Source YAML | `_<source>__sources.yml` | `_epoch__sources.yml` |
 | Model YAML | `_<source>__models.yml` | `_epoch__models.yml` |
+| Seed YAML | `_<folder>__seeds.yml` (`_seeds.yml` at the top) | `_manual__seeds.yml` |
 | Columns | `snake_case`, units in the name | `training_compute_flop`, `training_time_hours` |
 | Booleans | `is_` / `has_` prefix | `is_frontier_model` |
 
@@ -273,7 +279,7 @@ clean-targets:
 |---|---|---|
 | Epoch AI (Notable AI Models) | CC-BY 4.0 | Credit Epoch AI wherever the data is shown |
 | Epoch AI (Capabilities & benchmarking) | CC-BY 4.0 | Benchmark **baseline**: loaded once on 14 Nov 2026 from `epoch.ai/data/benchmark_data.zip` into `raw_epoch.benchmark_rows` (notebook `ingestion/ingest_epoch_benchmarks.py`, not scheduled). Credit Epoch AI on the site |
-| Model release pages (manual) | Published results, cited with their URL | Every benchmark result since the baseline, entered from the developer's announcement into `raw_manual` (one batch file per release in `ingestion/manual/releases/`). Only a developer's results for its own models; marked as developer-reported on the site |
+| Model release pages (manual) | Published results, cited with their URL | Every benchmark result since the baseline, entered from the developer's announcement into the seeds `seeds/manual/manual_benchmarks.csv` and `manual_benchmark_scores.csv` (one release note per release in `ingestion/manual/releases/`). Only a developer's results for its own models; marked as developer-reported on the site. The earlier warehouse tables `workspace.raw_manual.*` are retired and left untouched |
 | OpenRouter | Public API (`/api/v1/models`, no key needed) | Model catalogue and pricing; loaded daily at 06:00 Europe/London by the Databricks notebook `ingest_openrouter_models` (copy in `ingestion/`) into `raw_openrouter.models_daily` |
 
 ### Loading notes

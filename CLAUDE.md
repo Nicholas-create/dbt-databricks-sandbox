@@ -19,7 +19,7 @@ Nicholas, moving from BI/FP&A into Analytics Engineering. This project is my por
 - Tracks which AI model is best at what (benchmarks: Epoch AI baseline + model release pages), what models are (Epoch AI) and what they cost (OpenRouter).
 
 ## When a model is released
-New benchmark results come from the model's release page, not from Epoch (Epoch was a one-off baseline). Follow the runbook in [`ingestion/manual/README.md`](ingestion/manual/README.md): read the page, enter the developer's results for its own models as a batch file in `ingestion/manual/releases/`, build, PR, deploy.
+New benchmark results come from the model's release page, not from Epoch (Epoch was a one-off baseline). Follow the runbook in [`ingestion/manual/README.md`](ingestion/manual/README.md): read the page, add the developer's results for its own models to the seed CSVs in `seeds/manual/`, write a release note in `ingestion/manual/releases/`, build, PR. The merge deploys. Never write benchmark data into a warehouse table by hand (`workspace.raw_manual` is retired).
 
 ## Rules
 All project conventions are in [`CONVENTIONS.md`](CONVENTIONS.md). Read it before changing anything, and follow it.

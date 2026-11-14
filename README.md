@@ -70,10 +70,10 @@ Benchmarks:
 ```mermaid
 flowchart LR
     epoch_zip["Epoch AI benchmark hub<br/>(benchmark_data.zip)"] -->|"one-off load<br/>14 Nov 2026 (baseline)"| raw_bench[("raw_epoch.<br/>benchmark_rows")]
-    release["Model release pages<br/>(one batch per release)"] -->|"INSERT, append-only<br/>ingestion/manual/releases/"| raw_manual[("raw_manual.<br/>benchmarks +<br/>benchmark_scores")]
+    release["Model release pages<br/>(one PR per release)"] -->|"edited by hand, reviewed in a PR"| seeds_manual[("seeds/manual/<br/>manual_benchmarks +<br/>manual_benchmark_scores")]
 
     raw_bench --> stg_rows["stg_epoch__benchmark_rows<br/>stg_epoch__eci_*"]
-    raw_manual --> stg_manual["stg_manual__benchmarks<br/>stg_manual__benchmark_scores"]
+    seeds_manual --> stg_manual["stg_manual__benchmarks<br/>stg_manual__benchmark_scores"]
 
     catalog["seeds: benchmark_catalog,<br/>benchmark_categories"] --> int_bench["int_benchmarks__unioned"]
     stg_manual --> int_bench
@@ -98,6 +98,7 @@ flowchart LR
 | Layer | Built as | Purpose |
 |---|---|---|
 | Raw (`workspace.raw_*`) | Delta tables, loaded outside dbt | Source data exactly as published. OpenRouter is stored as untouched JSON plus `loaded_at`, appended daily |
+| Seeds (`seeds/`) | Tables, loaded from CSVs in the repo by `dbt build` | Small data authored here: name-match overrides, the benchmark catalog and categories, and every hand-entered benchmark result |
 | Staging | Views | Rename, cast, parse JSON, deduplicate same-day reloads. No joins, no business filters |
 | Intermediate | Views | Name matching between the two sources |
 | Marts | Tables | Dimension, fact and report tables ready for a dashboard |
@@ -113,7 +114,7 @@ flowchart LR
 | `fct_model_prices_daily` | One row per OpenRouter model per snapshot date | All listings kept, matched or not (5,517 rows over 12 snapshots, 1–13 Nov 2026) |
 | `rpt_models_latest_price` | One row per Epoch model | Latest standard price where one exists; unpriced models kept with `has_price = false` |
 | `stg_epoch__benchmark_rows` | One row per CSV row in Epoch's benchmark hub (latest load) | ~12,000 rows from ~90 files; each row's columns kept as a `map`, since the score column differs per file |
-| `stg_manual__benchmark_scores` | One row per benchmark per model (latest entry) | Hand-entered results; corrections and retractions are newer rows |
+| `stg_manual__benchmark_scores` | One row per benchmark per model | Hand-entered results from the seed `manual_benchmark_scores`; a correction is an edited CSV line, a withdrawal a deleted one |
 | `int_benchmark_scores__epoch` | One row per benchmark per model | Each model's best run, names resolved through Epoch's own version → name map |
 | `int_benchmark_scores__unioned` | One row per benchmark per model | Epoch + manual; a manual entry supersedes Epoch's score |
 | `dim_benchmarks` | One row per benchmark | Category, scale, publisher, harnesses, coverage |
@@ -133,8 +134,8 @@ flowchart LR
 | **Manual overrides beat automatic matches.** | Name normalisation handles most pairs. A small seed (7 rows) fixes date-coded releases like `deepseek-r1-0528` → *DeepSeek-R1 (May 2025)*, and every override carries a note explaining it. |
 | **Latest-price tie-break:** main listing → cheaper output price → id. | When several listings match one model, the undated main listing is the price most people pay, so it wins over cheaper dated checkpoints and previews. The final id sort keeps the result the same on every run. |
 | **Money as `decimal`, units in column names** (`_usd_per_mtok`). | `double` stores fractions inexactly, and a price column without a unit invites a millionfold mistake. |
-| **Epoch is a frozen baseline; release pages are the ongoing source.** Manual scores supersede the baseline and are labelled. | Epoch gave the history in one load. Waiting for third parties to add each new model would leave the site weeks behind, so every release is entered from its own announcement, as one reviewable batch file per release. Each row records its `source_url` and whether the developer reported it about its own model (`vendor_reported`); the site marks those scores. A developer's numbers for competitors' models are not entered: their own release pages are the source for those. |
-| **Manual tables are append-only too.** | A correction is a new row and the latest wins; a withdrawal is a row with `is_retracted`. Nobody runs `UPDATE`, so every past entry and its timestamp stays auditable. |
+| **Epoch is a frozen baseline; release pages are the ongoing source.** Manual scores supersede the baseline and are labelled. | Epoch gave the history in one load. Waiting for third parties to add each new model would leave the site weeks behind, so every release is entered from its own announcement, as one reviewable pull request per release (seed rows plus a release note). Each row records its `source_url` and whether the developer reported it about its own model (`vendor_reported`); the site marks those scores. A developer's numbers for competitors' models are not entered: their own release pages are the source for those. |
+| **Hand-entered data is a seed, not a warehouse table.** | Release-page results live in CSVs in the repo (`seeds/manual/`). The PR diff is the review, Git history is the audit trail, CI tests the PR's own copy of the data, and nothing reaches production before the merge. (Until 14 Nov 2026 they were typed into a shared `raw_manual` table, which was live in every environment before review.) |
 | **Versions of a benchmark are linked, not merged.** FrontierCode and FrontierCode 2.0 share a `benchmark_family` and appear as one split pill. | They are different tests, so their scores must never share a ranking, but a reader should see they're related. Each version keeps its own results; the family sits where its most relevant version ranks. |
 | **Benchmarks are ordered by relevance, computed in dbt.** `relevance = models released in the last 180 days with a score × headroom left for the 5 best of them`. | A benchmark is worth a front pill when current models are tested on it *and* it still separates them. Solved benchmarks (everyone at ~100%) and abandoned ones drift right on their own at each daily build; nobody maintains the order by hand. |
 | **The category "Overall" is an IRT fit, not an average.** | Averages reward models that only sat easy benchmarks. Fitting a skill per model and a difficulty per benchmark compares models fairly even when they sat different benchmarks. It's iterative maths, so it's a dbt Python model rather than SQL. |
@@ -145,8 +146,8 @@ The full rules, each with a correct and an incorrect example, are in [`CONVENTIO
 
 ## Data quality
 
-- **82 data tests** run on every `dbt build`: `unique` + `not_null` on every primary key (composite keys for daily and benchmark × model grain), `relationships` from matches and facts back to their dimensions (a mistyped `benchmark_id` in a manual entry fails the build), `accepted_values` on the categories that drive logic, and singular tests that fail if a negative price reaches the fact table, a score falls outside its benchmark's scale, or a hand-entered score lacks its model's lab or release date, or a benchmark family is split across categories or has an unlabelled version.
-- **Constraints at entry**: the manual tables reject unknown units, unknown source types and negative scores the moment a row is inserted.
+- **95 data tests** run on every `dbt build`: `unique` + `not_null` on every primary key (composite keys for daily and benchmark × model grain), `relationships` from matches and facts back to their dimensions (a mistyped `benchmark_id` in a manual entry fails the build), `accepted_values` on the categories that drive logic, and singular tests that fail if a negative price reaches the fact table, a score falls outside its benchmark's scale, or a hand-entered score lacks its model's lab or release date, or a benchmark family is split across categories or has an unlabelled version.
+- **Tests on the hand-entered seeds**: every column has an explicit type, and the build fails on an unknown unit or source type, a negative score, a duplicate benchmark and model, or an unknown category, before any model is built from them.
 - **Production build**: GitHub Actions ([`.github/workflows/dbt-prod.yml`](.github/workflows/dbt-prod.yml)) rebuilds the `analytics` schema from `main` after every merged PR that can change the build or the site, and daily at 07:17 UTC after the morning OpenRouter load, then checks source freshness. When it succeeds, the website is published from the fresh marts. If the load is late, the run fails and GitHub sends an email. Dev, CI and prod each have their own schema (see `CONVENTIONS.md` §6).
 - **CI on every pull request**: GitHub Actions ([`.github/workflows/dbt-ci.yml`](.github/workflows/dbt-ci.yml)) installs the pinned dbt versions and runs `dbt build` against Databricks in a separate `dbt_ci` schema. A PR is only merged once that check is green.
 - **Source freshness** on the OpenRouter feed: warn after 26 hours, error after 50.
@@ -191,14 +192,14 @@ default:
 .venv/bin/dbt source freshness       # is the OpenRouter feed up to date?
 ```
 
-The raw tables have to exist first: upload the Epoch CSV to `workspace.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §8), import [`ingestion/ingest_openrouter_models.py`](ingestion/ingest_openrouter_models.py) as a notebook and schedule it daily, run [`ingestion/ingest_epoch_benchmarks.py`](ingestion/ingest_epoch_benchmarks.py) once for the benchmark baseline, run [`ingestion/manual/create_manual_tables.sql`](ingestion/manual/create_manual_tables.sql) once, then replay the release batches in `ingestion/manual/releases/`. See [`ingestion/README.md`](ingestion/README.md).
+The raw tables have to exist first: upload the Epoch CSV to `workspace.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §8), import [`ingestion/ingest_openrouter_models.py`](ingestion/ingest_openrouter_models.py) as a notebook and schedule it daily, run [`ingestion/ingest_epoch_benchmarks.py`](ingestion/ingest_epoch_benchmarks.py) once for the benchmark baseline (the hand-entered benchmark data needs no setup: it is a seed, loaded by `dbt build`). See [`ingestion/README.md`](ingestion/README.md).
 
 ---
 
 ## Repository layout
 
 ```
-ingestion/              OpenRouter loader (daily job), Epoch benchmark baseline loader (one-off), manual/ (tables, templates, one SQL batch per model release)
+ingestion/              OpenRouter loader (daily job), Epoch benchmark baseline loader (one-off), manual/ (runbook, one release note per model release)
 models/
   staging/epoch/        stg_epoch__notable_models, benchmark rows, Capabilities Index + source and model YAML
   staging/openrouter/   stg_openrouter__models + source (with freshness) and model YAML
@@ -207,7 +208,8 @@ models/
   marts/                dim_models, fct_model_prices_daily, rpt_models_latest_price,
                         dim_benchmarks, fct_benchmark_scores, fct_benchmark_category_scores (Python)
 macros/                 model_match_key (shared name normalisation)
-seeds/                  model_match_overrides, benchmark_catalog (how to read each Epoch benchmark), benchmark_categories
+seeds/                  model_match_overrides, benchmark_catalog (how to read each Epoch benchmark), benchmark_categories,
+                        manual/ (hand-entered benchmarks and scores from release pages)
 tests/                  singular tests
 site/                   the public website (static HTML, CSS and D3; data/ is generated at deploy)
 scripts/                export_site_data.py (production marts → site/data/benchmarks.json)

@@ -2,7 +2,7 @@
 # One-off load of Epoch AI's benchmark hub (https://epoch.ai/benchmarks, CC BY 4.0)
 # into workspace.raw_epoch.benchmark_rows: the project's historical baseline, run
 # once on 14 Nov 2026. It is NOT scheduled: from then on, new results are entered
-# from each model's release page into raw_manual (see ingestion/manual/README.md).
+# from each model's release page into the seeds in seeds/manual/ (see ingestion/manual/README.md).
 # Re-running it appends a fresh copy; staging only reads the latest load.
 #
 # The zip holds ~90 CSVs, each with its own columns. Every CSV row is stored as
