@@ -1,7 +1,7 @@
 """Export the website's data from the production marts to a static JSON file.
 
 The public site can't query Databricks while someone is viewing it (that would
-put a token in the browser), so this runs after the daily production build and
+put a token in the browser), so this runs after each successful production build and
 writes the data the page needs into site/data/benchmarks.json.
 
 All modelling stays in dbt: this script only selects from tested marts and

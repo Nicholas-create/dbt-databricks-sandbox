@@ -160,7 +160,7 @@
               "lines": [
                 "# What do notable AI models cost to use?\n",
                 "\n",
-                "Notable AI models from **Epoch AI**, priced with **OpenRouter**'s public catalogue. Prices are USD per million tokens, taken from each model's main listing. The data is rebuilt daily at 07:30 UTC from the production `analytics` schema. Use the **Filters** panel to narrow by open or closed weights, organisation or release year."
+                "Notable AI models from **Epoch AI**, priced with **OpenRouter**'s public catalogue. Prices are USD per million tokens, taken from each model's main listing. The data is rebuilt daily at 07:17 UTC, and after every change to the project, from the production `analytics` schema. Use the **Filters** panel to narrow by open or closed weights, organisation or release year."
               ]
             }
           },

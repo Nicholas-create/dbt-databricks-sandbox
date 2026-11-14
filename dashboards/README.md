@@ -2,7 +2,7 @@
 
 ## `ai_model_prices.lvdash.json`: AI Model Prices
 
-A Databricks AI/BI dashboard on the production marts (`workspace.analytics`), refreshed by the daily production build.
+A Databricks AI/BI dashboard on the production marts (`workspace.analytics`), refreshed by the production build (daily, and after every merge to `main` that changes the project).
 
 ![AI Model Prices dashboard](../docs/dashboard.png)
 

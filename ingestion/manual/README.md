@@ -47,9 +47,9 @@ Done by Claude Code when Nicholas says a model is out (with the release page URL
      ✅ `'Humanity\'s Last Exam'` → Humanity's Last Exam
      ❌ `'Humanity''s Last Exam'` → Humanitys Last Exam (no error)
 7. **Build and check:** `.venv/bin/dbt build` in dev, then spot-check two scores in `fct_benchmark_scores` against the page, and preview the site (`scripts/export_site_data.py --schema dbt_nsampson`, then `python3 -m http.server 8766 -d site`).
-8. **Ship:** commit the batch file (plus any dbt change), open a PR with the build result and spot checks, wait for the green `dbt CI` check, merge, then run **GitHub → Actions → dbt production build → Run workflow** so the site updates now, and check the live page.
+8. **Ship:** commit the batch file (plus any dbt change), open a PR with the build result and spot checks, wait for the green `dbt CI` check, merge. The merge starts **dbt production build** and then **Publish site** on its own (GitHub → **Actions** shows both runs); when both are green, check the live page.
 
-Note: the raw tables are shared by dev, CI and prod, so the data is live in Databricks as soon as step 6 runs; the next scheduled production build (07:30 UTC) would publish it even before the PR merges. The PR is the review record of what was entered.
+Note: the raw tables are shared by dev, CI and prod, so the data is live in Databricks as soon as step 6 runs; any production build before the merge (the daily one at 07:17 UTC, or another PR's merge) would publish it even before this PR merges. The PR is the review record of what was entered.
 
 ## Doing it by hand
 

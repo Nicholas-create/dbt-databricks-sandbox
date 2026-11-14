@@ -147,7 +147,7 @@ The full rules, each with a correct and an incorrect example, are in [`CONVENTIO
 
 - **82 data tests** run on every `dbt build`: `unique` + `not_null` on every primary key (composite keys for daily and benchmark × model grain), `relationships` from matches and facts back to their dimensions (a mistyped `benchmark_id` in a manual entry fails the build), `accepted_values` on the categories that drive logic, and singular tests that fail if a negative price reaches the fact table, a score falls outside its benchmark's scale, or a hand-entered score lacks its model's lab or release date, or a benchmark family is split across categories or has an unlabelled version.
 - **Constraints at entry**: the manual tables reject unknown units, unknown source types and negative scores the moment a row is inserted.
-- **Daily production build**: GitHub Actions ([`.github/workflows/dbt-prod.yml`](.github/workflows/dbt-prod.yml)) rebuilds the `analytics` schema from `main` at 07:30 UTC, after the morning OpenRouter load, then checks source freshness. If the load is late, the run fails and GitHub sends an email. Dev, CI and prod each have their own schema (see `CONVENTIONS.md` §6).
+- **Production build**: GitHub Actions ([`.github/workflows/dbt-prod.yml`](.github/workflows/dbt-prod.yml)) rebuilds the `analytics` schema from `main` after every merged PR that can change the build or the site, and daily at 07:17 UTC after the morning OpenRouter load, then checks source freshness. When it succeeds, the website is published from the fresh marts. If the load is late, the run fails and GitHub sends an email. Dev, CI and prod each have their own schema (see `CONVENTIONS.md` §6).
 - **CI on every pull request**: GitHub Actions ([`.github/workflows/dbt-ci.yml`](.github/workflows/dbt-ci.yml)) installs the pinned dbt versions and runs `dbt build` against Databricks in a separate `dbt_ci` schema. A PR is only merged once that check is green.
 - **Source freshness** on the OpenRouter feed: warn after 26 hours, error after 50.
 - **Spot checks** after each change: known prices and tie-breaks are checked by hand in the SQL editor. Tests prove shape; spot checks prove meaning.
@@ -212,7 +212,7 @@ tests/                  singular tests
 site/                   the public website (static HTML, CSS and D3; data/ is generated at deploy)
 scripts/                export_site_data.py (production marts → site/data/benchmarks.json)
 dashboards/             AI/BI dashboard definition (.lvdash.json) and deployment notes
-.github/workflows/      dbt-ci.yml (every pull request), dbt-prod.yml (daily prod build), site.yml (publish the website)
+.github/workflows/      dbt-ci.yml (every pull request), dbt-prod.yml (prod build: every merge + daily), site.yml (publish the website after a prod build)
 CONVENTIONS.md          project rules, with reasons and examples
 ```
 

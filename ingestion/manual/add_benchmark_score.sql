@@ -1,7 +1,7 @@
 -- Templates for adding benchmark data by hand.
 -- Where: Databricks → SQL Editor (left sidebar) → paste one block → fill it in → Run.
--- The site picks it up after the next production build (daily 07:30 UTC), or now via
--- GitHub → Actions → "dbt production build" → Run workflow.
+-- The site picks it up after the next production build (every merge to main, and daily
+-- at 07:17 UTC), or now via GitHub → Actions → "dbt production build" → Run workflow.
 --
 -- Rules (CONVENTIONS.md section 1, "Manually curated sources"):
 --   * never UPDATE or DELETE. To fix a value, insert the row again with the right value:
