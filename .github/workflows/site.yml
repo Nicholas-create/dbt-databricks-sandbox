@@ -1,19 +1,15 @@
 name: Publish site
 
 # Publishes site/ to GitHub Pages with fresh data from the production marts.
-# Runs after each successful production dbt build (so the page never shows
-# data that failed its tests), and whenever the site itself changes on main.
+# Runs only after a successful production dbt build, so the page never shows
+# data that failed its tests and never ships before the marts it needs exist.
+# A merge that changes site/ triggers the production build (dbt-prod.yml),
+# which then triggers this. It can also be run by hand (workflow_dispatch).
 on:
   workflow_run:
     workflows: ["dbt production build"]
     types: [completed]
     branches: [main]
-  push:
-    branches: [main]
-    paths:
-      - "site/**"
-      - "scripts/export_site_data.py"
-      - ".github/workflows/site.yml"
   workflow_dispatch:
 
 # Only one deployment at a time; a newer run waits rather than cancelling.
@@ -29,7 +25,8 @@ permissions:
 jobs:
   publish:
     name: Export data and deploy
-    # Skip when the production build it follows failed.
+    # Skip when the production build it follows failed or was cancelled;
+    # a manual run (workflow_dispatch) always publishes.
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15

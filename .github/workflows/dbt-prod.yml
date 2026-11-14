@@ -1,12 +1,26 @@
 name: dbt production build
 
-# Rebuild the production schema (workspace.analytics) once a day, after the
-# 06:00 Europe/London OpenRouter ingestion has landed. The dashboard reads
-# from this schema, never from anyone's dev schema.
+# Rebuild the production schema (workspace.analytics) from main:
+#   - on every push to main (i.e. every merged PR) that could change the build
+#     or the site, so reviewed code reaches production without a manual step;
+#   - once a day, after the 06:00 Europe/London OpenRouter ingestion has landed,
+#     to pick up the new price snapshot.
+# When this succeeds, site.yml publishes the website from the fresh marts.
+# The dashboard and the site read this schema, never anyone's dev schema.
 on:
+  push:
+    branches: [main]
+    # Changes that can't affect the dbt build or the site don't rebuild prod.
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - "dashboards/**"
+      - ".github/workflows/dbt-ci.yml"
   schedule:
-    # 07:30 UTC = 07:30 GMT in winter, 08:30 BST in summer: always after the 06:00 London load
-    - cron: "30 7 * * *"
+    # 07:17 UTC = 07:17 GMT in winter, 08:17 BST in summer: always after the 06:00 London load.
+    # Not on the hour or half hour: those are GitHub's busiest times and scheduled runs
+    # get delayed (the first 07:30 run of this workflow started at 14:24 UTC).
+    - cron: "17 7 * * *"
   workflow_dispatch:
 
 # Never run two production builds at once.

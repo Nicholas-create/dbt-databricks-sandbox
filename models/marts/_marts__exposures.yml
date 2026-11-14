@@ -11,8 +11,8 @@ exposures:
     description: >
       Public GitHub Pages site (`site/`): the benchmark leaderboard and company race.
       `scripts/export_site_data.py` reads these marts from the production schema after
-      each daily build into `site/data/*.json`, and `.github/workflows/site.yml`
-      publishes them with the page.
+      each successful production build (every merge to main, and daily) into
+      `site/data/*.json`, and `.github/workflows/site.yml` publishes them with the page.
     depends_on:
       - ref('fct_benchmark_scores')
       - ref('dim_benchmarks')
