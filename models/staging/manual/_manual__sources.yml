@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: manual
+    description: >
+      Benchmark data typed in by hand, usually on a model's launch day before Epoch AI publishes its
+      own runs. Created by `ingestion/manual/create_manual_tables.sql`; rows added with the templates
+      in `ingestion/manual/add_benchmark_score.sql`. Append-only: corrections and retractions are new
+      rows (CONVENTIONS.md section 1). No freshness check: entries are irregular by design.
+    database: workspace
+    schema: raw_manual
+    tables:
+      - name: benchmarks
+        description: "Benchmark definitions not in the Epoch catalog seed. Latest row per benchmark_id wins."
+      - name: benchmark_scores
+        description: "Benchmark results entered by hand. Latest row per benchmark and model wins; they supersede Epoch's."

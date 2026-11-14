@@ -77,3 +77,84 @@ models:
         description: "How many standard OpenRouter listings matched this Epoch model. Above 1 means the tie-break chose one."
       - name: price_as_of_date
         description: "Snapshot date the price comes from. Older than the latest snapshot means OpenRouter has delisted the listing."
+
+  - name: dim_benchmarks
+    description: "One row per benchmark the site can show (Epoch catalog seed or hand-entered definition), with its category, scale and coverage."
+    columns:
+      - name: benchmark_id
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: category
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('benchmark_categories')
+                field: category_id
+      - name: unit
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['pct', 'points', 'index']
+      - name: defined_in
+        description: "epoch_catalog, manual, or epoch_catalog+manual (manual overrides the display details)."
+      - name: n_recent_models
+        description: "Models released in the last 180 days (from build date) with a score."
+      - name: leader_headroom
+        description: "1 minus the average of the 5 best recent scores as a share of the scale. Near 0 = saturated."
+      - name: relevance_score
+        description: "n_recent_models × leader_headroom: is it in use, and can it still separate the leaders?"
+      - name: relevance_rank
+        description: "Order within the category, 1 = most relevant (leftmost pill after Overall). Depends on the build date, by design."
+        data_tests:
+          - not_null
+
+  - name: fct_benchmark_scores
+    description: >
+      One row per benchmark per model: the score the site shows. Sources: Epoch AI (CC BY 4.0)
+      and hand-entered results, which supersede Epoch's for the same benchmark and model.
+      Scores in site units: a share 0-1 for pct benchmarks.
+    columns:
+      - name: benchmark_model_key
+        description: "benchmark_id + normalised model name. Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: benchmark_id
+        description: "A typo in a manual entry fails here rather than disappearing."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_benchmarks')
+                field: benchmark_id
+      - name: score
+        data_tests:
+          - not_null
+      - name: score_source
+        description: "epoch = Epoch's collected run; manual = entered by hand in raw_manual.benchmark_scores."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['epoch', 'manual']
+      - name: source_type
+        description: "Manual rows only: vendor_reported (the developer about its own model) or independent."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['vendor_reported', 'independent']
+
+  - name: fct_benchmark_category_scores
+    description: "One 'Overall' score per category per model, from an item response theory fit across the category's benchmarks (dbt Python model). Models need at least min_results scores in the category."
+    columns:
+      - name: category_model_key
+        description: "category + normalised model name. Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: score
+        description: "Share of tasks the model would solve on a typical benchmark of this category (0-1)."
+        data_tests:
+          - not_null

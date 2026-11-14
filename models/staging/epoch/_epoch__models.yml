@@ -9,3 +9,38 @@ models:
         data_tests:
           - unique
           - not_null
+  - name: stg_epoch__benchmark_rows
+    description: >
+      Every row of every CSV in Epoch's benchmark hub, from the latest load only (each load is a
+      complete copy). Shared columns are parsed; everything else stays in `fields`, a map of the
+      row's columns, because the score column differs per file (see seed benchmark_catalog).
+    columns:
+      - name: benchmark_row_key
+        description: "file_name + row_number. Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: harness
+        description: "Agent setup. Files call it Harness, Agent or Scaffold; one field under different names."
+      - name: effort
+        description: "Reasoning effort setting. Files call it Reasoning effort or Reasoning level."
+
+  - name: stg_epoch__eci_scores
+    description: "Epoch Capabilities Index, one row per model, with Epoch's organization, release date and weights access for each model."
+    columns:
+      - name: model_name
+        description: "Epoch's model name. Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: accessibility_group
+        description: "'Open weights' or 'Closed weights'."
+
+  - name: stg_epoch__eci_model_versions
+    description: "Inputs to the Capabilities Index: one row per model version per benchmark. Used for Epoch's own model version → model name mapping."
+    columns:
+      - name: benchmark_row_key
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null

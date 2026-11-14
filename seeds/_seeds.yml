@@ -17,3 +17,56 @@ seeds:
               arguments:
                 to: ref('stg_epoch__notable_models')
                 field: model_name
+  - name: benchmark_catalog
+    description: >
+      The Epoch AI benchmarks shown on the site, and how to read each one from Epoch's files:
+      which CSV, which column holds the score, and how to scale it to the site's units. Adding an
+      Epoch benchmark is one new row here; benchmarks Epoch doesn't carry go in raw_manual.benchmarks.
+    config:
+      column_types:
+        sort_order: int
+        score_scale: double
+        unit_max: double
+    columns:
+      - name: benchmark_id
+        description: "Lowercase slug. Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: category
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('benchmark_categories')
+                field: category_id
+      - name: epoch_file
+        description: "Path of the CSV inside Epoch's benchmark_data.zip."
+        data_tests:
+          - unique
+          - not_null
+      - name: score_column
+        description: "Column in that CSV holding the score."
+        data_tests:
+          - not_null
+      - name: score_scale
+        description: "Multiplier to site units (0.01 turns a 0-100 percentage into a share)."
+      - name: unit
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['pct', 'points', 'index']
+      - name: unit_max
+        description: "Top of the scale in site units. Null for an open-ended index."
+
+  - name: benchmark_categories
+    description: "Site categories, in tab order. `phrase` completes the title 'Which model is best ___?'."
+    config:
+      column_types:
+        sort_order: int
+    columns:
+      - name: category_id
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null

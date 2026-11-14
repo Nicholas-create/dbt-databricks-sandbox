@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_manual__benchmark_scores
+    description: >
+      Current state of the hand-entered scores: the latest row per benchmark and model (corrections
+      are newer rows). Retracted entries are kept, flagged by is_retracted; intermediate drops them.
+      Scores stay as published (49.1 = 49.1%).
+    columns:
+      - name: benchmark_model_key
+        description: "benchmark_id + normalised model name (macro model_match_key). Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: source_url
+        data_tests:
+          - not_null
+      - name: source_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['vendor_reported', 'independent']
+
+  - name: stg_manual__benchmarks
+    description: "Current state of the hand-entered benchmark definitions: the latest row per benchmark_id."
+    columns:
+      - name: benchmark_id
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: category
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('benchmark_categories')
+                field: category_id
+      - name: unit
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['pct', 'points', 'index']

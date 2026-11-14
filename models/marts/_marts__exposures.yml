@@ -9,11 +9,15 @@ exposures:
     maturity: medium
     url: https://nicholas-create.github.io/dbt-databricks-sandbox/
     description: >
-      Public GitHub Pages site (`site/`). `scripts/export_site_data.py` reads the
-      priced rows of this mart from the production schema after each daily build,
-      and `.github/workflows/site.yml` publishes them with the page.
+      Public GitHub Pages site (`site/`): the benchmark leaderboard and company race.
+      `scripts/export_site_data.py` reads these marts from the production schema after
+      each daily build into `site/data/*.json`, and `.github/workflows/site.yml`
+      publishes them with the page.
     depends_on:
-      - ref('rpt_models_latest_price')
+      - ref('fct_benchmark_scores')
+      - ref('dim_benchmarks')
+      - ref('fct_benchmark_category_scores')
+      - ref('benchmark_categories')
     owner:
       name: Nicholas
 
