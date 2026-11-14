@@ -31,7 +31,7 @@ Done by Claude Code when Nicholas says a model is out (with the release page URL
 2. **Decide what to enter.**
    - A developer's numbers **for its own models** only (`source_type = vendor_reported`), including its older models if the table shows them. Competitors' columns come from the competitors' own pages.
    - `independent` is for results published by a benchmark's maintainer (a public leaderboard).
-   - Never Artificial Analysis benchmarks (licence; CONVENTIONS.md §8).
+   - Never Artificial Analysis benchmarks (licence; CONVENTIONS.md §9).
    - **Every benchmark on the page**, even when Epoch already has that model and benchmark: the database stands on its own, and a manual row supersedes Epoch's.
    - Skip cells the page doesn't label clearly, and say so in the release note. A combined column (e.g. "Mythos 5 / Fable 5", showing the higher of two models) is only usable where the page says whose score a cell is.
    - Only published numbers. A chart counts when the page ships its exact values (OpenAI's pages embed each chart's data): take the value printed on the bar (stacked bars: the label, not one segment) and, for effort curves, each model's best score with its effort recorded. When a page has a table and a chart for the same result, use the table. A chart with no values anywhere is skipped (a value read off a plotted line is a guess).

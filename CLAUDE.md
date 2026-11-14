@@ -22,4 +22,4 @@ Nicholas, moving from BI/FP&A into Analytics Engineering. This project is my por
 New benchmark results come from the model's release page, not from Epoch (Epoch was a one-off baseline). Follow the runbook in [`ingestion/manual/README.md`](ingestion/manual/README.md): read the page, add the developer's results for its own models to the seed CSVs in `seeds/manual/`, write a release note in `ingestion/manual/releases/`, build, PR. The merge deploys. Never write benchmark data into a warehouse table by hand (`workspace.raw_manual` is retired).
 
 ## Rules
-All project conventions are in [`CONVENTIONS.md`](CONVENTIONS.md). Read it before changing anything, and follow it.
+All project conventions are in [`CONVENTIONS.md`](CONVENTIONS.md). Read it before changing anything, and follow it. SQL follows dbt Labs' style guide (`CONVENTIONS.md` §7): run `.venv/bin/sqlfluff lint models tests macros` before pushing; the `sql lint` PR check runs the same.

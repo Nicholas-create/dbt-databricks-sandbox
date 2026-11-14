@@ -26,32 +26,74 @@ from databricks import sql
 
 OUT_FILE = Path(__file__).resolve().parent.parent / "site" / "data" / "benchmarks.json"
 
+# SQL style: CONVENTIONS.md (dbt Labs' guide). "order by" uses column numbers
+# where every sort column is selected, and names where it isn't.
 QUERIES = {
     "categories": """
-        select category_id, label, phrase
+        select
+            category_id,
+            label,
+            phrase
         from {db}.benchmark_categories
-        where is_on_site                    -- e.g. 'internal' stays in the database only
+        where is_on_site  -- e.g. 'internal' stays in the database only
         order by sort_order
     """,
     "benchmarks": """
-        select benchmark_id, category, benchmark_name, publisher, source_url, harnesses,
-               unit, unit_max, n_models, latest_release_date, benchmark_family, variant_label
+        select
+            benchmark_id,
+            category,
+            benchmark_name,
+            publisher,
+            source_url,
+            harnesses,
+            unit,
+            unit_max,
+            n_models,
+            latest_release_date,
+            benchmark_family,
+            variant_label
         from {db}.dim_benchmarks
-        where n_models > 0 and is_on_site
-        order by category_sort_order, display_rank   -- most relevant first, versions together
+        where
+            n_models > 0
+            and is_on_site
+        -- most relevant first, versions together
+        order by category_sort_order, display_rank
     """,
     "scores": """
-        select benchmark_id, model_name, lab, is_open_weights, score, released_date,
-               harness, effort, output_price_usd_per_mtok, source_type, source_url
+        select
+            benchmark_id,
+            model_name,
+            lab,
+            is_open_weights,
+            score,
+            released_date,
+            harness,
+            effort,
+            output_price_usd_per_mtok,
+            source_type,
+            source_url
         from {db}.fct_benchmark_scores
-        where benchmark_id in (select benchmark_id from {db}.dim_benchmarks where is_on_site)
-        order by benchmark_id, score desc, model_name
+        where benchmark_id in (
+            select benchmark_id
+            from {db}.dim_benchmarks
+            where is_on_site
+        )
+        order by 1, 5 desc, 2  -- benchmark_id, score desc, model_name
     """,
     "composites": """
-        select category, model_name, lab, is_open_weights, score, released_date,
-               output_price_usd_per_mtok, parts_json, components_json, min_results
+        select
+            category,
+            model_name,
+            lab,
+            is_open_weights,
+            score,
+            released_date,
+            output_price_usd_per_mtok,
+            parts_json,
+            components_json,
+            min_results
         from {db}.fct_benchmark_category_scores
-        order by category, score desc, model_name
+        order by 1, 5 desc, 2  -- category, score desc, model_name
     """,
 }
 

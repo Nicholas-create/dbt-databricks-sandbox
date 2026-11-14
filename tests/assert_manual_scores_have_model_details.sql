@@ -8,5 +8,6 @@ select
     lab,
     released_date
 from {{ ref('fct_benchmark_scores') }}
-where score_source = 'manual'
-  and (lab is null or lab = '' or released_date is null)
+where
+    score_source = 'manual'
+    and (lab is null or lab = '' or released_date is null)

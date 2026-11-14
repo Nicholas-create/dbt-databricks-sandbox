@@ -90,8 +90,8 @@ Some sources use a magic number to mean "no real value" (OpenRouter reports a pr
 
 ✅
 ```sql
-case when price >= 0 then price end   as output_price_usd_per_mtok,
-coalesce(price < 0, false)            as is_variable_priced
+case when price >= 0 then price end as output_price_usd_per_mtok,
+coalesce(price < 0, false) as is_variable_priced
 ```
 ❌ `price as output_price_usd_per_mtok`: `-1` reaches the dashboard as a real price
 ❌ `greatest(price, 0)`: a router now looks free
@@ -101,8 +101,8 @@ A singular test on the mart (`tests/assert_model_prices_not_negative.sql`) fails
 ✅ Good staging:
 ```sql
 select
-    `Model`             as model_name,
-    `Publication date`  as published_date
+    `Model` as model_name,
+    `Publication date` as published_date
 from {{ source('epoch', 'notable_ai_models') }}
 ```
 
@@ -111,7 +111,7 @@ from {{ source('epoch', 'notable_ai_models') }}
 select
     `Model` as model_name
 from {{ source('epoch', 'notable_ai_models') }}
-where `Domain` = 'Language'          -- filtering belongs downstream
+where `Domain` = 'Language'  -- filtering belongs downstream
 ```
 
 ---
@@ -239,7 +239,7 @@ The website is published only after a successful production build (`site.yml` ru
 ✅ Merge the PR → **dbt production build** runs on the push to `main` → **Publish site** runs when it succeeds
 ❌ Publish the site on every push to `main`: a page that needs a new mart column goes live before prod has that column, and fails
 
-✅ Dashboard dataset: `FROM rpt_models_latest_price`, with the dataset schema set to `analytics`
+✅ Dashboard dataset: `from rpt_models_latest_price`, with the dataset schema set to `analytics`
 ❌ Dashboard dataset reading `dbt_nsampson.rpt_models_latest_price`
 
 ✅ `Add Epoch source and staging model with grain tests`
@@ -247,7 +247,143 @@ The website is published only after a successful production build (`site.yml` ru
 
 ---
 
-## 7. YAML formatting
+## 7. SQL style
+
+All SQL follows [dbt Labs' SQL style guide](https://docs.getdbt.com/best-practices/how-we-style/2-how-we-style-our-sql): models, tests and macros, and also the queries in `scripts/export_site_data.py` and the dashboard JSON. SQLFluff checks models, tests and macros on every pull request (the **sql lint** check; rules in `.sqlfluff`).
+
+> **Why:** when every file is laid out the same way, a diff shows only what changed in meaning, and anyone can read any model without learning its author's habits first. Because a machine checks the layout, review time goes on the logic.
+
+### Basics
+- Lowercase keywords, function names and field names. Indent 4 spaces. Trailing commas. Lines of 80 characters or fewer.
+- Every alias uses an explicit `as`, with **one space** before it. Don't pad `as` out to line up in a column. If an expression doesn't fit in 80 characters, break it over lines inside its brackets.
+
+> **Why:** with padding, one longer line means re-aligning (and re-diffing) every line around it, and the padding pushes lines past 80 characters.
+
+✅
+```sql
+nullif(trim(publisher), '') as publisher,
+nullif(trim(benchmark_family), '') as benchmark_family,
+round(
+    prices.cached_input_price_usd_per_mtok, 4
+) as cached_input_price_usd_per_mtok
+```
+❌
+```sql
+nullif(trim(publisher), '')                    as publisher,
+nullif(trim(benchmark_family), '')             as benchmark_family,
+round(prices.cached_input_price_usd_per_mtok, 4) cached_input_price_usd_per_mtok
+```
+
+### Joins
+- When a query joins two or more CTEs, prefix **every** column with its CTE's full name. Don't give tables aliases, least of all initials. (A single-table select needs no prefix.)
+- Exception: when one CTE is joined twice, give each copy a descriptive alias with `as` (`version_names as names_by_version`).
+- Always name the join type: `inner join`, `left join`, `full outer join`, never a bare `join`. Join left to right, never `right join`.
+- Use `union all` unless duplicates really have to be removed.
+
+> **Why:** `scores.benchmark_id` says where a column comes from wherever you are in the file; `s.benchmark_id` makes you scroll back to find out what `s` was.
+
+✅
+```sql
+select
+    scores.benchmark_id,
+    benchmarks.category,
+    scores.score
+from scores
+left join benchmarks
+    on scores.benchmark_id = benchmarks.benchmark_id
+```
+❌ (initials, a bare `join`, and `score` without a prefix)
+```sql
+select s.benchmark_id, b.category, score
+from scores s
+join benchmarks b on s.benchmark_id = b.benchmark_id
+```
+
+### Import CTEs, then one step per CTE
+- Every `{{ ref() }}` and `{{ source() }}` gets its own CTE at the top of the file, named after what it references. Pick only the columns and rows you need there, if that helps.
+- After the imports, each CTE does one logical step and has a name that says what it does. The model ends with `select * from final` (or whatever the last CTE is called).
+- A singular test that is one plain `select` from one model may keep its `ref()` inline. A test with CTEs or joins uses import CTEs.
+
+> **Why:** the top of the file lists everything the model depends on, so you can see its inputs without reading its logic.
+
+✅
+```sql
+with benchmarks as (
+
+    select * from {{ ref('int_benchmarks__unioned') }}
+
+),
+
+benchmark_rows as (
+
+    select * from {{ ref('stg_epoch__benchmark_rows') }}
+
+),
+
+harnesses_seen as (
+
+    select
+        benchmarks.benchmark_id,
+        benchmark_rows.harness
+    from benchmark_rows
+    inner join benchmarks
+        on benchmark_rows.file_name = benchmarks.epoch_file
+
+)
+```
+❌ (a `ref()` buried in the logic)
+```sql
+with benchmarks as (
+
+    select * from {{ ref('int_benchmarks__unioned') }}
+
+),
+
+harnesses_seen as (
+
+    select b.benchmark_id, r.harness
+    from {{ ref('stg_epoch__benchmark_rows') }} r
+    inner join benchmarks b
+        on r.file_name = b.epoch_file
+
+)
+```
+
+### Fields, aggregates and grouping
+- Plain fields first, then aggregates and window functions.
+- Aggregate as early as possible, before joining.
+- `group by` and `order by` use column numbers, not names. Exception: a query sorted by a column it doesn't select has to use the name.
+
+> **Why:** the select list already says what each column is. A number avoids repeating a long expression in the `group by`, and stays correct when a column is renamed.
+
+✅
+```sql
+select
+    benchmark_id,
+    array_sort(collect_set(harness)) as harnesses
+from harnesses_seen
+group by 1
+```
+❌ `group by benchmark_id`
+
+### Layout
+Lay files out as in the examples above:
+- a blank line after `with x as (` and before its closing `)`. Each `),` that separates CTEs sits on its own line, followed by a blank line
+- `select` on its own line, then one column per line when there's more than one
+- `where` / `and` / `or` conditions on their own lines, indented 4 spaces under `where`; `case` branches indented under `case`
+- every file ends with one newline
+
+Keep the `--` comments that explain logic, re-wrapped to fit. Use Jinja comments `{# ... #}` for notes that shouldn't appear in the compiled SQL.
+
+### Checking it
+- **On a pull request:** the **sql lint** check runs `sqlfluff lint models tests macros`. It must be green, like **dbt build**. It needs no warehouse and no secrets.
+- **Locally:** install once with `uv pip install -r requirements-lint.txt --python .venv/bin/python`. Then `.venv/bin/sqlfluff lint models tests macros` lists every problem, and `.venv/bin/sqlfluff fix <file>` rewrites the layout of one file. Read what `fix` changed: it can't remove aliases, add import CTEs or reorder columns.
+- **dbt Studio:** the **Lint** and **Format** buttons in the editor use SQLFluff with the rules in this repo's `.sqlfluff`, instead of their default sqlfmt. Restart the Studio IDE after `.sqlfluff` changes.
+- **Exceptions:** if a rule can't be met without changing a model's output (for example, `tasks` and `fields` are keywords to SQLFluff, but they are existing column names), put `-- noqa: <rule>` on that one line, with a comment above saying why. Never exclude a whole file. One SQLFluff rule is switched off project-wide, with the reason in `.sqlfluff`: ST06 (`structure.column_order`), which is stricter than the guide's field-order rule above.
+
+---
+
+## 8. YAML formatting
 
 - Indent with **2 spaces**. Never use tabs.
 - Top-level keys (`models:`, `sources:`, `clean-targets:`) start at the left margin.
@@ -273,7 +409,7 @@ clean-targets:
 
 ---
 
-## 8. Data sources and licensing
+## 9. Data sources and licensing
 
 | Source | Licence | Notes |
 |---|---|---|

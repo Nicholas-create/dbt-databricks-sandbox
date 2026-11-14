@@ -32,9 +32,14 @@ A Databricks AI/BI dashboard on the production marts, rebuilt daily. Only worksp
 | Closed | 44 | 10.00 |
 
 ```sql
-select is_open_weights, count(*), percentile_approx(output_price_usd_per_mtok, 0.5)
+select
+    is_open_weights,
+    count(*) as priced_models,
+    percentile_approx(output_price_usd_per_mtok, 0.5) as median_output_price
 from rpt_models_latest_price
-where has_price and release_year >= 2025
+where
+    has_price
+    and release_year >= 2025
 group by 1
 ```
 
@@ -150,6 +155,7 @@ The full rules, each with a correct and an incorrect example, are in [`CONVENTIO
 - **Tests on the hand-entered seeds**: every column has an explicit type, and the build fails on an unknown unit or source type, a negative score, a duplicate benchmark and model, or an unknown category, before any model is built from them.
 - **Production build**: GitHub Actions ([`.github/workflows/dbt-prod.yml`](.github/workflows/dbt-prod.yml)) rebuilds the `analytics` schema from `main` after every merged PR that can change the build or the site, and daily at 07:17 UTC after the morning OpenRouter load, then checks source freshness. When it succeeds, the website is published from the fresh marts. If the load is late, the run fails and GitHub sends an email. Dev, CI and prod each have their own schema (see `CONVENTIONS.md` §6).
 - **CI on every pull request**: GitHub Actions ([`.github/workflows/dbt-ci.yml`](.github/workflows/dbt-ci.yml)) installs the pinned dbt versions and runs `dbt build` against Databricks in a separate `dbt_ci` schema. A PR is only merged once that check is green.
+- **SQL style check on every pull request**: the `sql lint` job runs SQLFluff (rules in [`.sqlfluff`](.sqlfluff)) so all SQL follows dbt Labs' style guide (`CONVENTIONS.md` §7).
 - **Source freshness** on the OpenRouter feed: warn after 26 hours, error after 50.
 - **Spot checks** after each change: known prices and tie-breaks are checked by hand in the SQL editor. Tests prove shape; spot checks prove meaning.
 
@@ -192,7 +198,7 @@ default:
 .venv/bin/dbt source freshness       # is the OpenRouter feed up to date?
 ```
 
-The raw tables have to exist first: upload the Epoch CSV to `workspace.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §8), import [`ingestion/ingest_openrouter_models.py`](ingestion/ingest_openrouter_models.py) as a notebook and schedule it daily, run [`ingestion/ingest_epoch_benchmarks.py`](ingestion/ingest_epoch_benchmarks.py) once for the benchmark baseline (the hand-entered benchmark data needs no setup: it is a seed, loaded by `dbt build`). See [`ingestion/README.md`](ingestion/README.md).
+The raw tables have to exist first: upload the Epoch CSV to `workspace.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §9), import [`ingestion/ingest_openrouter_models.py`](ingestion/ingest_openrouter_models.py) as a notebook and schedule it daily, run [`ingestion/ingest_epoch_benchmarks.py`](ingestion/ingest_epoch_benchmarks.py) once for the benchmark baseline (the hand-entered benchmark data needs no setup: it is a seed, loaded by `dbt build`). See [`ingestion/README.md`](ingestion/README.md).
 
 ---
 

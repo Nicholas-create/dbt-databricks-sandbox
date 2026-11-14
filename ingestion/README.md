@@ -20,7 +20,7 @@ It follows the raw-layer rules in [`CONVENTIONS.md`](../CONVENTIONS.md) §1: the
 
 ## Epoch AI
 
-- **Notable AI models:** no loader. The [CSV](https://epoch.ai/data/notable_ai_models.csv) is uploaded by hand to `workspace.raw_epoch.notable_ai_models`; the upload settings are in `CONVENTIONS.md` §8.
+- **Notable AI models:** no loader. The [CSV](https://epoch.ai/data/notable_ai_models.csv) is uploaded by hand to `workspace.raw_epoch.notable_ai_models`; the upload settings are in `CONVENTIONS.md` §9.
 - **Benchmarks (`ingest_epoch_benchmarks.py`):** a one-off load of Epoch's benchmark hub (`epoch.ai/data/benchmark_data.zip`) into `workspace.raw_epoch.benchmark_rows`, run on 14 Nov 2026 as the historical baseline. It is **not scheduled**. One row per CSV row: `file_name`, `row_number`, `raw_json` (the row as a JSON object, untouched) and `loaded_at`. Re-running it appends a fresh copy, and staging reads only the latest load.
 
 ## Model releases (manual)
