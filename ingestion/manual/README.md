@@ -6,7 +6,7 @@ Since 14 Nov 2026 every new benchmark result comes from a **model's release page
 |---|---|
 | `create_manual_tables.sql` | Creates `workspace.raw_manual.benchmarks` and `benchmark_scores` (run once; safe to re-run) |
 | `add_benchmark_score.sql` | Fill-in templates for a single score, a new benchmark, or a retraction |
-| `releases/<release date>_<model>.sql` | One batch per model release: exactly what was entered, from which page, and what was left out and why |
+| `releases/<date>_<model or change>.sql` | One batch per model release (or definition change): exactly what was entered, from which page, and what was left out and why |
 
 ## The tables are append-only
 
@@ -30,6 +30,7 @@ Done by Claude Code when Nicholas says a model is out (with the release page URL
    - Skip cells the page doesn't label clearly, and say so in the batch file.
 3. **Map each benchmark** to an existing `benchmark_id` (`select benchmark_id, benchmark_name, category from workspace.analytics.dim_benchmarks`).
    - Same benchmark only if it's the same test and setup. A different version or "with tools" is a new benchmark: compare a shared model's score against ours before deciding.
+   - A new version or variant of an existing benchmark gets its own `benchmark_id` **and** the existing one's `benchmark_family`, plus a short `variant_label` (e.g. `2.0`, `with tools`). The site then shows both as one split pill, each with its own results. If the existing benchmark has no family yet, give it one (seed `benchmark_catalog` for Epoch benchmarks, a new definition row for manual ones).
    - A new benchmark gets a `raw_manual.benchmarks` row. Category must be one of the existing ones; **if none fits, ask Nicholas** before adding a category (that's a site change too).
 4. **Spell model names** exactly as existing rows do (`select distinct model_name from workspace.analytics.fct_benchmark_scores where model_name ilike '%fable%'`). New models follow the developer's official name, e.g. `Claude Fable 5.2`.
 5. **Fill every model detail** on new models: `lab`, `released_date`, `is_open_weights` (the test `assert_manual_scores_have_model_details` fails without lab and date). Scores exactly as published: `49.1` for 49.1%.

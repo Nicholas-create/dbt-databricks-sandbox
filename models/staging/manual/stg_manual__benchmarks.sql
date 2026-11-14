@@ -26,6 +26,8 @@ final as (
         nullif(trim(source_url), '')                                         as source_url,
         unit,
         unit_max,
+        nullif(trim(benchmark_family), '')                                   as benchmark_family,
+        nullif(trim(variant_label), '')                                      as variant_label,
         nullif(trim(notes), '')                                              as notes,
         is_retracted,
         entered_at

@@ -22,6 +22,8 @@ create table if not exists workspace.raw_manual.benchmarks (
     source_url      string             comment 'Benchmark home page',
     unit            string    not null comment 'pct (share of tasks, entered as 0-100), points, or index',
     unit_max        double             comment 'Top of the scale in site units: 1 for pct, e.g. 10 for points out of 10',
+    benchmark_family string            comment 'Links versions of one benchmark into one split pill, e.g. frontiercode (null = stands alone)',
+    variant_label   string             comment 'Label of this version inside the split pill, e.g. 2.0 or with tools',
     notes           string,
     is_retracted    boolean   not null default false,
     entered_at      timestamp not null default current_timestamp()

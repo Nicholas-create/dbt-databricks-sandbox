@@ -34,10 +34,10 @@ QUERIES = {
     """,
     "benchmarks": """
         select benchmark_id, category, benchmark_name, publisher, source_url, harnesses,
-               unit, unit_max, n_models, latest_release_date
+               unit, unit_max, n_models, latest_release_date, benchmark_family, variant_label
         from {db}.dim_benchmarks
         where n_models > 0
-        order by category_sort_order, relevance_rank   -- most relevant first (dim_benchmarks)
+        order by category_sort_order, display_rank   -- most relevant first, versions together
     """,
     "scores": """
         select benchmark_id, model_name, lab, is_open_weights, score, released_date,
@@ -120,6 +120,8 @@ def main():
             "id": b.benchmark_id,
             "category": b.category,
             "name": b.benchmark_name,
+            "family": b.benchmark_family,          # versions sharing a family form one split pill
+            "variant": b.variant_label or "",      # label inside that pill, e.g. "2.0"
             "publisher": b.publisher or "",
             "source": b.source_url or "",
             "harnesses": [] if b.harnesses is None else [str(h) for h in b.harnesses],  # arrives as a numpy array

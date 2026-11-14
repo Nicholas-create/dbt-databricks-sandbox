@@ -27,6 +27,9 @@ final as (
         -- a share-of-tasks benchmark tops out at 1 even when the entry left it blank
         coalesce(m.unit_max, c.unit_max, case when coalesce(m.unit, c.unit) = 'pct' then 1 end)
                                                                              as unit_max,
+        -- versions of one benchmark share a family (one split pill on the site)
+        coalesce(m.benchmark_family, c.benchmark_family)                     as benchmark_family,
+        coalesce(m.variant_label, c.variant_label)                           as variant_label,
         -- seed order first, then hand-added benchmarks in the order they were defined
         coalesce(c.sort_order, 1000 + row_number() over (order by m.entered_at, m.benchmark_id))
                                                                              as sort_order,
