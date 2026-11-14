@@ -79,7 +79,7 @@ models:
         description: "Snapshot date the price comes from. Older than the latest snapshot means OpenRouter has delisted the listing."
 
   - name: dim_benchmarks
-    description: "One row per benchmark the site can show (Epoch catalog seed or hand-entered definition), with its category, scale and coverage."
+    description: "One row per benchmark (Epoch catalog seed or hand-entered definition), with its category, scale and coverage. The site shows those whose category is_on_site."
     columns:
       - name: benchmark_id
         description: "Primary key."
@@ -93,6 +93,10 @@ models:
               arguments:
                 to: ref('benchmark_categories')
                 field: category_id
+      - name: is_on_site
+        description: "From the category: false = kept in the database but not exported to the site (e.g. internal evaluations)."
+        data_tests:
+          - not_null
       - name: unit
         data_tests:
           - accepted_values:

@@ -68,9 +68,12 @@ seeds:
     config:
       column_types:
         sort_order: int
+        is_on_site: boolean
     columns:
       - name: category_id
         description: "Primary key."
         data_tests:
           - unique
           - not_null
+      - name: is_on_site
+        description: "False for a category kept in the database but not shown on the site, e.g. 'internal': a developer's own evaluations, which only ever score that developer's models, so they can't rank models across labs."
