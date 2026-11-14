@@ -16,7 +16,7 @@ final as (
 
         -- release
         published_date,
-        year(published_date)                        as release_year,
+        year(published_date) as release_year,
 
         -- classification
         domains,
@@ -24,12 +24,12 @@ final as (
         is_frontier_model,
 
         -- openness
-        coalesce(model_accessibility, 'Unknown')    as access_type,
+        coalesce(model_accessibility, 'Unknown') as access_type,
         case
             when model_accessibility like 'Open weights%' then true
-            when model_accessibility is null              then null
+            when model_accessibility is null then null
             else false
-        end                                         as is_open_weights,
+        end as is_open_weights,
 
         -- scale and cost
         parameter_count,
