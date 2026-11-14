@@ -102,6 +102,7 @@ final as (
         b.category,
         c.label                                                              as category_label,
         c.sort_order                                                         as category_sort_order,
+        c.is_on_site,
         b.sort_order,
         b.publisher,
         b.source_url,

@@ -141,6 +141,17 @@ const SHAPES = {
     const [c, s] = [Math.cos(0.35), Math.sin(0.35)];
     return pts.map(([x, y, z]) => [x * c - y * s, x * s + y * c, z]);
   },
+  "long-context"(rand) { // a long ribbon coiled into a flat spiral, tilted so the coil reads in 3D
+    const turns = 4.5, steps = 900;
+    const coil = Array.from({ length: steps }, (_, i) => {
+      const t = i / (steps - 1), a = t * turns * 2 * Math.PI, r = 0.12 + 0.88 * t;
+      return [r * Math.cos(a), r * Math.sin(a), 0];
+    });
+    const edge = (o) => coil.map(([x, y], i) => [x, y, o * (0.5 + 0.5 * i / (steps - 1))]); // ribbon widens outward
+    const pts = [...alongPath(rand, edge(0.09), N / 2, 0.012), ...alongPath(rand, edge(-0.09), N / 2, 0.012)];
+    const [c, s] = [Math.cos(1.0), Math.sin(1.0)]; // lay it back about 57 degrees
+    return pts.map(([x, y, z]) => [x, y * c - z * s, y * s + z * c]);
+  },
   cyber(rand) { // padlock: a shackle over a deep body, with a keyhole on the front
     const W = 0.62, D = 0.2, top = -0.1, bottom = -0.95;
     const arc = Array.from({ length: 61 }, (_, i) => { const t = (Math.PI * i) / 60; return [0.4 * Math.cos(t), 0.2 + 0.4 * Math.sin(t), 0]; });

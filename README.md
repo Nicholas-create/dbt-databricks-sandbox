@@ -230,3 +230,4 @@ CONVENTIONS.md          project rules, with reasons and examples
 
 - Deploy the ingestion job from this repo (Databricks Asset Bundle), so the repo becomes the source of truth instead of a copy
 - An explicit order for the versions inside a split pill (today: the order definitions were last entered)
+- Display names for Epoch's raw model names (e.g. `gpt 5.5 instant` next to `GPT-5.5 Instant`) through `model_match_overrides`

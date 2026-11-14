@@ -64,7 +64,7 @@ def model(dbt, session):
                                    StringType, StructField, StructType)
 
     benchmarks = (dbt.ref("dim_benchmarks").toPandas()
-                  .query("unit != 'index'")
+                  .query("unit != 'index' and is_on_site")  # no Overall for hidden categories
                   .sort_values("display_rank"))  # tooltip parts follow the pill order
     scores = dbt.ref("fct_benchmark_scores").toPandas()
 

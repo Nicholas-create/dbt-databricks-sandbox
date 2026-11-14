@@ -134,8 +134,9 @@ main { flex: 1; display: flex; flex-direction: column; }
 
 /* Too narrow for name, tabs and switches on one line: the header grows a second row for the tabs,
    which scroll sideways if they still don't fit. --header-h follows, so both sections stay one screen.
-   One line needs ~1,310px with nine tabs (tabs ~820 + the equal side columns, 2 × 180, + padding). */
-@media (max-width: 1340px) {
+   One line needs ~1,495px with ten tabs (buttons 748 + 9 gaps of up to 28 + the equal side columns,
+   2 × 180, + padding and column gaps 144). Re-measure when a category is added. */
+@media (max-width: 1500px) {
   :root { --header-h: 96px; }
   .site-header { grid-template-columns: 1fr auto; grid-template-rows: 56px 40px; }
   .categories {
