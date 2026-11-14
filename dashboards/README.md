@@ -20,7 +20,7 @@ A Databricks AI/BI dashboard on the production marts (`workspace.analytics`), re
 
 ### How it's built
 
-- Every dataset query uses **bare table names** (`FROM rpt_models_latest_price`). The catalog and schema (`workspace.analytics`) are set at deploy time, so the same file can point at another schema without edits.
+- Every dataset query uses **bare table names** (`from rpt_models_latest_price`). The catalog and schema (`workspace.analytics`) are set at deploy time, so the same file can point at another schema without edits.
 - All business logic stays in dbt. The dataset SQL only shapes data for display: open/closed labels, price bands, top-10 grouping, first-vs-latest comparison.
 - Prices are cast from `DECIMAL` to `DOUBLE` **in the dashboard queries only**, because the dashboard formats floating-point numbers but not decimals. The tables keep `decimal`, as `CONVENTIONS.md` requires.
 - Open weights are always teal and closed always orange (colour-blind-safe Okabe-Ito colours).
