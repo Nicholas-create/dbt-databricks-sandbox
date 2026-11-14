@@ -45,6 +45,21 @@ Scheduled loads that capture changing data (e.g. daily prices) use `.mode("appen
 ✅ `.mode("append")`
 ❌ `.mode("overwrite")`
 
+### Manually curated sources are append-only too
+Some data has no feed and is typed in by hand: benchmark results from model release pages go into `workspace.raw_manual` (runbook in `ingestion/manual/README.md`). Those tables follow the same rule as every raw table, adapted to hand entry:
+
+- **Corrections and withdrawals are new rows.** The latest row per key is the current value; a withdrawal is a row with `is_retracted = true`. Staging picks the latest row; intermediate drops retractions.
+- **Every row says where it came from** (`source_url`, `source_type`), and each release is entered as one batch file in `ingestion/manual/releases/`, reviewed in a PR.
+- **Bad values are stopped at entry** with `CHECK` constraints on the table, and again by dbt tests.
+
+> **Why:** a hand-edited table that allows `UPDATE` loses what was entered before, and when. Append-only keeps an audit trail for free, and the batch files mean the table can always be rebuilt from Git.
+
+✅ Typo in a score → `INSERT` the row again with the right value (the newest wins)
+❌ Typo in a score → `UPDATE raw_manual.benchmark_scores SET score = …`
+
+✅ Score withdrawn → `INSERT` the same benchmark and model with `is_retracted = true`
+❌ Score withdrawn → `DELETE FROM raw_manual.benchmark_scores WHERE …`
+
 ---
 
 ## 2. Staging rules
@@ -252,6 +267,8 @@ clean-targets:
 | Source | Licence | Notes |
 |---|---|---|
 | Epoch AI (Notable AI Models) | CC-BY 4.0 | Credit Epoch AI wherever the data is shown |
+| Epoch AI (Capabilities & benchmarking) | CC-BY 4.0 | Benchmark **baseline**: loaded once on 14 Nov 2026 from `epoch.ai/data/benchmark_data.zip` into `raw_epoch.benchmark_rows` (notebook `ingestion/ingest_epoch_benchmarks.py`, not scheduled). Credit Epoch AI on the site |
+| Model release pages (manual) | Published results, cited with their URL | Every benchmark result since the baseline, entered from the developer's announcement into `raw_manual` (one batch file per release in `ingestion/manual/releases/`). Only a developer's results for its own models; marked as developer-reported on the site |
 | OpenRouter | Public API (`/api/v1/models`, no key needed) | Model catalogue and pricing; loaded daily at 06:00 Europe/London by the Databricks notebook `ingest_openrouter_models` (copy in `ingestion/`) into `raw_openrouter.models_daily` |
 
 ### Loading notes

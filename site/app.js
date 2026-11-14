@@ -76,7 +76,7 @@ for (const b of data.benchmarks) {
   b.models.forEach((m) => { m.rank = 1 + b.models.filter((o) => o.score > m.score).length; });
 }
 document.querySelector('[data-stat="generated"]').title =
-  `Epoch AI, Capabilities & benchmarking. Licensed CC BY 4.0, including results Epoch collects from each benchmark's publisher. As of ${d3.utcFormat("%-d %b %Y")(new Date(data.generated + "T00:00:00Z"))}.`;
+  `Epoch AI, Capabilities & benchmarking. Licensed CC BY 4.0, including results Epoch collects from each benchmark's publisher. Models released since then are added from their developers' release pages; scores marked * are reported by the model's own developer. As of ${d3.utcFormat("%-d %b %Y")(new Date(data.generated + "T00:00:00Z"))}.`;
 
 // ── State, mirrored in the URL hash (#category/benchmark) ─────
 const [hashCat, hashBench] = location.hash.slice(1).split("/");
@@ -218,6 +218,7 @@ function render() {
 
   const all = entering.merge(rows)
     .classed("open", (d) => d.m.open_weights === true)
+    .classed("reported", (d) => d.m.source_type === "vendor_reported")
     .classed("pinned", (d) => d.m.name === state.pinned)
     .classed("detached", (d) => Boolean(d.detached))
     .style("--lab", (d) => colorOf(d.m.lab))
@@ -317,6 +318,7 @@ function showTip(event, m) {
       }).join("")}
       ${m.harness ? `<dt>Agent</dt><dd>${escapeHtml(m.harness)}</dd>` : ""}
       ${m.effort ? `<dt>Reasoning effort</dt><dd>${escapeHtml(m.effort)}</dd>` : ""}
+      ${m.source_type === "vendor_reported" ? `<dt>Source</dt><dd>Reported by ${escapeHtml(m.lab || "the developer")}</dd>` : ""}
       ${m.output_price != null ? `<dt>Output price</dt><dd>${fmtPrice(m.output_price)} / M tokens</dd>` : ""}
     </dl>`;
   placeTip(tooltip, board, event);

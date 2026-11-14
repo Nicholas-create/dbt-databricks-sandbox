@@ -26,3 +26,37 @@ models:
           - accepted_values:
               arguments:
                 values: ['standard', 'batch', 'free']
+  - name: int_benchmarks__unioned
+    description: "Every benchmark: the Epoch catalog seed plus hand-entered definitions. A manual row overrides display details; the seed still says how to read Epoch's file."
+    columns:
+      - name: benchmark_id
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+
+  - name: int_benchmark_scores__epoch
+    description: >
+      Epoch results, one row per benchmark per model: the model's best run. Model names are
+      resolved through Epoch's own version → name map, then the file's display name, then the
+      readable version string. Scores in site units (share 0-1 for pct benchmarks).
+    columns:
+      - name: benchmark_model_key
+        description: "benchmark_id + model_key. Primary key."
+        data_tests:
+          - unique
+          - not_null
+
+  - name: int_benchmark_scores__unioned
+    description: "Epoch and manual scores together, one row per benchmark per model. A manual entry supersedes Epoch's score for the same key; retracted manual entries are dropped."
+    columns:
+      - name: benchmark_model_key
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: score_source
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['epoch', 'manual']

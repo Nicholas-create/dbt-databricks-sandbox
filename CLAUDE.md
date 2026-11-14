@@ -16,7 +16,10 @@ Nicholas, moving from BI/FP&A into Analytics Engineering. This project is my por
 
 ## Project
 - dbt project `ai_model_tracker` on Databricks Free Edition: catalog `workspace`, dev schema `dbt_nsampson`.
-- Tracks notable AI models: what they are (Epoch AI) and what they cost (OpenRouter).
+- Tracks which AI model is best at what (benchmarks: Epoch AI baseline + model release pages), what models are (Epoch AI) and what they cost (OpenRouter).
+
+## When a model is released
+New benchmark results come from the model's release page, not from Epoch (Epoch was a one-off baseline). Follow the runbook in [`ingestion/manual/README.md`](ingestion/manual/README.md): read the page, enter the developer's results for its own models as a batch file in `ingestion/manual/releases/`, build, PR, deploy.
 
 ## Rules
 All project conventions are in [`CONVENTIONS.md`](CONVENTIONS.md). Read it before changing anything, and follow it.

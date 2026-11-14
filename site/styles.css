@@ -249,6 +249,9 @@ main { flex: 1; display: flex; flex-direction: column; }
   border-radius: 0 4px 4px 0;
   transition: background-color .3s, border-color .3s;
 }
+/* developer-reported score (not yet in Epoch's data): an asterisk after the name */
+.row.reported .name::after { content: "*"; margin-left: 2px; color: var(--muted); }
+
 /* open weights: diagonal hatching in the company colour, so the hue stays at full strength */
 .row.open .bar, .swatch-open {
   --c: var(--lab, var(--muted));

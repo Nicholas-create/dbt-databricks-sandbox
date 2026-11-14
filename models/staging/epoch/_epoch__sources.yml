@@ -8,3 +8,10 @@ sources:
     tables:
       - name: notable_ai_models
         description: "One row per notable AI model, exactly as published by Epoch."
+      - name: benchmark_rows
+        description: >
+          Epoch AI's benchmark hub (https://epoch.ai/benchmarks, CC BY 4.0), loaded once on
+          14 Nov 2026 by `ingestion/ingest_epoch_benchmarks.py` as the historical baseline. Not
+          refreshed: new results come from model release pages via the `manual` source, so there
+          is no freshness check. One row per CSV row: `file_name` (path inside benchmark_data.zip),
+          `row_number`, `raw_json` (the row as a JSON object of strings, untouched), `loaded_at`.

@@ -1,0 +1,28 @@
+benchmark_id,benchmark_name,category,sort_order,epoch_file,score_column,score_scale,unit,unit_max,publisher,source_url
+frontiercode,FrontierCode,coding,1,frontiercode_external.csv,Main score,1,pct,1,Cognition,https://cognition.com/frontiercode
+mirrorcode,MirrorCode,coding,2,mirrorcode.csv,Best score (across scorers),1,pct,1,Epoch AI,
+frontierswe,FrontierSWE,coding,3,frontierswe_external.csv,Score,1,pct,1,FrontierSWE,https://www.frontierswe.com/
+deepswe,DeepSWE,coding,4,deepswe_external.csv,Pass@1,1,pct,1,Datacurve,https://deepswe.datacurve.ai/
+cursorbench,CursorBench,coding,5,cursorbench_external.csv,Score,1,pct,1,Cursor,https://cursor.com/cursorbench
+terminal-bench,Terminal-Bench,coding,6,terminalbench_external.csv,Accuracy mean,1,pct,1,Terminal-Bench,https://www.tbench.ai/leaderboard/terminal-bench/2.0
+swe-bench-verified,SWE-bench Verified,coding,7,swe_bench_verified.csv,mean_score,1,pct,1,Epoch AI,
+aider-polyglot,Aider Polyglot,coding,8,aider_polyglot_external.csv,Percent correct,0.01,pct,1,Aider,https://aider.chat/docs/leaderboards/
+creative-writing,Creative Writing,writing,9,lech_mazur_writing_external.csv,Mean score,1,points,10,Lech Mazur,https://github.com/lechmazur/Writing
+fiction-livebench,Fiction.LiveBench,writing,10,fictionlivebench_external.csv,16k token score,1,pct,1,Fiction.live,https://fiction.live/stories/Fiction-liveBench-Mar-14-2025/oQdzQvKHw8JyXbN87/home
+epoch-capabilities-index,Epoch Capabilities Index,overall,11,epoch_capabilities_index/eci_scores.csv,eci,1,index,,Epoch AI,
+frontiermath-1-3,FrontierMath 1–3,maths,12,frontiermath_tiers_1_3_v2.csv,Best score (across scorers),1,pct,1,Epoch AI,
+frontiermath-tier-4,FrontierMath Tier 4,maths,13,frontiermath_tier_4_v2.csv,Best score (across scorers),1,pct,1,Epoch AI,
+otis-mock-aime,OTIS Mock AIME,maths,14,otis_mock_aime_2024_2025.csv,Best score (across scorers),1,pct,1,Epoch AI,
+proofbench,ProofBench,maths,15,proofbench_external.csv,Accuracy,1,pct,1,Vals AI,https://www.vals.ai/benchmarks/proof_bench
+gpqa-diamond,GPQA Diamond,science,16,gpqa_diamond.csv,Best score (across scorers),1,pct,1,Epoch AI,
+humanity-s-last-exam,Humanity's Last Exam,science,17,hle_external.csv,Accuracy,1,pct,1,,
+simpleqa-verified,SimpleQA Verified,science,18,simpleqa_verified.csv,Best score (across scorers),1,pct,1,Epoch AI,
+arc-agi-2,ARC-AGI-2,reasoning,19,arc_agi_2_external.csv,Score,1,pct,1,,
+arc-agi,ARC-AGI,reasoning,20,arc_agi_external.csv,Score,1,pct,1,ARC Prize,https://arcprize.org/leaderboard
+simplebench,SimpleBench,reasoning,21,simplebench_external.csv,Score (AVG@5),1,pct,1,SimpleBench,https://simple-bench.com/
+enigmaeval,EnigmaEval,reasoning,22,enigma_eval_external.csv,Accuracy,1,pct,1,Scale AI,https://labs.scale.com/leaderboard/enigma_eval
+chess-puzzles,Chess Puzzles,reasoning,23,chess_puzzles.csv,Best score (across scorers),1,pct,1,Epoch AI,
+apex-agents,APEX-Agents,agents,24,apex_agents_external.csv,Pass@1 score,1,pct,1,,
+remote-labor-index,Remote Labor Index,agents,25,rli_external.csv,Score,1,pct,1,,
+metr-tasks,METR tasks,agents,26,metr_time_horizons_external.csv,average_score,1,pct,1,METR,https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/
+deepresearch-bench,DeepResearch Bench,agents,27,deepresearchbench_external.csv,Average score,1,pct,1,FutureSearch,https://evals.futuresearch.ai/#drb
