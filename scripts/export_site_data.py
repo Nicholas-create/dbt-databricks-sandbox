@@ -37,7 +37,7 @@ QUERIES = {
                unit, unit_max, n_models, latest_release_date
         from {db}.dim_benchmarks
         where n_models > 0
-        order by sort_order
+        order by category_sort_order, relevance_rank   -- most relevant first (dim_benchmarks)
     """,
     "scores": """
         select benchmark_id, model_name, lab, is_open_weights, score, released_date,

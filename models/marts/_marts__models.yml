@@ -100,6 +100,16 @@ models:
                 values: ['pct', 'points', 'index']
       - name: defined_in
         description: "epoch_catalog, manual, or epoch_catalog+manual (manual overrides the display details)."
+      - name: n_recent_models
+        description: "Models released in the last 180 days (from build date) with a score."
+      - name: leader_headroom
+        description: "1 minus the average of the 5 best recent scores as a share of the scale. Near 0 = saturated."
+      - name: relevance_score
+        description: "n_recent_models × leader_headroom: is it in use, and can it still separate the leaders?"
+      - name: relevance_rank
+        description: "Order within the category, 1 = most relevant (leftmost pill after Overall). Depends on the build date, by design."
+        data_tests:
+          - not_null
 
   - name: fct_benchmark_scores
     description: >

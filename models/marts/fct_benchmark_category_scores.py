@@ -65,7 +65,7 @@ def model(dbt, session):
 
     benchmarks = (dbt.ref("dim_benchmarks").toPandas()
                   .query("unit != 'index'")
-                  .sort_values("sort_order"))
+                  .sort_values("relevance_rank"))  # tooltip parts follow the pill order
     scores = dbt.ref("fct_benchmark_scores").toPandas()
 
     out = []
