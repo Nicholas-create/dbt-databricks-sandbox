@@ -58,6 +58,10 @@ seeds:
                 values: ['pct', 'points', 'index']
       - name: unit_max
         description: "Top of the scale in site units. Null for an open-ended index."
+      - name: benchmark_family
+        description: "Groups versions or variants of one benchmark (FrontierCode / FrontierCode 2.0) into one split pill on the site. Blank = stands alone."
+      - name: variant_label
+        description: "This version's label inside the split pill, e.g. 'FrontierCode' or '2.0'. Blank when benchmark_family is blank."
 
   - name: benchmark_categories
     description: "Site categories, in tab order. `phrase` completes the title 'Which model is best ___?'."

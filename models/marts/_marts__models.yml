@@ -107,7 +107,17 @@ models:
       - name: relevance_score
         description: "n_recent_models × leader_headroom: is it in use, and can it still separate the leaders?"
       - name: relevance_rank
-        description: "Order within the category, 1 = most relevant (leftmost pill after Overall). Depends on the build date, by design."
+        description: "Order within the category by relevance alone, 1 = most relevant. Depends on the build date, by design."
+        data_tests:
+          - not_null
+      - name: benchmark_family
+        description: "Versions of one benchmark share a family and appear as one split pill. A standalone benchmark is its own family."
+        data_tests:
+          - not_null
+      - name: variant_label
+        description: "This version's label inside the split pill (e.g. '2.0'). Null for standalone benchmarks."
+      - name: display_rank
+        description: "Pill order on the site: families placed by their most relevant version, versions kept together."
         data_tests:
           - not_null
 

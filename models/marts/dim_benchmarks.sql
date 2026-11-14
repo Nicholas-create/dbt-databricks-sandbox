@@ -107,6 +107,9 @@ final as (
         b.source_url,
         b.unit,
         b.unit_max,
+        -- a benchmark with no family is a family of one
+        coalesce(b.benchmark_family, b.benchmark_id)                         as benchmark_family,
+        b.variant_label,
         coalesce(h.harnesses, array())                                       as harnesses,
         coalesce(v.n_models, 0)                                              as n_models,
         coalesce(v.n_manual_scores, 0)                                       as n_manual_scores,
@@ -131,6 +134,21 @@ final as (
     left join relevance r
         on b.benchmark_id = r.benchmark_id
 
+),
+
+-- Pill order on the site: a family sits where its most relevant version ranks, and
+-- its versions stay together, oldest definition first (FrontierCode, then 2.0).
+ordered as (
+
+    select
+        *,
+        row_number() over (
+            partition by category
+            order by min(relevance_rank) over (partition by category, benchmark_family),
+                     sort_order
+        )                                                                    as display_rank
+    from final
+
 )
 
-select * from final
+select * from ordered

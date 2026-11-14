@@ -135,14 +135,22 @@ function render() {
   catButtons.attr("aria-selected", (c) => String(c.id === cat.id));
   document.querySelector(".phrase").textContent = cat.phrase;
 
-  // Benchmark pills: only when the category has a choice to make.
+  // Benchmark pills: only when the category has a choice to make. Versions of one
+  // benchmark (same family, e.g. FrontierCode / 2.0) share one split pill: a segment
+  // per version, labelled with its variant. The data keeps family members adjacent.
   const benches = cat.benchmarks.map((id) => benchById.get(id));
   pillsEl.attr("hidden", benches.length > 1 ? null : "");
-  pillsEl.selectAll("button").data(benches, (d) => d.id).join("button")
+  const families = d3.groups(benches, (d) => d.family ?? d.id);
+  pillsEl.selectAll(".pill-group").data(families, ([family]) => family).join("span")
+    .attr("class", ([, members]) => (members.length > 1 ? "pill-group split" : "pill-group"))
+    .attr("role", "presentation")
+    .selectAll("button").data(([, members]) => members.map((d) => ({ d, split: members.length > 1 })), (x) => x.d.id)
+    .join("button")
     .attr("type", "button").attr("role", "tab")
-    .attr("aria-selected", (d) => String(d.id === b.id))
-    .text((d) => d.name)
-    .on("click", (event, d) => select(cat.id, d.id));
+    .attr("aria-selected", (x) => String(x.d.id === b.id))
+    .attr("aria-label", (x) => (x.split ? x.d.name : null)) // a segment shows "2.0"; screen readers hear the full name
+    .text((x) => (x.split && x.d.variant ? x.d.variant : x.d.name))
+    .on("click", (event, x) => select(cat.id, x.d.id));
 
   const m = reducedMotion.matches ? 0 : 1; // 0 turns every duration and delay off
 
