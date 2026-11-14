@@ -1,0 +1,131 @@
+version: 2
+
+# Benchmark data typed in by hand from model release pages (runbook:
+# ingestion/manual/README.md). Each file holds the CURRENT state: a correction is
+# an edited line, a withdrawal a deleted line, and Git history is the audit trail.
+#
+# Every column has an explicit type. dbt reads a column listed in column_types as
+# text and lets the warehouse cast it, so nothing is guessed from the values
+# (e.g. variant_label "2.0" stays "2.0" instead of becoming the number 2).
+# An empty field is null.
+
+seeds:
+  - name: manual_benchmarks
+    description: >
+      Benchmarks not in the Epoch catalog seed (or whose display details override it), one row per
+      benchmark_id, in sort_order. A benchmark listed here and in `benchmark_catalog` takes its
+      display details from here and its place in the pill order from the catalog.
+    config:
+      column_types:
+        benchmark_id: string
+        benchmark_name: string
+        category: string
+        publisher: string
+        source_url: string
+        unit: string
+        unit_max: double
+        benchmark_family: string
+        variant_label: string
+        sort_order: int
+        notes: string
+    columns:
+      - name: benchmark_id
+        description: "Lowercase slug used everywhere downstream, e.g. automationbench. Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: benchmark_name
+        description: "Display name, e.g. AutomationBench."
+        data_tests:
+          - not_null
+      - name: category
+        description: "A category_id from benchmark_categories, e.g. coding, agents, cyber, internal."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('benchmark_categories')
+                field: category_id
+      - name: publisher
+        description: "Who maintains the benchmark."
+      - name: source_url
+        description: "Benchmark home page."
+      - name: unit
+        description: "pct (share of tasks; scores entered as 0-100), points, or index."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['pct', 'points', 'index']
+      - name: unit_max
+        description: "Top of the scale in site units: 1 for pct (filled in downstream when blank), e.g. 10 for points out of 10."
+      - name: benchmark_family
+        description: "Links versions of one benchmark into one split pill on the site, e.g. frontiercode. Blank = stands alone."
+      - name: variant_label
+        description: "This version's label inside the split pill, e.g. '2.0' or 'with tools'. Needed on every member of a family of two or more."
+      - name: sort_order
+        description: >
+          Order of the versions inside a split pill (lowest first). Numbered in steps of 10 from 1010,
+          so a new version can slot between two others without renumbering. The catalog's benchmarks
+          (1, 2, ...) always come before hand-entered ones in the same family.
+        data_tests:
+          - unique
+          - not_null
+      - name: notes
+        description: "What the benchmark measures, or which score variant is entered."
+
+  - name: manual_benchmark_scores
+    description: >
+      Benchmark results entered from model release pages, one row per benchmark and model. They
+      supersede Epoch's score for the same benchmark and model. Rows are kept sorted by benchmark_id,
+      then model_name (ignoring case), so a diff stays small and a duplicate sits next to its twin.
+      Uniqueness is tested in stg_manual__benchmark_scores, on the normalised model name.
+    config:
+      column_types:
+        benchmark_id: string
+        model_name: string
+        score: double
+        harness: string
+        effort: string
+        lab: string
+        is_open_weights: boolean
+        released_date: date
+        source_url: string
+        source_type: string
+        notes: string
+    columns:
+      - name: benchmark_id
+        description: "Must exist in manual_benchmarks or benchmark_catalog (tested on fct_benchmark_scores)."
+        data_tests:
+          - not_null
+      - name: model_name
+        description: "The developer's official model name, spelled exactly as existing rows spell it, e.g. Claude Fable 5.2."
+        data_tests:
+          - not_null
+      - name: score
+        description: "Exactly as published: 49.1 for 49.1%, 7.8 for 7.8/10. Never negative (tests/assert_manual_scores_not_negative.sql)."
+        data_tests:
+          - not_null
+      - name: harness
+        description: "Agent harness as published, e.g. claude-code."
+      - name: effort
+        description: "Reasoning effort or mode of the score entered, e.g. xhigh, max, thinking."
+      - name: lab
+        description: "Developer, e.g. Anthropic. Required for models newer than the Epoch baseline (tests/assert_manual_scores_have_model_details.sql)."
+      - name: is_open_weights
+        description: "true / false. Blank falls back to Epoch."
+      - name: released_date
+        description: "Model release date, YYYY-MM-DD. Required for models newer than the Epoch baseline."
+      - name: source_url
+        description: "The release page the number was read from."
+        data_tests:
+          - not_null
+      - name: source_type
+        description: "vendor_reported (the developer about its own model) or independent."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['vendor_reported', 'independent']
+      - name: notes
+        description: "Anything a reader needs to interpret the number (chart data, best of several efforts, subset)."

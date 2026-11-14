@@ -1,7 +1,7 @@
 -- Every benchmark the site can show: the Epoch catalog seed plus definitions
--- entered by hand in raw_manual.benchmarks. One row per benchmark_id.
+-- entered by hand in the seed manual_benchmarks. One row per benchmark_id.
 -- On a clash, the manual row overrides how the benchmark is displayed (name,
--- category, publisher...), while the seed still says how to read Epoch's file.
+-- category, publisher...), while the catalog still says how to read Epoch's file.
 with catalog as (
 
     select * from {{ ref('benchmark_catalog') }}
@@ -11,7 +11,6 @@ with catalog as (
 manual as (
 
     select * from {{ ref('stg_manual__benchmarks') }}
-    where not is_retracted
 
 ),
 
@@ -30,9 +29,9 @@ final as (
         -- versions of one benchmark share a family (one split pill on the site)
         coalesce(m.benchmark_family, c.benchmark_family)                     as benchmark_family,
         coalesce(m.variant_label, c.variant_label)                           as variant_label,
-        -- seed order first, then hand-added benchmarks in the order they were defined
-        coalesce(c.sort_order, 1000 + row_number() over (order by m.entered_at, m.benchmark_id))
-                                                                             as sort_order,
+        -- catalog order first (1, 2, ...), then hand-added benchmarks by their own
+        -- sort_order (1010, 1020, ...); orders the versions inside a split pill
+        coalesce(c.sort_order, m.sort_order)                                 as sort_order,
 
         -- how to read Epoch's file (null for benchmarks Epoch doesn't carry)
         c.epoch_file,

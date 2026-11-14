@@ -21,7 +21,7 @@ seeds:
     description: >
       The Epoch AI benchmarks shown on the site, and how to read each one from Epoch's files:
       which CSV, which column holds the score, and how to scale it to the site's units. Adding an
-      Epoch benchmark is one new row here; benchmarks Epoch doesn't carry go in raw_manual.benchmarks.
+      Epoch benchmark is one new row here; benchmarks Epoch doesn't carry go in the seed manual_benchmarks.
     config:
       column_types:
         sort_order: int

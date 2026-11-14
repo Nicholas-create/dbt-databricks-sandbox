@@ -1,0 +1,194 @@
+benchmark_id,benchmark_name,category,publisher,source_url,unit,unit_max,benchmark_family,variant_label,sort_order,notes
+terminal-bench-science,Terminal-Bench-Science,science,,,pct,1,,,1010,Agentic scientific research; version 0.1.
+wandr,WANDR,agents,Perplexity,,pct,1,,,1020,Agentic search; relaxed score.
+biomysterybench-hard,BioMysteryBench (hard),life-sciences,,,pct,1,biomysterybench,hard,1030,"Biology research problems, hard subset."
+biomysterybench-human-solved,BioMysteryBench (human solved),life-sciences,,,pct,1,biomysterybench,human solved,1040,Biology research problems that human experts have solved.
+blueprint-bench-2,Blueprint-Bench 2,reasoning,,,pct,1,,,1050,Spatial reasoning.
+gdp-pdf,GDP.pdf,agents,,,pct,1,,,1060,"Knowledge work from document images (vision), no tools."
+swe-bench-pro,SWE-bench Pro,coding,Scale AI,,pct,1,swe-bench,Pro,1070,Long-horizon software engineering tasks; a harder successor to SWE-bench Verified.
+arc-agi-3,ARC-AGI-3,reasoning,ARC Prize,https://arcprize.org/leaderboard,pct,1,arc-agi,3,1080,Novel problem-solving in interactive environments.
+frontier-bench,Frontier-Bench,coding,,,pct,1,,,1090,"Agentic terminal coding, v0.1; mini-SWE-agent harness, mean reward over 5 attempts."
+chartography,Chartography (no tools),reasoning,Surge AI,,pct,1,chartography,no tools,1100,"Visual chart recognition, no tools."
+binder-design,De novo binder design (24 hr),life-sciences,,,index,,,,1110,"Protein design within 24 hours; score as published, scale not stated."
+robodojo-sim,RoboDojo Sim,agents,,,pct,1,,,1120,Controlling a simulated two-arm robot from camera images.
+cursorbench-3-2,CursorBench 3.2,coding,Cursor,,pct,1,cursorbench,3.2,1130,Version 3.2.0; Epoch's CursorBench matches version 4.0.
+cyscenariobench,CyScenarioBench,cyber,,,pct,1,,,1140,Realistic cyber-operation scenarios; each lab's scores are based on unique tasks.
+frontiercode-2,FrontierCode 2.0,coding,,,pct,1,frontiercode,2.0,1150,Would the maintainers of open-source repositories merge the model's code changes. A newer version than Epoch's FrontierCode.
+frontiercode-diamond,FrontierCode (Diamond),coding,Cognition,,pct,1,frontiercode,Diamond,1160,"The Diamond set of FrontierCode, as named on Anthropic's pages; scores differ from the Main set (Epoch's FrontierCode)."
+chartography-with-tools,Chartography (with tools),reasoning,Surge AI,,pct,1,chartography,with tools,1170,"Visual chart recognition, tool use allowed."
+benchcad,BenchCAD,coding,,,pct,1,benchcad,BenchCAD,1180,CAD modelling of engineering parts.
+benchcad-python,BenchCAD (python tool),coding,,,pct,1,benchcad,python tool,1190,"CAD modelling of engineering parts, with a Python tool."
+big-finance-bench,Big Finance Bench,agents,,,pct,1,,,1200,Finance work tasks.
+exploitgym,ExploitGym,cyber,,,pct,1,,,1210,Exploit development under a time cap (2 h or 6 h; the cap per row is in its notes where known).
+kernelgen-1p,KernelGen 1P (OpenAI internal),internal,OpenAI,,pct,1,,,1220,
+lifescibench,LifeSciBench,life-sciences,,,pct,1,,,1230,Life-sciences research tasks.
+management-consulting-tasks,Management Consulting Tasks (OpenAI internal),internal,OpenAI,,pct,1,,,1240,
+medchembench,MedChemBench (OpenAI internal),internal,OpenAI,,pct,1,,,1250,
+mmmu-pro,MMMU-Pro (no tools),reasoning,,,pct,1,mmmu-pro,no tools,1260,Expert-level multimodal (image + text) questions.
+mmmu-pro-with-tools,MMMU-Pro (with tools),reasoning,,,pct,1,mmmu-pro,with tools,1270,MMMU-Pro with tool use allowed.
+nanogpt,NanoGPT (OpenAI self-improvement eval),internal,OpenAI,,pct,1,,,1280,
+posttrainbench-lite,PostTrainBench Lite (OpenAI self-improvement eval),internal,OpenAI,,pct,1,,,1290,
+research-debugging,Research Debugging (OpenAI internal),internal,OpenAI,,pct,1,,,1300,
+rsi-index,RSI Index (OpenAI internal),internal,OpenAI,,pct,1,,,1310,OpenAI's composite of its self-improvement evaluations.
+sec-bench-pro,SEC-Bench Pro,cyber,,,pct,1,,,1320,Finding and fixing security vulnerabilities in real code.
+data-science-tasks,Data Science Tasks (OpenAI internal),internal,OpenAI,,pct,1,,,1330,
+database-migration-tasks,Database Migration Tasks (OpenAI internal),internal,OpenAI,,pct,1,,,1340,
+design-tasks,Design Tasks (OpenAI internal),internal,OpenAI,,pct,1,,,1350,
+exploitbench,ExploitBench,cyber,,,pct,1,exploitbench,ExploitBench,1360,Exploit development; Cap% score.
+exploitbench-jun-aug-2026,ExploitBench (Jun–Aug 2026),cyber,,,pct,1,exploitbench,Jun–Aug 2026,1370,Internal port of ExploitBench on vulnerabilities from June to August 2026.
+frontiercode-extended,FrontierCode (Extended),coding,Cognition,,pct,1,frontiercode,Extended,1380,"FrontierCode 1.1, Extended set."
+openscore-string-quartets,OpenScore String Quartets,reasoning,,,pct,1,,,1390,"Optical music recognition: transcribing photographed string-quartet scores (1 - OMR-NED, Legato camera subset)."
+sre-bench,SRE-Bench,cyber,,,pct,1,,,1400,Site-reliability and security operations tasks.
+mmmu-pro-vision,MMMU-Pro (Vision),reasoning,,,pct,1,mmmu-pro,vision,1410,MMMU-Pro vision setting: the question is part of the image.
+cve-rediscovery,CVE Rediscovery (Anthropic internal),internal,Anthropic,,pct,1,,,1420,Anthropic internal evaluation: rediscovering known vulnerabilities (CVEs).
+aime-2025,AIME 2025,maths,,,pct,1,,,1430,"American Invitational Mathematics Examination 2025, no tools."
+mmmu,MMMU,reasoning,,,pct,1,,,1440,College-level multimodal (image + text) problems.
+charxiv-reasoning,CharXiv Reasoning (no tools),reasoning,,,pct,1,charxiv,no tools,1450,Reasoning about charts in scientific papers.
+charxiv-reasoning-python,CharXiv Reasoning (with Python),reasoning,,,pct,1,charxiv,with Python,1460,CharXiv Reasoning with a Python tool.
+videommmu,VideoMMMU,reasoning,,,pct,1,,,1470,Video-based multimodal reasoning (up to 256 frames).
+erqa,ERQA,reasoning,,,pct,1,,,1480,Multimodal spatial (embodied) reasoning.
+videomme,"VideoMME (long, with subtitles)",reasoning,,,pct,1,,,1490,"Long-video understanding, with subtitles."
+scale-multichallenge,Scale MultiChallenge,writing,Scale AI,,pct,1,,,1500,Multi-turn conversations: keeping instructions and context across turns.
+collie,COLLIE,writing,,,pct,1,,,1510,Following constraints in free-form writing.
+tau2-airline,τ²-bench (airline),agents,Sierra,,pct,1,tau2-bench,airline,1520,"Customer-support agent with tools, airline domain."
+tau2-retail,τ²-bench (retail),agents,Sierra,,pct,1,tau2-bench,retail,1530,"Customer-support agent with tools, retail domain."
+tau2-telecom,τ²-bench (telecom),agents,Sierra,,pct,1,tau2-bench,telecom,1540,"Customer-support agent with tools, telecom domain."
+api-instruction-following,API Instruction Following (OpenAI internal),internal,OpenAI,,pct,1,,,1550,
+frontiermath-1-3-v1,FrontierMath Tier 1–3 (v1),maths,Epoch AI,,pct,1,frontiermath,1–3 (v1),1560,"The original FrontierMath set, with Python, as reported on release pages before v2. Epoch's FrontierMath is v2."
+code-refactoring-tasks,Code Refactoring Tasks (OpenAI internal),internal,OpenAI,,pct,1,,,1570,
+swe-lancer,SWE-Lancer (IC Diamond),coding,OpenAI,,pct,1,,,1580,Freelance software-engineering tasks (IC SWE Diamond): share solved. The dollars-earned version isn't entered.
+gdpval,GDPval,agents,OpenAI,,pct,1,,,1590,Expert-graded knowledge work across 44 occupations: share of tasks where the model's work wins or ties against an expert's. Not GDPval-AA.
+frontiermath-tier-4-v1,FrontierMath Tier 4 (v1),maths,Epoch AI,,pct,1,frontiermath,Tier 4 (v1),1600,"The original FrontierMath Tier 4 set, with Python, as reported on release pages before v2."
+mmmlu,MMMLU,science,,,pct,1,,,1610,MMLU in 14 languages.
+mcp-atlas,MCP Atlas,agents,Scale AI,,pct,1,,,1620,Tool use through MCP servers.
+investment-banking-tasks,Investment Banking Modeling Tasks (OpenAI internal),internal,OpenAI,,pct,1,,,1630,
+chatgpt-factuality-search,"ChatGPT Answers Without Errors, with search (OpenAI internal)",internal,OpenAI,,pct,1,,,1640,
+chatgpt-factuality-nosearch,"ChatGPT Answers Without Errors, no search (OpenAI internal)",internal,OpenAI,,pct,1,,,1650,
+officeqa,OfficeQA,agents,,,pct,1,officeqa,OfficeQA,1660,Questions over office documents.
+frontier-science-research,FrontierScience (Research),science,OpenAI,,pct,1,,,1670,Research-level science problems.
+cybergym,CyberGym,cyber,,,pct,1,,,1680,Reproducing real-world vulnerabilities from descriptions.
+bixbench,BixBench,life-sciences,,,pct,1,,,1690,Bioinformatics analysis tasks.
+officeqa-pro,OfficeQA Pro,agents,,,pct,1,officeqa,Pro,1700,Harder questions over office documents.
+tau2-telecom-original,"τ²-bench (telecom, original prompts)",agents,Sierra,,pct,1,tau2-bench,telecom (original prompts),1710,Telecom domain with the original task prompts; scores differ from the other telecom runs (GPT-5.4: 92.8% vs 98.9%).
+expert-swe,Expert-SWE (OpenAI internal),internal,OpenAI,,pct,1,,,1720,
+hle-no-tools,Humanity's Last Exam (no tools),science,,,pct,1,humanity-s-last-exam,no tools,1730,"Developers' own runs without tools; they differ from Epoch's Humanity's Last Exam runs, so kept separate."
+hle-with-tools,Humanity's Last Exam (with tools),science,,,pct,1,humanity-s-last-exam,with tools,1740,"Same questions as Humanity's Last Exam, with tool use allowed."
+healthbench,HealthBench,life-sciences,OpenAI,,pct,1,healthbench,HealthBench,1750,Realistic health conversations graded against physician-written rubrics.
+healthbench-hard,HealthBench Hard,life-sciences,OpenAI,,pct,1,healthbench,Hard,1760,The hardest HealthBench conversations.
+healthbench-professional,HealthBench Professional,life-sciences,OpenAI,,pct,1,healthbench,Professional,1770,"Health conversations graded against physician-written rubrics, professional set."
+screenspot-pro,ScreenSpot-Pro,agents,,,pct,1,screenspot-pro,ScreenSpot-Pro,1780,Locating interface elements in high-resolution screenshots (no tools).
+screenspot-pro-python,ScreenSpot-Pro (with Python),agents,,,pct,1,screenspot-pro,with Python,1790,ScreenSpot-Pro with a Python tool.
+graphwalks-bfs-128k,GraphWalks BFS (<128K),long-context,OpenAI,,pct,1,graphwalks,<128K,1800,Breadth-first search over a graph given in under 128K tokens.
+graphwalks-256k,GraphWalks BFS (256K),long-context,OpenAI,,pct,1,graphwalks,256K,1810,Breadth-first search over a graph given in 256K tokens (F1).
+graphwalks-1m,GraphWalks BFS (1M),long-context,OpenAI,,pct,1,graphwalks,1M,1820,Breadth-first search over a graph given in 1M tokens (F1).
+graphwalks-bfs-256k-1m,GraphWalks BFS (256K–1M),long-context,OpenAI,,pct,1,graphwalks,256K–1M,1830,Breadth-first search over a graph given in 256K–1M tokens.
+graphwalks-parents-128k,GraphWalks parents (<128K),long-context,OpenAI,,pct,1,graphwalks-parents,<128K,1840,Finding a node's parents in a graph given in under 128K tokens.
+graphwalks-parents-256k,GraphWalks parents (256K),long-context,OpenAI,,pct,1,graphwalks-parents,256K,1850,Finding a node's parents in a graph given in 256K tokens (F1).
+graphwalks-parents-1m,GraphWalks parents (1M),long-context,OpenAI,,pct,1,graphwalks-parents,1M,1860,Finding a node's parents in a graph given in 1M tokens (F1).
+graphwalks-parents-256k-1m,GraphWalks parents (256K–1M),long-context,OpenAI,,pct,1,graphwalks-parents,256K–1M,1870,Finding a node's parents in a graph given in 256K–1M tokens.
+openai-mrcr-4k-8k,OpenAI MRCR v2 (4K–8K),long-context,OpenAI,,pct,1,openai-mrcr,4K–8K,1880,Long-context retrieval: 8 needles in 4K–8K tokens.
+openai-mrcr-8k-16k,OpenAI MRCR v2 (8K–16K),long-context,OpenAI,,pct,1,openai-mrcr,8K–16K,1890,Long-context retrieval: 8 needles in 8K–16K tokens.
+openai-mrcr-16k-32k,OpenAI MRCR v2 (16K–32K),long-context,OpenAI,,pct,1,openai-mrcr,16K–32K,1900,Long-context retrieval: 8 needles in 16K–32K tokens.
+openai-mrcr-32k-64k,OpenAI MRCR v2 (32K–64K),long-context,OpenAI,,pct,1,openai-mrcr,32K–64K,1910,Long-context retrieval: 8 needles in 32K–64K tokens.
+openai-mrcr-64k-128k,OpenAI MRCR v2 (64K–128K),long-context,OpenAI,,pct,1,openai-mrcr,64K–128K,1920,Long-context retrieval: 8 needles in 64K–128K tokens.
+openai-mrcr-128k-256k,OpenAI MRCR v2 (128K–256K),long-context,OpenAI,,pct,1,openai-mrcr,128K–256K,1930,Long-context retrieval: 8 needles in 128K–256K tokens.
+openai-mrcr-256k,OpenAI MRCR v2 (256K–512K),long-context,OpenAI,,pct,1,openai-mrcr,256K–512K,1940,Long-context retrieval: 8 needles in 256K–512K tokens.
+openai-mrcr-1m,OpenAI MRCR v2 (512K–1M),long-context,OpenAI,,pct,1,openai-mrcr,512K–1M,1950,Long-context retrieval: 8 needles in 512K–1M tokens.
+openai-mrcr-2needle-128k,"OpenAI MRCR (2 needles, 128K)",long-context,OpenAI,,pct,1,openai-mrcr-2needle,128K,1960,Long-context retrieval: 2 needles in 128K tokens.
+openai-mrcr-2needle-256k,"OpenAI MRCR (2 needles, 256K)",long-context,OpenAI,,pct,1,openai-mrcr-2needle,256K,1970,Long-context retrieval: 2 needles in 256K tokens.
+browsecomp-lc-128k,BrowseComp Long Context (128K),long-context,OpenAI,,pct,1,browsecomp-lc,128K,1980,Answering from 128K tokens of supplied web pages.
+browsecomp-lc-256k,BrowseComp Long Context (256K),long-context,OpenAI,,pct,1,browsecomp-lc,256K,1990,Answering from 256K tokens of supplied web pages.
+osworld-verified,OSWorld-Verified,agents,,,pct,1,osworld,Verified,2000,"Computer use, verified task set."
+osworld-2-0,OSWorld 2.0,agents,,,pct,1,osworld,2.0,2010,Computer use; the original 2.0 task release.
+osworld-2-0-offline,OSWorld 2.0 (offline set),agents,,,pct,1,osworld,2.0 offline,2020,"Computer use, OSWorld 2.0 v2026.08.08 offline set, partial score."
+osworld-2-0-aug,OSWorld 2.0 (Aug 2026 tasks),agents,,,pct,1,osworld,2.0 Aug,2030,"Computer use, August 2026 task release, partial credit; not comparable with earlier OSWorld 2.0 results."
+osworld-2-0-aug-strict,"OSWorld 2.0 (Aug 2026 tasks, strict)",agents,,,pct,1,osworld,2.0 Aug strict,2040,"Computer use, August 2026 task release, strict scoring (no partial credit)."
+osworld-2-1-full,OSWorld 2.1,agents,,,pct,1,osworld,2.1,2050,"Computer use, version 2.1, partial credit; no subset named (the offline-set results are osworld-2-1)."
+osworld-2-1,OSWorld 2.1 (offline set),agents,,,pct,1,osworld,2.1 offline,2060,"Computer use, version 2.1, offline set, partial credit."
+genebench,GeneBench,life-sciences,,,pct,1,genebench,GeneBench,2070,Genomics and gene-analysis tasks.
+genebench-pro,GeneBench Pro,life-sciences,,,pct,1,genebench,Pro,2080,Harder genomics and gene-analysis tasks.
+ctf-challenges,Capture-the-Flag Challenges (OpenAI internal),internal,OpenAI,,pct,1,,,2090,OpenAI's internal professional-level capture-the-flag evaluation; the task set changes over time.
+facts,FACTS Benchmark Suite,science,Google DeepMind,,pct,1,,,2100,"Factuality across grounding, parametric knowledge, search and multimodal inputs."
+gdm-mrcr-128k,"MRCR v2, Google (128K average)",long-context,Google DeepMind,,pct,1,gdm-mrcr,128K average,2110,"Google's 8-needle MRCR v2 set-up, averaged up to 128K tokens."
+gdm-mrcr-1m,"MRCR v2, Google (1M pointwise)",long-context,Google DeepMind,,pct,1,gdm-mrcr,1M pointwise,2120,Google's 8-needle MRCR v2 set-up at 1M tokens.
+global-piqa,Global PIQA,reasoning,,,pct,1,,,2130,Commonsense reasoning across 100 languages and cultures.
+livecodebench-pro,LiveCodeBench Pro,coding,,,index,,,,2140,"Competitive programming (Codeforces, ICPC, IOI): Elo rating."
+cmt-benchmark,CMT-Benchmark,science,,,pct,1,,,2150,Condensed matter theory problems.
+codeforces,Codeforces,coding,,,index,,,,2160,"Competitive programming, no tools: Elo rating."
+icho-2025,IChO 2025 (theory),science,,,pct,1,,,2170,"International Chemistry Olympiad 2025, theory problems."
+imo-2025,IMO 2025,maths,,,pct,1,,,2180,International Mathematical Olympiad 2025 problems.
+ipho-2025,IPhO 2025 (theory),science,,,pct,1,,,2190,"International Physics Olympiad 2025, theory problems."
+scicode,SciCode,coding,,,pct,1,,,2200,Scientific research coding problems.
+aime-2026,AIME 2026,maths,,,pct,1,,,2210,"American Invitational Mathematics Examination 2026, no tools."
+bbeh,BIG-Bench Extra Hard,reasoning,,,pct,1,,,2220,Hard reasoning tasks (BBEH).
+docvqa,DocVQA,reasoning,,,pct,1,,,2230,Questions about document images.
+infovqa,InfoVQA,reasoning,,,pct,1,,,2240,Questions about infographics.
+mmlu-pro,MMLU-Pro,science,,,pct,1,,,2250,Harder multiple-choice knowledge questions across subjects.
+mle-bench,MLE-Bench,coding,,,pct,1,,,2260,Machine-learning engineering competitions.
+hle-verified,Humanity's Last Exam (Verified),science,,,pct,1,humanity-s-last-exam,Verified,2270,A verified subset of Humanity's Last Exam.
+labbench2,LAB-Bench 2,life-sciences,FutureHouse,,pct,1,,,2280,Real-world biology research tasks.
+lvbench,LVBench,reasoning,,,pct,1,,,2290,Long video understanding.
+cwe-bench,CWE-bench,cyber,,,pct,1,,,2300,Finding weakness classes (CWEs) in real code.
+posttrainbench,PostTrainBench,coding,,,pct,1,,,2310,Post-training a language model as an ML engineer would.
+riemannbench,RiemannBench,maths,,,pct,1,,,2320,Research-level mathematics.
+vibe-code-bench,Vibe Code Bench,coding,Vals AI,,pct,1,,,2330,Building working apps from natural-language specs.
+swe-sweep,SWE-sweep,coding,,,pct,1,,,2340,"Large, sweeping software changes across a codebase."
+hle-diamond,Humanity's Last Exam (Diamond),science,,,pct,1,humanity-s-last-exam,Diamond,2350,The Diamond subset of Humanity's Last Exam.
+mka,Multimodal Knowledge Agents,agents,Google DeepMind,,pct,1,,,2360,"Agents answering knowledge questions from images, video and documents (Climb WSR accuracy)."
+agents-last-exam,Agents' Last Exam,agents,,,pct,1,agents-last-exam,v1,2370,Long-horizon professional work on a computer across 55 sub-industries (v1).
+agents-last-exam-v1-1,Agents' Last Exam v1.1,agents,,,pct,1,agents-last-exam,v1.1,2380,"Agents' Last Exam version 1.1, score."
+agents-last-exam-pass-rate,Agents' Last Exam (pass rate),agents,,,pct,1,agents-last-exam,pass rate,2390,Agents' Last Exam reported as the share of tasks fully passed.
+legal-agent-benchmark,Legal Agent Benchmark,agents,Harvey,,pct,1,legal-agent-benchmark,Legal Agent Benchmark,2400,Legal agent tasks (held-out set).
+legal-agent-benchmark-allpass,Legal Agent Benchmark (all pass rate),agents,Harvey,,pct,1,legal-agent-benchmark,all pass rate,2410,Harvey's Legal Agent Benchmark: share of tasks with every check passed.
+financeagent,FinanceAgent v1.1,agents,Vals AI,,pct,1,financeagent,v1.1,2420,Financial-analyst agent tasks (v1.1).
+financeagent-v2,Finance Agent v2,agents,Vals AI,,pct,1,financeagent,v2,2430,"Financial-analyst agent tasks, version 2."
+usamo-2025,USAMO 2025,maths,,,pct,1,,,2440,USA Mathematical Olympiad 2025: graded proofs.
+simpleqa,SimpleQA,science,OpenAI,,pct,1,,,2450,"Short factual questions (the original set, not SimpleQA Verified)."
+research-eval-reka,Research-Eval (Reka),agents,Reka,,pct,1,,,2460,Agentic research questions.
+xbench-deepsearch,xbench DeepSearch (zh),agents,,,pct,1,,,2470,Chinese deep-search agent tasks.
+x-browse,X Browse (xAI internal),internal,xAI,,pct,1,,,2480,
+eq-bench-3,EQ-Bench 3,writing,,,index,,,,2490,"Emotional intelligence in role-played conversations, LLM-judged: normalised Elo."
+creative-writing-v3,Creative Writing v3 (EQ-Bench),writing,,,index,,,,2500,"32 creative-writing prompts, LLM-judged: normalised Elo. Not Lech Mazur's Creative Writing."
+frames,FRAMES,agents,Google,,pct,1,,,2510,Multi-hop factual questions answered with retrieval.
+swe-marathon,SWE Marathon,coding,,,pct,1,,,2520,"Very long software-engineering tasks: resolution rate, pass@1."
+apex-swe,APEX-SWE,coding,Mercor,,pct,1,,,2530,Long-horizon professional software-engineering tasks.
+eebench,EEBench,coding,,,pct,1,,,2540,Electrical-engineering design tasks.
+vending-bench-1,"Vending-Bench (v1, net worth)",agents,Andon Labs,,index,,vending-bench-2,v1,2550,The original Vending-Bench: mean net worth in dollars.
+vending-bench-2,Vending-Bench 2 (net worth),agents,Andon Labs,,index,,vending-bench-2,2 net worth,2560,Running a simulated vending business for a year: mean net worth in dollars.
+vending-bench-2-balance,Vending-Bench 2 (bank balance),agents,Andon Labs,,index,,vending-bench-2,2 bank balance,2570,Running a simulated vending business: final bank balance in dollars.
+browsecomp,BrowseComp,agents,OpenAI,,pct,1,browsecomp,BrowseComp,2580,Agentic search: hard-to-find facts on the web.
+browsecomp-zh,BrowseComp (zh),agents,,,pct,1,browsecomp,zh,2590,Chinese-language BrowseComp.
+mmlu-redux,MMLU-Redux,science,,,pct,1,,,2600,MMLU with corrected questions.
+swe-bench-multilingual,SWE-bench Multilingual,coding,,,pct,1,,,2610,SWE-bench-style tasks across nine programming languages.
+aime-2024,AIME 2024,maths,,,pct,1,,,2620,"American Invitational Mathematics Examination 2024, no tools."
+imo-answerbench,IMO-AnswerBench,maths,,,pct,1,,,2630,Olympiad-level problems with short verifiable answers.
+mcp-universe,MCP-Universe,agents,,,pct,1,,,2640,Tasks over real MCP servers.
+mcp-mark,MCPMark,agents,,,pct,1,,,2650,Stress-testing realistic MCP tool use.
+chinese-simpleqa,Chinese SimpleQA,science,,,pct,1,,,2660,Short factual questions in Chinese.
+mrcr-1m-deepseek,MRCR 1M (DeepSeek set-up),long-context,,,pct,1,,,2670,"Multi-round coreference at 1M tokens, as run by DeepSeek (MMR)."
+corpusqa-1m,CorpusQA 1M,long-context,,,pct,1,,,2680,Question answering over a 1M-token corpus.
+nl2repo,NL2Repo-Bench,coding,,,pct,1,,,2690,Building a whole repository from a natural-language spec.
+dsbench-fullstack,DSBench-FullStack (DeepSeek internal),internal,DeepSeek,,pct,1,,,2700,
+dsbench-hard,DSBench-Hard (DeepSeek internal),internal,DeepSeek,,pct,1,,,2710,
+programbench,ProgramBench,coding,,,pct,1,,,2720,Writing whole programs from specifications (Almost@1).
+babyvision-tools,BabyVision (with tools),reasoning,,,pct,1,,,2730,"Basic visual reasoning, tool use allowed."
+zerobench-tools,ZeroBench (with tools),reasoning,,,pct,1,,,2740,"Very hard visual questions (main set, pass@5), tool use allowed."
+terminal-bench-1,Terminal-Bench 1.0,coding,Terminal-Bench,,pct,1,terminal-bench,1.0,2750,"Agentic coding in a terminal, version 1.0."
+terminal-bench-2-1,Terminal-Bench 2.1,coding,Terminal-Bench,,pct,1,terminal-bench,2.1,2760,"Agentic coding in a terminal, version 2.1."
+terminal-bench-3,Terminal-Bench 3.0,coding,Terminal-Bench,,pct,1,terminal-bench,3.0,2770,"Terminal-Bench 3.0, general agent capabilities."
+terminal-bench-4,Terminal-Bench 4.0,coding,Terminal-Bench,,pct,1,terminal-bench,4.0,2780,"Agentic coding in a terminal, version 4.0."
+terminal-bench-4-1,Terminal-Bench 4.1,coding,Terminal-Bench,,pct,1,terminal-bench,4.1,2790,"Terminal-Bench 4.1, cheating-adjusted score."
+hmmt-feb-2025,HMMT February 2025,maths,,,pct,1,hmmt,Feb 2025,2800,"Harvard-MIT Mathematics Tournament, February 2025, no tools."
+hmmt-nov-2025,HMMT November 2025,maths,,,pct,1,hmmt,Nov 2025,2810,"Harvard-MIT Mathematics Tournament, November 2025, no tools."
+hmmt-feb-2026,HMMT February 2026,maths,,,pct,1,hmmt,Feb 2026,2820,"Harvard-MIT Mathematics Tournament, February 2026, no tools."
+toolathlon,Toolathlon,agents,,,pct,1,toolathlon,Toolathlon,2830,Tool use across many real applications.
+toolathlon-verified,Toolathlon (Verified),agents,,,pct,1,toolathlon,Verified,2840,The verified Toolathlon task set.
+matharena-apex,MathArena Apex,maths,,,pct,1,matharena-apex,MathArena Apex,2850,The hardest recent maths-competition problems.
+matharena-apex-shortlist,MathArena Apex (Shortlist),maths,,,pct,1,matharena-apex,Shortlist,2860,The shortlist of MathArena Apex candidate problems.
+livecodebench-2025,LiveCodeBench (Jan–May 2025),coding,,,pct,1,livecodebench,Jan–May 2025,2870,"Code generation, problems published 1 Jan to 1 May 2025."
+livecodebench-2408-2505,LiveCodeBench (Aug 2024–May 2025),coding,,,pct,1,livecodebench,Aug 2024–May 2025,2880,"Code generation, problems published Aug 2024 to May 2025."
+livecodebench-v6,LiveCodeBench v6,coding,,,pct,1,livecodebench,v6,2890,"Competitive coding problems, LiveCodeBench release v6."
+automationbench,AutomationBench,agents,Zapier,,pct,1,automationbench,AutomationBench,2900,Business workflow automation.
+automationbench-private,AutomationBench (private set),agents,Zapier,,pct,1,automationbench,private set,2910,"Zapier's AutomationBench, private task set."
+automationbench-public,"AutomationBench (public, DeepSeek runs)",agents,,,pct,1,automationbench,public (DeepSeek),2920,AutomationBench public set as run by DeepSeek; not comparable with the other labs' runs.
+automationbench-v106-deepseek,AutomationBench v1.0.6 (DeepSeek runs),agents,,,pct,1,automationbench,v1.0.6 (DeepSeek),2930,AutomationBench 1.0.6 as run by DeepSeek; other labs' 1.0.6 runs of the same models score far lower.

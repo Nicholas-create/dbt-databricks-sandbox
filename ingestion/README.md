@@ -25,4 +25,4 @@ It follows the raw-layer rules in [`CONVENTIONS.md`](../CONVENTIONS.md) §1: the
 
 ## Model releases (manual)
 
-Every result since the baseline is entered from the model's release page into `workspace.raw_manual`. Tables, templates, one batch file per release and the step-by-step runbook are in [`manual/`](manual/README.md).
+Every result since the baseline is entered from the model's release page into the dbt seeds in [`seeds/manual/`](../seeds/manual/), with no loader: `dbt build` loads them. The step-by-step runbook and one release note per release are in [`manual/`](manual/README.md).

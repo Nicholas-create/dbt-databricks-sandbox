@@ -148,7 +148,7 @@ models:
         data_tests:
           - not_null
       - name: score_source
-        description: "epoch = Epoch's collected run; manual = entered by hand in raw_manual.benchmark_scores."
+        description: "epoch = Epoch's collected run; manual = entered by hand from a release page (seed manual_benchmark_scores)."
         data_tests:
           - accepted_values:
               arguments:
