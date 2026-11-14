@@ -1,5 +1,8 @@
 /* ── Tokens ───────────────────────────────────────────────── */
+/* Light is the default. Dark applies when the OS asks for it (unless the visitor chose light),
+   or when the visitor chose dark with the header toggle (data-theme on <html>). */
 :root {
+  color-scheme: light;
   --paper: #FAF9F7;
   --card: #FFFFFF;
   --ink: #161513;
@@ -8,211 +11,370 @@
   --faint: #9B958C;
   --line: #EAE6DE;
   --line-strong: #D6D0C5;
-  --accent: #B5461A;
+  --shadow: rgba(22, 21, 19, .22);
+  --accent: var(--ink); /* ink, not orange: the chart's colours belong to the companies (Anthropic's clay sat too close) */
 
-  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  /* Company colours (brand-led; validated on all pairs, see app.js). */
+  --lab-anthropic: #D97757;
+  --lab-openai: #10A37F;
+  --lab-google: #3186FF;
+  --lab-xai: #161513;
+  --lab-deepseek: #3B3FB8;
+  --lab-other: #C4BEB3;
+
+  --serif: Fraunces, Georgia, "Times New Roman", serif;
+  --serif-cut: "opsz" 9; /* Fraunces "text cut": its optical-size axis at 9, sturdier and lower contrast than the default display cut */
   --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 
-  --header-h: 64px;
+  --header-h: 56px;
+  --title-h: 92px;    /* the pinned title row; app.js sets the measured value */
+  --emblem: clamp(130px, 11vw, 200px);
   --gutter: clamp(16px, 4vw, 48px);
+  --row-h: 30px;
+  --name-w: 220px;
+}
+
+/* Dark tokens: a cool slate grey with white text (modelled on Google's dark mode), not near-black.
+   Written twice because CSS can't share one block between a media query and an attribute selector.
+   Company colours are re-picked for the slate surface, not inverted: xAI turns white (its brand is
+   black-and-white), DeepSeek moves toward violet so it stays clear of Google's blue, and "Other"
+   becomes a cool grey. All pairs validated against #35363B. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #35363B; --card: #404147; --ink: #F1F3F4; --ink-2: #E8EAED; --muted: #9AA0A6; --faint: #80868B;
+    --line: #45464C; --line-strong: #5F6368; --shadow: rgba(0, 0, 0, .45);
+    --lab-anthropic: #D5734F; --lab-openai: #14A47F; --lab-google: #5497D9; --lab-xai: #F1F3F4; --lab-deepseek: #9561F3; --lab-other: #74767D;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #35363B; --card: #404147; --ink: #F1F3F4; --ink-2: #E8EAED; --muted: #9AA0A6; --faint: #80868B;
+  --line: #45464C; --line-strong: #5F6368; --shadow: rgba(0, 0, 0, .45);
+  --lab-anthropic: #D5734F; --lab-openai: #14A47F; --lab-google: #5497D9; --lab-xai: #F1F3F4; --lab-deepseek: #9561F3; --lab-other: #74767D;
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
+/* The page is one screen tall: a column whose chart frame takes the height left over.
+   "Show all" (.board.expanded) lets the frame grow and the page scroll as normal. */
 body {
+  display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh;
   margin: 0;
   background: var(--paper);
   color: var(--ink-2);
-  font: 400 17px/1.6 var(--sans);
+  font: 400 16px/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
 }
-
 a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-strong); transition: border-color .2s; }
 a:hover { border-color: var(--accent); }
-b { font-weight: 600; color: var(--ink); }
-.num { font-family: var(--mono); font-size: .9em; color: var(--ink); white-space: nowrap; }
 
-.eyebrow, .section-label, .step-num, .layer-label, .axis-title, .scroll-hint {
-  font: 600 11.5px/1 var(--sans);
-  letter-spacing: .22em;
+.categories button {
+  font: 600 11.5px/1.4 var(--sans);
+  letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* ── Chrome: progress bar + fixed header ──────────────────── */
-.progress { position: fixed; inset: 0 0 auto; height: 2px; background: var(--line); z-index: 30; }
-.progress span { display: block; height: 100%; width: 0; background: var(--ink); }
-
+/* ── Header ───────────────────────────────────────────────── */
 .site-header {
-  position: fixed; inset: 2px 0 auto; height: var(--header-h); z-index: 20;
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  position: sticky; top: 0; height: var(--header-h); z-index: 20;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; column-gap: 24px;
   padding: 0 var(--gutter);
-  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
   backdrop-filter: blur(8px);
 }
-.wordmark { font: 400 22px/1 var(--serif); border: 0; color: var(--ink); }
-.header-link { justify-self: end; font: 500 13.5px/1 var(--sans); padding-bottom: 4px; }
-@media (max-width: 640px) { .section-label { display: none; } .site-header { grid-template-columns: 1fr 1fr; } }
+.wordmark { font: 400 21px/1 var(--serif); font-variation-settings: var(--serif-cut); letter-spacing: -0.01em; border: 0; color: var(--ink); }
+.header-nav { display: flex; align-items: center; gap: 18px; justify-self: end; }
+.wordmark { justify-self: start; white-space: nowrap; }
+.header-link { font: 500 13.5px/1 var(--sans); padding-bottom: 4px; }
 
-/* ── Hero ─────────────────────────────────────────────────── */
-.hero {
-  min-height: 100svh;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center;
-  padding: calc(var(--header-h) + 24px) var(--gutter) 48px;
-  position: relative;
+/* System / Light / Dark: three icon buttons in one pill; the active one is filled like a selected benchmark pill */
+.theme-switch { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line-strong); border-radius: 999px; }
+.theme-switch button {
+  display: grid; place-items: center; width: 28px; height: 28px; padding: 0;
+  background: none; border: 0; border-radius: 999px; color: var(--muted); cursor: pointer;
+  transition: color .2s, background-color .2s;
 }
-h1 {
-  font: 400 clamp(3rem, 8.4vw, 7rem)/0.95 var(--serif);
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 28px 0 32px;
-}
-h1 em { font-style: italic; color: var(--accent); }
-.lede { max-width: 34rem; margin: 0; color: var(--muted); font-size: 18px; }
-.scroll-hint { position: absolute; bottom: 32px; animation: nudge 2.4s ease-in-out infinite; }
-@keyframes nudge { 50% { transform: translateY(6px); opacity: .55; } }
-@media (prefers-reduced-motion: reduce) { .scroll-hint { animation: none; } }
+.theme-switch button:hover { color: var(--ink); }
+.theme-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.theme-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.theme-switch svg { width: 14px; height: 14px; }
 
-/* ── Scroll story ─────────────────────────────────────────── */
-.story {
-  display: grid;
-  grid-template-columns: minmax(280px, 30rem) 1fr;
-  grid-template-areas: "steps stage";
-  gap: clamp(24px, 4vw, 64px);
-  padding: 0 var(--gutter);
+
+/* ── Board ────────────────────────────────────────────────── */
+main { flex: 1; display: flex; flex-direction: column; }
+/* The leaderboard is exactly one screen (minus the header); the race section follows below it.
+   "Show all" lets the board grow past one screen. */
+.board { flex: none; height: calc(100vh - var(--header-h) - var(--title-h)); height: calc(100dvh - var(--header-h) - var(--title-h)); display: flex; flex-direction: column; width: 100%; max-width: 76rem; margin: 0 auto; padding: 4px var(--gutter) 14px; position: relative; }
+.board.expanded { height: auto; min-height: calc(100dvh - var(--header-h) - var(--title-h)); }
+
+/* ── Pinned title ─────────────────────────────────────────── */
+/* Sticks under the header across both sections. Its background fades in over the first few pixels
+   of scroll (--solid, from app.js), so on landing the emblem shows through beside the title; after
+   that, content slides under it. --swap (0 → 1) cross-fades the two wordings as the race arrives. */
+.title-bar { position: sticky; top: var(--header-h); z-index: 15; --solid: 0; --swap: 0; }
+.title-bar::before, .title-bar::after { content: ""; position: absolute; left: 0; right: 0; pointer-events: none; opacity: var(--solid); }
+.title-bar::before { inset: 0; background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.title-bar::after { top: 100%; height: 18px; background: linear-gradient(var(--paper), transparent); } /* soft edge, not a cut */
+.title-inner {
+  position: relative; display: grid; /* both wordings share one cell: same size, same place */
+  max-width: 76rem; margin: 0 auto; padding: 22px var(--gutter) 6px;
 }
-.steps { grid-area: steps; padding: 30vh 0 40vh; }
-.stage {
-  grid-area: stage;
-  position: sticky; top: calc(var(--header-h) + 8px);
-  height: calc(100svh - var(--header-h) - 24px);
-  display: flex; flex-direction: column;
-  align-self: start;
-  min-width: 0;
+.title-inner > * { grid-area: 1 / 1; margin: 0; font: 400 clamp(2rem, 4.2vw, 3.6rem)/1.02 var(--serif); font-variation-settings: var(--serif-cut); letter-spacing: -0.02em; color: var(--ink); will-change: transform, opacity; }
+.title-inner em { font-style: italic; color: var(--accent); }
+/* In turn, never overlapping: the outgoing line lifts away during the first half of the swap,
+   then the incoming one rises into the same place during the second half. */
+.title-a { --t: clamp(0, var(--swap) * 2, 1);     opacity: calc(1 - var(--t)); transform: translateY(calc(var(--t) * -0.3em)); }
+.title-b { --t: clamp(0, var(--swap) * 2 - 1, 1); opacity: var(--t);           transform: translateY(calc((1 - var(--t)) * 0.3em)); }
+@media (prefers-reduced-motion: reduce) { .title-a, .title-b { transform: none; } }
+@media (min-width: 1001px) { .title-inner { padding-right: calc(var(--gutter) + var(--emblem) + 24px); } }
+.chart-frame { flex: 1 1 0; min-height: 0; }
+.board.expanded .chart-frame { flex: none; }
+
+/* Too narrow for name, tabs and switches on one line: the header grows a second row for the tabs,
+   which scroll sideways if they still don't fit. --header-h follows, so both sections stay one screen. */
+@media (max-width: 1180px) {
+  :root { --header-h: 96px; }
+  .site-header { grid-template-columns: 1fr auto; grid-template-rows: 56px 40px; }
+  .categories {
+    grid-row: 2; grid-column: 1 / -1; align-self: start;
+    overflow-x: auto; scrollbar-width: none;
+    margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter);
+  }
+  .categories::-webkit-scrollbar { display: none; }
+  .categories button { flex: none; }
 }
 
-.step { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; opacity: .25; transition: opacity .5s; }
-.step.is-active { opacity: 1; }
-.step h2 { font: 400 clamp(2rem, 3.4vw, 3.1rem)/1.02 var(--serif); letter-spacing: -0.01em; color: var(--ink); margin: 16px 0 18px; }
-.step p { margin: 0 0 14px; max-width: 30rem; }
-.step .aside { font-size: 14px; color: var(--muted); border-left: 2px solid var(--line-strong); padding-left: 12px; }
+/* 3D category emblem (emblem.js), beside the pinned title. It sits in the title row, above the row's
+   background, and is taller than the row; on landing, the hero block below keeps that overhang clear
+   of the pills and legend. Scrolling the first EMBLEM_PX (app.js) fades it out and lifts it a little
+   (--lift, 0 → 1), so content never slides under it; at 1 it's removed (.emblem-gone), which also
+   pauses its rendering. The wrapper takes the scroll fade; the canvas keeps its own fade-in on load. */
+.emblem-wrap {
+  position: absolute; top: 0; right: var(--gutter); z-index: 1; /* above the row's soft bottom edge */
+  width: var(--emblem); height: var(--emblem); pointer-events: none;
+  opacity: calc(1 - var(--lift, 0));
+  transform: translateY(calc(var(--lift, 0) * -20px)) scale(calc(1 - var(--lift, 0) * .08));
+}
+.title-bar.emblem-gone .emblem-wrap { display: none; }
+.emblem { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease; }
+.emblem.ready { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .emblem-wrap { transform: none; } }
+@media (min-width: 1001px) { .hero { min-height: max(0px, var(--emblem) - var(--title-h)); } }
+@media (max-width: 1000px) { .emblem-wrap { display: none; } } /* no free space beside the title */
 
-.stage-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-top: 8px; }
-.labs { display: flex; flex-wrap: wrap; gap: 6px; }
-.labs button {
-  font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
-  color: var(--muted); background: transparent;
+/* Category tabs live in the sticky header (centre column), so they stay reachable while scrolling. */
+.categories { display: flex; flex-wrap: nowrap; gap: clamp(14px, 1.8vw, 28px); }
+.categories button { white-space: nowrap; }
+.categories button {
+  background: none; border: 0; padding: 6px 0; cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.categories button:hover { color: var(--ink); }
+.categories button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.categories button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+
+/* One row, always: if the pills outgrow the window they scroll sideways, and the right edge
+   fades (over the row's own end padding) to hint there's more. */
+.bench-pills {
+  display: flex; flex-wrap: nowrap; gap: 6px; margin-top: 18px;
+  overflow-x: auto; scrollbar-width: none; padding: 4px 32px 4px 4px; margin-left: -4px; margin-top: 14px; /* padding: room for focus outlines */
+  -webkit-mask: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  mask: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+}
+.bench-pills::-webkit-scrollbar { display: none; }
+.bench-pills[hidden] { display: none; }
+.bench-pills button {
+  font: 500 13px/1 var(--sans);
+  color: var(--ink-2); background: var(--paper); /* solid, so emblem dots never show through */
   border: 1px solid var(--line-strong); border-radius: 999px;
-  padding: 8px 12px; cursor: pointer;
+  padding: 8px 12px; cursor: pointer; flex: none; white-space: nowrap;
   transition: color .2s, border-color .2s, background .2s;
 }
-.labs button:hover { color: var(--ink); border-color: var(--ink); }
-.labs button[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
-.labs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bench-pills button:hover { border-color: var(--ink); }
+.bench-pills button[aria-selected="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+.bench-pills button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.legend { display: flex; gap: 16px; font: 500 12.5px/1 var(--sans); color: var(--ink-2); }
-.key[hidden] { display: none; }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font: 500 12.5px/1 var(--sans); color: var(--ink-2); }
+.companies { display: contents; }
+.legend-rule { width: 1px; height: 12px; background: var(--line-strong); }
 .key { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
-.mark { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.mark-closed { background: var(--ink); }
-.mark-open { border: 1.5px solid var(--ink); }
-.mark-focus { background: var(--accent); }
+.swatch { width: 12px; height: 10px; border-radius: 0 3px 3px 0; display: inline-block; }
+.swatch-closed { background: var(--muted); }
 
-.axis-title { margin: 20px 0 0; font-size: 10.5px; letter-spacing: .18em; }
-.chart { flex: 1; min-height: 0; position: relative; }
-.chart svg { display: block; overflow: visible; touch-action: pan-y; }
-.chart-error { font: 400 15px/1.5 var(--mono); color: var(--muted); padding: 40px 0; }
+.meta-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; margin: 16px 0 8px; }
 
-/* chart internals */
-.grid line { stroke: var(--line); }
-.grid text, .axis text { font: 400 11px var(--mono); fill: var(--muted); }
-.axis .domain { stroke: var(--line-strong); }
-.axis .tick line { display: none; }
+/* ── Chart rows ───────────────────────────────────────────── */
+.chart { position: relative; min-height: 100%; transition: height .6s cubic-bezier(.2, .7, .2, 1); } /* min-height: gridlines reach the frame's foot */
+@media (prefers-reduced-motion: reduce) { .chart { transition: none; } }
 
-.dots circle { fill: var(--ink); stroke: var(--paper); stroke-width: 2; transition: fill .4s, stroke .4s; }
-.dots circle.open { fill: var(--paper); stroke: var(--ink); stroke-width: 1.5; }
-.dots circle.focused { fill: var(--accent); stroke: var(--paper); stroke-width: 2; }
-.dots circle.open.focused { fill: var(--paper); stroke: var(--accent); stroke-width: 2; }
+/* gridlines at 0 / 25 / 50 / 75 / 100 % across the bar area */
+.axis { position: absolute; top: 0; bottom: 0; left: calc(32px + var(--name-w) + 16px); right: 64px; pointer-events: none; }
+.axis span { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--line); }
+.axis span:first-child { border-left-color: var(--line-strong); }
+/* tick labels and caption: their own row under the chart, lined up with the gridlines */
+.axis-scale { position: relative; height: 34px; margin: 4px 64px 0 calc(32px + var(--name-w) + 16px); }
+.axis-scale span { position: absolute; top: 0; }
+.axis-scale b { position: absolute; transform: translateX(-50%); font: 400 10.5px var(--mono); color: var(--faint); white-space: nowrap; }
+.axis-scale i { position: absolute; right: 0; top: 17px; font: 600 9.5px var(--sans); letter-spacing: .16em; text-transform: uppercase; font-style: normal; color: var(--faint); white-space: nowrap; }
 
-.medians line { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 4; opacity: .55; }
-.medians text { font: 500 11px var(--mono); fill: var(--ink-2); paint-order: stroke; stroke: var(--paper); stroke-width: 4px; }
+.row {
+  position: absolute; left: 0; right: 0; top: 0; height: var(--row-h);
+  display: grid; grid-template-columns: 32px var(--name-w) 1fr; align-items: center; column-gap: 8px;
+  cursor: pointer;
+  will-change: transform, opacity; /* moved by D3 transitions in app.js */
+}
+.row.exiting { pointer-events: none; }
+/* a followed model from further down, shown in the last slot: a dotted rule says it isn't the next rank */
+.row.detached::before { content: ""; position: absolute; left: 0; right: 0; top: 0; border-top: 1px dotted var(--line-strong); }
+.row > * { transition: opacity .3s; }
+.row:hover .name { text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+.row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 4px; }
 
-.labels text { paint-order: stroke; stroke: var(--paper); stroke-width: 4px; stroke-linejoin: round; }
-.labels .lbl-name { font: 500 12px var(--sans); fill: var(--ink); }
-.labels .lbl-price { font: 400 11px var(--mono); fill: var(--muted); }
-.labels line { stroke: var(--faint); stroke-width: 1; }
+.rank { font: 400 11.5px var(--mono); color: var(--faint); text-align: right; padding-right: 6px; }
+.who { min-width: 0; display: flex; align-items: center; gap: 9px; white-space: nowrap; overflow: hidden; }
+.name { font: 500 14px var(--sans); color: var(--ink); overflow: hidden; text-overflow: ellipsis; }
+/* company logo: the SVG is a mask, painted in the company colour (--mark) */
+.logo { flex: none; display: inline-block; width: 15px; height: 15px; background: var(--mark, var(--muted));
+  -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; }
+.logo.none { visibility: hidden; }
 
-.hover-ring { fill: none; stroke: var(--ink); stroke-width: 1; pointer-events: none; }
+.track { position: relative; height: 100%; margin-right: 64px; }
+.bar {
+  position: absolute; left: 0; top: 50%; height: 14px; width: 0; transform: translateY(-50%);
+  background: var(--lab, var(--ink)); /* --lab: the company's colour, set per row in app.js */
+  border-radius: 0 4px 4px 0;
+  transition: background-color .3s, border-color .3s;
+}
+/* open weights: diagonal hatching in the company colour, so the hue stays at full strength */
+.row.open .bar, .swatch-open {
+  --c: var(--lab, var(--muted));
+  background: repeating-linear-gradient(-45deg, var(--c) 0 2.5px, color-mix(in srgb, var(--c) 28%, var(--paper)) 2.5px 5px);
+  border: 1.5px solid var(--c);
+}
+.score { position: absolute; top: 50%; left: 0; transform: translate(8px, -50%); font: 500 12px var(--mono); font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; }
+
+/* followed (pinned) model */
+/* The bar keeps its company colour (orange would clash with the ochre); dimming the rest does the work. */
+.row.pinned .name, .row.pinned .score { font-weight: 600; }
+.row.pinned .rank { color: var(--ink); }
+/* dim the row's contents, not the row: the row's own opacity belongs to the enter/exit animation */
+.chart.has-pin .row:not(.pinned) > * { opacity: .3; }
+.chart.has-pin .row:not(.pinned):hover > * { opacity: 1; }
+
+.chart-actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 28px; min-height: 18px; }
+.pin-note { margin: 0; font-size: 13.5px; color: var(--muted); }
+.credit { margin-left: auto; font-size: 11.5px; color: var(--faint); border-bottom-color: transparent; }
+.credit:hover { color: var(--ink); border-bottom-color: var(--line-strong); }
+.pin-note b { color: var(--accent); font-weight: 600; }
+
+.show-all { display: inline-block; margin: 0; font: 600 11.5px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); background: none; border: 0; border-bottom: 1px solid var(--line-strong); padding: 0 0 4px; cursor: pointer; }
+.show-all:hover { border-color: var(--accent); }
+.show-all[hidden] { display: none; }
 
 .tooltip {
   position: absolute; z-index: 5; pointer-events: none;
-  min-width: 200px; max-width: 260px;
+  min-width: 220px; max-width: 280px;
   background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 14px 16px;
-  box-shadow: 0 12px 32px -12px rgba(22, 21, 19, .22);
+  box-shadow: 0 12px 32px -12px var(--shadow);
 }
-.tooltip .tt-name { font: 400 22px/1.1 var(--serif); color: var(--ink); margin: 0 0 4px; }
+.tooltip .tt-name { font: 400 20px/1.15 var(--serif); font-variation-settings: var(--serif-cut); color: var(--ink); margin: 0 0 4px; }
 .tooltip .tt-meta { font-size: 12.5px; color: var(--muted); margin: 0 0 10px; }
 .tooltip dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; font-size: 12.5px; }
 .tooltip dt { color: var(--muted); }
 .tooltip dd { margin: 0; text-align: right; font-family: var(--mono); color: var(--ink); }
+/* first component score of a combined ranking: a hairline separates the parts from the total */
+.tooltip .tt-first { margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--line); }
 
-/* ── How it's built ───────────────────────────────────────── */
-.method { max-width: 68rem; margin: 0 auto; padding: 20vh var(--gutter) 12vh; }
-.method h2 { font: 400 clamp(2.4rem, 5.4vw, 4.4rem)/1 var(--serif); color: var(--ink); letter-spacing: -0.01em; margin: 20px 0 64px; max-width: 14ch; }
 
-.pipeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 46rem; }
-.pipeline li { display: grid; grid-template-columns: 1fr 8rem; align-items: center; gap: 24px; }
-.layer {
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  padding: 18px 22px;
-  box-shadow: 0 14px 30px -22px rgba(22, 21, 19, .35);
-  transform: perspective(900px) rotateX(8deg);
-  transition: transform .4s, box-shadow .4s;
+/* ── Best over time (race.js) ─────────────────────────────── */
+.race {
+  display: flex; flex-direction: column; position: relative;
+  width: 100%; max-width: 76rem;
+  /* space above the section (outside it), so the two charts read as separate scenes while the
+     race keeps its full one-screen height; the hairline sits in that gap */
+  margin: clamp(56px, 10vh, 112px) auto 0;
+  /* one screen under the header and the pinned title, which shows this section's heading */
+  height: calc(100vh - var(--header-h) - var(--title-h)); height: calc(100dvh - var(--header-h) - var(--title-h)); min-height: 380px;
+  padding: 28px var(--gutter) 28px; border-top: 1px solid var(--line);
 }
-.pipeline li:hover .layer { transform: none; box-shadow: 0 18px 36px -20px rgba(22, 21, 19, .4); }
-.layer code { font: 500 12.5px var(--mono); color: var(--accent); }
-.layer p { margin: 8px 0 0; font-size: 15px; color: var(--ink-2); }
-.layer-label { position: relative; padding-left: 40px; }
-.layer-label::before { content: ""; position: absolute; left: 0; top: 50%; width: 28px; border-top: 1px solid var(--line-strong); }
-@media (max-width: 640px) {
-  .pipeline li { grid-template-columns: 1fr; gap: 8px; }
-  .layer-label { order: -1; padding-left: 0; }
-  .layer-label::before { display: none; }
+.race-chart { position: relative; flex: 1 1 0; min-height: 0; }
+.race-chart svg { display: block; overflow: visible; }
+
+.race-grid line { stroke: var(--line); }
+.race-vgrid line { stroke: var(--line); stroke-dasharray: 2 4; }
+.race-baseline { stroke: var(--line-strong); }
+.race-ytick text, .race-xtick text { font: 400 10.5px var(--mono); fill: var(--faint); }
+.race-xtick { transition: opacity .15s; }
+.race-caption { font: 600 9.5px var(--sans); letter-spacing: .16em; text-transform: uppercase; fill: var(--faint); }
+
+/* soft fill under the frontier (the best any company had): ink fading to nothing */
+.race-fill-top { stop-color: var(--ink); stop-opacity: .07; }
+.race-fill-foot { stop-color: var(--ink); stop-opacity: 0; }
+
+/* every release: a faint dot in its company colour; hollow = open weights (as the bars' hatching) */
+.race .dot { fill: var(--c); opacity: .2; transition: opacity .25s; }
+.race .dot.open { fill: var(--paper); stroke: var(--c); stroke-width: 1.1; opacity: .35; }
+
+/* company lines: rounded steps, the leader a little heavier */
+.race-lines path { fill: none; stroke: var(--c); stroke-width: 1.75; stroke-linejoin: round; stroke-linecap: round; transition: opacity .25s, stroke-width .25s; }
+.race-lines path.leader { stroke-width: 2.75; }
+.race-cap { fill: var(--c); transition: opacity .25s; }
+.race-ticks path { fill: none; stroke: var(--c); stroke-width: 1; opacity: .6; transition: opacity .25s; }
+/* the releases that moved a line: a solid dot at the top of every climb, with no ring, so it reads as part of the line */
+.race .step-dot { fill: var(--c); transition: opacity .25s; }
+.race .step-dot.open { fill: var(--paper); stroke: var(--c); stroke-width: 1.75; }
+
+/* hover: the time scrub (guide, markers, date chip) and the ring round a hovered release */
+.race-scrub line { stroke: var(--ink); stroke-opacity: .35; stroke-width: 1; }
+.race-scrub circle { fill: var(--c); }
+.race-when {
+  position: absolute; transform: translateX(-50%); pointer-events: none;
+  font: 500 10.5px/1 var(--mono); color: var(--paper); background: var(--ink);
+  padding: 4px 7px; border-radius: 999px; white-space: nowrap;
 }
+.race-when[hidden] { display: none; }
+.race-ring { fill: none; stroke: var(--c); stroke-width: 1.5; pointer-events: none; }
+.race-hit { fill: transparent; cursor: crosshair; }
 
-.method-links { margin: 48px 0 0; font-weight: 500; }
+/* end labels: logo, company and its best score, in text colours (the logo carries the identity) */
+.race-labels { position: absolute; pointer-events: none; }
+.race-label {
+  position: absolute; left: 0; transform: translateY(-50%);
+  display: flex; align-items: center; gap: 7px; white-space: nowrap;
+  font: 500 12.5px/1 var(--sans); color: var(--muted);
+  pointer-events: auto; cursor: default; transition: opacity .25s, color .2s, top .3s cubic-bezier(.2, .7, .2, 1);
+}
+/* while scrubbing, labels leave their line ends, so the connectors step aside */
+.race-chart.scrubbing .race-ticks { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .race-label { transition: opacity .25s, color .2s; } }
+.race-label b { font: 500 12px var(--mono); font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.race-label.leader { color: var(--ink); }
+.race-label.leader, .race-label.leader b { font-weight: 600; color: var(--ink); }
+.race-label.absent { opacity: .35; }
 
-.table-view { margin-top: 64px; border-top: 1px solid var(--line); padding-top: 24px; }
-.table-view summary { cursor: pointer; font: 600 12px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--ink); }
-.table-wrap { overflow-x: auto; margin-top: 24px; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th { text-align: left; font: 600 10.5px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 10px 12px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
-td { padding: 9px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
-td.r, th.r { text-align: right; }
-td.r { font-family: var(--mono); font-size: 13px; color: var(--ink); }
+/* hovering a company (its label, or one of its dots) dims the others */
+.race-chart.has-focus [data-key]:not(.on) { opacity: .12; }
+.race-chart.has-focus .race-label:not(.on), .race-chart.has-focus .race-lines path:not(.on),
+.race-chart.has-focus .race-cap:not(.on), .race-chart.has-focus .race-scrub circle:not(.on),
+.race-chart.has-focus .step-dot:not(.on) { opacity: .25; }
+.race-chart.has-focus .dot.on { opacity: .55; }
 
-.site-footer { padding: 40px var(--gutter) 56px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
-.site-footer p { margin: 0 0 6px; max-width: 60rem; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 
-/* ── Small screens: chart sticks at the top, text scrolls over it ── */
-/* Both share one grid area, so the sticky chart's containing block is as tall
-   as all the steps; the steps scroll up underneath it into the lower part. */
-@media (max-width: 860px) {
-  .story { grid-template-columns: 1fr; grid-template-areas: "main"; gap: 0; }
-  .stage, .steps { grid-area: main; }
-  .stage { height: 60svh; z-index: 2; background: var(--paper); border-bottom: 1px solid var(--line); padding-bottom: 8px; }
-  .legend { gap: 12px; font-size: 11.5px; }
-  .labs button { padding: 7px 10px; font-size: 10px; }
-  .labs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: calc(-1 * var(--gutter)); padding-right: var(--gutter); }
-  .labs::-webkit-scrollbar { display: none; }
-  .labs button { flex: none; }
-  .steps { padding: 62svh 0 20svh; position: relative; z-index: 1; }
-  .step { min-height: 55svh; justify-content: flex-start; padding-top: 8px; }
-  .step h2 { font-size: 2rem; margin: 10px 0 12px; }
-  .step p { font-size: 16px; }
+
+/* ── Small screens ────────────────────────────────────────── */
+@media (max-width: 760px) {
+  :root { --name-w: 140px; }
+  .name { font-size: 13px; }
+  .rank { font-size: 10.5px; padding-right: 2px; }
+  .row { grid-template-columns: 22px var(--name-w) 1fr; column-gap: 6px; }
+  .axis { left: calc(22px + var(--name-w) + 12px); right: 52px; }
+  .axis-scale { margin: 4px 52px 0 calc(22px + var(--name-w) + 12px); }
+  .track { margin-right: 52px; }
+  .bench-pills { margin-right: calc(-1 * var(--gutter)); }
 }
