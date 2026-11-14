@@ -53,7 +53,9 @@ const escapeHtml = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&a
 const UNITS = {
   pct: { fmt: (s) => `${(s * 100).toFixed(1)}%`, tick: (t) => `${Math.round(t * 100)}%`, caption: "Share of tasks solved" },
   points: { fmt: (s) => s.toFixed(2), tick: (t) => `${t}`, caption: "Score out of 10" },
-  index: { fmt: (s) => s.toFixed(1), tick: (t) => `${t}`, caption: "Index score" },
+  // open-ended scales as published: an index (~165.3), an Elo rating (2,887) or dollars (16,484)
+  index: { fmt: (s) => (Math.abs(s) >= 1000 ? Math.round(s).toLocaleString("en-GB") : s.toFixed(1)),
+           tick: (t) => (Math.abs(t) >= 1000 ? Math.round(t).toLocaleString("en-GB") : `${t}`), caption: "Score as published" },
 };
 
 // ── Load ──────────────────────────────────────────────────────
