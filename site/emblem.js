@@ -129,6 +129,34 @@ const SHAPES = {
     while (hubs.length + lines.length < N) lines.push(inBall(rand, 0.06).map((v, k) => v + nodes[0][k]));
     return [...hubs, ...lines];
   },
+  "life-sciences"(rand) { // DNA: two strands winding round each other, joined by base-pair rungs
+    const turns = 1.6, H = 2, R = 0.5, rungs = 14;
+    const at = (t, phase) => { const a = t * turns * 2 * Math.PI + phase; return [R * Math.cos(a), H * (t - 0.5), R * Math.sin(a)]; };
+    const strand = (phase) => alongPath(rand, Array.from({ length: 240 }, (_, i) => at(i / 239, phase)), 1000, 0.035);
+    const per = Math.floor((N - 2000) / rungs);
+    const bars = Array.from({ length: rungs }, (_, k) => { const t = (k + 0.5) / rungs; return alongPath(rand, [at(t, 0), at(t, Math.PI)], per, 0.014); }).flat();
+    const pts = [...strand(0), ...strand(Math.PI), ...bars];
+    while (pts.length < N) pts.push(at(rand(), 0));
+    // Lean it a little, so it reads as a helix rather than a column.
+    const [c, s] = [Math.cos(0.35), Math.sin(0.35)];
+    return pts.map(([x, y, z]) => [x * c - y * s, x * s + y * c, z]);
+  },
+  cyber(rand) { // padlock: a shackle over a deep body, with a keyhole on the front
+    const W = 0.62, D = 0.2, top = -0.1, bottom = -0.95;
+    const arc = Array.from({ length: 61 }, (_, i) => { const t = (Math.PI * i) / 60; return [0.4 * Math.cos(t), 0.2 + 0.4 * Math.sin(t), 0]; });
+    const shackle = alongPath(rand, [[0.4, top, 0], ...arc, [-0.4, top, 0]], 800, 0.05);
+    const face = (z) => [[-W, top, z], [W, top, z], [W, bottom, z], [-W, bottom, z], [-W, top, z]];
+    const body = [
+      ...alongPath(rand, face(D), 650, 0.014),
+      ...alongPath(rand, face(-D), 650, 0.014),
+      ...[[-W, top], [W, top], [W, bottom], [-W, bottom]].flatMap(([x, y]) => alongPath(rand, [[x, y, D], [x, y, -D]], 60, 0.014)),
+    ];
+    const ring = Array.from({ length: 41 }, (_, i) => { const t = (2 * Math.PI * i) / 40; return [0.09 * Math.cos(t), -0.45 + 0.09 * Math.sin(t), D]; });
+    const keyhole = [...alongPath(rand, ring, 330, 0.012), ...alongPath(rand, [[0, -0.54, D], [0, -0.74, D]], 200, 0.02)];
+    const pts = [...shackle, ...body, ...keyhole];
+    while (pts.length < N) pts.push(alongPath(rand, ring, 1, 0.012)[0]);
+    return pts;
+  },
 };
 
 // Centre each shape, scale it to fit a unit sphere, and sort its dots from bottom

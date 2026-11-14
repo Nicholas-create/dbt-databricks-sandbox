@@ -149,7 +149,8 @@ function render() {
     .attr("type", "button").attr("role", "tab")
     .attr("aria-selected", (x) => String(x.d.id === b.id))
     .attr("aria-label", (x) => (x.split ? x.d.name : null)) // a segment shows "2.0"; screen readers hear the full name
-    .text((x) => (x.split && x.d.variant ? x.d.variant : x.d.name))
+    // The first segment names the benchmark; the rest show only what differs ("Terminal-Bench | 2.1 | 4.0").
+    .text((x, i) => (x.split && i > 0 && x.d.variant ? x.d.variant : x.d.name))
     .on("click", (event, x) => select(cat.id, x.d.id));
 
   const m = reducedMotion.matches ? 0 : 1; // 0 turns every duration and delay off

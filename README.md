@@ -229,4 +229,4 @@ CONVENTIONS.md          project rules, with reasons and examples
 ## Roadmap
 
 - Deploy the ingestion job from this repo (Databricks Asset Bundle), so the repo becomes the source of truth instead of a copy
-- Categories for benchmarks that don't fit today's six (cybersecurity, robotics, protein design)
+- An explicit order for the versions inside a split pill (today: the order definitions were last entered)

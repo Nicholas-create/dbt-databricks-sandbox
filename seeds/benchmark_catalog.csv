@@ -3,9 +3,9 @@ frontiercode,FrontierCode,coding,1,frontiercode_external.csv,Main score,1,pct,1,
 mirrorcode,MirrorCode,coding,2,mirrorcode.csv,Best score (across scorers),1,pct,1,Epoch AI,,,
 frontierswe,FrontierSWE,coding,3,frontierswe_external.csv,Score,1,pct,1,FrontierSWE,https://www.frontierswe.com/,,
 deepswe,DeepSWE,coding,4,deepswe_external.csv,Pass@1,1,pct,1,Datacurve,https://deepswe.datacurve.ai/,,
-cursorbench,CursorBench,coding,5,cursorbench_external.csv,Score,1,pct,1,Cursor,https://cursor.com/cursorbench,,
-terminal-bench,Terminal-Bench,coding,6,terminalbench_external.csv,Accuracy mean,1,pct,1,Terminal-Bench,https://www.tbench.ai/leaderboard/terminal-bench/2.0,,
-swe-bench-verified,SWE-bench Verified,coding,7,swe_bench_verified.csv,mean_score,1,pct,1,Epoch AI,,,
+cursorbench,CursorBench,coding,5,cursorbench_external.csv,Score,1,pct,1,Cursor,https://cursor.com/cursorbench,cursorbench,4.0
+terminal-bench,Terminal-Bench,coding,6,terminalbench_external.csv,Accuracy mean,1,pct,1,Terminal-Bench,https://www.tbench.ai/leaderboard/terminal-bench/2.0,terminal-bench,2.0
+swe-bench-verified,SWE-bench Verified,coding,7,swe_bench_verified.csv,mean_score,1,pct,1,Epoch AI,,swe-bench,Verified
 aider-polyglot,Aider Polyglot,coding,8,aider_polyglot_external.csv,Percent correct,0.01,pct,1,Aider,https://aider.chat/docs/leaderboards/,,
 creative-writing,Creative Writing,writing,9,lech_mazur_writing_external.csv,Mean score,1,points,10,Lech Mazur,https://github.com/lechmazur/Writing,,
 fiction-livebench,Fiction.LiveBench,writing,10,fictionlivebench_external.csv,16k token score,1,pct,1,Fiction.live,https://fiction.live/stories/Fiction-liveBench-Mar-14-2025/oQdzQvKHw8JyXbN87/home,,

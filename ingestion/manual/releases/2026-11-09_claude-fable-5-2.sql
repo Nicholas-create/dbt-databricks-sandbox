@@ -28,7 +28,7 @@ insert into workspace.raw_manual.benchmarks
     (benchmark_id, benchmark_name, category, publisher, source_url, unit, unit_max, notes)
 values
     ('frontiercode-2',         'FrontierCode 2.0',                   'coding',  null,         null, 'pct', 1,
-     'Would the maintainers of open-source repositories merge the model''s code changes. A newer version than Epoch''s FrontierCode.'),
+     'Would the maintainers of open-source repositories merge the model\'s code changes. A newer version than Epoch\'s FrontierCode.'),
     ('automationbench',        'AutomationBench',                    'agents',  null,         null, 'pct', 1,
      'Business workflow automation.'),
     ('wandr',                  'WANDR',                              'agents',  'Perplexity', null, 'pct', 1,
@@ -37,8 +37,8 @@ values
      'Computer use; offline set, partial credit.'),
     ('terminal-bench-science', 'Terminal-Bench-Science',             'science', null,         null, 'pct', 1,
      'Agentic scientific research; version 0.1.'),
-    ('hle-with-tools',         'Humanity''s Last Exam (with tools)', 'science', null,         null, 'pct', 1,
-     'Same questions as Humanity''s Last Exam, with tool use allowed.');
+    ('hle-with-tools',         'Humanity\'s Last Exam (with tools)', 'science', null,         null, 'pct', 1,
+     'Same questions as Humanity\'s Last Exam, with tool use allowed.');
 
 insert into workspace.raw_manual.benchmark_scores
     (benchmark_id, model_name, score, harness, effort, lab, is_open_weights, released_date,
