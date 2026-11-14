@@ -17,7 +17,7 @@ insert into workspace.raw_manual.benchmarks
 values
     ('frontiercode-2', 'FrontierCode 2.0', 'coding', null, null, 'pct', 1,
      'frontiercode', '2.0',
-     'Would the maintainers of open-source repositories merge the model''s code changes. A newer version than Epoch''s FrontierCode.'),
-    ('hle-with-tools', 'Humanity''s Last Exam (with tools)', 'science', null, null, 'pct', 1,
+     'Would the maintainers of open-source repositories merge the model\'s code changes. A newer version than Epoch\'s FrontierCode.'),
+    ('hle-with-tools', 'Humanity\'s Last Exam (with tools)', 'science', null, null, 'pct', 1,
      'humanity-s-last-exam', 'with tools',
-     'Same questions as Humanity''s Last Exam, with tool use allowed.');
+     'Same questions as Humanity\'s Last Exam, with tool use allowed.');

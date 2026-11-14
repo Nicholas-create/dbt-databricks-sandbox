@@ -17,7 +17,7 @@ comment 'Data entered by hand. Append-only: corrections and retractions are new 
 create table if not exists workspace.raw_manual.benchmarks (
     benchmark_id    string    not null comment 'Lowercase slug used everywhere downstream, e.g. automationbench',
     benchmark_name  string    not null comment 'Display name, e.g. AutomationBench',
-    category        string    not null comment 'One of: overall, coding, writing, maths, science, reasoning, agents',
+    category        string    not null comment 'A category_id from seeds/benchmark_categories.csv, e.g. coding, agents, cyber',
     publisher       string             comment 'Who maintains the benchmark',
     source_url      string             comment 'Benchmark home page',
     unit            string    not null comment 'pct (share of tasks, entered as 0-100), points, or index',
