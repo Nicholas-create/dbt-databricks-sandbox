@@ -1,6 +1,6 @@
 -- One score per benchmark per model, from either source. When both Epoch and a
 -- manual entry exist for the same benchmark and model, the manual entry wins:
--- that table is where launch-day results are added, ahead of Epoch's own runs.
+-- it comes from the model's own release page, the newer and primary source.
 with benchmarks as (
 
     select benchmark_id, unit from {{ ref('int_benchmarks__unioned') }}
@@ -55,8 +55,6 @@ manual_scores as (
     -- test on fct_benchmark_scores fails loudly instead of the row vanishing
     left join benchmarks b
         on s.benchmark_id = b.benchmark_id
-    -- a retracted entry is withdrawn: Epoch's score (if any) shows again
-    where not s.is_retracted
 
 ),
 
@@ -72,7 +70,7 @@ superseded as (
 
     select *
     from unioned
-    -- each source already has one row per key (Epoch: best run; manual: latest entry),
+    -- each source already has one row per key (Epoch: best run; manual: one seed line),
     -- so the only clash is manual vs Epoch, and the priority is spelled out rather
     -- than relying on alphabetical order of the source names
     qualify row_number() over (

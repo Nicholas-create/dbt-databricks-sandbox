@@ -48,7 +48,7 @@ models:
           - not_null
 
   - name: int_benchmark_scores__unioned
-    description: "Epoch and manual scores together, one row per benchmark per model. A manual entry supersedes Epoch's score for the same key; retracted manual entries are dropped."
+    description: "Epoch and manual scores together, one row per benchmark per model. A manual entry supersedes Epoch's score for the same key; deleting the seed line brings Epoch's score back."
     columns:
       - name: benchmark_model_key
         description: "Primary key."

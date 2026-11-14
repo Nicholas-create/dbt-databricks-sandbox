@@ -1,29 +1,17 @@
 with source as (
 
-    select * from {{ source('manual', 'benchmark_scores') }}
+    select * from {{ ref('manual_benchmark_scores') }}
 
 ),
 
--- the table is append-only: a correction or retraction is a newer row for the same
--- benchmark and model, so the latest row per key is the current state. Retracted rows
--- are kept here with their flag; dropping them is a downstream decision.
-latest_entry as (
-
-    select *
-    from source
-    qualify row_number() over (
-        partition by benchmark_id, {{ model_match_key('model_name') }}
-        order by entered_at desc, entry_id desc
-    ) = 1
-
-),
-
+-- The seed holds the current state only: a correction is an edited line, a withdrawal
+-- a deleted line, and Git history keeps what was there before. So there is nothing
+-- to deduplicate here, only light tidying.
 final as (
 
     select
         -- keys
         trim(benchmark_id) || '|' || {{ model_match_key('model_name') }}     as benchmark_model_key,
-        entry_id,
         trim(benchmark_id)                                                   as benchmark_id,
         trim(model_name)                                                     as model_name,
 
@@ -40,11 +28,9 @@ final as (
         -- provenance
         trim(source_url)                                                     as source_url,
         source_type,
-        nullif(trim(notes), '')                                              as notes,
-        is_retracted,
-        entered_at
+        nullif(trim(notes), '')                                              as notes
 
-    from latest_entry
+    from source
 
 )
 
