@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: openrouter
     description: "Daily snapshots of OpenRouter's public model catalogue (/api/v1/models). Loaded by the Databricks notebook ingest_openrouter_models."
-    database: workspace
+    database: ai_model_tracker
     schema: raw_openrouter
     tables:
       - name: models_daily

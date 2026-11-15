@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies (versions pinned in requirements.txt)
         run: pip install -r requirements.txt
 
-      - name: Export site data from workspace.analytics
+      - name: Export site data from ai_model_tracker.analytics
         run: python scripts/export_site_data.py --schema analytics
 
       - name: Configure Pages

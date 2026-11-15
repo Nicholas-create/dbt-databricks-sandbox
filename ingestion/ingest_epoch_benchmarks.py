@@ -1,6 +1,6 @@
 # Databricks notebook source
 # One-off load of Epoch AI's benchmark hub (https://epoch.ai/benchmarks, CC BY 4.0)
-# into workspace.raw_epoch.benchmark_rows: the project's historical baseline, run
+# into ai_model_tracker.raw_epoch.benchmark_rows: the project's historical baseline, run
 # once on 14 Nov 2026. It is NOT scheduled: from then on, new results are entered
 # from each model's release page into the seeds in seeds/manual/ (see ingestion/manual/README.md).
 # Re-running it appends a fresh copy; staging only reads the latest load.
@@ -19,9 +19,9 @@ import requests
 from pyspark.sql import Row
 
 ZIP_URL = "https://epoch.ai/data/benchmark_data.zip"
-TABLE = "workspace.raw_epoch.benchmark_rows"
+TABLE = "ai_model_tracker.raw_epoch.benchmark_rows"
 
-spark.sql("CREATE SCHEMA IF NOT EXISTS workspace.raw_epoch")
+spark.sql("CREATE SCHEMA IF NOT EXISTS ai_model_tracker.raw_epoch")
 
 resp = requests.get(ZIP_URL, timeout=60)
 resp.raise_for_status()

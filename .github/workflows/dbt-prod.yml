@@ -1,6 +1,6 @@
 name: dbt production build
 
-# Rebuild the production schema (workspace.analytics) from main:
+# Rebuild the production schema (ai_model_tracker.analytics) from main:
 #   - on every push to main (i.e. every merged PR) that could change the build
 #     or the site, so reviewed code reaches production without a manual step;
 #   - once a day, after the 06:00 Europe/London OpenRouter ingestion has landed,
@@ -63,7 +63,7 @@ jobs:
             outputs:
               prod:
                 type: databricks
-                catalog: workspace
+                catalog: ai_model_tracker
                 schema: analytics
                 host: "{{ env_var('DATABRICKS_HOST') }}"
                 http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
