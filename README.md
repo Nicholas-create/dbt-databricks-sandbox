@@ -102,7 +102,7 @@ flowchart LR
 
 | Layer | Built as | Purpose |
 |---|---|---|
-| Raw (`workspace.raw_*`) | Delta tables, loaded outside dbt | Source data exactly as published. OpenRouter is stored as untouched JSON plus `loaded_at`, appended daily |
+| Raw (`ai_model_tracker.raw_*`) | Delta tables, loaded outside dbt | Source data exactly as published. OpenRouter is stored as untouched JSON plus `loaded_at`, appended daily |
 | Seeds (`seeds/`) | Tables, loaded from CSVs in the repo by `dbt build` | Small data authored here: name-match overrides, the benchmark catalog and categories, and every hand-entered benchmark result |
 | Staging | Views | Rename, cast, parse JSON, deduplicate same-day reloads. No joins, no business filters |
 | Intermediate | Views | Name matching between the two sources |
@@ -182,7 +182,7 @@ default:
   outputs:
     dev:
       type: databricks
-      catalog: workspace
+      catalog: ai_model_tracker
       schema: dbt_<your_name>
       host: "{{ env_var('DATABRICKS_HOST') }}"
       http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
@@ -198,7 +198,7 @@ default:
 .venv/bin/dbt source freshness       # is the OpenRouter feed up to date?
 ```
 
-The raw tables have to exist first: upload the Epoch CSV to `workspace.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §9), import [`ingestion/ingest_openrouter_models.py`](ingestion/ingest_openrouter_models.py) as a notebook and schedule it daily, run [`ingestion/ingest_epoch_benchmarks.py`](ingestion/ingest_epoch_benchmarks.py) once for the benchmark baseline (the hand-entered benchmark data needs no setup: it is a seed, loaded by `dbt build`). See [`ingestion/README.md`](ingestion/README.md).
+The raw tables have to exist first: upload the Epoch CSV to `ai_model_tracker.raw_epoch.notable_ai_models` (settings in `CONVENTIONS.md` §9), import [`ingestion/ingest_openrouter_models.py`](ingestion/ingest_openrouter_models.py) as a notebook and schedule it daily, run [`ingestion/ingest_epoch_benchmarks.py`](ingestion/ingest_epoch_benchmarks.py) once for the benchmark baseline (the hand-entered benchmark data needs no setup: it is a seed, loaded by `dbt build`). See [`ingestion/README.md`](ingestion/README.md).
 
 ---
 

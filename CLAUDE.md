@@ -15,7 +15,7 @@ Nicholas, moving from BI/FP&A into Analytics Engineering. This project is my por
 - **dbt Studio:** every change must still build there, so push the branch and say if Studio's engine could behave differently from local dbt Core.
 
 ## Project
-- dbt project `ai_model_tracker` on Databricks Free Edition: catalog `workspace`, dev schema `dbt_nsampson`.
+- dbt project `ai_model_tracker` on Databricks Free Edition: catalog `ai_model_tracker`, dev schema `dbt_nsampson`.
 - Tracks which AI model is best at what (benchmarks: Epoch AI baseline + model release pages), what models are (Epoch AI) and what they cost (OpenRouter).
 
 ## When a model is released

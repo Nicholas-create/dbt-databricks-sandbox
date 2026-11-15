@@ -16,11 +16,20 @@ raw  →  staging  →  intermediate  →  marts
 
 | Layer | Where it lives | Built as | Purpose |
 |---|---|---|---|
-| **Raw** | `workspace.raw_<source>` | Delta table (loaded outside dbt) | Source data exactly as published |
+| **Raw** | `ai_model_tracker.raw_<source>` | Delta table (loaded outside dbt) | Source data exactly as published |
 | **Seeds** | `seeds/` (CSV in the repo) | Table, loaded by `dbt build` into each environment | Small data authored in the repo: lookups, the benchmark catalog, hand-entered results |
 | **Staging** | `models/staging/<source>/` | View | Rename, retype, light tidying. One model per source table |
 | **Intermediate** | `models/intermediate/` | View or table | Joins, reshaping, business logic shared by several marts |
 | **Marts** | `models/marts/` | Table | Final, dashboard-ready tables |
+
+### The project owns one catalog
+Everything this project reads or writes lives in the Unity Catalog catalog **`ai_model_tracker`**: the raw schemas, and every schema dbt builds (dev, ci, prod; see §6). Other projects in the same Databricks workspace (sql-gym, sakila) use their own catalogs. Sources name the catalog explicitly with `database:`.
+
+> **Why:** the catalog is the top of the three-part name `catalog.schema.table`. When one project owns it, a table's name says which project it belongs to, and access and cleanup can be done for the whole project in one place. Raw data lives in one place whatever the environment, so the sources name its catalog instead of inheriting the one the dbt target happens to use.
+
+✅ `database: ai_model_tracker` on every source, `catalog: ai_model_tracker` in every dbt profile
+❌ Leaving `database:` off a source: it then follows the target's catalog, so a target pointed at another catalog quietly reads the wrong raw tables (or none)
+❌ A new raw schema in the shared `workspace` catalog
 
 ### Raw data is never edited
 Raw tables are a faithful copy of the source. If a load is wrong, fix it **at load time** and reload. Never patch raw data by hand, and never make dbt repair problems that the loader caused.
@@ -161,7 +170,7 @@ where `Domain` = 'Language'  -- filtering belongs downstream
 > **Why:** `source()` and `ref()` let dbt work out build order and draw lineage. A hard-coded path breaks both and ties the code to one environment.
 
 ✅ `from {{ ref('stg_epoch__notable_models') }}`
-❌ `from workspace.dbt_nicholas.stg_epoch__notable_models`
+❌ `from ai_model_tracker.dbt_nicholas.stg_epoch__notable_models`
 
 ---
 

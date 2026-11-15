@@ -9,7 +9,7 @@ reshapes rows into the nested layout the page reads. Presentation choices
 (colours, labels, which labs get logos) live in the site's JavaScript.
 
 Usage (credentials come from the same env vars dbt uses, never from the repo):
-    python scripts/export_site_data.py                         # reads workspace.analytics
+    python scripts/export_site_data.py                         # reads ai_model_tracker.analytics
     python scripts/export_site_data.py --schema dbt_nsampson   # preview a dev build
 """
 
@@ -122,7 +122,7 @@ def model_entry(r, **extra):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--catalog", default="workspace")
+    parser.add_argument("--catalog", default="ai_model_tracker")
     parser.add_argument("--schema", default="analytics")
     args = parser.parse_args()
     db = f"{args.catalog}.{args.schema}"
