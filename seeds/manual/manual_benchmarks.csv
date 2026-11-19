@@ -3,9 +3,11 @@ terminal-bench-science,Terminal-Bench-Science,science,,,pct,1,,,1010,Agentic sci
 wandr,WANDR,agents,Perplexity,,pct,1,,,1020,Agentic search; relaxed score.
 biomysterybench-hard,BioMysteryBench (hard),life-sciences,,,pct,1,biomysterybench,hard,1030,"Biology research problems, hard subset."
 biomysterybench-human-solved,BioMysteryBench (human solved),life-sciences,,,pct,1,biomysterybench,human solved,1040,Biology research problems that human experts have solved.
+biomysterybench-v11,BioMysteryBench (v11),life-sciences,,,pct,1,biomysterybench,v11,1045,Official v11 release; Moonshot and Alibaba report identical scores for shared models (Claude Opus 5.5 81.9%).
 blueprint-bench-2,Blueprint-Bench 2,reasoning,,,pct,1,,,1050,Spatial reasoning.
 gdp-pdf,GDP.pdf,agents,,,pct,1,,,1060,"Knowledge work from document images (vision), no tools."
 swe-bench-pro,SWE-bench Pro,coding,Scale AI,,pct,1,swe-bench,Pro,1070,Long-horizon software engineering tasks; a harder successor to SWE-bench Verified.
+swe-bench-pro-v2-hard,SWE-bench Pro v2 (Hard),coding,Scale AI,,pct,1,swe-bench,Pro v2 (Hard),1075,"SWE-bench Pro version 2, Hard set (Scale AI)."
 arc-agi-3,ARC-AGI-3,reasoning,ARC Prize,https://arcprize.org/leaderboard,pct,1,arc-agi,3,1080,Novel problem-solving in interactive environments.
 frontier-bench,Frontier-Bench,coding,,,pct,1,,,1090,"Agentic terminal coding, v0.1; mini-SWE-agent harness, mean reward over 5 attempts."
 chartography,Chartography (no tools),reasoning,Surge AI,,pct,1,chartography,no tools,1100,"Visual chart recognition, no tools."
@@ -71,6 +73,7 @@ frontier-science-research,FrontierScience (Research),science,OpenAI,,pct,1,,,167
 cybergym,CyberGym,cyber,,,pct,1,,,1680,Reproducing real-world vulnerabilities from descriptions.
 bixbench,BixBench,life-sciences,,,pct,1,,,1690,Bioinformatics analysis tasks.
 officeqa-pro,OfficeQA Pro,agents,,,pct,1,officeqa,Pro,1700,Harder questions over office documents.
+officeqa-pro-v2,OfficeQA Pro v2,agents,,,pct,1,officeqa,Pro v2,1705,Version 2 of OfficeQA Pro (Claude Opus 5.5 62.2% on both the Kimi and ERNIE pages).
 tau2-telecom-original,"τ²-bench (telecom, original prompts)",agents,Sierra,,pct,1,tau2-bench,telecom (original prompts),1710,Telecom domain with the original task prompts; scores differ from the other telecom runs (GPT-5.4: 92.8% vs 98.9%).
 expert-swe,Expert-SWE (OpenAI internal),internal,OpenAI,,pct,1,,,1720,
 hle-no-tools,Humanity's Last Exam (no tools),science,,,pct,1,humanity-s-last-exam,no tools,1730,"Developers' own runs without tools; they differ from Epoch's Humanity's Last Exam runs, so kept separate."
@@ -137,14 +140,18 @@ vibe-code-bench,Vibe Code Bench,coding,Vals AI,,pct,1,,,2330,Building working ap
 swe-sweep,SWE-sweep,coding,,,pct,1,swe-sweep,mini-SWE harness,2340,"Large, sweeping software changes across a codebase, in the mini-SWE agent harness."
 swe-sweep-provider-harness,SWE-sweep (provider harness),coding,,,pct,1,swe-sweep,provider harness,2345,SWE-sweep run in each model provider's own agent harness; scores far higher than the mini-SWE harness.
 hle-diamond,Humanity's Last Exam (Diamond),science,,,pct,1,humanity-s-last-exam,Diamond,2350,The Diamond subset of Humanity's Last Exam.
+hle-diamond-no-tools,"Humanity's Last Exam (Diamond, no tools)",science,,,pct,1,humanity-s-last-exam,"Diamond, no tools",2355,"The Diamond subset without tools. Google's HLE-Diamond rows score far higher for the same model (Opus 5.5 67.9% vs 60.9% on Kimi's page), so kept separate."
 mka,Multimodal Knowledge Agents,agents,Google DeepMind,,pct,1,,,2360,"Agents answering knowledge questions from images, video and documents (Climb WSR accuracy)."
 agents-last-exam,Agents' Last Exam,agents,,,pct,1,agents-last-exam,v1,2370,Long-horizon professional work on a computer across 55 sub-industries (v1).
 agents-last-exam-v1-1,Agents' Last Exam v1.1,agents,,,pct,1,agents-last-exam,v1.1,2380,"Agents' Last Exam version 1.1, score."
+agents-last-exam-leaderboard,Agents' Last Exam v1.1 (leaderboard overall),agents,,,pct,1,agents-last-exam,leaderboard,2385,"Overall score on the official ALE leaderboard (full set), as cited by Alibaba, MiniMax and Moonshot. Opus 5.5 scores about 43% here vs 71.6% on the v1.1 score; may be the same measure as the pass rate, kept separate until a shared model confirms."
 agents-last-exam-pass-rate,Agents' Last Exam (pass rate),agents,,,pct,1,agents-last-exam,pass rate,2390,Agents' Last Exam reported as the share of tasks fully passed.
 legal-agent-benchmark,Legal Agent Benchmark,agents,Harvey,,pct,1,legal-agent-benchmark,Legal Agent Benchmark,2400,Legal agent tasks (held-out set).
 legal-agent-benchmark-allpass,Legal Agent Benchmark (all pass rate),agents,Harvey,,pct,1,legal-agent-benchmark,all pass rate,2410,Harvey's Legal Agent Benchmark: share of tasks with every check passed.
+legal-agent-benchmark-vals,Legal Agent Benchmark v1.1 (Vals),agents,Vals AI,,pct,1,legal-agent-benchmark,v1.1 (Vals),2415,Harvey's Legal Agent Benchmark (LAB) v1.1 as run by Vals AI. Not Harvey LAB-AA (Artificial Analysis).
 financeagent,FinanceAgent v1.1,agents,Vals AI,,pct,1,financeagent,v1.1,2420,Financial-analyst agent tasks (v1.1).
 financeagent-v2,Finance Agent v2,agents,Vals AI,,pct,1,financeagent,v2,2430,"Financial-analyst agent tasks, version 2."
+financeagent-v2-1,Finance Agent v2.1,agents,Vals AI,,pct,1,financeagent,v2.1,2435,"Financial-analyst agent tasks, version 2.1 (Vals AI)."
 usamo-2025,USAMO 2025,maths,,,pct,1,,,2440,USA Mathematical Olympiad 2025: graded proofs.
 simpleqa,SimpleQA,science,OpenAI,,pct,1,,,2450,"Short factual questions (the original set, not SimpleQA Verified)."
 research-eval-reka,Research-Eval (Reka),agents,Reka,,pct,1,,,2460,Agentic research questions.
@@ -174,8 +181,10 @@ nl2repo,NL2Repo-Bench,coding,,,pct,1,,,2690,Building a whole repository from a n
 dsbench-fullstack,DSBench-FullStack (DeepSeek internal),internal,DeepSeek,,pct,1,,,2700,
 dsbench-hard,DSBench-Hard (DeepSeek internal),internal,DeepSeek,,pct,1,,,2710,
 programbench,ProgramBench,coding,,,pct,1,,,2720,Writing whole programs from specifications (Almost@1).
-babyvision-tools,BabyVision (with tools),reasoning,,,pct,1,,,2730,"Basic visual reasoning, tool use allowed."
-zerobench-tools,ZeroBench (with tools),reasoning,,,pct,1,,,2740,"Very hard visual questions (main set, pass@5), tool use allowed."
+babyvision,BabyVision (no tools),reasoning,,,pct,1,babyvision,no tools,2725,"Basic visual reasoning, no tools."
+babyvision-tools,BabyVision (with tools),reasoning,,,pct,1,babyvision,with tools,2730,"Basic visual reasoning, tool use allowed."
+zerobench,ZeroBench (no tools),reasoning,,,pct,1,zerobench,no tools,2735,"Very hard visual questions (main set), no tools."
+zerobench-tools,ZeroBench (with tools),reasoning,,,pct,1,zerobench,with tools,2740,"Very hard visual questions (main set, pass@5), tool use allowed."
 terminal-bench-1,Terminal-Bench 1.0,coding,Terminal-Bench,,pct,1,terminal-bench,1.0,2750,"Agentic coding in a terminal, version 1.0."
 terminal-bench-2-1,Terminal-Bench 2.1,coding,Terminal-Bench,,pct,1,terminal-bench,2.1,2760,"Agentic coding in a terminal, version 2.1."
 terminal-bench-3,Terminal-Bench 3.0,coding,Terminal-Bench,,pct,1,terminal-bench,3.0,2770,"Terminal-Bench 3.0, general agent capabilities."
@@ -194,9 +203,80 @@ livecodebench-v6,LiveCodeBench v6,coding,,,pct,1,livecodebench,v6,2890,"Competit
 automationbench,AutomationBench,agents,Zapier,,pct,1,automationbench,AutomationBench,2900,Business workflow automation.
 automationbench-private,AutomationBench (private set),agents,Zapier,,pct,1,automationbench,private set,2910,"Zapier's AutomationBench, private task set."
 automationbench-public,"AutomationBench (public, DeepSeek runs)",agents,,,pct,1,automationbench,public (DeepSeek),2920,AutomationBench public set as run by DeepSeek; not comparable with the other labs' runs.
-automationbench-v106-deepseek,AutomationBench v1.0.6 (DeepSeek runs),agents,,,pct,1,automationbench,v1.0.6 (DeepSeek),2930,AutomationBench 1.0.6 as run by DeepSeek; other labs' 1.0.6 runs of the same models score far lower.
+automationbench-v106-deepseek,AutomationBench v1.0.6 (public tasks),agents,,,pct,1,automationbench,v1.0.6 public,2930,"AutomationBench 1.0.6 on the 600 publicly released tasks, as run by the model developers (DeepSeek, MiniMax, Tencent, Baidu, Reflection); OpenAI's and Anthropic's 1.0.6 runs of the same models score far lower."
 lifeval,LifeVal (OpenAI),internal,OpenAI,,pct,1,,,2940,"OpenAI's published everyday-tasks evaluation; so far scored only on OpenAI models, so kept internal."
 gdpval-v2,GDPval v2 (OpenAI internal),internal,OpenAI,,pct,1,,,2950,Long-horizon knowledge-work assignments; labelled internal by OpenAI. Not GDPval (v1) or GDPval-AA.
 secureswe,SecureSWE (OpenAI internal),internal,OpenAI,,pct,1,,,2960,Writing functional and secure code for security-sensitive components.
 patchbench,PatchBench (OpenAI),internal,OpenAI,,pct,1,,,2970,Producing security patches that keep intended behaviour; only scored on OpenAI models so far.
 webexploitbench-1-2,WebExploitBench v1.2,cyber,,,pct,1,,,2980,Exploiting vulnerabilities in web applications (version 1.2).
+frontier-finance,Frontier Finance,agents,,,pct,1,,,2990,Complete investment workflows from screening to profitability analysis.
+handbook-md,HANDBOOK.md,agents,,,pct,1,,,3000,"Agent tasks following an organisation handbook (OpenHands harness, v1)."
+jobbench,JobBench,agents,,,pct,1,,,3010,Professional job tasks.
+banker-toolbench,BankerToolBench,agents,,,pct,1,,,3020,Multi-step banking and finance work with chained tool calls.
+finworkbench,FinWorkBench (Finch),agents,,,pct,1,,,3030,Finance and accounting workflows that create and edit spreadsheets.
+draco,DRACO,agents,,,pct,1,,,3040,Deep-research agent tasks.
+spreadsheetbench-v2,SpreadsheetBench V2,agents,,,pct,1,,,3050,Spreadsheet manipulation tasks.
+skillsbench,SkillsBench 1.1 (text-only),agents,,,pct,1,,,3060,Agent tasks with curated skills; 78-task text-only subset.
+deepsearchqa,DeepSearchQA,agents,,,pct,1,,,3070,Multi-step web research questions.
+tau3-banking,τ³-bench (banking),agents,,,pct,1,,,3080,"Customer-support agent with tools, banking domain (τ³-bench). Not the Artificial Analysis run."
+webvoyager,WebVoyager,agents,,,pct,1,,,3090,Completing tasks on live websites.
+enterprisebench-corecraft,EnterpriseBench-CoreCraft,agents,Surge,,pct,1,,,3100,Enterprise workflow tasks (Surge).
+dayjob-healthcare,DAYJOB (Healthcare),agents,Surge,,pct,1,dayjob,Healthcare,3110,"Full working-day tasks, healthcare (Surge)."
+dayjob-finance,DAYJOB (Finance),agents,Surge,,pct,1,dayjob,Finance,3120,"Full working-day tasks, finance (Surge)."
+excel-modeling-bench,Excel Modeling Benchmark v1.1,agents,Vals AI,,pct,1,,,3130,Building financial models in Excel (Vals AI).
+tax-agent-bench,Tax Agent Bench,agents,Vals AI,,pct,1,,,3140,Tax preparation agent tasks (Vals AI).
+apex-accounting,APEX-Accounting v1.1,agents,Mercor,,pct,1,,,3150,"Accounting tasks, pass@1 (Mercor)."
+deepfinance,DeepFinance,agents,Julius Research,,pct,1,,,3160,Financial research tasks (Julius Research).
+diligence-bench,Diligence Bench,agents,Thoughtful,,pct,1,,,3170,"Due-diligence tasks, best harness (Thoughtful)."
+atlas-finance,ATLAS-Finance v1.1,agents,Handshake,,pct,1,,,3180,Finance tasks (Handshake).
+legal-research-bench,Legal Research Bench,agents,Vals AI,,pct,1,,,3190,Legal research tasks (Vals AI).
+sudo-l7,Sudo L7,coding,Surge,,pct,1,,,3200,Hard software tasks (Surge).
+swe-refactor-bench,SWE Refactor Bench,coding,,,pct,1,,,3210,Large refactoring tasks in real codebases.
+cookiebench,CookieBench,coding,,,pct,1,,,3220,"Building React web projects, scored with interactive evaluation."
+blenderworld,BlenderWorld (text-only),coding,,,pct,1,,,3230,3D modelling tasks in Blender; 78-task text-only subset.
+swe-atlas,SWE-Atlas v1.1,coding,Scale AI,,pct,1,swe-atlas,v1.1,3240,Software-engineering tasks (Scale AI).
+swe-atlas-codebase-qna,SWE-Atlas Codebase QnA,coding,,,pct,1,swe-atlas,Codebase QnA,3250,Answering questions about large codebases (SWE-Atlas).
+loca-bench-256k,LOCA-Bench (256K),long-context,,,pct,1,,,3260,"Language agents under controllable, extreme context growth, 256K setting."
+longbench-v2,LongBench v2,long-context,,,pct,1,,,3270,"Long-context understanding, multiple choice."
+mmlongbench-doc,MMLongBench-Doc,long-context,,,pct,1,,,3280,Understanding long multimodal documents.
+perceptionbench,PerceptionBench (no tools),reasoning,,,pct,1,perceptionbench,no tools,3290,Fine-grained visual perception.
+perceptionbench-tools,PerceptionBench (with tools),reasoning,,,pct,1,perceptionbench,with tools,3300,"Fine-grained visual perception, tool use allowed."
+humanitys-sixth-sense,Humanity's Sixth Sense,reasoning,Scale AI,,pct,1,,,3310,Visual perception questions (Scale AI).
+simplevqa-tools,SimpleVQA (with tools),reasoning,,,pct,1,,,3320,"Factual visual questions, tool use allowed."
+muirbench,MuirBench,reasoning,,,pct,1,,,3330,Multi-image understanding.
+omnidocbench-v1-6,OmniDocBench v1.6 (overall),reasoning,,,pct,1,,,3340,"Document parsing, overall score (higher is better)."
+v-star,V*,reasoning,,,pct,1,,,3350,Visual search for small details in high-resolution images.
+ocr-reasoning,OCR-Reasoning,reasoning,,,pct,1,,,3360,Reasoning over text in images.
+ocrbench-v2-en,OCRBench v2 (English),reasoning,,,pct,1,ocrbench-v2,English,3370,"Text recognition and understanding in images, English."
+ocrbench-v2-zh,OCRBench v2 (Chinese),reasoning,,,pct,1,ocrbench-v2,Chinese,3380,"Text recognition and understanding in images, Chinese."
+videomme-v2,Video-MME v2,reasoning,,,pct,1,,,3390,"Video understanding, version 2."
+mathvision,MathVision,maths,,,pct,1,,,3400,Mathematics problems presented visually.
+arxivmath-2610,ArxivMath (Oct 2026),maths,MathArena,,pct,1,,,3410,Research mathematics from October 2026 arXiv papers (MathArena).
+brokenarxiv-2610,BrokenArxiv (Oct 2026),maths,MathArena,,pct,1,,,3420,Spotting broken proofs from October 2026 arXiv papers (MathArena).
+critpt,CritPt,science,,,pct,1,,,3430,Research-level physics problems. Developer runs; not the Artificial Analysis run.
+mysterymechanism,MysteryMechanism,science,Vals AI,,pct,1,,,3440,Inferring hidden mechanisms from experiments (Vals AI).
+sage-v1-1,SAGE v1.1,reasoning,Vals AI,,pct,1,,,3450,SAGE v1.1 (Vals AI).
+mmlu-prox,MMLU-ProX,reasoning,,,pct,1,,,3460,MMLU-Pro across many languages.
+global-mmlu-lite,Global-MMLU-Lite,reasoning,,,pct,1,,,3470,Multilingual knowledge questions.
+mdpbench,MDPBench,reasoning,,,pct,1,,,3480,Multilingual benchmark (as listed on the Inkling 2 Small page).
+ifbench,IFBench,writing,,,pct,1,,,3490,Following verifiable output instructions.
+complexconstraints,ComplexConstraints v1.0,writing,,,pct,1,,,3500,Following many simultaneous constraints.
+wmt24pp,WMT24++,writing,,,pct,1,,,3510,Machine translation across many languages.
+cyberbench,CyberBench v1.1,cyber,Vals AI,,pct,1,,,3520,Finding and patching security vulnerabilities (Vals AI).
+patcheval,PatchEval,cyber,,,pct,1,,,3530,Patching security vulnerabilities.
+kimi-code-bench-2,Kimi Code Bench 2.0 (Moonshot internal),internal,Moonshot,,pct,1,,,3600,
+kimi-code-bench-3-lh,Kimi Code Bench 3.0 Long-horizon (Moonshot internal),internal,Moonshot,,pct,1,,,3610,
+kimi-business-operation,Business Operation (Moonshot internal),internal,Moonshot,,pct,1,,,3620,Long-horizon management in a simulated business.
+kimi-financial-modeling,Financial Modeling (Moonshot internal),internal,Moonshot,,pct,1,,,3630,
+kimi-financial-research,Financial Research (Moonshot internal),internal,Moonshot,,pct,1,,,3640,
+xdev-bench-hard,xdev-bench-hard (Moonshot internal),internal,Moonshot,,pct,1,,,3650,"Exploit development from source, pass@3."
+work360,Work360 (Alibaba internal),internal,Alibaba,,pct,1,,,3660,Industry tasks across 26 domains.
+personal-superintelligence-index,Personal Superintelligence Index (Meta internal),internal,Meta,,pct,1,,,3670,Meta's composite of personal and knowledge-work evaluations.
+hy-pptgenbench,PPTGenBench (Tencent internal),internal,Tencent,,pct,1,,,3680,Part of Tencent WorkIndex.
+hy-pptcoeditbench,PPTCoEditBench (Tencent internal),internal,Tencent,,pct,1,,,3690,Part of Tencent WorkIndex.
+hy-pptfixbench,PPTFixBench (Tencent internal),internal,Tencent,,pct,1,,,3700,Part of Tencent WorkIndex.
+hy-mdcoeditbench,MdCoEditBench (Tencent internal),internal,Tencent,,pct,1,,,3710,Part of Tencent WorkIndex.
+hy-wordeditbench,WordEditBench (Tencent internal),internal,Tencent,,pct,1,,,3720,Part of Tencent WorkIndex.
+hy-excelfixbench,ExcelFixBench (Tencent internal),internal,Tencent,,pct,1,,,3730,Part of Tencent WorkIndex.
+hy-audiovideobench,AudioVideoBench (Tencent internal),internal,Tencent,,pct,1,,,3740,Part of Tencent WorkIndex.
+hy-buddyvqa-atlas,BuddyVQA Atlas (Tencent internal),internal,Tencent,,pct,1,,,3750,Part of Tencent WorkIndex; without tools.

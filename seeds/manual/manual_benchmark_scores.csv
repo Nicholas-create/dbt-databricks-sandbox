@@ -8,6 +8,10 @@ agents-last-exam,GPT-6 Luna,50.9,,max,OpenAI,false,2026-09-22,https://openai.com
 agents-last-exam,GPT-6 Sol,56.36,,max,OpenAI,false,2026-09-22,https://openai.com/index/introducing-gpt-6-sol-and-luna/,vendor_reported,From the page's chart data (best score across effort levels).
 agents-last-exam,GPT-6.1 Sol,58.6,,max,OpenAI,false,2026-09-29,https://openai.com/index/introducing-gpt-6-1-terra/,vendor_reported,From the page's chart data (best score across effort levels).
 agents-last-exam,GPT-6.1 Terra,60,,max,OpenAI,false,2026-10-26,https://openai.com/index/introducing-gpt-6-1-terra/,vendor_reported,From the page's chart data (best score across effort levels).
+agents-last-exam-leaderboard,Kimi K3.1 Pro,43.2,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Moonshot's own run of the full v1.1 set (bypassing runs scored zero).
+agents-last-exam-leaderboard,MiniMax M3.1 Flash,29.6,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,"Official leaderboard, overall setting. Transcribed from the page image."
+agents-last-exam-leaderboard,Qwen3.8 Max (0902),27.9,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,independent,Cited from the Agents' Last Exam leaderboard. From the chart labels.
+agents-last-exam-leaderboard,Qwen4-Max,46.7,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,independent,Cited from the Agents' Last Exam leaderboard. From the chart labels.
 agents-last-exam-pass-rate,DeepSeek V4 Flash 0731,25.2,,,DeepSeek,true,2026-07-31,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 agents-last-exam-pass-rate,DeepSeek V4 Pro 0813,25.7,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 agents-last-exam-pass-rate,DeepSeek V4.1 Flash,31.8,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
@@ -50,16 +54,25 @@ aime-2025,GPT-5.2 Pro,100,,,OpenAI,false,2025-12-11,https://openai.com/index/int
 aime-2025,GPT-5.5 Instant,81.2,,,OpenAI,false,2026-05-05,https://openai.com/index/gpt-5-5-instant/,vendor_reported,From the page's chart data.
 aime-2025,Grok 4,91.7,,,xAI,false,2025-07-09,https://x.ai/news/grok-4-fast,vendor_reported,
 aime-2025,Grok 4 Fast,92,,,xAI,false,2025-09-19,https://x.ai/news/grok-4-fast,vendor_reported,
+aime-2026,Beam 1.0,97.7,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 aime-2026,Gemma 4 26B A4B,88.3,,,Google,true,2026-04-02,https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/,vendor_reported,
 aime-2026,Gemma 4 31B IT,89.2,,,Google,true,2026-04-02,https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/,vendor_reported,
 aime-2026,Gemma 4 E2B IT,37.5,,,Google,true,2026-04-02,https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/,vendor_reported,
 aime-2026,Gemma 4 E4B IT,42.5,,,Google,true,2026-04-02,https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/,vendor_reported,
+apex-accounting,Inkling 2 Small,14.5,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,pass@1. As reported by Mercor (cited on the page).
 apex-agents,DeepSeek V4.1 Flash,64.6,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,Apex Bench v1.1.
 apex-agents,DeepSeek V4.1 Flash 1017,72.1,,,DeepSeek,true,2026-10-17,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,Apex Bench v1.1.
+apex-agents,ERNIE 5.5 Flash Preview,64.2,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,"APEX-Agents 1.1, official harness. Transcribed from the page image."
 apex-agents,Gemini 3 Pro,18.4,,,Google,false,2025-11-18,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 apex-agents,Gemini 3.1 Pro,33.5,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 apex-agents,Grok 4.5,47.1,,high,xAI,false,2026-07-16,https://x.ai/news/grok-4-6,vendor_reported,
 apex-agents,Grok 4.6,57.5,,high,xAI,false,2026-08-12,https://x.ai/news/grok-4-6,vendor_reported,
+apex-agents,Hy4,75.2,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,"APEX-Agents v1.1, pass@1. Transcribed from the page image."
+apex-agents,Hy4 flash,63.1,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,"APEX-Agents v1.1, pass@1. Transcribed from the page image."
+apex-agents,Kimi K3.1 Pro,69.4,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,independent,Cited from the Mercor leaderboard.
+apex-agents,Qwen3.8 Max (0902),63.3,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,independent,"APEX-Agents v1.1, cited from the Mercor leaderboard. From the chart labels."
+apex-agents,Qwen4-Max,72.1,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,independent,"APEX-Agents v1.1, cited from the Mercor leaderboard. From the chart labels."
+apex-agents,Tencent Hy4 preview,53.9,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,"APEX-Agents v1.1, pass@1. Transcribed from the page image."
 apex-swe,Grok 4.5,53.6,,high,xAI,false,2026-07-16,https://x.ai/news/grok-4-6,vendor_reported,
 apex-swe,Grok 4.6,56.4,,high,xAI,false,2026-08-12,https://x.ai/news/grok-4-6,vendor_reported,
 api-instruction-following,GPT-5,64,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
@@ -73,6 +86,7 @@ arc-agi,GPT-5.4 Pro,94.5,,,OpenAI,false,2026-03-05,https://openai.com/index/intr
 arc-agi,GPT-5.5,95,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,ARC-AGI-1 (Verified).
 arc-agi,GPT-5.6 Sol,97.5,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,ARC-AGI-1.
 arc-agi,GPT-6 Astra,98.5,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,ARC-AGI-1.
+arc-agi,Inkling 2 Small,96.5,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,ARC-AGI-1. As reported by ARC Prize (cited on the page).
 arc-agi-2,Gemini 3 Deep Think (2/26),84.6,,,Google,false,2026-02-12,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,vendor_reported,
 arc-agi-2,Gemini 3 Flash,33.6,,,Google,false,2025-12-17,https://deepmind.google/models/model-cards/gemini-3-5-flash/,vendor_reported,
 arc-agi-2,Gemini 3 Pro,31.1,,,Google,false,2025-11-18,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
@@ -87,6 +101,7 @@ arc-agi-2,GPT-5.5,85,,,OpenAI,false,2026-04-23,https://openai.com/index/introduc
 arc-agi-2,GPT-5.6 Sol,92.5,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 arc-agi-2,GPT-6 Astra,95,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
 arc-agi-2,Grok 4,15.9,,,xAI,false,2025-07-09,https://x.ai/news/grok-4,vendor_reported,
+arc-agi-2,Inkling 2 Small,81.7,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by ARC Prize (cited on the page).
 arc-agi-3,Claude Opus 4.8,1.5,,,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-opus-5,vendor_reported,
 arc-agi-3,Claude Opus 5,30.2,,,Anthropic,false,2026-07-24,https://www.anthropic.com/news/claude-opus-5,vendor_reported,
 arc-agi-3,GPT-5.5,0.43,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
@@ -94,6 +109,8 @@ arc-agi-3,GPT-5.6 Luna,0.18,,,OpenAI,false,2026-07-09,https://openai.com/index/g
 arc-agi-3,GPT-5.6 Sol,7.8,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 arc-agi-3,GPT-5.6 Terra,0.8,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 arc-agi-3,GPT-6 Astra,99.9,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+arxivmath-2610,Inkling 2 Small,27.7,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by MathArena (cited on the page).
+atlas-finance,Inkling 2 Small,6.0,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Handshake (cited on the page).
 automationbench,Claude Fable 5,17.1,,,Anthropic,false,2026-06-09,https://www.anthropic.com/claude-fable-and-mythos-5-1,vendor_reported,
 automationbench,Claude Fable 5.1,31.4,,,Anthropic,false,2026-09-01,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
 automationbench,Claude Fable 5.2,51.4,,,Anthropic,false,2026-11-09,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
@@ -121,17 +138,31 @@ automationbench-public,DeepSeek V4 Pro 0813,31.8,,,DeepSeek,true,2026-08-13,http
 automationbench-public,DeepSeek-V4-Flash,10.8,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 automationbench-public,DeepSeek-V4-Flash-Vision-Exp,25.7,,,DeepSeek,true,2026-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp,vendor_reported,
 automationbench-public,DeepSeek-V4-Pro,12.8,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
+automationbench-v106-deepseek,Beam 1.0,39.3,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,Public split only. BF16.
 automationbench-v106-deepseek,DeepSeek V4 Flash 0731,37.7,,,DeepSeek,true,2026-07-31,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 automationbench-v106-deepseek,DeepSeek V4 Pro 0813,43.2,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 automationbench-v106-deepseek,DeepSeek V4.1 Flash,54.8,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
 automationbench-v106-deepseek,DeepSeek V4.1 Flash 1017,60.5,,,DeepSeek,true,2026-10-17,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
+automationbench-v106-deepseek,ERNIE 5.5 Flash Preview,61.9,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Open-sourced subset of v1.0.6. Transcribed from the page image.
+automationbench-v106-deepseek,Hy4,56.2,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,600 public tasks. Transcribed from the page image.
+automationbench-v106-deepseek,Hy4 flash,52.2,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,600 public tasks. Transcribed from the page image.
+automationbench-v106-deepseek,MiniMax M3.1 Flash,62.8,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,"AutomationBench v1.0.6, 600 public tasks. Transcribed from the page image."
+automationbench-v106-deepseek,Tencent Hy4 preview,36.3,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,600 public tasks. Transcribed from the page image.
+babyvision,Inkling 2 Small,68.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+babyvision,Nemotron 3.5 Super VL,29.6,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 babyvision-tools,DeepSeek V4.1 Flash,89.6,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
 babyvision-tools,DeepSeek V4.1 Flash 1017,92.5,,,DeepSeek,true,2026-10-17,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
+babyvision-tools,Inkling 2 Small,93.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,With Python; xhigh.
+babyvision-tools,Kimi K3.1 Pro,95.4,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
+babyvision-tools,MiniMax M3.1 Flash,91.0,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,Transcribed from the page image.
+babyvision-tools,Muse Spark Open,80.2,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Transcribed from the page image.
+banker-toolbench,MiniMax M3.1 Flash,76.2,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,OpenCode harness. Transcribed from the page image.
 bbeh,Gemma 4 12B,53,,,Google,true,2026-06-03,https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/,vendor_reported,
 benchcad,GPT-5.5,44.4,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
 benchcad,GPT-5.6 Luna,63.1,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 benchcad,GPT-5.6 Sol,70.6,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 benchcad,GPT-5.6 Terra,62.3,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
+benchcad,Kimi K3.1 Pro,72.8,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,"Without tools, 1,000-case subset; max effort."
 benchcad-2-1-core,GPT-6 Astra,62.6,,max,OpenAI,false,2026-09-03,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 benchcad-2-1-core,GPT-6.1 Sol,52.6,,max,OpenAI,false,2026-09-29,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 benchcad-2-1-core,GPT-6.2 Astra,82.5,,max,OpenAI,false,2026-11-17,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
@@ -141,6 +172,7 @@ benchcad-python,GPT-5.6 Luna,73.9,,,OpenAI,false,2026-07-09,https://openai.com/i
 benchcad-python,GPT-5.6 Sol,83.3,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 benchcad-python,GPT-5.6 Terra,78.2,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 benchcad-python,GPT-6 Astra,95.9,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+benchcad-python,Kimi K3.1 Pro,92.7,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,"With tools (Claude Code), 1,000-case subset; max effort."
 big-finance-bench,GPT-5.5,49,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
 big-finance-bench,GPT-5.6 Luna,36,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 big-finance-bench,GPT-5.6 Sol,53,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
@@ -163,14 +195,20 @@ biomysterybench-human-solved,Claude Opus 5,90.1,,,Anthropic,false,2026-07-24,htt
 biomysterybench-human-solved,Gemini 3.6 Flash,80.6,,,Google,false,2026-07-21,https://deepmind.google/models/model-cards/gemini-3-7-flash/,vendor_reported,
 biomysterybench-human-solved,Gemini 3.7 Flash,87.1,,,Google,false,2026-08-13,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
 biomysterybench-human-solved,Gemini 3.8 Flash,88.8,,,Google,false,2026-09-02,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
+biomysterybench-v11,Kimi K3.1 Pro,80.6,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
+biomysterybench-v11,Qwen3.8 Max (0902),84.1,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
+biomysterybench-v11,Qwen4-Max,85.0,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
 bixbench,GPT-5.4,74,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 bixbench,GPT-5.5,80.5,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
+blenderworld,ERNIE 5.5 Flash Preview,79.0,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Image understanding via a Claude Opus 5.5 tool. Transcribed from the page image.
 blueprint-bench-2,Claude Opus 4.8,14.5,,,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-fable-5-mythos-5,vendor_reported,
 blueprint-bench-2,Gemini 3 Flash,0,,,Google,false,2025-12-17,https://deepmind.google/models/model-cards/gemini-3-5-flash/,vendor_reported,
 blueprint-bench-2,Gemini 3.1 Pro,26.5,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-5-flash/,vendor_reported,
 blueprint-bench-2,Gemini 3.5 Flash,33.6,,,Google,false,2026-05-19,https://deepmind.google/models/model-cards/gemini-3-5-flash/,vendor_reported,
 blueprint-bench-2,Gemini 4 Argon,54.4,,,Google,false,2026-09-30,https://deepmind.google/models/model-cards/gemini-4-carbon/,vendor_reported,Similarity score.
 blueprint-bench-2,Gemini 4 Carbon,58.6,,,Google,false,2026-10-28,https://deepmind.google/models/model-cards/gemini-4-carbon/,vendor_reported,Similarity score.
+brokenarxiv-2610,Inkling 2 Small,63.3,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by MathArena (cited on the page).
+browsecomp,Beam 1.0,76.8,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,With context management. BF16.
 browsecomp,Claude Fable 5,87.4,,,Anthropic,false,2026-06-09,https://www.anthropic.com/news/claude-opus-5,vendor_reported,
 browsecomp,Claude Opus 4.8,84.3,,,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-opus-5,vendor_reported,
 browsecomp,Claude Opus 5,90.8,,,Anthropic,false,2026-07-24,https://www.anthropic.com/news/claude-opus-5,vendor_reported,
@@ -179,6 +217,7 @@ browsecomp,DeepSeek-V3.1-Terminus,38.5,,,DeepSeek,true,2025-09-22,https://huggin
 browsecomp,DeepSeek-V3.2-Exp,40.1,,,DeepSeek,true,2025-09-29,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
 browsecomp,DeepSeek-V4-Flash,73.2,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 browsecomp,DeepSeek-V4-Pro,83.4,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
+browsecomp,ERNIE 5.5 Flash Preview,87.4,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Transcribed from the page image.
 browsecomp,Gemini 3 Pro,59.2,,,Google,false,2025-11-18,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 browsecomp,Gemini 3.1 Pro,85.9,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 browsecomp,GPT-5,54.9,,,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5/,vendor_reported,From the page's chart data (the value printed on the bar).
@@ -197,6 +236,11 @@ browsecomp,GPT-5.6 Terra,87.5,,,OpenAI,false,2026-07-09,https://openai.com/index
 browsecomp,GPT-6 Astra,91.5,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
 browsecomp,Grok 4,43,,,xAI,false,2025-07-09,https://x.ai/news/grok-4-fast,vendor_reported,
 browsecomp,Grok 4 Fast,44.9,,,xAI,false,2025-09-19,https://x.ai/news/grok-4-fast,vendor_reported,
+browsecomp,Inkling 2 Small,90.2,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,With compaction; xhigh.
+browsecomp,Kimi K3.1 Pro,92.1,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Context compaction at 200K; max effort.
+browsecomp,Mistral Large 4,84.5,,,Mistral,true,2026-10-29,https://mistral.ai/news/mistral-large-4-oss/,vendor_reported,From the chart label.
+browsecomp,Nemotron 3 Ultra,67.85,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+browsecomp,Nemotron 3.5 Super VL,78,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 browsecomp-lc-128k,GPT-5,90,,high,OpenAI,false,2025-08-07,https://openai.com/index/gpt-5-1-for-developers/,vendor_reported,
 browsecomp-lc-128k,GPT-5 mini,89.4,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 browsecomp-lc-128k,GPT-5 nano,80.4,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
@@ -223,11 +267,16 @@ chartography,Gemini 4 Argon,71.6,,,Google,false,2026-09-30,https://deepmind.goog
 chartography,Gemini 4 Carbon,72.5,,,Google,false,2026-10-28,https://deepmind.google/models/model-cards/gemini-4-carbon/,vendor_reported,
 chartography,Gemini 4 Hydrogen,66.6,,,Google,false,2026-11-12,https://deepmind.google/models/model-cards/gemini-4-hydrogen/,vendor_reported,
 chartography,Gemini 4 Neon,73.5,,,Google,false,2026-11-18,https://deepmind.google/models/model-cards/gemini-4-neon/,vendor_reported,
+chartography,Inkling 2 Small,36.7,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+chartography,Qwen3.8 Max (0902),42.0,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,min_pixels 4096x32x32. From the chart labels.
+chartography,Qwen4-Max,54.2,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,min_pixels 4096x32x32. From the chart labels.
 chartography-with-tools,Claude Fable 5.1,88.4,,,Anthropic,false,2026-09-01,https://www.anthropic.com/claude-opus-5-5,vendor_reported,
 chartography-with-tools,Claude Opus 5,83.4,,,Anthropic,false,2026-07-24,https://www.anthropic.com/claude-opus-5-5,vendor_reported,
 chartography-with-tools,Claude Opus 5.5,89,,,Anthropic,false,2026-09-22,https://www.anthropic.com/claude-opus-5-5,vendor_reported,
 chartography-with-tools,DeepSeek V4.1 Flash,78.9,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
 chartography-with-tools,DeepSeek V4.1 Flash 1017,83,,,DeepSeek,true,2026-10-17,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
+chartography-with-tools,Inkling 2 Small,82.1,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,With Python; xhigh.
+chartography-with-tools,Kimi K3.1 Pro,90.2,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Average of five runs; max effort.
 charxiv-reasoning,Gemini 3 Flash,80.3,,,Google,false,2025-12-17,https://deepmind.google/models/model-cards/gemini-3-5-flash/,vendor_reported,
 charxiv-reasoning,Gemini 3 Pro,81.4,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,
 charxiv-reasoning,Gemini 3.1 Flash-Lite,73.2,,,Google,false,2026-03-03,https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/,vendor_reported,
@@ -240,6 +289,10 @@ charxiv-reasoning,Gemini 3.8 Flash,86.2,,,Google,false,2026-09-02,https://deepmi
 charxiv-reasoning,GPT-5.1,67,,,OpenAI,false,2025-11-13,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 charxiv-reasoning,GPT-5.2,82.1,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 charxiv-reasoning,GPT-5.5 Instant,81.6,,,OpenAI,false,2026-05-05,https://openai.com/index/gpt-5-5-instant/,vendor_reported,From the page's chart data.
+charxiv-reasoning,Inkling 2 Small,85.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+charxiv-reasoning,Kimi K3.1 Pro,89.0,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
+charxiv-reasoning,MiniMax M3.1 Flash,82.5,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,Transcribed from the page image.
+charxiv-reasoning,Nemotron 3.5 Super VL,80.82,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 charxiv-reasoning-python,Gemini 3.1 Flash-Lite,75.6,,,Google,false,2026-03-03,https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/,vendor_reported,With tools.
 charxiv-reasoning-python,Gemini 3.1 Pro,83.2,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-6-flash/,vendor_reported,With tools.
 charxiv-reasoning-python,Gemini 3.5 Flash,84.9,,,Google,false,2026-05-19,https://deepmind.google/models/model-cards/gemini-3-6-flash/,vendor_reported,With tools.
@@ -251,6 +304,8 @@ charxiv-reasoning-python,GPT-5 mini,75.5,,high,OpenAI,false,2025-08-07,https://o
 charxiv-reasoning-python,GPT-5 nano,62.7,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 charxiv-reasoning-python,GPT-5.1,80.3,,,OpenAI,false,2025-11-13,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 charxiv-reasoning-python,GPT-5.2,88.7,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
+charxiv-reasoning-python,Inkling 2 Small,89.1,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+charxiv-reasoning-python,Kimi K3.1 Pro,93.4,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
 chatgpt-factuality-nosearch,GPT-5.1,87.3,,,OpenAI,false,2025-11-13,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 chatgpt-factuality-nosearch,GPT-5.2,88,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 chatgpt-factuality-search,GPT-5.1,91.2,,,OpenAI,false,2025-11-13,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
@@ -276,10 +331,14 @@ codeforces,Gemini 3 Pro,2512,,,Google,false,2025-11-18,https://blog.google/innov
 collie,GPT-5,99,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 collie,GPT-5 mini,98.5,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 collie,GPT-5 nano,96.9,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
+complexconstraints,Inkling 2 Small,44.5,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+cookiebench,ERNIE 5.5 Flash Preview,88.2,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,"React setting, 1,000 queries. Transcribed from the page image."
 corpusqa-1m,DeepSeek-V4-Flash,60.5,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 corpusqa-1m,DeepSeek-V4-Pro,62,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 creative-writing-v3,Grok 4.1,1708.6,,,xAI,false,2025-11-17,https://x.ai/news/grok-4-1,vendor_reported,
 creative-writing-v3,Grok 4.1 Thinking,1721.9,,,xAI,false,2025-11-17,https://x.ai/news/grok-4-1,vendor_reported,
+critpt,Nemotron 3 Ultra,3.1,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+critpt,Nemotron 3.5 Super VL,10.86,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 ctf-challenges,GPT-5,26.83,,,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-2-codex/,vendor_reported,From the page's chart data.
 ctf-challenges,GPT-5-Codex,50.5,,,OpenAI,false,2025-09-15,https://openai.com/index/introducing-gpt-5-2-codex/,vendor_reported,From the page's chart data.
 ctf-challenges,GPT-5.1-Codex-Max,75.6,,,OpenAI,false,2025-11-19,https://openai.com/index/introducing-gpt-5-2-codex/,vendor_reported,From the page's chart data.
@@ -310,6 +369,7 @@ cve-rediscovery,Claude Opus 5.5,81.3,,,Anthropic,false,2026-09-22,https://www.an
 cwe-bench,Gemini 4 Argon,68,,,Google,false,2026-09-30,https://deepmind.google/models/model-cards/gemini-4-carbon/,vendor_reported,
 cwe-bench,Gemini 4 Carbon,71,,,Google,false,2026-10-28,https://deepmind.google/models/model-cards/gemini-4-carbon/,vendor_reported,
 cwe-bench,Gemini 4 Neon,70.7,,,Google,false,2026-11-18,https://deepmind.google/models/model-cards/gemini-4-neon/,vendor_reported,CWE-Bench v2.
+cyberbench,Inkling 2 Small,72.7,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Vals AI (cited on the page).
 cybergym,DeepSeek V4 Flash 0731,76.7,,,DeepSeek,true,2026-07-31,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 cybergym,DeepSeek V4 Pro 0813,83.3,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 cybergym,DeepSeek V4.1 Flash,88.1,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
@@ -318,6 +378,7 @@ cybergym,DeepSeek-V4-Flash-Vision-Exp,75.3,,,DeepSeek,true,2026-08-21,https://hu
 cybergym,DeepSeek-V4-Pro,52.7,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 cybergym,GPT-5.4,79,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 cybergym,GPT-5.5,81.8,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
+cybergym,MiniMax M3.1 Flash,82.2,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,Transcribed from the page image.
 cyscenariobench,Claude Mythos 5.1,61.7,,,Anthropic,false,2026-09-01,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
 cyscenariobench,Claude Mythos 5.2,76.3,,,Anthropic,false,2026-11-09,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
 cyscenariobench,Claude Opus 5.5,67.6,,,Anthropic,false,2026-09-22,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,Without safeguards.
@@ -325,6 +386,12 @@ data-science-tasks,GPT-5.6 Sol,30.5,,,OpenAI,false,2026-07-09,https://openai.com
 data-science-tasks,GPT-6 Astra,40.9,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
 database-migration-tasks,GPT-5.6 Sol,42.7,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 database-migration-tasks,GPT-6 Astra,63.9,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+dayjob-finance,Inkling 2 Small,14.3,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Surge (cited on the page).
+dayjob-healthcare,Inkling 2 Small,6.4,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Surge (cited on the page).
+deepfinance,Inkling 2 Small,29.8,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Julius Research (cited on the page).
+deepsearchqa,Beam 1.0,80.5,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,With context management. BF16.
+deepsearchqa,Inkling 2 Small,90.9,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,With compaction; xhigh.
+deepswe,Beam 1.0,43.3,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 deepswe,Claude Fable 5,69.7,,,Anthropic,false,2026-06-09,https://www.anthropic.com/news/claude-opus-5,vendor_reported,DeepSWE v1.1.
 deepswe,Claude Opus 4.8,59,,,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-opus-5,vendor_reported,DeepSWE v1.1.
 deepswe,Claude Opus 5,68.8,,,Anthropic,false,2026-07-24,https://www.anthropic.com/news/claude-opus-5,vendor_reported,DeepSWE v1.1.
@@ -335,6 +402,7 @@ deepswe,DeepSeek V4.1 Flash 1017,77,,,DeepSeek,true,2026-10-17,https://huggingfa
 deepswe,DeepSeek-V4-Flash,7.3,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 deepswe,DeepSeek-V4-Flash-Vision-Exp,59.3,,,DeepSeek,true,2026-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp,vendor_reported,
 deepswe,DeepSeek-V4-Pro,12.8,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
+deepswe,ERNIE 5.5 Flash Preview,71.2,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,"DeepSWE v1.1, mini-swe-agent. Transcribed from the page image."
 deepswe,Gemini 3.1 Pro,12,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-6-flash/,vendor_reported,DeepSWE v1.1.
 deepswe,Gemini 3.5 Flash,37,,,Google,false,2026-05-19,https://deepmind.google/models/model-cards/gemini-3-6-flash/,vendor_reported,DeepSWE v1.1.
 deepswe,Gemini 3.6 Flash,48.6,,,Google,false,2026-07-21,https://deepmind.google/models/model-cards/gemini-3-7-flash/,vendor_reported,DeepSWE v1.1.
@@ -352,9 +420,22 @@ deepswe,GPT-6.1 Sol,75.22,,high,OpenAI,false,2026-09-29,https://openai.com/index
 deepswe,Grok 4.5,54,,high,xAI,false,2026-07-16,https://x.ai/news/grok-4-6,vendor_reported,DeepSWE v1.1.
 deepswe,Grok 4.6,65.2,,high,xAI,false,2026-08-12,https://x.ai/news/grok-4-7,vendor_reported,DeepSWE v1.1.
 deepswe,Grok 4.7,71,,high,xAI,false,2026-09-21,https://x.ai/news/grok-4-7,vendor_reported,DeepSWE v1.1.
+deepswe,Hy4,74.9,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,"DeepSWE v1.1, mini-SWE-agent. Transcribed from the page image."
+deepswe,Hy4 flash,64.6,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,"DeepSWE v1.1, mini-SWE-agent. Transcribed from the page image."
+deepswe,Inkling 2 Small,72.1,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,"DeepSWE v1.1, mini-swe-agent. As reported by Datacurve (cited on the page)."
+deepswe,Kimi K3.1 Pro,75.5,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,DeepSWE v1.1; max effort.
+deepswe,MiniMax M3.1 Flash,73.7,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,mini-SWE-agent harness. Transcribed from the page image.
+deepswe,Muse Spark Open,60,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Best available / self-reported harness. Transcribed from the page image.
+deepswe,Nemotron 3 Ultra,3,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,"From the ""[offline]"" section."
+deepswe,Nemotron 3.5 Super VL,24.65,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,"From the ""[offline]"" section."
+deepswe,Qwen3.8 Max (0902),69.3,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,DeepSWE v1.1. From the chart labels.
+deepswe,Qwen4-Max,75.7,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,DeepSWE v1.1. From the chart labels.
+deepswe,Tencent Hy4 preview,64.3,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,"DeepSWE v1.1, mini-SWE-agent. Transcribed from the page image."
 design-tasks,GPT-5.6 Sol,47.4,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 design-tasks,GPT-6 Astra,50,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+diligence-bench,Inkling 2 Small,58.1,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,Best harness. As reported by Thoughtful (cited on the page).
 docvqa,Gemma 4 12B,94.9,,,Google,true,2026-06-03,https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/,vendor_reported,
+draco,ERNIE 5.5 Flash Preview,84.9,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Transcribed from the page image.
 dsbench-fullstack,DeepSeek V4 Flash 0731,68.7,,,DeepSeek,true,2026-07-31,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 dsbench-fullstack,DeepSeek V4 Pro 0813,71.1,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 dsbench-fullstack,DeepSeek-V4-Flash,37,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
@@ -366,12 +447,14 @@ dsbench-hard,DeepSeek-V4-Flash-Vision-Exp,63.6,,,DeepSeek,true,2026-08-21,https:
 dsbench-hard,DeepSeek-V4-Pro,31.1,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 eebench,Grok 4.6,53,,,xAI,false,2026-08-12,https://x.ai/news/grok-4-7,vendor_reported,
 eebench,Grok 4.7,64,,,xAI,false,2026-09-21,https://x.ai/news/grok-4-7,vendor_reported,
+enterprisebench-corecraft,Inkling 2 Small,71.8,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Surge (cited on the page).
 eq-bench-3,Grok 4,1206,,,xAI,false,2025-07-09,https://x.ai/news/grok-4-1,vendor_reported,
 eq-bench-3,Grok 4.1,1585,,,xAI,false,2025-11-17,https://x.ai/news/grok-4-1,vendor_reported,
 eq-bench-3,Grok 4.1 Thinking,1586,,,xAI,false,2025-11-17,https://x.ai/news/grok-4-1,vendor_reported,
 erqa,GPT-5,65.7,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 erqa,GPT-5 mini,62.9,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 erqa,GPT-5 nano,50.1,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
+excel-modeling-bench,Inkling 2 Small,69.5,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Vals AI (cited on the page).
 expert-swe,GPT-5.4,68.5,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 expert-swe,GPT-5.5,73.1,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 exploitbench,Claude Mythos 5,78,,,Anthropic,false,2026-06-09,https://www.anthropic.com/news/claude-fable-5-mythos-5,vendor_reported,Starred cell of the Mythos 5 / Fable 5 column (Mythos 5's score).
@@ -382,6 +465,7 @@ exploitbench,GPT-5.6 Luna,33.2,,,OpenAI,false,2026-07-09,https://openai.com/inde
 exploitbench,GPT-5.6 Sol,78.5,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 exploitbench,GPT-5.6 Terra,52.9,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 exploitbench,GPT-6 Astra,100,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+exploitbench,Kimi K3.1 Pro,74.7,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,pass@5 max capability score; max effort.
 exploitbench-jun-aug-2026,GPT-5.6 Sol,5.5,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 exploitbench-jun-aug-2026,GPT-6 Astra,31.5,,max,OpenAI,false,2026-09-03,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 exploitbench-jun-aug-2026,GPT-6.1 Sol,21.5,,max,OpenAI,false,2026-09-29,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
@@ -397,6 +481,7 @@ exploitgym,GPT-5.6 Luna,12.4,,,OpenAI,false,2026-07-09,https://openai.com/index/
 exploitgym,GPT-5.6 Sol,30.3,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 exploitgym,GPT-5.6 Terra,23.2,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,6 h cap (chart).
 exploitgym,GPT-6 Astra,42.4,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+exploitgym,Kimi K3.1 Pro,20.7,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,6-hour budget; max effort.
 facts,Gemini 3 Flash,61.9,,,Google,false,2025-12-17,https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/,vendor_reported,
 facts,Gemini 3 Pro,70.5,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,
 facts,Gemini 3.1 Flash-Lite,40.6,,,Google,false,2026-03-03,https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/,vendor_reported,
@@ -411,10 +496,13 @@ financeagent-v2,Gemini 3.5 Flash,57.9,,,Google,false,2026-05-19,https://deepmind
 financeagent-v2,Gemini 3.7 Flash,59,,,Google,false,2026-08-13,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
 financeagent-v2,Gemini 3.8 Flash,61.4,,,Google,false,2026-09-02,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
 financeagent-v2,Gemini 4 Argon,65.4,,,Google,false,2026-09-30,https://deepmind.google/models/model-cards/gemini-4-argon/,vendor_reported,
+financeagent-v2-1,Inkling 2 Small,67.5,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Vals AI (cited on the page).
+finworkbench,Mistral Large 4,73.3,,,Mistral,true,2026-10-29,https://mistral.ai/news/mistral-large-4-oss/,vendor_reported,From the chart label.
 frames,Grok 4.1 Fast,87.6,,,xAI,false,2025-11-19,https://x.ai/news/grok-4-1-fast,vendor_reported,
 frontier-bench,Claude Fable 5,33.7,,,Anthropic,false,2026-06-09,https://www.anthropic.com/news/claude-opus-5,vendor_reported,
 frontier-bench,Claude Opus 4.8,21.1,,,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-opus-5,vendor_reported,
 frontier-bench,Claude Opus 5,43.3,,,Anthropic,false,2026-07-24,https://www.anthropic.com/news/claude-opus-5,vendor_reported,
+frontier-finance,Kimi K3.1 Pro,58.6,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Official finance agent v2 harness; max effort.
 frontier-science-research,GPT-5.2,25.2,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-4/,vendor_reported,
 frontier-science-research,GPT-5.4,33,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-4/,vendor_reported,
 frontier-science-research,GPT-5.4 Pro,36.7,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-4/,vendor_reported,
@@ -441,6 +529,7 @@ frontiercode-2,GPT-6 Astra,42.8,,max,OpenAI,false,2026-09-03,https://openai.com/
 frontiercode-2,GPT-6.1 Sol,39,,max,OpenAI,false,2026-09-29,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 frontiercode-2,GPT-6.2 Astra,44.2,,max,OpenAI,false,2026-11-17,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 frontiercode-2,GPT-6.2 Sol,43.8,,max,OpenAI,false,2026-11-17,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
+frontiercode-2,Mistral Large 4,19.7,,,Mistral,true,2026-10-29,https://mistral.ai/news/mistral-large-4-oss/,vendor_reported,From the chart label.
 frontiercode-diamond,Claude Opus 4.8,13.4,,xhigh,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-fable-5-mythos-5,vendor_reported,
 frontiercode-extended,GPT-5.6 Sol,60.6,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 frontiercode-extended,GPT-6 Astra,64.5,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
@@ -526,8 +615,10 @@ genebench-pro,GPT-5.6 Luna,10.8,,,OpenAI,false,2026-07-09,https://openai.com/ind
 genebench-pro,GPT-5.6 Sol,32.3,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 genebench-pro,GPT-5.6 Terra,23.3,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 genebench-pro,GPT-6 Astra,37.1,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+global-mmlu-lite,Inkling 2 Small,91.0,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
 global-piqa,Gemini 3 Flash,92.8,,,Google,false,2025-12-17,https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/,vendor_reported,
 global-piqa,Gemini 3 Pro,93.4,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,
+gpqa-diamond,Beam 1.0,90.6,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 gpqa-diamond,DeepSeek V3.2 Speciale,85.7,,,DeepSeek,true,2025-12-01,https://api-docs.deepseek.com/news/news251201,vendor_reported,
 gpqa-diamond,DeepSeek V4 Flash 0731,89.9,,,DeepSeek,true,2026-07-31,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 gpqa-diamond,DeepSeek V4 Pro 0813,92.4,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
@@ -568,6 +659,9 @@ gpqa-diamond,GPT-5.6 Terra,92.9,,,OpenAI,false,2026-07-09,https://openai.com/ind
 gpqa-diamond,GPT-6 Astra,96,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
 gpqa-diamond,Grok 4,87.5,,,xAI,false,2025-07-09,https://x.ai/news/grok-4-fast,vendor_reported,
 gpqa-diamond,Grok 4 Fast,85.7,,,xAI,false,2025-09-19,https://x.ai/news/grok-4-fast,vendor_reported,
+gpqa-diamond,Kimi K3.1 Pro,94.2,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
+gpqa-diamond,Nemotron 3 Ultra,87.0,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+gpqa-diamond,Nemotron 3.5 Super VL,89.52,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 graphwalks-1m,GPT-5.4,9.4,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 graphwalks-1m,GPT-5.5,45.4,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
 graphwalks-1m,GPT-5.6 Luna,51.2,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
@@ -604,6 +698,7 @@ graphwalks-parents-1m,GPT-5.5,58.5,,,OpenAI,false,2026-04-23,https://openai.com/
 graphwalks-parents-256k,GPT-5.4,82.8,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 graphwalks-parents-256k,GPT-5.5,90.1,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 graphwalks-parents-256k-1m,GPT-5.4,32.4,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-4/,vendor_reported,
+handbook-md,Kimi K3.1 Pro,44.6,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
 healthbench,GPT-5,67.2,,,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5/,vendor_reported,From the page's chart data (the value printed on the bar).
 healthbench-hard,GPT-5,46.2,,,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5/,vendor_reported,From the page's chart data (the value printed on the bar).
 healthbench-professional,Claude Mythos 5,66,,,Anthropic,false,2026-06-09,https://www.anthropic.com/news/claude-opus-5,vendor_reported,Labelled Mythos 5 in the Fable 5 column.
@@ -617,8 +712,13 @@ healthbench-professional,GPT-5.6 Terra,57.7,,,OpenAI,false,2026-07-09,https://op
 healthbench-professional,GPT-6 Astra,63.4,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,Length-adjusted.
 healthbench-professional,Grok 4.6,48.5,,,xAI,false,2026-08-12,https://x.ai/news/grok-4-7,vendor_reported,
 healthbench-professional,Grok 4.7,56.7,,,xAI,false,2026-09-21,https://x.ai/news/grok-4-7,vendor_reported,
+healthbench-professional,Qwen3.8 Max (0902),39.6,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
+healthbench-professional,Qwen4-Max,60.0,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
 hle-diamond,Gemini 4 Hydrogen,58.8,,,Google,false,2026-11-12,https://deepmind.google/models/model-cards/gemini-4-hydrogen/,vendor_reported,
 hle-diamond,Gemini 4 Neon,71.3,,,Google,false,2026-11-18,https://deepmind.google/models/model-cards/gemini-4-neon/,vendor_reported,
+hle-diamond-no-tools,Kimi K3.1 Pro,39.4,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
+hle-diamond-no-tools,Muse Spark Open,26.1,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Transcribed from the page image; xhigh.
+hle-no-tools,Beam 1.0,36.0,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 hle-no-tools,Claude Fable 5,57.8,,,Anthropic,false,2026-06-09,https://www.anthropic.com/claude-fable-and-mythos-5-1,vendor_reported,
 hle-no-tools,Claude Fable 5.1,60.9,,,Anthropic,false,2026-09-01,https://www.anthropic.com/claude-fable-and-mythos-5-1,vendor_reported,
 hle-no-tools,Claude Haiku 4.5,10.2,,,Anthropic,false,2025-10-15,https://www.anthropic.com/claude-haiku-5-5,vendor_reported,
@@ -641,6 +741,7 @@ hle-no-tools,DeepSeek-V3.2,25.1,,,DeepSeek,true,2025-12-01,https://api-docs.deep
 hle-no-tools,DeepSeek-V3.2-Exp,19.8,,,DeepSeek,true,2025-09-29,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
 hle-no-tools,DeepSeek-V4-Flash,34.8,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 hle-no-tools,DeepSeek-V4-Pro,37.7,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
+hle-no-tools,ERNIE 5.5 Flash Preview,46.4,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Text-only subset. Transcribed from the page image.
 hle-no-tools,Gemini 3 Deep Think,41,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,Tools off (chart with printed values).
 hle-no-tools,Gemini 3 Deep Think (2/26),48.4,,,Google,false,2026-02-12,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,vendor_reported,
 hle-no-tools,Gemini 3 Flash,33.7,,,Google,false,2025-12-17,https://deepmind.google/models/model-cards/gemini-3-5-flash/,vendor_reported,
@@ -663,9 +764,16 @@ hle-no-tools,GPT-5.5,41.4,,,OpenAI,false,2026-04-23,https://openai.com/index/int
 hle-no-tools,GPT-5.5 Pro,43.1,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 hle-no-tools,Grok 4,25.4,,,xAI,false,2025-07-09,https://x.ai/news/grok-4-fast,vendor_reported,
 hle-no-tools,Grok 4 Fast,20,,,xAI,false,2025-09-19,https://x.ai/news/grok-4-fast,vendor_reported,
+hle-no-tools,Kimi K3.1 Pro,51.1,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,"Full set (2,500 questions); max effort."
+hle-no-tools,MiniMax M3.1 Flash,43.4,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,"Text-only subset (2,158 questions). Transcribed from the page image."
+hle-no-tools,Nemotron 3 Ultra,29.2,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,Text-only subset (no full-set score given).
+hle-no-tools,Nemotron 3.5 Super VL,29.2,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,Full set (text-only subset: 31.79).
+hle-no-tools,Qwen3.8 Max (0902),43.9,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
+hle-no-tools,Qwen4-Max,51.7,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
 hle-verified,Gemini 3.6 Flash,51.2,,,Google,false,2026-07-21,https://deepmind.google/models/model-cards/gemini-3-7-flash/,vendor_reported,
 hle-verified,Gemini 3.7 Flash,53.6,,,Google,false,2026-08-13,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
 hle-verified,Gemini 3.8 Flash,54.9,,,Google,false,2026-09-02,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
+hle-with-tools,Beam 1.0,51.1,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 hle-with-tools,Claude Fable 5,63.8,,,Anthropic,false,2026-06-09,https://www.anthropic.com/claude-fable-and-mythos-5-1,vendor_reported,
 hle-with-tools,Claude Fable 5.1,65.6,,,Anthropic,false,2026-09-01,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
 hle-with-tools,Claude Fable 5.2,74.2,,,Anthropic,false,2026-11-09,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
@@ -704,6 +812,9 @@ hle-with-tools,GPT-5.5 Pro,57.2,,,OpenAI,false,2026-04-23,https://openai.com/ind
 hle-with-tools,GPT-6 Astra,57.2,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
 hle-with-tools,Grok 4,38.6,,,xAI,false,2025-07-09,https://x.ai/news/grok-4,vendor_reported,"Full set, with Python and internet tools."
 hle-with-tools,Grok 4 Heavy,44.4,,,xAI,false,2025-07-09,https://x.ai/news/grok-4,vendor_reported,"Full set, with Python and internet tools."
+hle-with-tools,Hy4,59.1,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Full set. Transcribed from the page image.
+hle-with-tools,Hy4 flash,55.2,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Full set. Transcribed from the page image.
+hle-with-tools,Kimi K3.1 Pro,70.0,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Full set; max effort.
 hmmt-feb-2025,DeepSeek V3.2 Speciale,99.2,,,DeepSeek,true,2025-12-01,https://api-docs.deepseek.com/news/news251201,vendor_reported,
 hmmt-feb-2025,DeepSeek-V3.1,84.2,,,DeepSeek,true,2025-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V3.1,vendor_reported,Thinking mode.
 hmmt-feb-2025,DeepSeek-V3.1-Terminus,86.1,,,DeepSeek,true,2025-09-22,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
@@ -721,8 +832,35 @@ hmmt-feb-2026,DeepSeek-V4-Flash,94.8,,max,DeepSeek,true,2026-04-24,https://huggi
 hmmt-feb-2026,DeepSeek-V4-Pro,95.2,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 hmmt-nov-2025,DeepSeek V3.2 Speciale,94.4,,,DeepSeek,true,2025-12-01,https://api-docs.deepseek.com/news/news251201,vendor_reported,
 hmmt-nov-2025,DeepSeek-V3.2,90.2,,,DeepSeek,true,2025-12-01,https://api-docs.deepseek.com/news/news251201,vendor_reported,
+humanitys-sixth-sense,Inkling 2 Small,33.3,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Scale AI (cited on the page).
+hy-audiovideobench,Hy4,27.4,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-audiovideobench,Hy4 flash,17.8,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-audiovideobench,Tencent Hy4 preview,16.3,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-buddyvqa-atlas,Hy4,55.5,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-buddyvqa-atlas,Hy4 flash,48.5,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-excelfixbench,Hy4,27.8,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-excelfixbench,Hy4 flash,15.6,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-excelfixbench,Tencent Hy4 preview,11.7,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-mdcoeditbench,Hy4,57.7,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-mdcoeditbench,Hy4 flash,56.9,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-mdcoeditbench,Tencent Hy4 preview,49.2,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptcoeditbench,Hy4,78.9,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptcoeditbench,Hy4 flash,74.0,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptcoeditbench,Tencent Hy4 preview,71.5,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptfixbench,Hy4,45.6,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptfixbench,Hy4 flash,23.7,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptfixbench,Tencent Hy4 preview,23.8,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptgenbench,Hy4,61.5,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptgenbench,Hy4 flash,54.2,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-pptgenbench,Tencent Hy4 preview,52.3,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-wordeditbench,Hy4,57.2,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-wordeditbench,Hy4 flash,46.2,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+hy-wordeditbench,Tencent Hy4 preview,44.2,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
 icho-2025,Gemini 3 Deep Think (2/26),82.8,,,Google,false,2026-02-12,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,vendor_reported,
 icho-2025,Gemini 3 Pro,69.6,,,Google,false,2025-11-18,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,vendor_reported,
+ifbench,Beam 1.0,79.6,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
+ifbench,Nemotron 3 Ultra,82.9,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+ifbench,Nemotron 3.5 Super VL,70.86,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 imo-2025,Gemini 3 Deep Think (2/26),81.5,,,Google,false,2026-02-12,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,vendor_reported,
 imo-2025,Gemini 3 Pro,14.3,,,Google,false,2025-11-18,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,vendor_reported,
 imo-answerbench,DeepSeek V3.2 Speciale,84.5,,,DeepSeek,true,2025-12-01,https://api-docs.deepseek.com/news/news251201,vendor_reported,
@@ -740,11 +878,24 @@ investment-banking-tasks,GPT-5.5,88.5,,,OpenAI,false,2026-04-23,https://openai.c
 investment-banking-tasks,GPT-5.5 Pro,88.6,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 ipho-2025,Gemini 3 Deep Think (2/26),87.7,,,Google,false,2026-02-12,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,vendor_reported,
 ipho-2025,Gemini 3 Pro,76.3,,,Google,false,2025-11-18,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,vendor_reported,
+jobbench,Inkling 2 Small,70.5,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+jobbench,Muse Spark Open,61.8,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Transcribed from the page image; xhigh.
+jobbench,Qwen3.8 Max (0902),65.3,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,Updated dataset and evaluation code. From the chart labels.
+jobbench,Qwen4-Max,68.5,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,Updated dataset and evaluation code. From the chart labels.
 kernelgen-1p,GPT-5.4,17.96,,,OpenAI,false,2026-03-05,https://openai.com/index/gpt-5-6/,vendor_reported,From the page's chart data (best score across effort levels).
 kernelgen-1p,GPT-5.5,29.3,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
 kernelgen-1p,GPT-5.6 Luna,22.4,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 kernelgen-1p,GPT-5.6 Sol,61.1,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 kernelgen-1p,GPT-5.6 Terra,49.2,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
+kimi-business-operation,Kimi K3,8.9,,,Moonshot,true,2026-07-16,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Kimi K3 from the chart description.
+kimi-business-operation,Kimi K3.1 Pro,37.8,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Kimi K3 from the chart description.
+kimi-code-bench-2,Kimi K3.1 Pro,77.1,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,
+kimi-code-bench-3-lh,Kimi K3,55.95,,,Moonshot,true,2026-07-16,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Kimi K3 from the page text.
+kimi-code-bench-3-lh,Kimi K3.1 Pro,61.2,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Kimi K3 from the page text.
+kimi-financial-modeling,Kimi K3,50.4,,,Moonshot,true,2026-07-16,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,From the chart description.
+kimi-financial-modeling,Kimi K3.1 Pro,57.6,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,From the chart description.
+kimi-financial-research,Kimi K3,58.8,,,Moonshot,true,2026-07-16,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,From the chart description.
+kimi-financial-research,Kimi K3.1 Pro,70.4,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,From the chart description.
 labbench2,Gemini 3.6 Flash,76.1,,,Google,false,2026-07-21,https://deepmind.google/models/model-cards/gemini-3-7-flash/,vendor_reported,
 labbench2,Gemini 3.7 Flash,82.1,,,Google,false,2026-08-13,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
 labbench2,Gemini 3.8 Flash,86.2,,,Google,false,2026-09-02,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
@@ -758,6 +909,11 @@ legal-agent-benchmark-allpass,Gemini 4 Argon,19.6,,,Google,false,2026-09-30,http
 legal-agent-benchmark-allpass,Grok 4.5,12.9,,high,xAI,false,2026-07-16,https://x.ai/news/grok-4-6,vendor_reported,Harvey LAB (Vals).
 legal-agent-benchmark-allpass,Grok 4.6,15.8,,,xAI,false,2026-08-12,https://x.ai/news/grok-4-7,vendor_reported,Harvey Legal Agent Benchmark.
 legal-agent-benchmark-allpass,Grok 4.7,19.6,,,xAI,false,2026-09-21,https://x.ai/news/grok-4-7,vendor_reported,Harvey Legal Agent Benchmark.
+legal-agent-benchmark-allpass,Kimi K3.1 Pro,23.7,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,"Public set of 1,251 tasks, all-pass rate."
+legal-agent-benchmark-vals,Inkling 2 Small,21.7,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Vals AI (cited on the page).
+legal-agent-benchmark-vals,Qwen3.8 Max (0902),15.4,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,independent,"HLAB-Vals-1.1, cited from the Vals Index. From the chart labels."
+legal-agent-benchmark-vals,Qwen4-Max,21.3,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,independent,"HLAB-Vals-1.1, cited from the Vals Index. From the chart labels."
+legal-research-bench,Inkling 2 Small,46.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Vals AI (cited on the page).
 lifescibench,GPT-5.4,44.17,,,OpenAI,false,2026-03-05,https://openai.com/index/gpt-5-6/,vendor_reported,From the page's chart data (best score across effort levels).
 lifescibench,GPT-5.5,50.4,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
 lifescibench,GPT-5.6 Luna,51.2,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
@@ -781,6 +937,11 @@ livecodebench-v6,Gemma 4 26B A4B,77.1,,,Google,true,2026-04-02,https://blog.goog
 livecodebench-v6,Gemma 4 31B IT,80,,,Google,true,2026-04-02,https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/,vendor_reported,
 livecodebench-v6,Gemma 4 E2B IT,44,,,Google,true,2026-04-02,https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/,vendor_reported,
 livecodebench-v6,Gemma 4 E4B IT,52,,,Google,true,2026-04-02,https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/,vendor_reported,
+livecodebench-v6,Nemotron 3 Ultra,89.2,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+livecodebench-v6,Nemotron 3.5 Super VL,88.22,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+loca-bench-256k,MiniMax M3.1 Flash,60.3,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,Transcribed from the page image.
+longbench-v2,Beam 1.0,67.5,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
+longbench-v2,Inkling 2 Small,70.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
 lvbench,Gemini 3.6 Flash,84.2,,,Google,false,2026-07-21,https://deepmind.google/models/model-cards/gemini-3-7-flash/,vendor_reported,
 lvbench,Gemini 3.7 Flash,85.4,,,Google,false,2026-08-13,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
 lvbench,Gemini 3.8 Flash,87.1,,,Google,false,2026-09-02,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
@@ -798,8 +959,13 @@ matharena-apex,DeepSeek-V4-Pro,38.3,,max,DeepSeek,true,2026-04-24,https://huggin
 matharena-apex,Gemini 3 Pro,23.4,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,
 matharena-apex-shortlist,DeepSeek-V4-Flash,85.7,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 matharena-apex-shortlist,DeepSeek-V4-Pro,90.2,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
+matharena-apex-shortlist,Nemotron 3 Ultra,75.0,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,"Listed as ""APEX shortlist""."
+matharena-apex-shortlist,Nemotron 3.5 Super VL,88.36,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,"Listed as ""APEX shortlist""."
+mathvision,Nemotron 3.5 Super VL,78.16,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+mcp-atlas,Beam 1.0,80.8,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 mcp-atlas,DeepSeek-V4-Flash,69,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 mcp-atlas,DeepSeek-V4-Pro,74.2,,high,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
+mcp-atlas,ERNIE 5.5 Flash Preview,84.6,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Public set (500 tasks). Transcribed from the page image.
 mcp-atlas,Gemini 3 Flash,62,,,Google,false,2025-12-17,https://deepmind.google/models/model-cards/gemini-3-5-flash/,vendor_reported,
 mcp-atlas,Gemini 3 Pro,54.1,,,Google,false,2025-11-18,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 mcp-atlas,Gemini 3.1 Pro,78.2,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-5-flash/,vendor_reported,
@@ -811,8 +977,11 @@ mcp-atlas,GPT-5.4,70.6,,,OpenAI,false,2026-03-05,https://openai.com/index/introd
 mcp-atlas,GPT-5.4 Mini,57.7,,xhigh,OpenAI,false,2026-03-17,https://openai.com/index/introducing-gpt-5-4-mini-and-nano/,vendor_reported,
 mcp-atlas,GPT-5.4 Nano,56.1,,xhigh,OpenAI,false,2026-03-17,https://openai.com/index/introducing-gpt-5-4-mini-and-nano/,vendor_reported,
 mcp-atlas,GPT-5.5,75.3,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
+mcp-atlas,Inkling 2 Small,85.4,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,Full set (public set: 85.0). As reported by Scale AI (cited on the page).
+mcp-atlas,Muse Spark Open,89.2,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Transcribed from the page image; xhigh.
 mcp-mark,DeepSeek-V3.2,38,,,DeepSeek,true,2025-12-01,https://api-docs.deepseek.com/news/news251201,vendor_reported,
 mcp-universe,DeepSeek-V3.2,45.9,,,DeepSeek,true,2025-12-01,https://api-docs.deepseek.com/news/news251201,vendor_reported,
+mdpbench,Inkling 2 Small,81.4,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
 medchembench,GPT-5.4,23.98,,,OpenAI,false,2026-03-05,https://openai.com/index/gpt-5-6/,vendor_reported,From the page's chart data (best score across effort levels).
 medchembench,GPT-5.5,35.5,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
 medchembench,GPT-5.6 Luna,30.4,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
@@ -826,12 +995,15 @@ mle-bench,Gemini 3.1 Pro,42.6,,,Google,false,2026-02-19,https://deepmind.google/
 mle-bench,Gemini 3.5 Flash,49.7,,,Google,false,2026-05-19,https://deepmind.google/models/model-cards/gemini-3-6-flash/,vendor_reported,
 mle-bench,Gemini 3.5 Flash-Lite,39.2,,,Google,false,2026-07-21,https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/,vendor_reported,
 mle-bench,Gemini 3.6 Flash,63.9,,,Google,false,2026-07-21,https://deepmind.google/models/model-cards/gemini-3-6-flash/,vendor_reported,
+mmlongbench-doc,Nemotron 3.5 Super VL,62.82,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 mmlu-pro,DeepSeek-V3.1,84.8,,,DeepSeek,true,2025-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus,vendor_reported,
 mmlu-pro,DeepSeek-V3.1-Terminus,85,,,DeepSeek,true,2025-09-22,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
 mmlu-pro,DeepSeek-V3.2-Exp,85,,,DeepSeek,true,2025-09-29,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
 mmlu-pro,DeepSeek-V4-Flash,86.4,,high,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 mmlu-pro,DeepSeek-V4-Pro,87.5,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 mmlu-pro,Gemma 4 12B,77.2,,,Google,true,2026-06-03,https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/,vendor_reported,
+mmlu-prox,Nemotron 3 Ultra,83.1,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+mmlu-prox,Nemotron 3.5 Super VL,76.91,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 mmlu-redux,DeepSeek-V3.1,93.7,,,DeepSeek,true,2025-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V3.1,vendor_reported,Thinking mode.
 mmmlu,Gemini 3 Flash,91.8,,,Google,false,2025-12-17,https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/,vendor_reported,
 mmmlu,Gemini 3 Pro,91.8,,,Google,false,2025-11-18,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
@@ -870,6 +1042,9 @@ mmmu-pro,GPT-5.5 Instant,76,,,OpenAI,false,2026-05-05,https://openai.com/index/g
 mmmu-pro,GPT-5.6 Luna,78.4,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 mmmu-pro,GPT-5.6 Sol,83,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 mmmu-pro,GPT-5.6 Terra,80.7,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
+mmmu-pro,Hy4,78.6,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+mmmu-pro,Hy4 flash,75.8,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Transcribed from the page image.
+mmmu-pro,Kimi K3.1 Pro,84.1,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
 mmmu-pro-vision,GPT-5.6 Terra,81.7,,max,OpenAI,false,2026-07-09,https://openai.com/index/introducing-gpt-6-1-terra/,vendor_reported,From the page's chart data (best score across effort levels).
 mmmu-pro-vision,GPT-6 Astra,86.7,,max,OpenAI,false,2026-09-03,https://openai.com/index/introducing-gpt-6-1-terra/,vendor_reported,From the page's chart data (best score across effort levels).
 mmmu-pro-vision,GPT-6 Luna,79.9,,max,OpenAI,false,2026-09-22,https://openai.com/index/introducing-gpt-6-1-terra/,vendor_reported,From the page's chart data (best score across effort levels).
@@ -885,8 +1060,11 @@ mmmu-pro-with-tools,GPT-5.5,83.2,,,OpenAI,false,2026-04-23,https://openai.com/in
 mmmu-pro-with-tools,GPT-5.6 Luna,79.5,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 mmmu-pro-with-tools,GPT-5.6 Sol,84.6,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 mmmu-pro-with-tools,GPT-5.6 Terra,82,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
+mmmu-pro-with-tools,Kimi K3.1 Pro,90.0,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
 mrcr-1m-deepseek,DeepSeek-V4-Flash,78.7,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 mrcr-1m-deepseek,DeepSeek-V4-Pro,83.5,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
+muirbench,Inkling 2 Small,79.2,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+mysterymechanism,Inkling 2 Small,25.2,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Vals AI (cited on the page).
 nanogpt,GPT-5.4,2.3,,,OpenAI,false,2026-03-05,https://openai.com/index/gpt-5-6/,vendor_reported,From the page's chart data (best score across effort levels).
 nanogpt,GPT-5.5,2.65,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
 nanogpt,GPT-5.6 Luna,1.66,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
@@ -899,11 +1077,20 @@ nl2repo,DeepSeek V4.1 Flash 1017,68.2,,,DeepSeek,true,2026-10-17,https://hugging
 nl2repo,DeepSeek-V4-Flash,39.4,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 nl2repo,DeepSeek-V4-Flash-Vision-Exp,57.7,,,DeepSeek,true,2026-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp,vendor_reported,
 nl2repo,DeepSeek-V4-Pro,38.5,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
+nl2repo,ERNIE 5.5 Flash Preview,64.8,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Transcribed from the page image.
+nl2repo,MiniMax M3.1 Flash,61.2,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,Transcribed from the page image.
+ocr-reasoning,Nemotron 3.5 Super VL,65.08,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+ocrbench-v2-en,Nemotron 3.5 Super VL,68.12,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+ocrbench-v2-zh,Nemotron 3.5 Super VL,59.15,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 officeqa,GPT-5.2,63.1,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-4/,vendor_reported,
 officeqa,GPT-5.3-Codex,65.1,,,OpenAI,false,2026-02-05,https://openai.com/index/introducing-gpt-5-4/,vendor_reported,
 officeqa,GPT-5.4,68.1,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-4/,vendor_reported,
 officeqa-pro,GPT-5.4,53.2,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 officeqa-pro,GPT-5.5,54.1,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
+officeqa-pro,Kimi K3.1 Pro,67.4,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
+officeqa-pro-v2,ERNIE 5.5 Flash Preview,67.9,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Transcribed from the page image.
+officeqa-pro-v2,Kimi K3.1 Pro,64.4,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
+omnidocbench-v1-6,Inkling 2 Small,94.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
 openai-mrcr-128k-256k,GPT-5 mini,19.4,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-4-mini-and-nano/,vendor_reported,
 openai-mrcr-128k-256k,GPT-5.1,29.6,,,OpenAI,false,2025-11-13,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 openai-mrcr-128k-256k,GPT-5.2,77,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-4/,vendor_reported,
@@ -964,6 +1151,7 @@ osworld-2-0,GPT-5.5,47.5,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-
 osworld-2-0,GPT-5.6 Luna,45.6,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 osworld-2-0,GPT-5.6 Sol,62.6,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 osworld-2-0,GPT-5.6 Terra,50.2,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
+osworld-2-0,MiniMax M3.1 Flash,61.7,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,0808 full release. Transcribed from the page image.
 osworld-2-0-aug,Claude Fable 5,72.9,,,Anthropic,false,2026-06-09,https://www.anthropic.com/claude-fable-and-mythos-5-1,vendor_reported,
 osworld-2-0-aug,Claude Fable 5.1,77.9,,,Anthropic,false,2026-09-01,https://www.anthropic.com/claude-fable-and-mythos-5-1,vendor_reported,
 osworld-2-0-aug,Claude Opus 5,75.4,,,Anthropic,false,2026-07-24,https://www.anthropic.com/claude-fable-and-mythos-5-1,vendor_reported,
@@ -996,6 +1184,10 @@ osworld-2-1-full,Claude Opus 5,74,,,Anthropic,false,2026-07-24,https://www.anthr
 osworld-2-1-full,Claude Opus 5.5,81.8,,,Anthropic,false,2026-09-22,https://www.anthropic.com/claude-sonnet-5-5,vendor_reported,
 osworld-2-1-full,Claude Sonnet 5,57,,,Anthropic,false,2026-06-30,https://www.anthropic.com/claude-sonnet-5-5,vendor_reported,
 osworld-2-1-full,Claude Sonnet 5.5,80.1,,,Anthropic,false,2026-09-28,https://www.anthropic.com/claude-sonnet-5-5,vendor_reported,
+osworld-2-1-full,Hy4,78.9,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Partial score. Transcribed from the page image.
+osworld-2-1-full,Hy4 flash,68.1,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Partial score. Transcribed from the page image.
+osworld-2-1-full,Kimi K3.1 Pro,79.6,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Kimi Agent harness; max effort.
+osworld-2-1-full,Muse Ember,69.5,,,Meta,false,2026-11-09,https://research.meta.ai/blog/muse-ember,vendor_reported,Partial score (binary: 33.8); max effort.
 osworld-verified,Claude Mythos Preview,85.4,,,Anthropic,false,2026-04-07,https://www.anthropic.com/news/claude-fable-5-mythos-5,vendor_reported,
 osworld-verified,Claude Opus 4.8,83.4,,,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-sonnet-5,vendor_reported,
 osworld-verified,Claude Sonnet 4.6,78.5,,,Anthropic,false,2026-02-17,https://www.anthropic.com/news/claude-sonnet-5,vendor_reported,Re-run with an updated harness for this page (footnote).
@@ -1014,11 +1206,20 @@ osworld-verified,GPT-5.4,75,,,OpenAI,false,2026-03-05,https://openai.com/index/i
 osworld-verified,GPT-5.4 Mini,72.1,,xhigh,OpenAI,false,2026-03-17,https://openai.com/index/introducing-gpt-5-4-mini-and-nano/,vendor_reported,
 osworld-verified,GPT-5.4 Nano,39,,xhigh,OpenAI,false,2026-03-17,https://openai.com/index/introducing-gpt-5-4-mini-and-nano/,vendor_reported,
 osworld-verified,GPT-5.5,78.7,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
+osworld-verified,Nemotron 3.5 Super VL,51.14,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 patchbench,GPT-6 Astra,70.9,,max,OpenAI,false,2026-09-03,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 patchbench,GPT-6.1 Sol,71,,max,OpenAI,false,2026-09-29,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 patchbench,GPT-6.2 Astra,79.7,,xhigh,OpenAI,false,2026-11-17,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 patchbench,GPT-6.2 Sol,75.6,,max,OpenAI,false,2026-11-17,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
+patcheval,Inkling 2 Small,79.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+perceptionbench,Inkling 2 Small,64.7,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
+perceptionbench,Kimi K3.1 Pro,68.3,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Max effort.
+perceptionbench-tools,Muse Ember,80.6,,,Meta,false,2026-11-09,https://research.meta.ai/blog/muse-ember,vendor_reported,Max effort.
+personal-superintelligence-index,Muse Ember,46.8,,,Meta,false,2026-11-09,https://research.meta.ai/blog/muse-ember,vendor_reported,Max effort.
 posttrainbench,Gemini 4 Argon,45.3,,,Google,false,2026-09-30,https://deepmind.google/models/model-cards/gemini-4-argon/,vendor_reported,
+posttrainbench,Inkling 2 Small,31.9,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,PostTrainBench v1.2. As reported by Thoughtful (cited on the page).
+posttrainbench,Kimi K3.1 Pro,36.5,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,"PostTrainBench v1.2, on H20 GPUs; max effort."
+posttrainbench,MiniMax M3.1 Flash,39.3,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,PostTrainBench v1.1. Transcribed from the page image.
 posttrainbench-lite,GPT-5.5,38.8,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-6/,vendor_reported,
 posttrainbench-lite,GPT-5.6 Luna,29.6,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 posttrainbench-lite,GPT-5.6 Sol,50.3,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
@@ -1026,6 +1227,13 @@ posttrainbench-lite,GPT-5.6 Terra,51.5,,,OpenAI,false,2026-07-09,https://openai.
 programbench,DeepSeek V4 Pro 0813,15.5,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 programbench,DeepSeek V4.1 Flash,20.3,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
 programbench,DeepSeek V4.1 Flash 1017,29.1,,,DeepSeek,true,2026-10-17,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
+programbench,ERNIE 5.5 Flash Preview,29.5,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Almost Solved score. Transcribed from the page image.
+programbench,Hy4,30.0,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Almost Solved score. Transcribed from the page image.
+programbench,Hy4 flash,16.0,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Almost Solved score. Transcribed from the page image.
+programbench,Kimi K3.1 Pro,31.5,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Binary score (task counts if >= 95%); max effort.
+programbench,Qwen3.8 Max (0902),28.0,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
+programbench,Qwen4-Max,31.5,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
+programbench,Tencent Hy4 preview,17.5,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Almost Solved score. Transcribed from the page image.
 remote-labor-index,Claude Fable 5.1,17.9,,,Anthropic,false,2026-09-01,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
 remote-labor-index,Claude Fable 5.2,41.3,,high,Anthropic,false,2026-11-09,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
 remote-labor-index,Claude Opus 5.5,21.3,,,Anthropic,false,2026-09-22,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,Pipeline test 14 Nov 2026: restores the entry retracted by the previous row
@@ -1048,17 +1256,24 @@ rsi-index,GPT-5.5,41.7,,,OpenAI,false,2026-04-23,https://openai.com/index/gpt-5-
 rsi-index,GPT-5.6 Luna,41.9,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 rsi-index,GPT-5.6 Sol,57.9,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 rsi-index,GPT-5.6 Terra,56.3,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
+sage-v1-1,Inkling 2 Small,88.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Vals AI (cited on the page).
 scale-multichallenge,GPT-5,69.6,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,o3-mini grader.
 scale-multichallenge,GPT-5 mini,62.3,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,o3-mini grader.
 scale-multichallenge,GPT-5 nano,54.9,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,o3-mini grader.
+scicode,Beam 1.0,49.2,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 scicode,Gemini 3 Pro,56,,,Google,false,2025-11-18,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 scicode,Gemini 3.1 Pro,59,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
+scicode,Muse Spark Open,58.5,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Transcribed from the page image; xhigh.
+scicode,Nemotron 3 Ultra,42.0,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,Subtask score.
+scicode,Nemotron 3.5 Super VL,47.13,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,Subtask score.
 screenspot-pro,Gemini 3 Flash,69.1,,,Google,false,2025-12-17,https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/,vendor_reported,
 screenspot-pro,Gemini 3 Pro,72.7,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,
 screenspot-pro,GPT-5.6 Sol,76.9,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 screenspot-pro,GPT-6 Astra,92.7,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+screenspot-pro,Inkling 2 Small,83.8,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
 screenspot-pro-python,GPT-5.1,64.2,,,OpenAI,false,2025-11-13,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 screenspot-pro-python,GPT-5.2,86.3,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
+screenspot-pro-python,Inkling 2 Small,92.0,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,xhigh.
 sec-bench-pro,DeepSeek V4 Flash 0731,30.9,,,DeepSeek,true,2026-07-31,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 sec-bench-pro,DeepSeek V4 Pro 0813,56.4,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 sec-bench-pro,DeepSeek V4.1 Flash,62.8,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
@@ -1086,13 +1301,23 @@ simpleqa-verified,DeepSeek-V4-Pro,57.9,,max,DeepSeek,true,2026-04-24,https://hug
 simpleqa-verified,Gemini 3 Flash,68.7,,,Google,false,2025-12-17,https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/,vendor_reported,
 simpleqa-verified,Gemini 3 Pro,72.1,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,
 simpleqa-verified,Gemini 3.1 Flash-Lite,43.3,,,Google,false,2026-03-03,https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/,vendor_reported,
+simplevqa-tools,Muse Spark Open,73.6,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Transcribed from the page image.
+skillsbench,ERNIE 5.5 Flash Preview,73.5,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Transcribed from the page image.
+spreadsheetbench-v2,ERNIE 5.5 Flash Preview,36.4,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Transcribed from the page image.
 sre-bench,GPT-5.6 Sol,55.9,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-6-astra/,vendor_reported,
 sre-bench,GPT-6 Astra,88,,,OpenAI,false,2026-09-03,https://openai.com/index/gpt-6-astra/,vendor_reported,
+sudo-l7,Inkling 2 Small,14.1,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Surge (cited on the page).
+swe-atlas,Inkling 2 Small,61.9,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Scale AI (cited on the page).
+swe-atlas-codebase-qna,Beam 1.0,31.8,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
+swe-bench-multilingual,Beam 1.0,78.3,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 swe-bench-multilingual,DeepSeek-V3.1,54.5,,,DeepSeek,true,2025-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus,vendor_reported,
 swe-bench-multilingual,DeepSeek-V3.1-Terminus,57.8,,,DeepSeek,true,2025-09-22,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
 swe-bench-multilingual,DeepSeek-V3.2-Exp,57.9,,,DeepSeek,true,2025-09-29,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
 swe-bench-multilingual,DeepSeek-V4-Flash,73.3,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 swe-bench-multilingual,DeepSeek-V4-Pro,76.2,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
+swe-bench-multilingual,Nemotron 3 Ultra,68.8,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+swe-bench-multilingual,Nemotron 3.5 Super VL,67.72,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+swe-bench-pro,Beam 1.0,66.1,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,SWE-bench Pro v1. BF16.
 swe-bench-pro,Claude Mythos Preview,77.8,,,Anthropic,false,2026-04-07,https://www.anthropic.com/news/claude-fable-5-mythos-5,vendor_reported,
 swe-bench-pro,Claude Opus 4.8,69.2,,,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-sonnet-5,vendor_reported,
 swe-bench-pro,Claude Sonnet 4.6,58.1,,,Anthropic,false,2026-02-17,https://www.anthropic.com/news/claude-sonnet-5,vendor_reported,
@@ -1119,6 +1344,11 @@ swe-bench-pro,GPT-5.6 Luna,62.7,,,OpenAI,false,2026-07-09,https://openai.com/ind
 swe-bench-pro,GPT-5.6 Sol,64.6,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 swe-bench-pro,GPT-5.6 Terra,63.4,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 swe-bench-pro,Grok 4.5,64.7,,,xAI,false,2026-07-16,https://x.ai/news/grok-4-5,vendor_reported,
+swe-bench-pro,Nemotron 3 Ultra,49.66,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+swe-bench-pro,Nemotron 3.5 Super VL,51.78,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+swe-bench-pro-v2-hard,Beam 1.0,76.5,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
+swe-bench-pro-v2-hard,Inkling 2 Small,86.3,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Scale AI (cited on the page).
+swe-bench-verified,Beam 1.0,81.6,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 swe-bench-verified,DeepSeek-V3.1,66,,,DeepSeek,true,2025-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus,vendor_reported,
 swe-bench-verified,DeepSeek-V3.1-Terminus,68.4,,,DeepSeek,true,2025-09-22,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
 swe-bench-verified,DeepSeek-V3.2-Exp,67.8,,,DeepSeek,true,2025-09-29,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
@@ -1136,6 +1366,8 @@ swe-bench-verified,GPT-5.1-Codex,73.7,,high,OpenAI,false,2025-11-12,https://open
 swe-bench-verified,GPT-5.1-Codex-Max,77.9,,xhigh,OpenAI,false,2025-11-19,https://openai.com/index/gpt-5-1-codex-max/,vendor_reported,All 500 problems.
 swe-bench-verified,GPT-5.2,80,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 swe-bench-verified,Grok Code Fast 1,70.8,,,xAI,false,2025-08-28,https://x.ai/news/grok-code-fast-1,vendor_reported,"Full set, xAI's own harness (page text)."
+swe-bench-verified,Nemotron 3 Ultra,73.9,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+swe-bench-verified,Nemotron 3.5 Super VL,71.1,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 swe-lancer,GPT-5.1,69.7,,,OpenAI,false,2025-11-13,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 swe-lancer,GPT-5.1-Codex,66.3,,high,OpenAI,false,2025-11-12,https://openai.com/index/gpt-5-1-codex-max/,vendor_reported,
 swe-lancer,GPT-5.1-Codex-Max,79.9,,xhigh,OpenAI,false,2025-11-19,https://openai.com/index/gpt-5-1-codex-max/,vendor_reported,
@@ -1143,6 +1375,8 @@ swe-lancer,GPT-5.2,74.6,,xhigh,OpenAI,false,2025-12-11,https://openai.com/index/
 swe-lancer,GPT-5.2-Codex,76,,xhigh,OpenAI,false,2025-12-18,https://openai.com/index/introducing-gpt-5-3-codex/,vendor_reported,
 swe-lancer,GPT-5.3-Codex,81.4,,xhigh,OpenAI,false,2026-02-05,https://openai.com/index/introducing-gpt-5-3-codex/,vendor_reported,
 swe-marathon,Grok 4.5,29,,,xAI,false,2026-07-16,https://x.ai/news/grok-4-5,vendor_reported,
+swe-marathon,Kimi K3.1 Pro,51.7,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,SWE-Marathon v1.1; max effort.
+swe-refactor-bench,MiniMax M3.1 Flash,23.0,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,Transcribed from the page image.
 swe-sweep,Gemini 4 Argon,4.3,,,Google,false,2026-09-30,https://deepmind.google/models/model-cards/gemini-4-carbon/,vendor_reported,
 swe-sweep,Gemini 4 Carbon,9.6,,,Google,false,2026-10-28,https://deepmind.google/models/model-cards/gemini-4-carbon/,vendor_reported,
 swe-sweep,Gemini 4 Hydrogen,13.5,,,Google,false,2026-11-12,https://deepmind.google/models/model-cards/gemini-4-hydrogen/,vendor_reported,
@@ -1152,6 +1386,8 @@ tau2-airline,GPT-5,62.6,,high,OpenAI,false,2025-08-07,https://openai.com/index/g
 tau2-airline,GPT-5 mini,60,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 tau2-airline,GPT-5 nano,41,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 tau2-airline,GPT-5.1,67,,high,OpenAI,false,2025-11-13,https://openai.com/index/gpt-5-1-for-developers/,vendor_reported,
+tau2-airline,Nemotron 3 Ultra,79.8,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+tau2-airline,Nemotron 3.5 Super VL,76.5,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 tau2-retail,Gemini 3 Pro,85.3,,,Google,false,2025-11-18,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 tau2-retail,Gemini 3.1 Pro,90.8,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 tau2-retail,Gemma 4 26B A4B,85.5,,,Google,true,2026-04-02,https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/,vendor_reported,
@@ -1163,6 +1399,8 @@ tau2-retail,GPT-5 mini,78.3,,high,OpenAI,false,2025-08-07,https://openai.com/ind
 tau2-retail,GPT-5 nano,62.3,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 tau2-retail,GPT-5.1,77.9,,,OpenAI,false,2025-11-13,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
 tau2-retail,GPT-5.2,82,,,OpenAI,false,2025-12-11,https://openai.com/index/introducing-gpt-5-2/,vendor_reported,
+tau2-retail,Nemotron 3 Ultra,73.7,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+tau2-retail,Nemotron 3.5 Super VL,69.24,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 tau2-telecom,Gemini 3 Pro,98,,,Google,false,2025-11-18,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 tau2-telecom,Gemini 3.1 Pro,99.3,,,Google,false,2026-02-19,https://deepmind.google/models/model-cards/gemini-3-1-pro/,vendor_reported,
 tau2-telecom,GPT-5,96.7,,high,OpenAI,false,2025-08-07,https://openai.com/index/gpt-5-1-for-developers/,vendor_reported,
@@ -1173,8 +1411,14 @@ tau2-telecom,GPT-5.2,98.7,,,OpenAI,false,2025-12-11,https://openai.com/index/int
 tau2-telecom,GPT-5.4,98.9,,xhigh,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-4-mini-and-nano/,vendor_reported,
 tau2-telecom,GPT-5.4 Mini,93.4,,xhigh,OpenAI,false,2026-03-17,https://openai.com/index/introducing-gpt-5-4-mini-and-nano/,vendor_reported,
 tau2-telecom,GPT-5.4 Nano,92.5,,xhigh,OpenAI,false,2026-03-17,https://openai.com/index/introducing-gpt-5-4-mini-and-nano/,vendor_reported,
+tau2-telecom,Nemotron 3 Ultra,83.0,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+tau2-telecom,Nemotron 3.5 Super VL,73.19,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 tau2-telecom-original,GPT-5.4,92.8,,,OpenAI,false,2026-03-05,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
 tau2-telecom-original,GPT-5.5,98,,,OpenAI,false,2026-04-23,https://openai.com/index/introducing-gpt-5-5/,vendor_reported,
+tau3-banking,Beam 1.0,36.1,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
+tau3-banking,Nemotron 3 Ultra,18.4,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+tau3-banking,Nemotron 3.5 Super VL,18.88,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+tax-agent-bench,Inkling 2 Small,38.9,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,As reported by Vals AI (cited on the page).
 terminal-bench,DeepSeek-V4-Flash,56.9,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,Terminal Bench 2.0.
 terminal-bench,DeepSeek-V4-Pro,67.9,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,Terminal Bench 2.0.
 terminal-bench,Gemini 3 Flash,47.6,,,Google,false,2025-12-17,https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/,vendor_reported,"Terminal-Bench 2.0, Terminus-2 harness."
@@ -1193,6 +1437,7 @@ terminal-bench,GPT-5.5,82.7,,,OpenAI,false,2026-04-23,https://openai.com/index/i
 terminal-bench-1,DeepSeek-V3.1,31.3,,,DeepSeek,true,2025-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus,vendor_reported,
 terminal-bench-1,DeepSeek-V3.1-Terminus,36.7,,,DeepSeek,true,2025-09-22,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
 terminal-bench-1,DeepSeek-V3.2-Exp,37.7,,,DeepSeek,true,2025-09-29,https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp,vendor_reported,
+terminal-bench-2-1,Beam 1.0,80.1,,,Reflection,true,2026-10-05,https://huggingface.co/reflection/Beam-1.0-501B-A23B,vendor_reported,BF16.
 terminal-bench-2-1,Claude Mythos 5,88,,,Anthropic,false,2026-06-09,https://www.anthropic.com/news/claude-fable-5-mythos-5,vendor_reported,Starred cell of the Mythos 5 / Fable 5 column (Mythos 5's score).
 terminal-bench-2-1,Claude Opus 4.8,82.7,,,Anthropic,false,2026-05-28,https://www.anthropic.com/news/claude-sonnet-5,vendor_reported,
 terminal-bench-2-1,Claude Sonnet 4.6,67,,,Anthropic,false,2026-02-17,https://www.anthropic.com/news/claude-sonnet-5,vendor_reported,
@@ -1217,6 +1462,9 @@ terminal-bench-2-1,GPT-5.6 Sol,88.8,,,OpenAI,false,2026-07-09,https://openai.com
 terminal-bench-2-1,GPT-5.6 Sol Ultra,91.9,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 terminal-bench-2-1,GPT-5.6 Terra,87.4,,,OpenAI,false,2026-07-09,https://openai.com/index/gpt-5-6/,vendor_reported,
 terminal-bench-2-1,Grok 4.5,83.3,,,xAI,false,2026-07-16,https://x.ai/news/grok-4-5,vendor_reported,
+terminal-bench-2-1,Muse Spark Open,76.4,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Terminus 2 agent. Transcribed from the page image.
+terminal-bench-2-1,Nemotron 3 Ultra,54.8,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+terminal-bench-2-1,Nemotron 3.5 Super VL,60.67,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 terminal-bench-3,DeepSeek V4 Flash 0731,7.6,,,DeepSeek,true,2026-07-31,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 terminal-bench-3,DeepSeek V4 Pro 0813,11.8,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 terminal-bench-3,DeepSeek V4.1 Flash,30,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
@@ -1237,6 +1485,7 @@ terminal-bench-4,DeepSeek V4 Flash 0731,7,,,DeepSeek,true,2026-07-31,https://hug
 terminal-bench-4,DeepSeek V4 Pro 0813,12.4,,,DeepSeek,true,2026-08-13,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash,vendor_reported,
 terminal-bench-4,DeepSeek V4.1 Flash,31.2,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
 terminal-bench-4,DeepSeek V4.1 Flash 1017,42.3,,,DeepSeek,true,2026-10-17,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
+terminal-bench-4,ERNIE 5.5 Flash Preview,46.5,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Claude Code harness. Transcribed from the page image.
 terminal-bench-4,Gemini 3.7 Flash,11.2,,,Google,false,2026-08-13,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
 terminal-bench-4,Gemini 3.8 Flash,19.1,,,Google,false,2026-09-02,https://deepmind.google/models/model-cards/gemini-3-8-flash/,vendor_reported,
 terminal-bench-4,Gemini 4 Argon,57.4,,,Google,false,2026-09-30,https://deepmind.google/models/model-cards/gemini-4-argon/,vendor_reported,
@@ -1247,6 +1496,16 @@ terminal-bench-4,GPT-6.1 Sol,55.9,,max,OpenAI,false,2026-09-29,https://openai.co
 terminal-bench-4,GPT-6.1 Terra,50.3,,max,OpenAI,false,2026-10-26,https://openai.com/index/introducing-gpt-6-1-terra/,vendor_reported,From the page's chart data (best score across effort levels).
 terminal-bench-4,Grok 4.6,20.3,,,xAI,false,2026-08-12,https://x.ai/news/grok-4-7,vendor_reported,
 terminal-bench-4,Grok 4.7,37.6,,,xAI,false,2026-09-21,https://x.ai/news/grok-4-7,vendor_reported,
+terminal-bench-4,Hy4,44.4,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Claude Code harness. Transcribed from the page image.
+terminal-bench-4,Hy4 flash,19.2,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Claude Code harness. Transcribed from the page image.
+terminal-bench-4,Kimi K3.1 Pro,65.7,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Claude Code harness; max effort.
+terminal-bench-4,MiniMax M3.1 Flash,38.1,,,MiniMax,false,2026-10-19,https://www.minimax.io/blog/minimax-m31f,vendor_reported,Codex harness. Transcribed from the page image.
+terminal-bench-4,Muse Ember,40.9,,,Meta,false,2026-11-09,https://research.meta.ai/blog/muse-ember,vendor_reported,Best published harness; max effort.
+terminal-bench-4,Nemotron 3 Ultra,0,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,"From the ""[offline]"" section."
+terminal-bench-4,Nemotron 3.5 Super VL,1,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,"From the ""[offline]"" section."
+terminal-bench-4,Qwen3.8 Max (0902),38.9,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
+terminal-bench-4,Qwen4-Max,48.5,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the chart labels.
+terminal-bench-4,Tencent Hy4 preview,26.3,,,Tencent,true,2026-08-28,https://huggingface.co/tencent/Hy4-flash,vendor_reported,Claude Code harness. Transcribed from the page image.
 terminal-bench-4-1,Gemini 4 Hydrogen,57,,,Google,false,2026-11-12,https://deepmind.google/models/model-cards/gemini-4-hydrogen/,vendor_reported,
 terminal-bench-4-1,Gemini 4 Neon,65.2,,,Google,false,2026-11-18,https://deepmind.google/models/model-cards/gemini-4-neon/,vendor_reported,Cheating-adjusted accuracy.
 terminal-bench-science,Claude Fable 5,24.7,,,Anthropic,false,2026-06-09,https://www.anthropic.com/claude-fable-and-mythos-5-1,vendor_reported,
@@ -1255,6 +1514,7 @@ terminal-bench-science,Claude Fable 5.2,74.6,,,Anthropic,false,2026-11-09,https:
 terminal-bench-science,Claude Mythos 5.2,75.3,,,Anthropic,false,2026-11-09,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,Labelled Mythos 5.2 in the Fable 5.2 column.
 terminal-bench-science,Claude Opus 5,29,,,Anthropic,false,2026-07-24,https://www.anthropic.com/claude-opus-5-5,vendor_reported,
 terminal-bench-science,Claude Opus 5.5,58.7,,,Anthropic,false,2026-09-22,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
+terminal-bench-science,ERNIE 5.5 Flash Preview,21.0,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Claude Code harness. Transcribed from the page image.
 terminal-bench-science,Gemini 4 Argon,57.6,,,Google,false,2026-09-30,https://deepmind.google/models/model-cards/gemini-4-argon/,vendor_reported,
 terminal-bench-science,Gemini 4 Hydrogen,51.4,,,Google,false,2026-11-12,https://deepmind.google/models/model-cards/gemini-4-hydrogen/,vendor_reported,
 terminal-bench-science,Gemini 4 Neon,70.5,,,Google,false,2026-11-18,https://deepmind.google/models/model-cards/gemini-4-neon/,vendor_reported,
@@ -1265,6 +1525,7 @@ terminal-bench-science,GPT-6.1 Sol,57,,max,OpenAI,false,2026-09-29,https://opena
 terminal-bench-science,GPT-6.1 Terra,58.3,,max,OpenAI,false,2026-10-26,https://openai.com/index/introducing-gpt-6-1-terra/,vendor_reported,From the page's chart data (best score across effort levels).
 terminal-bench-science,GPT-6.2 Astra,77.1,,max,OpenAI,false,2026-11-17,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
 terminal-bench-science,GPT-6.2 Sol,68,,max,OpenAI,false,2026-11-17,https://openai.com/index/introducing-gpt-6-2-astra-sol/,vendor_reported,From the page's chart data (best score across effort levels).
+terminal-bench-science,Kimi K3.1 Pro,38.1,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Claude Code harness; max effort.
 toolathlon,DeepSeek-V3.2,35.2,,,DeepSeek,true,2025-12-01,https://api-docs.deepseek.com/news/news251201,vendor_reported,Tool-Decathlon.
 toolathlon,DeepSeek-V4-Flash,47.8,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
 toolathlon,DeepSeek-V4-Pro,51.8,,max,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro,vendor_reported,
@@ -1287,7 +1548,9 @@ toolathlon-verified,DeepSeek V4 Pro 0813,74.1,,,DeepSeek,true,2026-08-13,https:/
 toolathlon-verified,DeepSeek-V4-Flash,49.7,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
 toolathlon-verified,DeepSeek-V4-Flash-Vision-Exp,75.9,,,DeepSeek,true,2026-08-21,https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp,vendor_reported,
 toolathlon-verified,DeepSeek-V4-Pro,55.9,,,DeepSeek,true,2026-04-24,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813,vendor_reported,
+toolathlon-verified,ERNIE 5.5 Flash Preview,75.0,,,Baidu,false,2026-11-11,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,vendor_reported,Transcribed from the page image.
 usamo-2025,Grok 4,37.5,,,xAI,false,2025-07-09,https://x.ai/news/grok-4,vendor_reported,
+v-star,Nemotron 3.5 Super VL,85.6,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 vending-bench-1,Grok 4,4694.15,,,xAI,false,2025-07-09,https://x.ai/news/grok-4,vendor_reported,Average of 5 runs (page text).
 vending-bench-2,Gemini 3 Flash,3635,,,Google,false,2025-12-17,https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/,vendor_reported,
 vending-bench-2,Gemini 3 Pro,5478.16,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,
@@ -1295,9 +1558,11 @@ vending-bench-2-balance,Gemini 4 Argon,13718,,,Google,false,2026-09-30,https://d
 vending-bench-2-balance,Gemini 4 Carbon,16484,,,Google,false,2026-10-28,https://deepmind.google/models/model-cards/gemini-4-carbon/,vendor_reported,
 vending-bench-2-balance,Gemini 4 Hydrogen,14549,,,Google,false,2026-11-12,https://deepmind.google/models/model-cards/gemini-4-hydrogen/,vendor_reported,
 vibe-code-bench,Gemini 4 Argon,91.9,,,Google,false,2026-09-30,https://deepmind.google/models/model-cards/gemini-4-argon/,vendor_reported,
+vibe-code-bench,Inkling 2 Small,81.6,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,independent,Vibe Code Bench v1.1. As reported by Vals AI (cited on the page).
 videomme,GPT-5,86.7,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 videomme,GPT-5 mini,78.5,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
 videomme,GPT-5 nano,65.7,,high,OpenAI,false,2025-08-07,https://openai.com/index/introducing-gpt-5-for-developers/,vendor_reported,
+videomme-v2,Nemotron 3.5 Super VL,32.85,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
 videommmu,Gemini 3 Flash,86.9,,,Google,false,2025-12-17,https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/,vendor_reported,
 videommmu,Gemini 3 Pro,87.6,,,Google,false,2025-11-18,https://blog.google/products-and-platforms/products/gemini/gemini-3/,vendor_reported,
 videommmu,Gemini 3.1 Flash-Lite,84.8,,,Google,false,2026-03-03,https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/,vendor_reported,
@@ -1310,10 +1575,24 @@ wandr,Claude Fable 5.1,68.7,,,Anthropic,false,2026-09-01,https://www.anthropic.c
 wandr,Claude Fable 5.2,82.1,,,Anthropic,false,2026-11-09,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
 wandr,Claude Opus 5.5,72.3,,,Anthropic,false,2026-09-22,https://www.anthropic.com/claude-fable-and-mythos-5-2,vendor_reported,
 webexploitbench-1-2,Gemini 4 Neon,51.3,,,Google,false,2026-11-18,https://deepmind.google/models/model-cards/gemini-4-neon/,vendor_reported,
+webvoyager,Nemotron 3.5 Super VL,77.72,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,"From the ""[offline]"" section."
+wmt24pp,Nemotron 3 Ultra,82.7,,,Nvidia,true,2026-06-04,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+wmt24pp,Nemotron 3.5 Super VL,84.8,,,Nvidia,true,2026-10-15,https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,vendor_reported,
+work360,Qwen3.8 Max (0902),47.74,,,Alibaba,false,2026-09-01,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the page text.
+work360,Qwen4-Max,52.69,,,Alibaba,false,2026-11-16,https://qwen.ai/blog?id=qwen4-max,vendor_reported,From the page text.
 x-browse,Grok 4,53.2,,,xAI,false,2025-07-09,https://x.ai/news/grok-4-fast,vendor_reported,
 x-browse,Grok 4 Fast,58,,,xAI,false,2025-09-19,https://x.ai/news/grok-4-fast,vendor_reported,
 x-browse,Grok 4.1 Fast,56.3,,,xAI,false,2025-11-19,https://x.ai/news/grok-4-1-fast,vendor_reported,
 xbench-deepsearch,Grok 4,66,,,xAI,false,2025-07-09,https://x.ai/news/grok-4-fast,vendor_reported,
 xbench-deepsearch,Grok 4 Fast,74,,,xAI,false,2025-09-19,https://x.ai/news/grok-4-fast,vendor_reported,
+xdev-bench-hard,Kimi K3,33.3,,,Moonshot,true,2026-07-16,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Kimi K3 from the chart description.
+xdev-bench-hard,Kimi K3.1 Pro,81.0,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,Kimi K3 from the chart description.
+zerobench,Inkling 2 Small,29.0,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,Main set; xhigh.
+zerobench,Kimi K3.1 Pro,39.0,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,pass@5 (avg@5: 29.8); max effort.
 zerobench-tools,DeepSeek V4.1 Flash,49,,,DeepSeek,true,2026-09-10,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
 zerobench-tools,DeepSeek V4.1 Flash 1017,51,,,DeepSeek,true,2026-10-17,https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017,vendor_reported,
+zerobench-tools,Hy4,55.4,,,Tencent,false,2026-11-04,https://huggingface.co/tencent/Hy4-flash,vendor_reported,pass@5. Transcribed from the page image.
+zerobench-tools,Hy4 flash,45.8,,,Tencent,true,2026-11-16,https://huggingface.co/tencent/Hy4-flash,vendor_reported,pass@5. Transcribed from the page image.
+zerobench-tools,Inkling 2 Small,44.0,,,Thinking Machines,true,2026-11-05,https://thinkingmachines.ai/news/inkling-2-small/,vendor_reported,"Main set, with Python; xhigh."
+zerobench-tools,Kimi K3.1 Pro,63.0,,,Moonshot,true,2026-10-23,https://www.kimi.com/en/blog/kimi-k3-1-pro,vendor_reported,pass@5; max effort.
+zerobench-tools,Muse Spark Open,50.0,,,Meta,true,2026-10-15,https://research.meta.ai/blog/muse-spark-open,vendor_reported,Transcribed from the page image.
