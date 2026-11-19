@@ -12,12 +12,14 @@ chartography,Chartography (no tools),reasoning,Surge AI,,pct,1,chartography,no t
 binder-design,De novo binder design (24 hr),life-sciences,,,index,,,,1110,"Protein design within 24 hours; score as published, scale not stated."
 robodojo-sim,RoboDojo Sim,agents,,,pct,1,,,1120,Controlling a simulated two-arm robot from camera images.
 cursorbench-3-2,CursorBench 3.2,coding,Cursor,,pct,1,cursorbench,3.2,1130,Version 3.2.0; Epoch's CursorBench matches version 4.0.
+cursorbench-4-1,CursorBench 4.1,coding,Cursor,,pct,1,cursorbench,4.1,1135,Version 4.1; Epoch's CursorBench is version 4.0.
 cyscenariobench,CyScenarioBench,cyber,,,pct,1,,,1140,Realistic cyber-operation scenarios; each lab's scores are based on unique tasks.
 frontiercode-2,FrontierCode 2.0,coding,,,pct,1,frontiercode,2.0,1150,Would the maintainers of open-source repositories merge the model's code changes. A newer version than Epoch's FrontierCode.
 frontiercode-diamond,FrontierCode (Diamond),coding,Cognition,,pct,1,frontiercode,Diamond,1160,"The Diamond set of FrontierCode, as named on Anthropic's pages; scores differ from the Main set (Epoch's FrontierCode)."
 chartography-with-tools,Chartography (with tools),reasoning,Surge AI,,pct,1,chartography,with tools,1170,"Visual chart recognition, tool use allowed."
 benchcad,BenchCAD,coding,,,pct,1,benchcad,BenchCAD,1180,CAD modelling of engineering parts.
 benchcad-python,BenchCAD (python tool),coding,,,pct,1,benchcad,python tool,1190,"CAD modelling of engineering parts, with a Python tool."
+benchcad-2-1-core,BenchCAD 2.1 (Core),coding,,,pct,1,benchcad,2.1 Core,1195,"BenchCAD version 2.1, Core set: CAD modelling of engineering parts."
 big-finance-bench,Big Finance Bench,agents,,,pct,1,,,1200,Finance work tasks.
 exploitgym,ExploitGym,cyber,,,pct,1,,,1210,Exploit development under a time cap (2 h or 6 h; the cap per row is in its notes where known).
 kernelgen-1p,KernelGen 1P (OpenAI internal),internal,OpenAI,,pct,1,,,1220,
@@ -132,7 +134,8 @@ cwe-bench,CWE-bench,cyber,,,pct,1,,,2300,Finding weakness classes (CWEs) in real
 posttrainbench,PostTrainBench,coding,,,pct,1,,,2310,Post-training a language model as an ML engineer would.
 riemannbench,RiemannBench,maths,,,pct,1,,,2320,Research-level mathematics.
 vibe-code-bench,Vibe Code Bench,coding,Vals AI,,pct,1,,,2330,Building working apps from natural-language specs.
-swe-sweep,SWE-sweep,coding,,,pct,1,,,2340,"Large, sweeping software changes across a codebase."
+swe-sweep,SWE-sweep,coding,,,pct,1,swe-sweep,mini-SWE harness,2340,"Large, sweeping software changes across a codebase, in the mini-SWE agent harness."
+swe-sweep-provider-harness,SWE-sweep (provider harness),coding,,,pct,1,swe-sweep,provider harness,2345,SWE-sweep run in each model provider's own agent harness; scores far higher than the mini-SWE harness.
 hle-diamond,Humanity's Last Exam (Diamond),science,,,pct,1,humanity-s-last-exam,Diamond,2350,The Diamond subset of Humanity's Last Exam.
 mka,Multimodal Knowledge Agents,agents,Google DeepMind,,pct,1,,,2360,"Agents answering knowledge questions from images, video and documents (Climb WSR accuracy)."
 agents-last-exam,Agents' Last Exam,agents,,,pct,1,agents-last-exam,v1,2370,Long-horizon professional work on a computer across 55 sub-industries (v1).
@@ -192,3 +195,8 @@ automationbench,AutomationBench,agents,Zapier,,pct,1,automationbench,AutomationB
 automationbench-private,AutomationBench (private set),agents,Zapier,,pct,1,automationbench,private set,2910,"Zapier's AutomationBench, private task set."
 automationbench-public,"AutomationBench (public, DeepSeek runs)",agents,,,pct,1,automationbench,public (DeepSeek),2920,AutomationBench public set as run by DeepSeek; not comparable with the other labs' runs.
 automationbench-v106-deepseek,AutomationBench v1.0.6 (DeepSeek runs),agents,,,pct,1,automationbench,v1.0.6 (DeepSeek),2930,AutomationBench 1.0.6 as run by DeepSeek; other labs' 1.0.6 runs of the same models score far lower.
+lifeval,LifeVal (OpenAI),internal,OpenAI,,pct,1,,,2940,"OpenAI's published everyday-tasks evaluation; so far scored only on OpenAI models, so kept internal."
+gdpval-v2,GDPval v2 (OpenAI internal),internal,OpenAI,,pct,1,,,2950,Long-horizon knowledge-work assignments; labelled internal by OpenAI. Not GDPval (v1) or GDPval-AA.
+secureswe,SecureSWE (OpenAI internal),internal,OpenAI,,pct,1,,,2960,Writing functional and secure code for security-sensitive components.
+patchbench,PatchBench (OpenAI),internal,OpenAI,,pct,1,,,2970,Producing security patches that keep intended behaviour; only scored on OpenAI models so far.
+webexploitbench-1-2,WebExploitBench v1.2,cyber,,,pct,1,,,2980,Exploiting vulnerabilities in web applications (version 1.2).
