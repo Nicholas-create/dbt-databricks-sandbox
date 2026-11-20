@@ -5,7 +5,7 @@ with source as (
 ),
 
 -- one row per model_name in the seed (tested there), so only light tidying
--- here; empty text becomes null so int_models__unioned falls back to Epoch
+-- here
 final as (
 
     select

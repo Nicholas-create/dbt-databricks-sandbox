@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_models
-    description: "One row per AI model, ready for reporting. Source: Epoch AI (CC-BY 4.0), plus new releases added by hand in the seed manual_models (int_models__unioned)."
+    description: "One row per AI model, ready for reporting. Source: the model list, seed manual_models."
     columns:
       - name: model_name
         description: "Primary key."
@@ -10,7 +10,7 @@ models:
           - unique
           - not_null
       - name: access_type
-        description: "How the model is made available. 'Unknown' where Epoch has no data."
+        description: "How the model is made available. 'Unknown' where the model list leaves it blank."
         data_tests:
           - accepted_values:
               arguments:
@@ -25,12 +25,8 @@ models:
                   - 'Unknown'
       - name: is_open_weights
         description: "True if weights are downloadable in any form. Null where access is unknown."
-      - name: model_source
-        description: "epoch, manual (added by hand in seeds/manual/manual_models.csv) or epoch+manual."
-        data_tests:
-          - not_null
   - name: fct_model_prices_daily
-    description: "One row per OpenRouter model per snapshot date, with its Epoch match where one exists. All OpenRouter models are kept; unmatched ones have a null epoch_model_name. Prices in USD per million tokens, rounded to 4 dp."
+    description: "One row per OpenRouter model per snapshot date, with its match in the model list where one exists. All OpenRouter models are kept; unmatched ones have a null model_name. Prices in USD per million tokens, rounded to 4 dp."
     columns:
       - name: model_snapshot_key
         description: "openrouter_model_id + snapshot_date. Primary key."
@@ -43,8 +39,8 @@ models:
       - name: snapshot_date
         data_tests:
           - not_null
-      - name: epoch_model_name
-        description: "Matched Epoch model. Null when unmatched."
+      - name: model_name
+        description: "Matched model from the model list (dim_models). Null when unmatched."
         data_tests:
           - relationships:
               arguments:
@@ -63,7 +59,7 @@ models:
         description: "Null when variable-priced. 0 means free."
 
   - name: rpt_models_latest_price
-    description: "One row per Epoch model with its latest standard OpenRouter price. Where several listings match, the main listing wins over dated checkpoints and previews, then the cheaper one. Unpriced models are kept (has_price = false)."
+    description: "One row per model in the model list with its latest standard OpenRouter price. Where several listings match, the main listing wins over dated checkpoints and previews, then the cheaper one. Unpriced models are kept (has_price = false)."
     columns:
       - name: model_name
         description: "Primary key. Matches dim_models."
@@ -71,19 +67,19 @@ models:
           - unique
           - not_null
       - name: published_date
-        description: "Release date from Epoch AI. The website plots models along this axis."
+        description: "Release date from the model list."
         data_tests:
           - not_null
       - name: has_price
         data_tests:
           - not_null
       - name: standard_listings
-        description: "How many standard OpenRouter listings matched this Epoch model. Above 1 means the tie-break chose one."
+        description: "How many standard OpenRouter listings matched this model. Above 1 means the tie-break chose one."
       - name: price_as_of_date
         description: "Snapshot date the price comes from. Older than the latest snapshot means OpenRouter has delisted the listing."
 
   - name: dim_benchmarks
-    description: "One row per benchmark (Epoch catalog seed or hand-entered definition), with its category, scale and coverage. The site shows those whose category is_on_site."
+    description: "One row per benchmark (seed manual_benchmarks), with its category, scale, coverage and weight in the combined Overall scores. The site shows those whose category is_on_site."
     columns:
       - name: benchmark_id
         description: "Primary key."
@@ -106,8 +102,22 @@ models:
           - accepted_values:
               arguments:
                 values: ['pct', 'points', 'index']
-      - name: defined_in
-        description: "epoch_catalog, manual, or epoch_catalog+manual (manual overrides the display details)."
+      - name: released_date
+        description: "When the benchmark (this version) was published. Sets its recency weight."
+        data_tests:
+          - not_null
+      - name: is_in_combined_scores
+        description: "True when the benchmark feeds the combined scores: on the site, a bounded scale (not an open-ended index) and at least two models."
+        data_tests:
+          - not_null
+      - name: age_years
+        description: "Years from released_date to the newest model release in the data (the reference date, so weights only change when the data does)."
+      - name: recency_weight
+        description: "0.5 ^ (age_years / var benchmark_half_life_years), capped at 1: 1 for a new benchmark, 0.5 one half-life later."
+      - name: weight_in_category
+        description: "Share of its category's combined score (adds up to 1 per category): recency weight, split between versions of the same benchmark family. Null when not in the combined scores."
+      - name: weight_in_overall
+        description: "Share of the headline Overall (adds up to 1 across all benchmarks): weight_in_category × the category's share (seed benchmark_categories.overall_weight). Null when not in the combined scores."
       - name: n_recent_models
         description: "Models released in the last 180 days (from build date) with a score."
       - name: leader_headroom
@@ -131,8 +141,7 @@ models:
 
   - name: fct_benchmark_scores
     description: >
-      One row per benchmark per model: the score the site shows. Sources: Epoch AI (CC BY 4.0)
-      and hand-entered results, which supersede Epoch's for the same benchmark and model.
+      One row per benchmark per model: the score the site shows (seed manual_benchmark_scores).
       Scores in site units: a share 0-1 for pct benchmarks.
     columns:
       - name: benchmark_model_key
@@ -151,21 +160,21 @@ models:
       - name: score
         data_tests:
           - not_null
-      - name: score_source
-        description: "epoch = Epoch's collected run; manual = entered by hand from a release page (seed manual_benchmark_scores)."
-        data_tests:
-          - accepted_values:
-              arguments:
-                values: ['epoch', 'manual']
       - name: source_type
-        description: "Manual rows only: vendor_reported (the developer about its own model) or independent."
+        description: "vendor_reported (the developer about its own model) or independent (a leaderboard or third-party run). The site marks vendor_reported scores with *."
         data_tests:
+          - not_null
           - accepted_values:
               arguments:
                 values: ['vendor_reported', 'independent']
 
   - name: fct_benchmark_category_scores
-    description: "One 'Overall' score per category per model, from an item response theory fit across the category's benchmarks (dbt Python model). Models need at least min_results scores in the category."
+    description: >
+      Combined scores from weighted item response theory fits (dbt Python model): one per category
+      per model (the category's 'Overall' pill; at least min_results results in the category), and
+      one per model with category = 'overall' (the headline Overall tab: one pooled fit across every
+      category; at least min_results results in at least two categories). Weights come from
+      dim_benchmarks.
     columns:
       - name: category_model_key
         description: "category + normalised model name. Primary key."
@@ -173,6 +182,6 @@ models:
           - unique
           - not_null
       - name: score
-        description: "Share of tasks the model would solve on a typical benchmark of this category (0-1)."
+        description: "Share of tasks the model would solve on a typical benchmark of this category, or of all categories for 'overall' (0-1)."
         data_tests:
           - not_null

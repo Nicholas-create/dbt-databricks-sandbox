@@ -3,8 +3,8 @@ version: 2
 models:
   - name: stg_manual__benchmark_scores
     description: >
-      Hand-entered scores from model release pages, tidied from the seed `manual_benchmark_scores`.
-      One row per benchmark and model. Scores stay as published (49.1 = 49.1%).
+      Every benchmark result, tidied from the seed `manual_benchmark_scores`. One row per benchmark
+      and model. Scores stay as published (49.1 = 49.1%).
     columns:
       - name: benchmark_model_key
         description: >
@@ -14,9 +14,13 @@ models:
         data_tests:
           - unique
           - not_null
+      - name: model_key
+        description: "Normalised model name (macro model_match_key): lowercase letters and digits only."
+        data_tests:
+          - not_null
 
   - name: stg_manual__models
-    description: "Models added by hand to the model list, tidied from the seed `manual_models`. One row per model_name."
+    description: "The model list, tidied from the seed `manual_models`. One row per model_name."
     columns:
       - name: model_name
         description: "Primary key."
@@ -25,10 +29,12 @@ models:
           - not_null
 
   - name: stg_manual__benchmarks
-    description: "Hand-entered benchmark definitions, tidied from the seed `manual_benchmarks`. One row per benchmark_id."
+    description: "Benchmark definitions, tidied from the seed `manual_benchmarks`. One row per benchmark_id."
     columns:
       - name: benchmark_id
         description: "Primary key."
         data_tests:
           - unique
           - not_null
+      - name: unit_max
+        description: "Top of the scale in site units; 1 for a pct benchmark even when the seed left it blank. Null only for an open-ended index."

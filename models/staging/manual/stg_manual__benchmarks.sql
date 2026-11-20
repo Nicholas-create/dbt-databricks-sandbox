@@ -15,10 +15,13 @@ final as (
         nullif(trim(publisher), '') as publisher,
         nullif(trim(source_url), '') as source_url,
         unit,
-        unit_max,
+        -- a share-of-tasks benchmark tops out at 1 even when the entry left it
+        -- blank
+        coalesce(unit_max, case when unit = 'pct' then 1 end) as unit_max,
         nullif(trim(benchmark_family), '') as benchmark_family,
         nullif(trim(variant_label), '') as variant_label,
         sort_order,
+        released_date,
         nullif(trim(notes), '') as notes
     from source
 

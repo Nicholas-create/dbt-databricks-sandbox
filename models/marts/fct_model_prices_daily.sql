@@ -18,7 +18,7 @@ matched as (
 
     select
         openrouter_model_id,
-        epoch_model_name,
+        model_name,
         match_method,
         pricing_variant
     from {{ ref('int_models__matched') }}
@@ -31,7 +31,7 @@ final as (
         -- keys
         prices.model_snapshot_key,
         prices.model_id as openrouter_model_id,
-        matched.epoch_model_name,
+        matched.model_name,
         prices.snapshot_date,
 
         -- attributes for slicing

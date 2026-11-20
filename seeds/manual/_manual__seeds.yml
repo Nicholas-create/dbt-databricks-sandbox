@@ -1,8 +1,11 @@
 version: 2
 
-# Benchmark data typed in by hand from model release pages (runbook:
-# ingestion/manual/README.md). Each file holds the CURRENT state: a correction is
-# an edited line, a withdrawal a deleted line, and Git history is the audit trail.
+# The project's own benchmark and model data, maintained in Git (runbook:
+# ingestion/manual/README.md). New rows are typed in from model release pages; the
+# rows dated before 20 Nov 2026 with source_url https://epoch.ai/benchmarks are a
+# one-time copy of the Epoch AI baseline (CC BY 4.0), owned and edited here like any
+# other row since. Each file holds the CURRENT state: a correction is an edited line,
+# a withdrawal a deleted line, and Git history is the audit trail.
 #
 # Every column has an explicit type. dbt reads a column listed in column_types as
 # text and lets the warehouse cast it, so nothing is guessed from the values
@@ -12,9 +15,8 @@ version: 2
 seeds:
   - name: manual_benchmarks
     description: >
-      Benchmarks not in the Epoch catalog seed (or whose display details override it), one row per
-      benchmark_id, in sort_order. A benchmark listed here and in `benchmark_catalog` takes its
-      display details from here and its place in the pill order from the catalog.
+      Every benchmark the project knows, one row per benchmark_id, in sort_order: its name,
+      category, scale, and when it was released (which sets its weight in the combined scores).
     config:
       column_types:
         benchmark_id: string
@@ -27,6 +29,7 @@ seeds:
         benchmark_family: string
         variant_label: string
         sort_order: int
+        released_date: date
         notes: string
     columns:
       - name: benchmark_id
@@ -65,21 +68,29 @@ seeds:
         description: "This version's label inside the split pill, e.g. '2.0' or 'with tools'. Needed on every member of a family of two or more."
       - name: sort_order
         description: >
-          Order of the versions inside a split pill (lowest first). Numbered in steps of 10 from 1010,
-          so a new version can slot between two others without renumbering. The catalog's benchmarks
-          (1, 2, ...) always come before hand-entered ones in the same family.
+          Order of the versions inside a split pill (lowest first). The first benchmarks are 1-27;
+          later ones are numbered in steps of 10 from 1010, so a new version can slot between two
+          others without renumbering.
         data_tests:
           - unique
+          - not_null
+      - name: released_date
+        description: >
+          When this benchmark (this version) was first published, YYYY-MM-DD: the paper,
+          announcement or leaderboard launch. If that can't be found, the date of the first release
+          page that reports it. Newer benchmarks count for more in the Overall scores (half-life:
+          var benchmark_half_life_years), because old ones saturate and leak into training data.
+        data_tests:
           - not_null
       - name: notes
         description: "What the benchmark measures, or which score variant is entered."
 
   - name: manual_benchmark_scores
     description: >
-      Benchmark results entered from model release pages, one row per benchmark and model. They
-      supersede Epoch's score for the same benchmark and model. Rows are kept sorted by benchmark_id,
-      then model_name (ignoring case), so a diff stays small and a duplicate sits next to its twin.
-      Uniqueness is tested in stg_manual__benchmark_scores, on the normalised model name.
+      Every benchmark result, one row per benchmark and model: entered from model release pages, plus
+      the copied Epoch baseline. Rows are kept sorted by benchmark_id, then model_name (ignoring
+      case), so a diff stays small and a duplicate sits next to its twin. Uniqueness is tested in
+      stg_manual__benchmark_scores, on the normalised model name.
     config:
       column_types:
         benchmark_id: string
@@ -95,7 +106,7 @@ seeds:
         notes: string
     columns:
       - name: benchmark_id
-        description: "Must exist in manual_benchmarks or benchmark_catalog (tested on fct_benchmark_scores)."
+        description: "Must exist in manual_benchmarks (tested on fct_benchmark_scores)."
         data_tests:
           - not_null
       - name: model_name
@@ -111,17 +122,21 @@ seeds:
       - name: effort
         description: "Reasoning effort or mode of the score entered, e.g. xhigh, max, thinking."
       - name: lab
-        description: "Developer, e.g. Anthropic. Required for models newer than the Epoch baseline (tests/assert_manual_scores_have_model_details.sql)."
+        description: "Developer, short form, e.g. Anthropic, Google, Meta. The leaderboard colours rows by it."
+        data_tests:
+          - not_null
       - name: is_open_weights
-        description: "true / false. Blank falls back to Epoch."
+        description: "true / false. Blank = unknown (falls back to the priced-models mart)."
       - name: released_date
-        description: "Model release date, YYYY-MM-DD. Required for models newer than the Epoch baseline."
+        description: "Model release date, YYYY-MM-DD. The 'best over time' chart plots by it."
+        data_tests:
+          - not_null
       - name: source_url
-        description: "The release page the number was read from."
+        description: "Where the number was read from: the release page, or https://epoch.ai/benchmarks for the copied baseline."
         data_tests:
           - not_null
       - name: source_type
-        description: "vendor_reported (the developer about its own model) or independent."
+        description: "vendor_reported (the developer about its own model) or independent (a leaderboard or third-party run, including the copied baseline)."
         data_tests:
           - not_null
           - accepted_values:
@@ -132,11 +147,9 @@ seeds:
 
   - name: manual_models
     description: >
-      Models added by hand to the model list (dim_models), one row per model, sorted by model_name.
-      For new releases Epoch's notable-models file doesn't list yet. Columns use Epoch's own
-      vocabulary, so a hand-entered row looks like an Epoch row downstream. Where Epoch also lists
-      the model, the values filled in here win (int_models__unioned); a warning test lists those
-      models, so a line can be deleted once Epoch has caught up.
+      The model list (dim_models), one row per model, sorted by model_name: every model the price
+      marts track, plus the benchmarked models copied from the Epoch baseline. A new release gets a
+      row here so OpenRouter prices can find it.
     config:
       column_types:
         model_name: string
@@ -157,17 +170,17 @@ seeds:
           - unique
           - not_null
       - name: organization
-        description: "Developer, spelled as Epoch spells it: Google DeepMind, Meta AI, Mistral AI, OpenAI."
+        description: "Developer, full name as existing rows spell it: Google DeepMind, Meta AI, Mistral AI, OpenAI."
         data_tests:
           - not_null
       - name: organization_country
-        description: "Country of the developer, as Epoch spells it, e.g. United States of America."
+        description: "Country of the developer, as existing rows spell it, e.g. United States of America."
       - name: published_date
         description: "Release date, YYYY-MM-DD: the first announcement, matching the release note and manual_benchmark_scores."
         data_tests:
           - not_null
       - name: model_accessibility
-        description: "Epoch's access category; dim_models derives is_open_weights from it."
+        description: "Access category; dim_models derives is_open_weights from it."
         data_tests:
           - not_null
           - accepted_values:
@@ -181,7 +194,7 @@ seeds:
                   - 'Open weights (non-commercial)'
                   - 'Open weights (restricted use)'
       - name: domains
-        description: "Comma-separated, Epoch's vocabulary, e.g. Language,Multimodal,Vision."
+        description: "Comma-separated, same vocabulary as existing rows, e.g. Language,Multimodal,Vision."
       - name: source_url
         description: "The release page or model card the details come from."
         data_tests:
