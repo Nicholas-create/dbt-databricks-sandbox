@@ -147,7 +147,7 @@ def main():
             r,
             harness=r.harness or "",
             effort=r.effort or "",
-            source_type=r.source_type,   # null = Epoch's run; vendor_reported / independent = entered by hand
+            source_type=r.source_type,   # vendor_reported (the site adds *) or independent
             source_url=r.source_url,
         ))
 
@@ -176,7 +176,8 @@ def main():
             "models": models,
         })
 
-    # Category "Overall" pills, fitted in dbt (fct_benchmark_category_scores)
+    # Combined scores, fitted in dbt (fct_benchmark_category_scores): each category's "Overall"
+    # pill, and the headline Overall tab (category "overall", whose parts are the category scores)
     composites_by_cat = defaultdict(list)
     for r in rows["composites"]:
         composites_by_cat[r.category].append(r)
@@ -204,7 +205,7 @@ def main():
     payload = {
         "generated": datetime.now(timezone.utc).date().isoformat(),
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "source": "Epoch AI, Capabilities & benchmarking (CC BY 4.0), plus results published by model developers",
+        "source": "Model developers' release pages and independent leaderboards; results before 20 Nov 2026 include Epoch AI data (CC BY 4.0)",
         "source_schema": db,
         "categories": [
             {"id": c.category_id, "label": c.label, "phrase": c.phrase,
@@ -216,9 +217,9 @@ def main():
 
     OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     OUT_FILE.write_text(json.dumps(payload, indent=1))
-    n_manual = sum(1 for r in rows["scores"] if r.source_type)
+    n_reported = sum(1 for r in rows["scores"] if r.source_type == "vendor_reported")
     print(f"Wrote {len(all_benchmarks)} benchmarks, {len(rows['scores'])} scores "
-          f"({n_manual} entered by hand) to {OUT_FILE}")
+          f"({n_reported} reported by the developer) to {OUT_FILE}")
 
 
 if __name__ == "__main__":
