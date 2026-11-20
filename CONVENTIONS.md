@@ -56,7 +56,7 @@ Scheduled loads that capture changing data (e.g. daily prices) use `.mode("appen
 ❌ `.mode("overwrite")`
 
 ### Hand-entered data lives in Git, as seeds
-Some data has no feed and is typed in by hand: benchmark results from model release pages, and new releases Epoch's notable-models file doesn't list yet (`manual_models`). It lives in the repo as dbt seeds (`seeds/manual/*.csv`, runbook in `ingestion/manual/README.md`), not in a warehouse table. A **source** is data that arrives from outside (an API, a file someone publishes); a **seed** is small data authored in the repo itself.
+The project's benchmark data has no feed: every benchmark, every result and the model list (`manual_models`) are typed in by hand from model release pages. (The history before 20 Nov 2026 was copied in once from Epoch AI and is maintained the same way.) It lives in the repo as dbt seeds (`seeds/manual/*.csv`, runbook in `ingestion/manual/README.md`), not in a warehouse table. A **source** is data that arrives from outside (an API, a file someone publishes); a **seed** is small data authored in the repo itself.
 
 - **Each CSV holds the current state.** A correction is an edited line; a withdrawal is a deleted line. Git history is the audit trail: every earlier value, when it changed, who changed it and in which PR.
 - **Every row says where it came from** (`source_url`, `source_type`), and each release gets a short note in `ingestion/manual/releases/`: what was entered from which page, and what was skipped and why.
@@ -67,7 +67,7 @@ Some data has no feed and is typed in by hand: benchmark results from model rele
 ✅ Typo in a score → edit that line of `manual_benchmark_scores.csv` in a PR
 ❌ Typo in a score → `INSERT` or `UPDATE` a warehouse table by hand
 
-✅ Score withdrawn → delete its line in a PR (Epoch's score, if any, shows again)
+✅ Score withdrawn → delete its line in a PR
 ❌ Score withdrawn → keep the line and add an `is_retracted` flag
 
 ✅ Seed column with an explicit type: `variant_label: string` in `column_types`
@@ -110,17 +110,17 @@ A singular test on the mart (`tests/assert_model_prices_not_negative.sql`) fails
 ✅ Good staging:
 ```sql
 select
-    `Model` as model_name,
-    `Publication date` as published_date
-from {{ source('epoch', 'notable_ai_models') }}
+    model_id,
+    cast(raw_json:name as string) as model_display_name
+from {{ source('openrouter', 'models_daily') }}
 ```
 
 ❌ Bad staging (business logic buried in the wrong layer):
 ```sql
 select
-    `Model` as model_name
-from {{ source('epoch', 'notable_ai_models') }}
-where `Domain` = 'Language'  -- filtering belongs downstream
+    model_id
+from {{ source('openrouter', 'models_daily') }}
+where model_id like 'openai/%'  -- filtering belongs downstream
 ```
 
 ---
@@ -129,24 +129,24 @@ where `Domain` = 'Language'  -- filtering belongs downstream
 
 | Thing | Pattern | Example |
 |---|---|---|
-| Raw schema | `raw_<source>` | `raw_epoch` |
-| Staging model | `stg_<source>__<entity>` | `stg_epoch__notable_models` |
+| Raw schema | `raw_<source>` | `raw_openrouter` |
+| Staging model | `stg_<source>__<entity>` | `stg_openrouter__models` |
 | Intermediate model | `int_<entity>__<verb>` | `int_models__joined_pricing` |
 | Mart | `fct_<event>` / `dim_<thing>` | `dim_models`, `fct_model_prices_daily` |
 | Hand-entered seed | `manual_<entity>` in `seeds/manual/` | `manual_benchmark_scores` |
-| Source YAML | `_<source>__sources.yml` | `_epoch__sources.yml` |
-| Model YAML | `_<source>__models.yml` | `_epoch__models.yml` |
+| Source YAML | `_<source>__sources.yml` | `_openrouter__sources.yml` |
+| Model YAML | `_<source>__models.yml` | `_openrouter__models.yml` |
 | Seed YAML | `_<folder>__seeds.yml` (`_seeds.yml` at the top) | `_manual__seeds.yml` |
-| Columns | `snake_case`, units in the name | `training_compute_flop`, `training_time_hours` |
-| Booleans | `is_` / `has_` prefix | `is_frontier_model` |
+| Columns | `snake_case`, units in the name | `output_price_usd_per_mtok`, `context_length_tokens` |
+| Booleans | `is_` / `has_` prefix | `is_open_weights` |
 
 > **Why:** a name should say which layer a model is in and where its data comes from, without opening the file.
 
-✅ `stg_epoch__notable_models.sql`
-❌ `epoch_clean.sql`
+✅ `stg_openrouter__models.sql`
+❌ `openrouter_clean.sql`
 
-✅ `training_power_draw_watts`
-❌ `power`
+✅ `context_length_tokens`
+❌ `context`
 
 ### Units and money
 - Every measured value carries its **unit in the column name**, including currency and scale.
@@ -169,8 +169,8 @@ where `Domain` = 'Language'  -- filtering belongs downstream
 
 > **Why:** `source()` and `ref()` let dbt work out build order and draw lineage. A hard-coded path breaks both and ties the code to one environment.
 
-✅ `from {{ ref('stg_epoch__notable_models') }}`
-❌ `from ai_model_tracker.dbt_nicholas.stg_epoch__notable_models`
+✅ `from {{ ref('stg_openrouter__models') }}`
+❌ `from ai_model_tracker.dbt_nicholas.stg_openrouter__models`
 
 ---
 
@@ -251,7 +251,7 @@ The website is published only after a successful production build (`site.yml` ru
 ✅ Dashboard dataset: `from rpt_models_latest_price`, with the dataset schema set to `analytics`
 ❌ Dashboard dataset reading `dbt_nsampson.rpt_models_latest_price`
 
-✅ `Add Epoch source and staging model with grain tests`
+✅ `Add OpenRouter source and staging model with grain tests`
 ❌ `updates`
 
 ---
@@ -319,24 +319,24 @@ join benchmarks b on s.benchmark_id = b.benchmark_id
 ```sql
 with benchmarks as (
 
-    select * from {{ ref('int_benchmarks__unioned') }}
+    select * from {{ ref('stg_manual__benchmarks') }}
 
 ),
 
-benchmark_rows as (
+categories as (
 
-    select * from {{ ref('stg_epoch__benchmark_rows') }}
+    select * from {{ ref('benchmark_categories') }}
 
 ),
 
-harnesses_seen as (
+benchmarks_labelled as (
 
     select
         benchmarks.benchmark_id,
-        benchmark_rows.harness
-    from benchmark_rows
-    inner join benchmarks
-        on benchmark_rows.file_name = benchmarks.epoch_file
+        categories.label as category_label
+    from benchmarks
+    inner join categories
+        on benchmarks.category = categories.category_id
 
 )
 ```
@@ -344,16 +344,16 @@ harnesses_seen as (
 ```sql
 with benchmarks as (
 
-    select * from {{ ref('int_benchmarks__unioned') }}
+    select * from {{ ref('stg_manual__benchmarks') }}
 
 ),
 
-harnesses_seen as (
+benchmarks_labelled as (
 
-    select b.benchmark_id, r.harness
-    from {{ ref('stg_epoch__benchmark_rows') }} r
-    inner join benchmarks b
-        on r.file_name = b.epoch_file
+    select b.benchmark_id, c.label as category_label
+    from benchmarks b
+    inner join {{ ref('benchmark_categories') }} c
+        on b.category = c.category_id
 
 )
 ```
@@ -422,12 +422,9 @@ clean-targets:
 
 | Source | Licence | Notes |
 |---|---|---|
-| Epoch AI (Notable AI Models) | CC-BY 4.0 | Credit Epoch AI wherever the data is shown |
-| Epoch AI (Capabilities & benchmarking) | CC-BY 4.0 | Benchmark **baseline**: loaded once on 14 Nov 2026 from `epoch.ai/data/benchmark_data.zip` into `raw_epoch.benchmark_rows` (notebook `ingestion/ingest_epoch_benchmarks.py`, not scheduled). Credit Epoch AI on the site |
-| Model release pages (manual) | Published results, cited with their URL | Every benchmark result since the baseline, entered from the developer's announcement into the seeds `seeds/manual/manual_benchmarks.csv` and `manual_benchmark_scores.csv` (one release note per release in `ingestion/manual/releases/`). Only a developer's results for its own models; marked as developer-reported on the site. New releases Epoch doesn't list yet go in `seeds/manual/manual_models.csv` (joined to Epoch in `int_models__unioned`, hand-entered values win) The earlier warehouse tables `workspace.raw_manual.*` are retired and left untouched |
+| Model release pages (manual) | Published results, cited with their URL | **The source for every new result.** Entered from the developer's announcement into the seeds `seeds/manual/manual_benchmarks.csv`, `manual_benchmark_scores.csv` and `manual_models.csv` (one release note per release in `ingestion/manual/releases/`). Only a developer's results for its own models; marked as developer-reported on the site. The earlier warehouse tables `workspace.raw_manual.*` are retired and left untouched |
+| Epoch AI (Capabilities & benchmarking; Data on AI models) | CC BY 4.0 | **History only, not a feed.** The results and models the project started from were copied into the same seeds once on 20 Nov 2026 (rows with `source_url` https://epoch.ai/benchmarks, or the note "From Epoch AI's notable-models list"), and are maintained there since. Nothing reads from Epoch at build time. The licence requires credit wherever the data is shown: the site's credit line and the README keep it. The old `raw_epoch` tables in Databricks are no longer used |
 | OpenRouter | Public API (`/api/v1/models`, no key needed) | Model catalogue and pricing; loaded daily at 06:00 Europe/London by the Databricks notebook `ingest_openrouter_models` (copy in `ingestion/`) into `raw_openrouter.models_daily` |
 
 ### Loading notes
-- **Epoch CSV:** upload with *Rows span multiple lines* ticked and *Escape character* set to `"`. Without these, multi-paragraph text fields break into extra rows (first load produced 6,407 rows instead of 1,091).
-- **Missing values:** many recent closed models have no published parameter count. These nulls are genuine gaps in the source, not load errors.
 - **OpenRouter benchmarks:** the API response includes a `benchmarks.artificial_analysis` block. It is deliberately not parsed or published, because Artificial Analysis's free terms don't allow redistribution.
