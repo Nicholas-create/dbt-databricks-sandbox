@@ -57,7 +57,7 @@ export function createRace(section, deps) {
   function show(cat, { animate = true } = {}) {
     current = cat;
     const category = catById.get(cat);
-    const b = benchById.get(category.benchmarks[0]); // the category's headline view (ECI, or its Overall)
+    const b = benchById.get(category.benchmarks[0]); // the category's headline view: its Overall
     const unit = UNITS[b.unit];
     phraseEl.textContent = category.phrase;
     document.querySelectorAll("[data-race-phrase]").forEach((n) => { n.textContent = category.phrase; });
@@ -244,7 +244,7 @@ export function createRace(section, deps) {
         tip.innerHTML = `
           <p class="tt-name">${escapeHtml(m.name)}</p>
           <p class="tt-meta">${[m.lab, fmtMonth(m.released), m.open_weights === true ? "Open weights" : m.open_weights === false ? "Closed" : ""].filter(Boolean).map(escapeHtml).join(" · ")}</p>
-          <dl><dt>${b.kind === "composite" ? `${escapeHtml(category.label)} overall` : escapeHtml(b.name)}</dt><dd>${unit.fmt(m.score)}</dd>
+          <dl><dt>${b.kind !== "composite" ? escapeHtml(b.name) : category.id === "overall" ? "Overall" : `${escapeHtml(category.label)} overall`}</dt><dd>${unit.fmt(m.score)}</dd>
           ${stepSet.has(m) ? `<dt>New best for</dt><dd>${escapeHtml(m.lab)}</dd>` : ""}</dl>`;
         placeTip(tip, section, event);
       })

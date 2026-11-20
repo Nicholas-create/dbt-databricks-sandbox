@@ -16,6 +16,7 @@ final as (
         || {{ model_match_key('model_name') }} as benchmark_model_key,
         trim(benchmark_id) as benchmark_id,
         trim(model_name) as model_name,
+        {{ model_match_key('model_name') }} as model_key,
 
         -- result, exactly as published (49.1 means 49.1%); converted to site
         -- units downstream
@@ -23,8 +24,8 @@ final as (
         nullif(trim(harness), '') as harness,
         nullif(trim(effort), '') as effort,
 
-        -- model metadata (null = fall back to Epoch)
-        nullif(trim(lab), '') as lab,
+        -- model details
+        trim(lab) as lab,
         is_open_weights,
         released_date,
 

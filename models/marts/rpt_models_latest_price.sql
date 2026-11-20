@@ -1,4 +1,4 @@
-with epoch_models as (
+with models as (
 
     select * from {{ ref('dim_models') }}
 
@@ -16,7 +16,7 @@ latest_prices as (
     select *
     from model_prices_daily
     where
-        epoch_model_name is not null
+        model_name is not null
         and pricing_variant = 'standard'
     qualify row_number() over (
         partition by openrouter_model_id
@@ -29,9 +29,9 @@ ranked as (
 
     select
         *,
-        count(*) over (partition by epoch_model_name) as standard_listings,
+        count(*) over (partition by model_name) as standard_listings,
         row_number() over (
-            partition by epoch_model_name
+            partition by model_name
             order by
                 -- 1. main listing before dated checkpoints (-0324, -2507,
                 -- -2024-08-06) and previews
@@ -62,14 +62,14 @@ chosen as (
 final as (
 
     select
-        -- Epoch: the spine
-        epoch_models.model_name,
-        epoch_models.organization,
-        epoch_models.published_date,
-        epoch_models.release_year,
-        epoch_models.access_type,
-        epoch_models.is_open_weights,
-        epoch_models.domains,
+        -- the model list: the spine
+        models.model_name,
+        models.organization,
+        models.published_date,
+        models.release_year,
+        models.access_type,
+        models.is_open_weights,
+        models.domains,
 
         -- OpenRouter: the enrichment
         chosen.openrouter_model_id is not null as has_price,
@@ -81,9 +81,9 @@ final as (
         chosen.context_length_tokens,
         chosen.snapshot_date as price_as_of_date
 
-    from epoch_models
+    from models
     left join chosen
-        on epoch_models.model_name = chosen.epoch_model_name
+        on models.model_name = chosen.model_name
 
 )
 

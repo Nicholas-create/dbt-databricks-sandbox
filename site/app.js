@@ -1,4 +1,5 @@
-// Best AI model: notable models ranked on Epoch AI benchmarks, by category.
+// Best AI model: notable models ranked on public benchmarks, by category, with our own
+// weighted Overall score (fitted in dbt: fct_benchmark_category_scores).
 // Data: data/benchmarks.json. Everything here is presentation.
 
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
@@ -78,7 +79,9 @@ for (const b of data.benchmarks) {
   b.models.forEach((m) => { m.rank = 1 + b.models.filter((o) => o.score > m.score).length; });
 }
 document.querySelector('[data-stat="generated"]').title =
-  `Epoch AI, Capabilities & benchmarking. Licensed CC BY 4.0, including results Epoch collects from each benchmark's publisher. Models released since then are added from their developers' release pages; scores marked * are reported by the model's own developer. As of ${d3.utcFormat("%-d %b %Y")(new Date(data.generated + "T00:00:00Z"))}.`;
+  `Results from model developers' release pages (marked *: reported by the model's own developer) and independent leaderboards. Results before 20 Nov 2026 include data collected by Epoch AI, licensed CC BY 4.0. Overall scores are our own weighted combination of every benchmark. As of ${d3.utcFormat("%-d %b %Y")(new Date(data.generated + "T00:00:00Z"))}.`;
+// Name of a combined score: "Coding overall", or just "Overall" for the headline tab.
+const compositeName = (b) => (b.category === "overall" ? "Overall" : `${catById.get(b.category).label} overall`);
 
 // ── State, mirrored in the URL hash (#category/benchmark) ─────
 const [hashCat, hashBench] = location.hash.slice(1).split("/");
@@ -166,7 +169,9 @@ function render() {
     .style("left", at)
     .select("b").each(function (t) { swapText(this, unit.tick(t), m); });
   // A combined score is an estimate (see prep: IRT fit), so its caption says so.
-  const caption = b.kind === "composite" ? `Est. share solved on a typical ${cat.label.toLowerCase()} benchmark` : unit.caption;
+  const caption = b.kind !== "composite" ? unit.caption
+    : cat.id === "overall" ? "Est. share solved on a typical benchmark"
+    : `Est. share solved on a typical ${cat.label.toLowerCase()} benchmark`;
   d3.select(".axis-scale").selectAll("i").data([0]).join("i").each(function () { swapText(this, caption, m); });
 
   // Rows: as many as fit (up to 15). A followed model further down takes the last slot,
@@ -321,11 +326,11 @@ function showTip(event, m) {
     <p class="tt-name">${escapeHtml(m.name)}</p>
     <p class="tt-meta">${[m.lab, fmtMonth(m.released), m.open_weights === true ? "Open weights" : m.open_weights === false ? "Closed" : ""].filter(Boolean).map(escapeHtml).join(" · ")}</p>
     <dl>
-      <dt>${b.kind === "composite" ? `${escapeHtml(catById.get(b.category).label)} overall` : escapeHtml(b.name)}</dt><dd>${UNITS[b.unit].fmt(m.score)}</dd>
+      <dt>${escapeHtml(b.kind === "composite" ? compositeName(b) : b.name)}</dt><dd>${UNITS[b.unit].fmt(m.score)}</dd>
       <dt>Rank</dt><dd>${m.rank} of ${b.n_models}</dd>
       ${(m.parts ?? []).map(([id, score], i) => {
-        const part = benchById.get(id);
-        return `<dt class="${i === 0 ? "tt-first" : ""}">${escapeHtml(part.name)}</dt><dd class="${i === 0 ? "tt-first" : ""}">${UNITS[part.unit].fmt(score)}</dd>`;
+        const part = benchById.get(id); // the Overall's parts are the category scores
+        return `<dt class="${i === 0 ? "tt-first" : ""}">${escapeHtml(part.kind === "composite" ? compositeName(part) : part.name)}</dt><dd class="${i === 0 ? "tt-first" : ""}">${UNITS[part.unit].fmt(score)}</dd>`;
       }).join("")}
       ${m.harness ? `<dt>Agent</dt><dd>${escapeHtml(m.harness)}</dd>` : ""}
       ${m.effort ? `<dt>Reasoning effort</dt><dd>${escapeHtml(m.effort)}</dd>` : ""}

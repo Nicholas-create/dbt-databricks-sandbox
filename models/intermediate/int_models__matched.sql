@@ -9,13 +9,12 @@ with openrouter_models as (
 
 ),
 
--- Epoch's models plus those added by hand (seed manual_models), so a new
--- release gets its price before Epoch lists it. The output column keeps its
--- name, epoch_model_name, because the price marts and the dashboard use it.
-epoch_models as (
+-- the model list (seed manual_models): a new release gets its price as soon
+-- as it has a row there
+models as (
 
     select model_name
-    from {{ ref('int_models__unioned') }}
+    from {{ ref('stg_manual__models') }}
 
 ),
 
@@ -23,7 +22,7 @@ overrides as (
 
     select
         openrouter_model_id,
-        epoch_model_name,
+        model_name,
         match_note
     from {{ ref('model_match_overrides') }}
 
@@ -82,12 +81,12 @@ openrouter_keyed as (
 
 ),
 
-epoch_keyed as (
+models_keyed as (
 
     select
-        model_name as epoch_model_name,
+        model_name,
         {{ model_match_key('model_name') }} as match_key
-    from epoch_models
+    from models
 
 ),
 
@@ -98,12 +97,10 @@ final as (
         openrouter_keyed.model_display_name as openrouter_display_name,
         openrouter_keyed.provider_slug,
         openrouter_keyed.pricing_variant,
-        coalesce(
-            overrides.epoch_model_name, epoch_keyed.epoch_model_name
-        ) as epoch_model_name,
+        coalesce(overrides.model_name, models_keyed.model_name) as model_name,
         case
-            when overrides.epoch_model_name is not null then 'manual'
-            when epoch_keyed.epoch_model_name is not null then 'automatic'
+            when overrides.model_name is not null then 'manual'
+            when models_keyed.model_name is not null then 'automatic'
             else 'unmatched'
         end as match_method,
         overrides.match_note
@@ -111,8 +108,8 @@ final as (
     from openrouter_keyed
     left join overrides
         on openrouter_keyed.model_id = overrides.openrouter_model_id
-    left join epoch_keyed
-        on openrouter_keyed.match_key = epoch_keyed.match_key
+    left join models_keyed
+        on openrouter_keyed.match_key = models_keyed.match_key
 
 )
 

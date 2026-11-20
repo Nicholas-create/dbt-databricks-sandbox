@@ -1,4 +1,4 @@
-openrouter_model_id,epoch_model_name,match_note
+openrouter_model_id,model_name,match_note
 deepseek/deepseek-chat-v3-0324,DeepSeek-V3 (Mar 2025),Date code 0324 = March 2025 release
 deepseek/deepseek-r1-0528,DeepSeek-R1 (May 2025),Date code 0528 = May 2025 release
 google/gemini-2.5-pro,Gemini 2.5 Pro (Jun 2025),Stable alias for the June 2025 general release

@@ -28,3 +28,10 @@ models:
       +materialized: view
     marts:
       +materialized: table
+
+vars:
+  # Overall scores (dim_benchmarks → fct_benchmark_category_scores): a benchmark's
+  # weight halves for every this many years since it was released. 1.5 years: a
+  # 3-year-old benchmark counts a quarter as much as a new one. Frontier
+  # benchmarks typically go from hard to saturated in one to three years.
+  benchmark_half_life_years: 1.5

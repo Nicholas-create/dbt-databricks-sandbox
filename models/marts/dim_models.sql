@@ -1,6 +1,6 @@
 with models as (
 
-    select * from {{ ref('int_models__unioned') }}
+    select * from {{ ref('stg_manual__models') }}
 
 ),
 
@@ -10,9 +10,7 @@ final as (
         -- identity
         model_name,
         organization,
-        organization_category,
         organization_country,
-        base_model_name,
 
         -- release
         published_date,
@@ -20,8 +18,6 @@ final as (
 
         -- classification
         domains,
-        tasks,
-        is_frontier_model,
 
         -- openness
         coalesce(model_accessibility, 'Unknown') as access_type,
@@ -31,14 +27,8 @@ final as (
             else false
         end as is_open_weights,
 
-        -- scale and cost
-        parameter_count,
-        training_compute_flop,
-        training_compute_cost_2023_usd,
-
         -- provenance
-        source_url,
-        model_source
+        source_url
 
     from models
 

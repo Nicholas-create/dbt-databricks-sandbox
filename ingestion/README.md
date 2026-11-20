@@ -18,11 +18,10 @@ It follows the raw-layer rules in [`CONVENTIONS.md`](../CONVENTIONS.md) §1: the
 
 **Keeping it in sync:** the job runs the copy in the Databricks workspace. After changing the notebook there, re-export it (Workspace → the notebook → ⋮ → *Export* → *Source file*) and commit it here.
 
-## Epoch AI
-
-- **Notable AI models:** no loader. The [CSV](https://epoch.ai/data/notable_ai_models.csv) is uploaded by hand to `ai_model_tracker.raw_epoch.notable_ai_models`; the upload settings are in `CONVENTIONS.md` §9.
-- **Benchmarks (`ingest_epoch_benchmarks.py`):** a one-off load of Epoch's benchmark hub (`epoch.ai/data/benchmark_data.zip`) into `ai_model_tracker.raw_epoch.benchmark_rows`, run on 14 Nov 2026 as the historical baseline. It is **not scheduled**. One row per CSV row: `file_name`, `row_number`, `raw_json` (the row as a JSON object, untouched) and `loaded_at`. Re-running it appends a fresh copy, and staging reads only the latest load.
-
 ## Model releases (manual)
 
-Every result since the baseline is entered from the model's release page into the dbt seeds in [`seeds/manual/`](../seeds/manual/), with no loader: `dbt build` loads them. The step-by-step runbook and one release note per release are in [`manual/`](manual/README.md).
+Benchmarks, results and the model list have no loader: they're entered from each model's release page into the dbt seeds in [`seeds/manual/`](../seeds/manual/), and `dbt build` loads them. The step-by-step runbook and one release note per release are in [`manual/`](manual/README.md).
+
+## Retired: Epoch AI
+
+The project started from Epoch AI's benchmark hub and notable-models list. On 20 Nov 2026 the data still in use was copied into the seeds (see [`manual/releases/2026-11-20_epoch-baseline-copy.md`](manual/releases/2026-11-20_epoch-baseline-copy.md)), and the loader, source and staging models were removed. The raw tables `ai_model_tracker.raw_epoch.*` are no longer read by anything.

@@ -1,9 +1,10 @@
 -- One row per benchmark per model: the score the site shows, where it came
--- from, and the model details the leaderboard needs. Blank model details fall
--- back to Epoch's Capabilities Index, then to the priced-models mart.
+-- from, and the model details the leaderboard needs. Every row carries its own
+-- lab and release date (tested on the seed); open weights falls back to the
+-- priced-models mart when the row leaves it blank.
 with scores as (
 
-    select * from {{ ref('int_benchmark_scores__unioned') }}
+    select * from {{ ref('stg_manual__benchmark_scores') }}
 
 ),
 
@@ -11,14 +12,9 @@ benchmarks as (
 
     select
         benchmark_id,
-        category
-    from {{ ref('int_benchmarks__unioned') }}
-
-),
-
-eci_scores as (
-
-    select * from {{ ref('stg_epoch__eci_scores') }}
+        category,
+        unit
+    from {{ ref('stg_manual__benchmarks') }}
 
 ),
 
@@ -45,59 +41,34 @@ final as (
         scores.model_name,
         scores.model_key,
 
-        -- result (site units: a share 0-1 for pct benchmarks)
-        scores.score,
+        -- result in site units: entered as published (49.1 = 49.1%), the site
+        -- works in shares (0.491)
+        case
+            when benchmarks.unit = 'pct' then scores.score_as_published / 100
+            else scores.score_as_published
+        end as score,
         scores.harness,
         scores.effort,
 
         -- provenance
-        scores.score_source,
         scores.source_type,
         scores.source_url,
         scores.notes,
 
         -- model details
+        scores.lab,
         coalesce(
-            scores.lab,
-            -- first listed organization, with long names shortened for the
-            -- site
-            case trim(
-                split_part(
-                    coalesce(eci_scores.organization, scores.organization),
-                    ',',
-                    1
-                )
-            )
-                when 'Google DeepMind' then 'Google'
-                when 'Meta AI' then 'Meta'
-                when 'Z.ai (Zhipu AI)' then 'Z.ai'
-                when 'Xiaomi Corp' then 'Xiaomi'
-                when 'Mistral AI' then 'Mistral'
-                else trim(
-                    split_part(
-                        coalesce(eci_scores.organization, scores.organization),
-                        ',',
-                        1
-                    )
-                )
-            end
-        ) as lab,
-        coalesce(
-            scores.is_open_weights,
-            case
-                when eci_scores.accessibility_group is not null
-                    then eci_scores.accessibility_group = 'Open weights'
-            end,
-            prices.is_open_weights
+            scores.is_open_weights, prices.is_open_weights
         ) as is_open_weights,
-        coalesce(scores.release_date, eci_scores.release_date) as released_date,
+        scores.released_date,
         prices.output_price_usd_per_mtok
 
     from scores
+    -- left join: an unknown benchmark_id still comes through, so the
+    -- relationships test on benchmark_id fails loudly instead of the row
+    -- vanishing
     left join benchmarks
         on scores.benchmark_id = benchmarks.benchmark_id
-    left join eci_scores
-        on scores.model_name = eci_scores.model_name
     left join prices
         on scores.model_name = prices.model_name
 

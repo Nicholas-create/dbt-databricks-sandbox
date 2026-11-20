@@ -16,10 +16,10 @@ Nicholas, moving from BI/FP&A into Analytics Engineering. This project is my por
 
 ## Project
 - dbt project `ai_model_tracker` on Databricks Free Edition: catalog `ai_model_tracker`, dev schema `dbt_nsampson`.
-- Tracks which AI model is best at what (benchmarks: Epoch AI baseline + model release pages), what models are (Epoch AI) and what they cost (OpenRouter).
+- Tracks which AI model is best at what (benchmarks from model release pages, with the project's own weighted Overall score), the model list, and what models cost (OpenRouter). No Epoch AI feed: its history was copied into the seeds on 20 Nov 2026 and is maintained there.
 
 ## When a model is released
-New benchmark results come from the model's release page, not from Epoch (Epoch was a one-off baseline). Follow the runbook in [`ingestion/manual/README.md`](ingestion/manual/README.md): read the page, add the developer's results for its own models to the seed CSVs in `seeds/manual/`, write a release note in `ingestion/manual/releases/`, build, PR. The merge deploys. Never write benchmark data into a warehouse table by hand (`workspace.raw_manual` is retired).
+New benchmark results come from the model's release page (the project's only benchmark source). Follow the runbook in [`ingestion/manual/README.md`](ingestion/manual/README.md): read the page, add the developer's results for its own models to the seed CSVs in `seeds/manual/`, write a release note in `ingestion/manual/releases/`, build, PR. The merge deploys. Never write benchmark data into a warehouse table by hand (`workspace.raw_manual` is retired).
 
 ## Rules
 All project conventions are in [`CONVENTIONS.md`](CONVENTIONS.md). Read it before changing anything, and follow it. SQL follows dbt Labs' style guide (`CONVENTIONS.md` §7): run `.venv/bin/sqlfluff lint models tests macros` before pushing; the `sql lint` PR check runs the same.
