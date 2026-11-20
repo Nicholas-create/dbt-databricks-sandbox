@@ -1,23 +1,185 @@
 model_name,organization,organization_country,published_date,model_accessibility,domains,source_url,notes
 Beam 1.0,Reflection,United States of America,2026-10-05,Open weights (unrestricted),Language,https://reflection.ai/beam-model-card,Apache 2.0; open weights released 16 Oct 2026. Text only.
+Claude 2,Anthropic,United States of America,2023-07-11,API access,Language,"https://www.anthropic.com/index/claude-2, https://www-files.anthropic.com/production/images/Model-Card-Claude-2.pdf","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude 2.1,Anthropic,United States of America,2023-11-21,API access,Language,https://www.anthropic.com/index/claude-2-1,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude 3 Opus,Anthropic,United States of America,2024-03-04,API access,"Multimodal,Language,Vision",https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude 3 Sonnet,Anthropic,United States of America,2024-03-04,API access,"Multimodal,Language,Vision",https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude 3.5 Sonnet,Anthropic,United States of America,2024-06-20,API access,"Multimodal,Language,Vision",https://www-cdn.anthropic.com/fed9cc193a14b84131812372d8d5857f8f304c52/Model_Card_Claude_3_Addendum.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude 3.5 Sonnet (October 2024),Anthropic,United States of America,2024-10-22,API access,"Multimodal,Language,Vision",https://www.anthropic.com/news/3-5-models-and-computer-use,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude 3.7 Sonnet,Anthropic,United States of America,2025-02-24,API access,"Language,Vision,Multimodal",https://www.anthropic.com/news/claude-3-7-sonnet,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Fable 5,Anthropic,United States of America,2026-06-09,API access,"Language,Multimodal",https://www.anthropic.com/news/claude-fable-5-mythos-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Fable 5.1,Anthropic,United States of America,2026-09-01,API access,"Language,Multimodal,Vision",https://www.anthropic.com/claude-fable-and-mythos-5-1,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Claude Fable 5.2,Anthropic,United States of America,2026-11-09,API access,"Language,Multimodal,Vision",https://www.anthropic.com/claude-fable-and-mythos-5-2,
+Claude Haiku 4.5,Anthropic,United States of America,2025-10-15,API access,Language,https://www.anthropic.com/news/claude-haiku-4-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Claude Haiku 5.5,Anthropic,United States of America,2026-10-07,API access,"Language,Multimodal,Vision",https://www.anthropic.com/claude-haiku-5-5,
+Claude Mythos 5,Anthropic,United States of America,2026-06-09,Unreleased,"Language,Multimodal",https://www.anthropic.com/news/claude-fable-5-mythos-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Mythos Preview,Anthropic,United States of America,2026-04-07,Limited access,"Language,Multimodal","https://www-cdn.anthropic.com/7624816413e9b4d2e3ba620c5a5e091b98b190a5/Claude%20Mythos%20Preview%20System%20Card.pdf
+https://www.anthropic.com/glasswing","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Opus 4,Anthropic,United States of America,2025-05-22,API access,"Language,Multimodal,Vision","https://www.anthropic.com/claude/opus
+
+https://www.anthropic.com/news/claude-4","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Opus 4.1,Anthropic,United States of America,2025-08-05,API access,"Language,Multimodal,Vision",https://www.anthropic.com/news/claude-opus-4-1,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Opus 4.5,Anthropic,United States of America,2025-11-24,API access,"Language,Multimodal,Vision",https://www.anthropic.com/news/claude-opus-4-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Opus 4.7,Anthropic,United States of America,2026-04-16,API access,Language,https://www.anthropic.com/news/claude-opus-4-7,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Opus 4.8,Anthropic,United States of America,2026-05-28,API access,Language,https://www.anthropic.com/news/claude-opus-4-8,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Opus 5,Anthropic,United States of America,2026-07-24,API access,"Language,Vision,Multimodal",https://www.anthropic.com/news/claude-opus-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Opus 5.5,Anthropic,United States of America,2026-09-22,API access,Language,https://www.anthropic.com/claude-opus-5-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Sonnet 4,Anthropic,United States of America,2025-05-22,API access,"Language,Multimodal,Vision","https://www.anthropic.com/claude/sonnet
+
+https://www.anthropic.com/news/claude-4","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Sonnet 4.5,Anthropic,United States of America,2025-09-29,API access,"Language,Vision,Multimodal",https://www.anthropic.com/news/claude-sonnet-4-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Claude Sonnet 5.5,Anthropic,United States of America,2026-09-28,API access,"Language,Multimodal,Vision",https://www.anthropic.com/claude-sonnet-5-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Composer 2.5,Cursor,United States of America,2026-05-18,API access,Language,https://cursor.com/blog/composer-2-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+DeepSeek V4.1 Flash,DeepSeek,China,2026-09-09,Open weights (unrestricted),"Language,Vision,Multimodal","https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf 
+
+https://www.deepseek.com/en/news/deepseek-v4-1-flash/","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+DeepSeek-R1,DeepSeek,China,2025-01-20,Open weights (unrestricted),Language,https://api-docs.deepseek.com/news/news250120,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+DeepSeek-R1 (May 2025),DeepSeek,China,2025-05-28,Open weights (unrestricted),Language,https://api-docs.deepseek.com/news/news250120,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+DeepSeek-V2.5,DeepSeek,China,2024-09-06,Open weights (restricted use),Language,https://huggingface.co/deepseek-ai/DeepSeek-V2.5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+DeepSeek-V3,DeepSeek,China,2024-12-24,Open weights (restricted use),Language,https://arxiv.org/abs/2412.19437,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+DeepSeek-V3 (Mar 2025),DeepSeek,China,2025-03-24,Open weights (restricted use),Language,https://arxiv.org/abs/2412.19437,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+DeepSeek-V4-Flash,DeepSeek,China,2026-04-24,Open weights (unrestricted),Language,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+DeepSeek-V4-Pro,DeepSeek,China,2026-04-24,Open weights (unrestricted),Language,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 ERNIE 5.5 Flash Preview,Baidu,China,2026-11-11,API access,Language,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,Text only. Weights to be open-sourced under Apache 2.0 later.
+Eurus-2-7B-PRIME,"Tsinghua University,University of Illinois Urbana-Champaign (UIUC),Shanghai AI Lab,Peking University,Shanghai Jiao Tong University,CUHK Shenzhen Research Institute","China,United States of America,China,China,China,China",2025-01-02,Open weights (unrestricted),"Mathematics,Language",https://arxiv.org/abs/2502.01456,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 2.0 Pro,Google DeepMind,United States of America,2024-12-11,Hosted access (no API),"Language,Multimodal,Vision,Video,Audio",https://deepmind.google/technologies/gemini/pro/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 2.5 Pro (Jun 2025),Google DeepMind,United States of America,2025-06-05,API access,"Language,Vision,Video,Multimodal,Speech",https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/#gemini-2-5-thinking,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 2.5 Pro (Mar 2025),Google DeepMind,United States of America,2025-03-25,API access,"Language,Vision,Video,Multimodal,Speech",https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/#gemini-2-5-thinking,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 2.5 Pro (May 2025),Google DeepMind,United States of America,2025-05-06,API access,"Language,Vision,Video,Multimodal,Speech",https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/#gemini-2-5-thinking,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 3 Deep Think,Google DeepMind,United States of America,2025-11-18,Hosted access (no API),Language,https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 3 Pro,Google DeepMind,United States of America,2025-11-18,API access,"Multimodal,Language,Vision",https://blog.google/products/gemini/gemini-3/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 3.5 Flash,Google DeepMind,United States of America,2026-05-19,API access,"Language,Multimodal,Audio,Video,Vision",https://deepmind.google/models/model-cards/gemini-3-5-flash/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 3.8 Flash,Google DeepMind,United States of America,2026-09-02,API access,"Language,Multimodal,Image generation,Video,Audio",https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 4 Argon,Google DeepMind,United States of America,2026-09-30,Limited access,"Language,Multimodal,Vision",https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Gemini 4 Carbon,Google DeepMind,United States of America,2026-10-28,Unreleased,"Language,Multimodal,Vision",https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Gemini 4 Hydrogen,Google DeepMind,United States of America,2026-11-12,API access,"Language,Multimodal,Vision",https://deepmind.google/models/model-cards/gemini-4-hydrogen/,
 Gemini 4 Neon,Google DeepMind,United States of America,2026-11-18,API access,"Language,Multimodal,Vision",https://deepmind.google/models/model-cards/gemini-4-neon/,Adapted from Gemini 4 Carbon.
+GLM-4.5,"Z.ai (Zhipu AI),Tsinghua University","China,China",2025-07-28,Open weights (unrestricted),Language,https://arxiv.org/abs/2508.06471,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GLM-4.6,"Z.ai (Zhipu AI),Tsinghua University","China,China",2025-09-30,Open weights (unrestricted),Language,https://z.ai/blog/glm-4.6,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GLM-4.7,Z.ai (Zhipu AI),China,2025-12-22,Open weights (unrestricted),Language,https://z.ai/blog/glm-4.7,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GLM-5,Z.ai (Zhipu AI),China,2026-02-12,Open weights (unrestricted),Language,"https://arxiv.org/pdf/2602.15763 
+
+https://z.ai/blog/glm-5 ","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GLM-5.1,Z.ai (Zhipu AI),China,2026-04-07,Open weights (unrestricted),Language,https://z.ai/blog/glm-5.1,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GLM-5.3,Z.ai (Zhipu AI),China,2026-08-14,Open weights (restricted use),Language,https://z.ai/blog/glm-5.3,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GLM-5.3-Flash,Z.ai (Zhipu AI),China,2026-08-20,Open weights (unrestricted),"Language,Vision,Multimodal",https://z.ai/blog/glm-5.3-flash,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-3.5 Turbo Instruct,OpenAI,United States of America,2023-09-28,API access,Language,https://platform.openai.com/docs/models/gpt-3.5-turbo,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4 (Jun 2023),OpenAI,United States of America,2023-06-13,API access,"Multimodal,Language,Vision",https://arxiv.org/abs/2303.08774,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4 (Mar 2023),OpenAI,United States of America,2023-03-15,API access,"Multimodal,Language,Vision",https://arxiv.org/abs/2303.08774,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4 Turbo (Apr 2024),OpenAI,United States of America,2024-04-09,API access,"Multimodal,Vision,Language,Image generation",https://x.com/OpenAI/status/1778574613813006610,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4 Turbo (Nov 2023),OpenAI,United States of America,2023-11-06,API access,"Multimodal,Vision,Language,Image generation",https://openai.com/blog/new-models-and-developer-products-announced-at-devday,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4.5,OpenAI,United States of America,2025-02-27,API access,"Language,Vision,Multimodal",https://openai.com/index/introducing-gpt-4-5/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4o,OpenAI,United States of America,2024-05-13,API access,"Multimodal,Language,Audio,Speech,Vision","https://openai.com/index/hello-gpt-4o/ 
+https://openai.com/index/gpt-4o-system-card/","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4o (Aug 2024),OpenAI,United States of America,2024-08-06,API access,"Multimodal,Language,Audio,Speech,Vision",https://help.openai.com/en/articles/9624314-model-release-notes,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4o (Nov 2024),OpenAI,United States of America,2024-11-20,API access,"Multimodal,Language,Audio,Speech,Vision",https://help.openai.com/en/articles/9624314-model-release-notes,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-4o mini,OpenAI,United States of America,2024-07-18,API access,"Language,Multimodal,Vision",https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5,OpenAI,United States of America,2025-08-07,API access,"Multimodal,Language,Vision","https://cdn.openai.com/gpt-5-system-card.pdf
+https://openai.com/index/introducing-gpt-5/ ","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5 mini,OpenAI,United States of America,2025-08-07,API access,"Multimodal,Language,Vision",https://cdn.openai.com/gpt-5-system-card.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5 nano,OpenAI,United States of America,2025-08-07,API access,"Multimodal,Language,Vision",https://cdn.openai.com/gpt-5-system-card.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5 Pro,OpenAI,United States of America,2025-10-07,API access,"Multimodal,Language,Vision",https://cdn.openai.com/gpt-5-system-card.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.1,OpenAI,United States of America,2025-11-13,API access,"Multimodal,Language,Vision",https://openai.com/index/gpt-5-1/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.1-Codex,OpenAI,United States of America,2025-11-12,API access,Language,https://openai.com/index/gpt-5-1-for-developers/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026. Source link from our release note (Epoch's list had none)."
+GPT-5.1-Codex-Max,OpenAI,United States of America,2025-11-19,API access,Language,https://openai.com/index/gpt-5-1-codex-max/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.2,OpenAI,United States of America,2025-12-11,API access,,https://openai.com/index/introducing-gpt-5-2/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026. Source link from our release note (Epoch's list had none)."
+GPT-5.2 Codex,OpenAI,United States of America,2025-12-18,API access,Language,https://openai.com/index/introducing-gpt-5-2-codex/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.2 Pro,OpenAI,United States of America,2025-12-11,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-5-2/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.3 Codex,OpenAI,United States of America,2026-02-05,API access,Language,https://openai.com/index/introducing-gpt-5-3-codex/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.4,OpenAI,United States of America,2026-03-05,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-5-4/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.4 Pro,OpenAI,United States of America,2026-03-05,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-5-4/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.5,OpenAI,United States of America,2026-04-23,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-5-5/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.5 Instant,OpenAI,United States of America,2026-05-05,API access,"Multimodal,Language,Vision",https://openai.com/index/gpt-5-5-instant/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-5.5 Pro,OpenAI,United States of America,2026-04-23,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-5-5/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-6 Astra,OpenAI,United States of America,2026-09-03,API access,"Multimodal,Language,Vision",https://openai.com/index/gpt-6-astra/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026. Source link from our release note (Epoch's list had none)."
+GPT-6 Luna,OpenAI,United States of America,2026-09-22,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-sol-and-luna/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-6 Sol,OpenAI,United States of America,2026-09-22,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-sol-and-luna/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+GPT-6.1 Sol,OpenAI,United States of America,2026-09-29,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-1-sol/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 GPT-6.1 Terra,OpenAI,United States of America,2026-10-26,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-1-terra/,
 GPT-6.1 Terra Pro,OpenAI,United States of America,2026-10-26,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-1-terra/,Pro tier; no separate benchmark results published.
 GPT-6.2 Astra,OpenAI,United States of America,2026-11-17,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-2-astra-sol/,
 GPT-6.2 Astra Pro,OpenAI,United States of America,2026-11-17,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-2-astra-sol/,Pro tier; no separate benchmark results published.
 GPT-6.2 Sol,OpenAI,United States of America,2026-11-17,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-2-astra-sol/,
 GPT-6.2 Sol Pro,OpenAI,United States of America,2026-11-17,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-2-astra-sol/,Pro tier; no separate benchmark results published.
+gpt-oss-120b,OpenAI,United States of America,2025-08-05,Open weights (unrestricted),Language,https://cdn.openai.com/pdf/419b6906-9da6-406c-a19d-1bb078ac7637/oai_gpt-oss_model_card.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+gpt-oss-20b,OpenAI,United States of America,2025-08-05,Open weights (unrestricted),Language,https://cdn.openai.com/pdf/419b6906-9da6-406c-a19d-1bb078ac7637/oai_gpt-oss_model_card.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Grok 3,xAI,United States of America,2025-02-17,API access,"Language,Vision,Multimodal",https://x.ai/blog/grok-3,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Grok 4,xAI,United States of America,2025-07-09,API access,"Language,Multimodal,Vision",https://x.ai/news/grok-4,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Grok 4 Heavy,xAI,United States of America,2025-07-10,Unreleased,Language,https://x.ai/news/grok-4,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Grok 4.1,xAI,United States of America,2025-11-17,API access,Language,https://x.ai/news/grok-4-1,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Grok 4.1 Fast,xAI,United States of America,2025-11-19,API access,Language,https://x.ai/news/grok-4-1-fast,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Grok 4.20,xAI,United States of America,2026-02-17,API access,Language,https://docs.x.ai/developers/models,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Grok 4.7,xAI,United States of America,2026-09-21,API access,Language,https://x.ai/news/grok-4-7,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Hy4,Tencent,China,2026-11-04,API access,"Language,Multimodal,Vision",https://huggingface.co/tencent/Hy4-flash,No release page of its own found; details from the Hy4 flash card. Weights not published as of 19 Nov 2026.
 Hy4 flash,Tencent,China,2026-11-16,Open weights (restricted use),"Language,Multimodal,Vision",https://huggingface.co/tencent/Hy4-flash,Tencent Hy License.
+Inkling,Thinking Machines,United States of America,2026-07-15,Open weights (unrestricted),"Language,Multimodal,Audio,Video,Vision",https://thinkingmachines.ai/news/introducing-inkling/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Inkling 2 Small,Thinking Machines,United States of America,2026-11-05,Open weights (unrestricted),"Language,Multimodal,Vision",https://thinkingmachines.ai/news/inkling-2-small/,Apache 2.0; weights on Hugging Face since 12 Nov 2026.
+Kimi K2,Moonshot,China,2025-07-11,Open weights (restricted use),Language,https://moonshotai.github.io/Kimi-K2/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Kimi K2 Thinking,Moonshot,China,2025-11-06,Open weights (restricted use),Language,https://moonshotai.github.io/Kimi-K2/thinking,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Kimi K2.5,Moonshot,China,2026-02-02,Open weights (unrestricted),Language,https://arxiv.org/abs/2602.02276,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Kimi K2.6,Moonshot,China,2026-04-20,Open weights (unrestricted),Language,https://www.kimi.com/ai-models/kimi-k2-6,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Kimi K3,Moonshot,China,2026-07-16,Open weights (non-commercial),"Language,Multimodal,Vision",https://huggingface.co/moonshotai/Kimi-K3,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Kimi K3.1 Pro,Moonshot,China,2026-10-23,Open weights (non-commercial),"Language,Multimodal,Vision",https://www.kimi.com/en/blog/kimi-k3-1-pro,Kimi K3.1 Pro License; same access category Epoch gives Kimi K3.
+Llama 2-70B,Meta AI,United States of America,2023-07-18,Open weights (restricted use),Language,"https://ai.meta.com/research/publications/llama-2-open-foundation-and-fine-tuned-chat-models/
+https://arxiv.org/abs/2307.09288","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Llama 3-70B,Meta AI,United States of America,2024-04-18,Open weights (restricted use),Language,https://ai.meta.com/blog/meta-llama-3/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Llama 3.1-405B,Meta AI,United States of America,2024-07-23,Open weights (restricted use),Language,https://ai.meta.com/research/publications/the-llama-3-herd-of-models/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Llama 3.3 70B,Meta AI,United States of America,2024-12-06,Open weights (restricted use),Language,https://www.llama.com/docs/model-cards-and-prompt-formats/llama3_3/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Llama 4 Maverick,Meta AI,United States of America,2025-04-05,Open weights (restricted use),"Multimodal,Language,Vision",https://ai.meta.com/blog/llama-4-multimodal-intelligence/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Llama 4 Scout,Meta AI,United States of America,2025-04-05,Open weights (restricted use),"Multimodal,Language,Vision",https://ai.meta.com/blog/llama-4-multimodal-intelligence/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+LongCat-2.0,Meituan Inc,China,2026-06-29,Open weights (unrestricted),Language,https://longcat.chat/blog/longcat-2.0/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Mercury 2.5,Inception Labs,United States of America,2026-09-08,API access,Language,https://www.inceptionlabs.ai/blog/introducing-mercury-2-5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+MiMo-V2.5-Pro,Xiaomi Corp,China,2026-04-23,Open weights (unrestricted),Language,https://mimo.xiaomi.com/mimo-v2-5-pro/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 MiniMax M3.1 Flash,MiniMax,China,2026-10-19,API access,"Language,Multimodal,Vision",https://www.minimax.io/blog/minimax-m31f,Weights to be released later.
+MiniMax-M2,MiniMax,China,2025-10-27,Open weights (unrestricted),Language,https://www.minimax.io/news/minimax-m2,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+MiniMax-M2.1,MiniMax,China,2025-12-23,Open weights (restricted use),Language,https://huggingface.co/MiniMaxAI/MiniMax-M2.1,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+MiniMax-M3,MiniMax,China,2026-06-01,Open weights (restricted use),"Language,Multimodal,Vision,Video",https://www.minimax.io/blog/minimax-m3,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Mistral Large,Mistral AI,France,2024-02-26,API access,Language,https://mistral.ai/news/mistral-large/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Mistral Large 4,Mistral AI,France,2026-10-29,Open weights (restricted use),"Language,Multimodal,Vision",https://mistral.ai/news/mistral-large-4-oss/,Modified MIT licence (commercial use needs a Mistral licence). Epoch lists the 6 Oct preview separately.
+Mixtral 8x7B,Mistral AI,France,2023-12-11,Open weights (unrestricted),Language,"https://mistral.ai/news/mixtral-of-experts/, https://arxiv.org/abs/2401.04088","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Motif-3,Motif Technologies,South Korea,2026-08-07,Open weights (unrestricted),Language,"https://huggingface.co/Motif-Technologies/Motif-3
+https://huggingface.co/Motif-Technologies/Motif-3/blob/main/motif_3_technical_report.pdf
+https://github.com/MotifTechnologies/motif3-training-example","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Muse Ember,Meta AI,United States of America,2026-11-09,API access,"Language,Multimodal,Vision",https://research.meta.ai/blog/muse-ember,
+Muse Spark,Meta AI,United States of America,2026-04-08,API access,"Multimodal,Language,Vision",https://ai.meta.com/blog/introducing-muse-spark-msl/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Muse Spark 1.2,Meta AI,United States of America,2026-08-05,API access,Language,https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Muse Spark 1.3,Meta AI,United States of America,2026-09-02,API access,Language,https://research.meta.ai/blog/introducing-muse-spark-1-3,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Muse Spark Open,Meta AI,United States of America,2026-10-15,Open weights (restricted use),"Language,Multimodal,Vision",https://research.meta.ai/blog/muse-spark-open,Muse Model License (commercial use capped by revenue).
+Muse Wonder,Meta AI,United States of America,2026-10-12,API access,"Language,Vision,Video,Multimodal",https://research.meta.ai/blog/muse-wonder,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Nemotron 3 Super,Nvidia,United States of America,2026-03-11,Open weights (unrestricted),Language,https://developer.nvidia.com/blog/introducing-nemotron-3-super-an-open-hybrid-mamba-transformer-moe-for-agentic-reasoning/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Nemotron 3 Ultra,Nvidia,United States of America,2026-06-04,Open weights (unrestricted),Language,"https://arxiv.org/abs/2512.20856
+https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Ultra-Technical-Report.pdf ","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Nemotron 3-Nano-30B-A3B,Nvidia,United States of America,2025-12-15,Open weights (restricted use),Language,https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Nano-Technical-Report.pdf,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Nemotron 3.5 Super VL,Nvidia,United States of America,2026-10-15,Open weights (unrestricted),"Language,Multimodal,Vision,Video",https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,OpenMDW-1.1 licence.
+o1,OpenAI,United States of America,2024-12-05,API access,"Language,Mathematics,Multimodal",https://openai.com/index/introducing-chatgpt-pro/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+o1-mini,OpenAI,United States of America,2024-09-12,API access,Language,https://openai.com/index/learning-to-reason-with-llms/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+o1-preview,OpenAI,United States of America,2024-09-12,API access,"Language,Mathematics,Biology",https://openai.com/index/introducing-openai-o1-preview/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+o1-pro,OpenAI,United States of America,2025-03-19,API access,"Language,Mathematics,Multimodal",https://openai.com/index/introducing-chatgpt-pro/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+o3,OpenAI,United States of America,2024-12-20,API access,"Language,Vision,Multimodal",https://openai.com/index/introducing-o3-and-o4-mini/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+o3-mini,OpenAI,United States of America,2025-01-31,API access,Language,https://openai.com/index/openai-o3-mini/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen 3.6 Plus,Alibaba,China,2026-04-01,API access,"Language,Multimodal",https://qwen.ai/blog?id=qwen3.6,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen 3.8 Max,Alibaba,China,2026-07-19,API access,"Language,Vision,Video",https://qwen.ai/blog?id=qwen3.8,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen2-72B,Alibaba,China,2024-06-07,Open weights (unrestricted),Language,"https://qwenlm.github.io/blog/qwen2/ 
+https://arxiv.org/abs/2407.10671 ","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen2.5-72B,Alibaba,China,2024-09-19,Open weights (unrestricted),Language,https://qwenlm.github.io/blog/qwen2.5/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3-235B-A22B,Alibaba,China,2025-04-29,Open weights (unrestricted),Language,https://qwenlm.github.io/blog/qwen3/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3-235B-A22B (Jul 2025),Alibaba,China,2025-07-25,Open weights (unrestricted),Language,https://qwenlm.github.io/blog/qwen3/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3-235B-A22B-Thinking (Jul 2025),Alibaba,China,2025-07-25,Open weights (unrestricted),Language,https://qwenlm.github.io/blog/qwen3/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3-Coder-480B-A35B,Alibaba,China,2025-07-22,Open weights (unrestricted),Language,https://qwenlm.github.io/blog/qwen3-coder/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3-Coder-Next,Alibaba,China,2026-02-02,Open weights (unrestricted),Language,https://qwen.ai/blog?id=qwen3-coder-next,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3-Max,Alibaba,China,2025-09-05,API access,Language,"https://modelstudio.console.alibabacloud.com/?tab=doc#/doc/?type=model&url=2840914_2&modelId=qwen3-max-preview
+
+https://qwen.ai/blog?id=87dc93fc8a590dc718c77e1f6e84c07b474f6c5a&from=home.latest-research-list","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3-VL-235B-A22B,Alibaba,China,2025-09-23,Open weights (unrestricted),"Language,Vision,Multimodal,Video",https://arxiv.org/abs/2511.21631,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3.5 397B-A17B,Alibaba,China,2026-02-15,Open weights (unrestricted),"Language,Vision",https://qwen.ai/blog?id=qwen3.5,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3.5-122B-A10B,Alibaba,China,2026-02-24,Open weights (restricted use),Language,https://github.com/QwenLM/Qwen3.5?tab=readme-ov-file ,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3.7-Plus,Alibaba,China,2026-06-03,API access,"Language,Vision,Multimodal","https://qwen.ai/blog?id=qwen3.7-plus
+
+https://www.qwencloud.com/models/qwen3.7-plus","From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Qwen3.8-2.4T-A95B,Alibaba,China,2026-08-08,Open weights (restricted use),Language,https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
 Qwen4-Max,Alibaba,China,2026-11-16,API access,"Language,Multimodal,Vision",https://qwen.ai/blog?id=qwen4-max,
+QwQ-32B,Alibaba,China,2025-03-06,Open weights (unrestricted),Language,https://qwenlm.github.io/blog/qwq-32b/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Step 5 Preview,StepFun,China,2026-09-18,API access,"Language,Vision,Multimodal",https://platform.stepfun.ai/docs/en/guides/models/step-5-preview,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+SWE 1.6,Cognition,United States of America,2026-03-01,Hosted access (no API),Language,https://cognition.ai/blog/swe-1-6-preview,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Tencent Hy4 preview,Tencent,China,2026-08-28,Open weights (unrestricted),Language,https://hy.tencent.com/hy4-preview,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
+Yi-Lightning,01.AI,China,2024-10-16,API access,Language,https://www.lingyiwanwu.com/en https://platform.lingyiwanwu.com/,"From Epoch AI's notable-models list (CC BY 4.0), copied 20 Nov 2026."
