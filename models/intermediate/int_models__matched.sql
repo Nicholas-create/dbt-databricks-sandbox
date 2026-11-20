@@ -9,10 +9,13 @@ with openrouter_models as (
 
 ),
 
+-- Epoch's models plus those added by hand (seed manual_models), so a new
+-- release gets its price before Epoch lists it. The output column keeps its
+-- name, epoch_model_name, because the price marts and the dashboard use it.
 epoch_models as (
 
     select model_name
-    from {{ ref('stg_epoch__notable_models') }}
+    from {{ ref('int_models__unioned') }}
 
 ),
 

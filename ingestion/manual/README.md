@@ -2,12 +2,13 @@
 
 Since 14 Nov 2026 every new benchmark result comes from a **model's release page**, not from Epoch AI. Epoch's hub was loaded once as the historical baseline (`raw_epoch.benchmark_rows`). Results entered here supersede that baseline for the same benchmark and model.
 
-The data itself lives in Git, as two dbt seeds. This folder holds the runbook and one release note per release.
+The data itself lives in Git, as three dbt seeds. This folder holds the runbook and one release note per release.
 
 | File | What it is |
 |---|---|
 | [`seeds/manual/manual_benchmarks.csv`](../../seeds/manual/manual_benchmarks.csv) | Benchmarks Epoch's catalog doesn't carry: one row per `benchmark_id` |
 | [`seeds/manual/manual_benchmark_scores.csv`](../../seeds/manual/manual_benchmark_scores.csv) | Results from release pages: one row per benchmark and model, sorted by `benchmark_id`, then model name |
+| [`seeds/manual/manual_models.csv`](../../seeds/manual/manual_models.csv) | New releases Epoch's notable-models file doesn't list yet: one row per model, so the model gets a row in `dim_models` and its OpenRouter price. Sorted by `model_name` |
 | [`seeds/manual/_manual__seeds.yml`](../../seeds/manual/_manual__seeds.yml) | What each column means, its type, and the tests that stop bad values |
 | `releases/<date>_<model>.md` | One release note per model release: the page and date read, what was entered, what was skipped and why, older values a newer page replaced |
 
@@ -47,6 +48,7 @@ Done by Claude Code when Nicholas says a model is out (with the release page URL
    - A new benchmark gets a row in `manual_benchmarks.csv`. Category must exist in `seeds/benchmark_categories.csv`. If none fits, Claude may add one (agreed 14 Nov 2026): a seed row, plus an emblem shape in `site/emblem.js` (otherwise the tab shows the globe), then check the header still fits. Example: Long context was split from Reasoning because OpenAI's pages give those benchmarks their own section, and eight MRCR context lengths had taken over the Reasoning tab.
 4. **Spell model names** exactly as existing rows do (search `manual_benchmark_scores.csv`, or `select distinct model_name from ai_model_tracker.analytics.fct_benchmark_scores where model_name ilike '%fable%'`). New models follow the developer's official name, e.g. `Claude Fable 5.2`.
 5. **Fill every model detail** on new models: `lab`, `released_date` (YYYY-MM-DD), `is_open_weights` (`true` / `false`). The test `assert_manual_scores_have_model_details` fails without lab and date. Scores exactly as published: `49.1` for 49.1%.
+   - **Add the model to the model list if it's new.** Check `select model_name, model_source from ai_model_tracker.analytics.dim_models where model_name = '<name>'`. No row means Epoch doesn't list it yet: add a line to `seeds/manual/manual_models.csv` (same name; organisation, country and access category spelled as Epoch spells them, e.g. `Google DeepMind`, `Open weights (unrestricted)`; release date; release page). That gives it a row in `dim_models` and, once OpenRouter lists it, a price on the site and dashboard. If OpenRouter names it differently (e.g. `Beam 1.0 501B A23B`), add the pairing to `seeds/model_match_overrides.csv`. After an Epoch refresh, the warning test `assert_manual_models_not_in_epoch` lists hand-entered models Epoch now has: delete their lines.
 6. **Edit the seeds and write the release note.**
    - Add or change rows in the two CSVs. Keep `manual_benchmark_scores.csv` sorted by `benchmark_id`, then model name, so a duplicate sits next to its twin. Leave a field empty for "no value".
    - Write `releases/<release date>_<model>.md`: the source URL and date read, what was entered, what was skipped and why, and any older values this page replaced.

@@ -15,6 +15,15 @@ models:
           - unique
           - not_null
 
+  - name: stg_manual__models
+    description: "Models added by hand to the model list, tidied from the seed `manual_models`. One row per model_name."
+    columns:
+      - name: model_name
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+
   - name: stg_manual__benchmarks
     description: "Hand-entered benchmark definitions, tidied from the seed `manual_benchmarks`. One row per benchmark_id."
     columns:

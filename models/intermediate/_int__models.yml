@@ -1,8 +1,26 @@
 version: 2
 
 models:
+  - name: int_models__unioned
+    description: >
+      Every model the project knows about: Epoch's notable-models file plus models added by hand
+      in the seed manual_models. One row per model_name. A value filled in by hand wins on a clash;
+      Epoch fills the rest.
+    columns:
+      - name: model_name
+        description: "Primary key."
+        data_tests:
+          - unique
+          - not_null
+      - name: model_source
+        description: "Where the row comes from: epoch, manual, or epoch+manual (listed in both; the hand-entered values win)."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['epoch', 'manual', 'epoch+manual']
   - name: int_models__matched
-    description: "One row per OpenRouter model, mapped to an Epoch model where possible. Manual overrides take priority over automatic name matching."
+    description: "One row per OpenRouter model, mapped to a model in the model list (Epoch or added by hand) where possible. Manual overrides take priority over automatic name matching."
     columns:
       - name: openrouter_model_id
         description: "Primary key."
@@ -10,11 +28,11 @@ models:
           - unique
           - not_null
       - name: epoch_model_name
-        description: "Matched Epoch model. Null when unmatched."
+        description: "Matched model from int_models__unioned (Epoch or added by hand; the name predates the manual list). Null when unmatched."
         data_tests:
           - relationships:
               arguments:
-                to: ref('stg_epoch__notable_models')
+                to: ref('int_models__unioned')
                 field: model_name
       - name: match_method
         data_tests:

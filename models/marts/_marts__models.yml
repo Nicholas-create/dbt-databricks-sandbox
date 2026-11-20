@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_models
-    description: "One row per notable AI model, ready for reporting. Source: Epoch AI (CC-BY 4.0)."
+    description: "One row per AI model, ready for reporting. Source: Epoch AI (CC-BY 4.0), plus new releases added by hand in the seed manual_models (int_models__unioned)."
     columns:
       - name: model_name
         description: "Primary key."
@@ -25,6 +25,10 @@ models:
                   - 'Unknown'
       - name: is_open_weights
         description: "True if weights are downloadable in any form. Null where access is unknown."
+      - name: model_source
+        description: "epoch, manual (added by hand in seeds/manual/manual_models.csv) or epoch+manual."
+        data_tests:
+          - not_null
   - name: fct_model_prices_daily
     description: "One row per OpenRouter model per snapshot date, with its Epoch match where one exists. All OpenRouter models are kept; unmatched ones have a null epoch_model_name. Prices in USD per million tokens, rounded to 4 dp."
     columns:

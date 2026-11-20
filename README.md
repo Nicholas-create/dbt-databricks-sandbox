@@ -55,11 +55,13 @@ flowchart LR
     raw_epoch --> stg_epoch["stg_epoch__notable_models"]
     raw_or --> stg_or["stg_openrouter__models"]
 
-    stg_epoch --> int_matched["int_models__matched"]
+    seed_models["seed: manual_models<br/>(new releases)"] --> int_union_models["int_models__unioned"]
+    stg_epoch --> int_union_models
+    int_union_models --> int_matched["int_models__matched"]
     stg_or --> int_matched
     seed["seed: model_match_overrides"] --> int_matched
 
-    stg_epoch --> dim["dim_models"]
+    int_union_models --> dim["dim_models"]
     stg_or --> fct["fct_model_prices_daily"]
     int_matched --> fct
 
@@ -114,8 +116,9 @@ flowchart LR
 |---|---|---|
 | `stg_epoch__notable_models` | One row per Epoch model | 1,091 models, 1950–2026 |
 | `stg_openrouter__models` | One row per OpenRouter model per snapshot date | Prices converted from USD per token (text) to `decimal` USD per million tokens. Router placeholder prices (`-1`) become null with `is_variable_priced` |
-| `int_models__matched` | One row per OpenRouter model | Links each listing to an Epoch model: manual override first, then an automatic match on a normalised name key (`model_match_key` macro) |
-| `dim_models` | One row per Epoch model | Organisation, release year, domains, `access_type`, `is_open_weights`, parameters, training compute |
+| `int_models__unioned` | One row per model | Epoch's notable models plus new releases added by hand (seed `manual_models`); hand-entered values win, `model_source` says which |
+| `int_models__matched` | One row per OpenRouter model | Links each listing to a model in `int_models__unioned`: manual override first, then an automatic match on a normalised name key (`model_match_key` macro) |
+| `dim_models` | One row per model (Epoch + added by hand) | Organisation, release year, domains, `access_type`, `is_open_weights`, parameters, training compute |
 | `fct_model_prices_daily` | One row per OpenRouter model per snapshot date | All listings kept, matched or not (5,517 rows over 12 snapshots, 1–13 Nov 2026) |
 | `rpt_models_latest_price` | One row per Epoch model | Latest standard price where one exists; unpriced models kept with `has_price = false` |
 | `stg_epoch__benchmark_rows` | One row per CSV row in Epoch's benchmark hub (latest load) | ~12,000 rows from ~90 files; each row's columns kept as a `map`, since the score column differs per file |

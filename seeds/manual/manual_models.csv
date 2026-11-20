@@ -1,0 +1,23 @@
+model_name,organization,organization_country,published_date,model_accessibility,domains,source_url,notes
+Beam 1.0,Reflection,United States of America,2026-10-05,Open weights (unrestricted),Language,https://reflection.ai/beam-model-card,Apache 2.0; open weights released 16 Oct 2026. Text only.
+Claude Fable 5.2,Anthropic,United States of America,2026-11-09,API access,"Language,Multimodal,Vision",https://www.anthropic.com/claude-fable-and-mythos-5-2,
+Claude Haiku 5.5,Anthropic,United States of America,2026-10-07,API access,"Language,Multimodal,Vision",https://www.anthropic.com/claude-haiku-5-5,
+ERNIE 5.5 Flash Preview,Baidu,China,2026-11-11,API access,Language,https://ernie.baidu.com/release/ernie-5-5-flash-preview/,Text only. Weights to be open-sourced under Apache 2.0 later.
+Gemini 4 Hydrogen,Google DeepMind,United States of America,2026-11-12,API access,"Language,Multimodal,Vision",https://deepmind.google/models/model-cards/gemini-4-hydrogen/,
+Gemini 4 Neon,Google DeepMind,United States of America,2026-11-18,API access,"Language,Multimodal,Vision",https://deepmind.google/models/model-cards/gemini-4-neon/,Adapted from Gemini 4 Carbon.
+GPT-6.1 Terra,OpenAI,United States of America,2026-10-26,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-1-terra/,
+GPT-6.1 Terra Pro,OpenAI,United States of America,2026-10-26,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-1-terra/,Pro tier; no separate benchmark results published.
+GPT-6.2 Astra,OpenAI,United States of America,2026-11-17,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-2-astra-sol/,
+GPT-6.2 Astra Pro,OpenAI,United States of America,2026-11-17,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-2-astra-sol/,Pro tier; no separate benchmark results published.
+GPT-6.2 Sol,OpenAI,United States of America,2026-11-17,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-2-astra-sol/,
+GPT-6.2 Sol Pro,OpenAI,United States of America,2026-11-17,API access,"Multimodal,Language,Vision",https://openai.com/index/introducing-gpt-6-2-astra-sol/,Pro tier; no separate benchmark results published.
+Hy4,Tencent,China,2026-11-04,API access,"Language,Multimodal,Vision",https://huggingface.co/tencent/Hy4-flash,No release page of its own found; details from the Hy4 flash card. Weights not published as of 19 Nov 2026.
+Hy4 flash,Tencent,China,2026-11-16,Open weights (restricted use),"Language,Multimodal,Vision",https://huggingface.co/tencent/Hy4-flash,Tencent Hy License.
+Inkling 2 Small,Thinking Machines,United States of America,2026-11-05,Open weights (unrestricted),"Language,Multimodal,Vision",https://thinkingmachines.ai/news/inkling-2-small/,Apache 2.0; weights on Hugging Face since 12 Nov 2026.
+Kimi K3.1 Pro,Moonshot,China,2026-10-23,Open weights (non-commercial),"Language,Multimodal,Vision",https://www.kimi.com/en/blog/kimi-k3-1-pro,Kimi K3.1 Pro License; same access category Epoch gives Kimi K3.
+MiniMax M3.1 Flash,MiniMax,China,2026-10-19,API access,"Language,Multimodal,Vision",https://www.minimax.io/blog/minimax-m31f,Weights to be released later.
+Mistral Large 4,Mistral AI,France,2026-10-29,Open weights (restricted use),"Language,Multimodal,Vision",https://mistral.ai/news/mistral-large-4-oss/,Modified MIT licence (commercial use needs a Mistral licence). Epoch lists the 6 Oct preview separately.
+Muse Ember,Meta AI,United States of America,2026-11-09,API access,"Language,Multimodal,Vision",https://research.meta.ai/blog/muse-ember,
+Muse Spark Open,Meta AI,United States of America,2026-10-15,Open weights (restricted use),"Language,Multimodal,Vision",https://research.meta.ai/blog/muse-spark-open,Muse Model License (commercial use capped by revenue).
+Nemotron 3.5 Super VL,Nvidia,United States of America,2026-10-15,Open weights (unrestricted),"Language,Multimodal,Vision,Video",https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16,OpenMDW-1.1 licence.
+Qwen4-Max,Alibaba,China,2026-11-16,API access,"Language,Multimodal,Vision",https://qwen.ai/blog?id=qwen4-max,

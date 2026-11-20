@@ -6,3 +6,4 @@ google/gemini-2.5-pro-preview,Gemini 2.5 Pro (Jun 2025),Preview 06-05 is the Jun
 qwen/qwen3-235b-a22b-2507,Qwen3-235B-A22B (Jul 2025),Date code 2507 = July 2025 update
 qwen/qwen3-235b-a22b-thinking-2507,Qwen3-235B-A22B-Thinking (Jul 2025),Date code 2507 = July 2025 thinking variant
 qwen/qwen3-vl-235b-a22b-instruct,Qwen3-VL-235B-A22B,Instruct is the standard served variant
+reflection/beam-1.0-501b-a23b,Beam 1.0,OpenRouter adds the parameter counts (501B A23B) to the name
