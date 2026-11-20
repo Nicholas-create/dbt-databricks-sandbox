@@ -56,7 +56,7 @@ Scheduled loads that capture changing data (e.g. daily prices) use `.mode("appen
 ❌ `.mode("overwrite")`
 
 ### Hand-entered data lives in Git, as seeds
-Some data has no feed and is typed in by hand: benchmark results from model release pages. It lives in the repo as dbt seeds (`seeds/manual/*.csv`, runbook in `ingestion/manual/README.md`), not in a warehouse table. A **source** is data that arrives from outside (an API, a file someone publishes); a **seed** is small data authored in the repo itself.
+Some data has no feed and is typed in by hand: benchmark results from model release pages, and new releases Epoch's notable-models file doesn't list yet (`manual_models`). It lives in the repo as dbt seeds (`seeds/manual/*.csv`, runbook in `ingestion/manual/README.md`), not in a warehouse table. A **source** is data that arrives from outside (an API, a file someone publishes); a **seed** is small data authored in the repo itself.
 
 - **Each CSV holds the current state.** A correction is an edited line; a withdrawal is a deleted line. Git history is the audit trail: every earlier value, when it changed, who changed it and in which PR.
 - **Every row says where it came from** (`source_url`, `source_type`), and each release gets a short note in `ingestion/manual/releases/`: what was entered from which page, and what was skipped and why.
@@ -424,7 +424,7 @@ clean-targets:
 |---|---|---|
 | Epoch AI (Notable AI Models) | CC-BY 4.0 | Credit Epoch AI wherever the data is shown |
 | Epoch AI (Capabilities & benchmarking) | CC-BY 4.0 | Benchmark **baseline**: loaded once on 14 Nov 2026 from `epoch.ai/data/benchmark_data.zip` into `raw_epoch.benchmark_rows` (notebook `ingestion/ingest_epoch_benchmarks.py`, not scheduled). Credit Epoch AI on the site |
-| Model release pages (manual) | Published results, cited with their URL | Every benchmark result since the baseline, entered from the developer's announcement into the seeds `seeds/manual/manual_benchmarks.csv` and `manual_benchmark_scores.csv` (one release note per release in `ingestion/manual/releases/`). Only a developer's results for its own models; marked as developer-reported on the site. The earlier warehouse tables `workspace.raw_manual.*` are retired and left untouched |
+| Model release pages (manual) | Published results, cited with their URL | Every benchmark result since the baseline, entered from the developer's announcement into the seeds `seeds/manual/manual_benchmarks.csv` and `manual_benchmark_scores.csv` (one release note per release in `ingestion/manual/releases/`). Only a developer's results for its own models; marked as developer-reported on the site. New releases Epoch doesn't list yet go in `seeds/manual/manual_models.csv` (joined to Epoch in `int_models__unioned`, hand-entered values win) The earlier warehouse tables `workspace.raw_manual.*` are retired and left untouched |
 | OpenRouter | Public API (`/api/v1/models`, no key needed) | Model catalogue and pricing; loaded daily at 06:00 Europe/London by the Databricks notebook `ingest_openrouter_models` (copy in `ingestion/`) into `raw_openrouter.models_daily` |
 
 ### Loading notes

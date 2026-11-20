@@ -10,12 +10,12 @@ seeds:
           - unique
           - not_null
       - name: epoch_model_name
-        description: "Exact Epoch model name this OpenRouter model represents."
+        description: "Exact name in the model list (Epoch, or added by hand in manual_models) this OpenRouter model represents."
         data_tests:
           - not_null
           - relationships:
               arguments:
-                to: ref('stg_epoch__notable_models')
+                to: ref('int_models__unioned')
                 field: model_name
   - name: benchmark_catalog
     description: >

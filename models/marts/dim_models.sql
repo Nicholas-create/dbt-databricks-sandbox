@@ -1,6 +1,6 @@
 with models as (
 
-    select * from {{ ref('stg_epoch__notable_models') }}
+    select * from {{ ref('int_models__unioned') }}
 
 ),
 
@@ -37,7 +37,8 @@ final as (
         training_compute_cost_2023_usd,
 
         -- provenance
-        source_url
+        source_url,
+        model_source
 
     from models
 

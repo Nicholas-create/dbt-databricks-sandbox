@@ -129,3 +129,62 @@ seeds:
                 values: ['vendor_reported', 'independent']
       - name: notes
         description: "Anything a reader needs to interpret the number (chart data, best of several efforts, subset)."
+
+  - name: manual_models
+    description: >
+      Models added by hand to the model list (dim_models), one row per model, sorted by model_name.
+      For new releases Epoch's notable-models file doesn't list yet. Columns use Epoch's own
+      vocabulary, so a hand-entered row looks like an Epoch row downstream. Where Epoch also lists
+      the model, the values filled in here win (int_models__unioned); a warning test lists those
+      models, so a line can be deleted once Epoch has caught up.
+    config:
+      column_types:
+        model_name: string
+        organization: string
+        organization_country: string
+        published_date: date
+        model_accessibility: string
+        domains: string
+        source_url: string
+        notes: string
+    columns:
+      - name: model_name
+        description: >
+          Spelled exactly as in manual_benchmark_scores and as the developer names it, e.g. GPT-6.2 Astra.
+          OpenRouter listings find it through the normalised name (macro model_match_key), or through
+          model_match_overrides when OpenRouter's name differs.
+        data_tests:
+          - unique
+          - not_null
+      - name: organization
+        description: "Developer, spelled as Epoch spells it: Google DeepMind, Meta AI, Mistral AI, OpenAI."
+        data_tests:
+          - not_null
+      - name: organization_country
+        description: "Country of the developer, as Epoch spells it, e.g. United States of America."
+      - name: published_date
+        description: "Release date, YYYY-MM-DD: the first announcement, matching the release note and manual_benchmark_scores."
+        data_tests:
+          - not_null
+      - name: model_accessibility
+        description: "Epoch's access category; dim_models derives is_open_weights from it."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - 'Unreleased'
+                  - 'API access'
+                  - 'Hosted access (no API)'
+                  - 'Limited access'
+                  - 'Open weights (unrestricted)'
+                  - 'Open weights (non-commercial)'
+                  - 'Open weights (restricted use)'
+      - name: domains
+        description: "Comma-separated, Epoch's vocabulary, e.g. Language,Multimodal,Vision."
+      - name: source_url
+        description: "The release page or model card the details come from."
+        data_tests:
+          - not_null
+      - name: notes
+        description: "Licence, open-weights timing, or why a value was chosen."
